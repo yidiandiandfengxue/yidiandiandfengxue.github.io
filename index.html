@@ -1286,6 +1286,26 @@ section,footer{scroll-margin-top:92px}
   box-shadow: 0 8px 24px -14px rgba(16, 28, 46, 0.28);
 }
 
+/* v2补丁精修：浅色首屏冷调极光 + 视觉流白雾渐变（深色零改动） */
+:root[data-theme="light"] .hero {
+  background:
+    radial-gradient(ellipse 68% 48% at 24% 16%, rgba(20, 184, 166, 0.12), transparent 70%),
+    radial-gradient(ellipse 58% 44% at 78% 24%, rgba(99, 102, 241, 0.09), transparent 70%),
+    var(--bg);
+}
+:root[data-theme="light"] .gm::after {
+  background: radial-gradient(ellipse 74% 72% at 50% 50%, transparent 52%, rgba(250, 251, 253, 0.94) 100%);
+}
+:root[data-theme="light"] .grid-motion__tile {
+  background: #ffffff;
+  box-shadow: 0 14px 30px -20px rgba(15, 23, 42, 0.22);
+}
+:root[data-theme="light"] .gm-cap {
+  background: rgba(255, 255, 255, 0.9);
+  color: #0f172a;
+  border-color: rgba(15, 23, 42, 0.14);
+}
+
 /* 主题按钮内部排布 */
 .theme-btn{display:inline-flex;align-items:center;gap:.5em}
 .theme-ico{font-size:1.05em;line-height:1;display:inline-block}
@@ -4651,6 +4671,7 @@ void main() {
       };
 
       const sprite = (view, glyph, stroke, ink) => {
+        const isLight = document.documentElement.dataset.theme === 'light';
         const pad = Math.ceil(s.strokeWidth * 2 + 4);
         const left = glyph.box.x1 - pad;
         const top = glyph.box.y1 - pad;
@@ -4666,9 +4687,9 @@ void main() {
         const paint = inkStyle(c, glyph, ink);
         if (stroke) {
           c.lineJoin = 'round';
-          c.lineWidth = s.strokeWidth * 2;
+          c.lineWidth = s.strokeWidth * (isLight ? 2.45 : 2);
           c.lineCap = 'butt';
-          c.strokeStyle = paint;
+          c.strokeStyle = isLight ? 'rgba(13, 148, 136, 0.85)' : paint;
           if (s.lineStyle !== 'solid') c.setLineDash([Math.max(1, s.dashLength), Math.max(1, s.dashGap)]);
           c.strokeText(glyph.char, glyph.x, view.baseline);
           c.setLineDash([]);
@@ -4676,6 +4697,11 @@ void main() {
           c.fillStyle = '#000000';
           c.fillText(glyph.char, glyph.x, view.baseline);
           c.globalCompositeOperation = 'source-over';
+          /* v2补丁：浅色下给空心描边字补一层极淡青填充，白底更立得住 */
+          if (isLight) {
+            c.fillStyle = 'rgba(13, 148, 136, 0.065)';
+            c.fillText(glyph.char, glyph.x, view.baseline);
+          }
         } else {
           c.fillStyle = paint;
           c.fillText(glyph.char, glyph.x, view.baseline);
