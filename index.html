@@ -7069,10 +7069,10 @@ const wrap = (value, span) => ((value % span) + span) % span;
       window.dispatchEvent(new Event('resize'));  // 触发首屏矢量大字按新配色重绘
     };
 
-    const saved = readSaved();
-    const preferLight = matchMedia('(prefers-color-scheme: light)').matches;
-    // 默认深色：不跟随系统偏好，只有用户手动保存过主题时才沿用
-    applyTheme(saved || 'dark');
+    // 每次打开都强制深色：不读取 localStorage 保存值，也不跟随系统偏好。
+    // applyTheme 内部会把 dark 写回 localStorage，顺带清掉旧的浅色记录。
+    // 右上角按钮仍可在当前会话内切换主题，但刷新/重开一律回到深色。
+    applyTheme('dark');
     if (btn) btn.addEventListener('click', () => applyTheme(root.dataset.theme === 'light' ? 'dark' : 'light'));
 
     /* 通用形态胶囊：两套晶体引擎共用，靠 __fglMorph / __fglShape / fgl:shape 驱动 */
