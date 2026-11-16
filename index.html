@@ -128,11 +128,11 @@ section,footer{scroll-margin-top:92px}
 .pill:hover::before{transform:translateX(120%)}
 .pill:active{transform:translateY(0)}
 .pill-primary{
-  color:#04120f;border-color:transparent;font-weight:700;
-  background:linear-gradient(116deg,#7ff8e0,#5cf2d0 42%,#b9f7ea 100%);
-  box-shadow:0 12px 34px -14px rgba(92,242,208,.8),inset 0 1px 0 rgba(255,255,255,.6);
+  color:#eafff9;border-color:rgba(92,242,208,.32);font-weight:700;
+  background:linear-gradient(116deg,#0e8f7d,#12b79b 46%,#0c7d6e 100%);
+  box-shadow:0 12px 30px -12px rgba(18,183,155,.55),inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(0,0,0,.22);
 }
-.pill-primary:hover{background:linear-gradient(116deg,#a2ffe9,#6ef7d8 44%,#d6fff4);color:#04120f}
+.pill-primary:hover{background:linear-gradient(116deg,#12a68f,#19cdae 46%,#0f8c7b);color:#ffffff;border-color:rgba(92,242,208,.55)}
 .pill-sm{min-height:34px;padding:.45rem .85rem;font-size:.66rem;letter-spacing:.09em}
 
 /* ============================================================
@@ -736,6 +736,27 @@ section,footer{scroll-margin-top:92px}
 .phone .ph-tab i{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.28)}
 .phone .ph-tab i:first-child{background:var(--mint)}
 
+  /* ===== 云枢协同 · 蓝色移动端样机（脱敏演示） ===== */
+  .phones--blue .phone{--iw:#3d6ee8;background:linear-gradient(178deg,#eef3ff,#f7f9ff);border-color:rgba(61,110,232,.22)}
+  .phones--blue .phone .ph-bar{color:rgba(61,110,232,.55)}
+  .phones--blue .phone .ph-h{background:linear-gradient(90deg,rgba(61,110,232,.62),rgba(61,110,232,.12))}
+  .phones--blue .phone .ph-card{background:rgba(61,110,232,.055);border-color:rgba(61,110,232,.14)}
+  .phones--blue .phone .ph-card.hi{background:linear-gradient(120deg,rgba(61,110,232,.30),rgba(88,170,255,.24));border-color:rgba(61,110,232,.38)}
+  .phones--blue .phone .ph-row{background:rgba(61,110,232,.09)}
+  .phones--blue .phone .ph-tab{background:rgba(61,110,232,.08)}
+  .phones--blue .phone .ph-tab i{background:rgba(61,110,232,.24)}
+  .phones--blue .phone .ph-tab i:first-child{background:var(--iw)}
+  .phone-rig__screen .phone--blue{background:linear-gradient(180deg,#eef3ff,#f7f9ff) !important}
+  .phone-rig__screen .phone--blue .ph-bar{color:rgba(61,110,232,.6)}
+  .phone-rig__screen .phone--blue .ph-h{background:linear-gradient(90deg,rgba(61,110,232,.62),rgba(61,110,232,.12))}
+  .phone-rig__screen .phone--blue .ph-card{background:rgba(61,110,232,.06);border-color:rgba(61,110,232,.16)}
+  .phone-rig__screen .phone--blue .ph-card.hi{background:linear-gradient(120deg,rgba(61,110,232,.32),rgba(88,170,255,.26));border-color:rgba(61,110,232,.4)}
+  .phone-rig__screen .phone--blue .ph-row{background:rgba(61,110,232,.1)}
+  .phone-rig__screen .phone--blue .ph-tab{background:rgba(61,110,232,.09)}
+  .phone-rig__screen .phone--blue .ph-tab i{background:rgba(61,110,232,.26)}
+  .phone-rig__screen .phone--blue .ph-tab i:first-child{background:var(--iw,#3d6ee8)}
+
+
 /* ============================================================
    7. 方法 / 流程
    ============================================================ */
@@ -1205,18 +1226,27 @@ section,footer{scroll-margin-top:92px}
 :root[data-theme="light"] .clink:hover { background: #ffffff; color: #0f172a; }
 :root[data-theme="light"] .tl-item time,
 :root[data-theme="light"] .foot { color: rgba(15, 23, 42, 0.48); }
+.foot-ver{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;color:var(--mint);opacity:.8;
+  border:1px solid rgba(92,242,208,.3);border-radius:99px;padding:.18rem .6rem;background:rgba(92,242,208,.07)}
 :root[data-theme="light"] dialog {
   background: #ffffff;
   color: #0f172a;
   border-color: rgba(15, 23, 42, 0.14);
 }
 
-/* 6. 3D 晶体形态切换胶囊 & 复制成功提示 */
+/* 6. 3D 晶体形态切换胶囊（形态 / 关闭）+ 复制成功提示 */
 .crystal-hud {
   position: fixed;
   left: var(--pad);
   bottom: 92px;
   z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  pointer-events: auto;
+  transition: opacity 0.4s ease, transform 0.3s ease;
+}
+.crystal-hud .ch-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -1230,11 +1260,10 @@ section,footer{scroll-margin-top:92px}
   border: 1px solid var(--edge);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  pointer-events: auto;
   cursor: pointer;
-  transition: opacity 0.4s ease, transform 0.3s ease, border-color 0.3s ease;
+  transition: border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
-.crystal-hud:hover {
+.crystal-hud .ch-btn:hover {
   border-color: var(--mint);
   color: var(--ink);
   transform: translateY(-2px);
@@ -1245,8 +1274,12 @@ section,footer{scroll-margin-top:92px}
   border-radius: 50%;
   background: var(--mint);
   box-shadow: 0 0 8px var(--mint);
+  flex: none;
 }
-:root[data-theme="light"] .crystal-hud {
+.crystal-hud .ch-morph { opacity: .5; }
+.crystal-hud .ch-close { padding: 5px 9px; font-size: .9rem; line-height: 1; }
+.crystal-hud.is-off i { background: var(--muted); box-shadow: none; }
+:root[data-theme="light"] .crystal-hud .ch-btn {
   background: rgba(255, 255, 255, 0.82);
   border-color: rgba(15, 23, 42, 0.14);
 }
@@ -1306,9 +1339,12 @@ section,footer{scroll-margin-top:92px}
   border-color: rgba(15, 23, 42, 0.14);
 }
 
-/* 主题按钮内部排布 */
-.theme-btn{display:inline-flex;align-items:center;gap:.5em}
-.theme-ico{font-size:1.05em;line-height:1;display:inline-block}
+/* 主题按钮：纯图标圆形切换 */
+.theme-btn{display:inline-flex;align-items:center;justify-content:center;gap:0;width:34px;height:34px;min-height:34px;padding:0;border-radius:50%}
+.theme-ico{width:16px;height:16px;display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.theme-ico-moon{display:none}
+:root[data-theme="light"] .theme-ico-sun{display:none}
+:root[data-theme="light"] .theme-ico-moon{display:block}
 
 </style>
 </head>
@@ -1352,10 +1388,9 @@ section,footer{scroll-margin-top:92px}
   
 
   <div class="nav-right">
-    <span class="status"><i aria-hidden="true"></i>可接新项目</span>
     <button class="pill pill-sm theme-btn" id="themeToggle" type="button" aria-label="切换深浅色主题" title="切换深浅色主题">
-      <span class="theme-ico" id="themeIco" aria-hidden="true">☀</span>
-      <span id="themeLabel">浅色</span>
+      <svg class="theme-ico theme-ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      <svg class="theme-ico theme-ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </button>
     <a class="pill pill-primary pill-sm" href="#contact">聊聊 <span aria-hidden="true">↗</span></a>
   </div>
@@ -1742,6 +1777,51 @@ section,footer{scroll-margin-top:92px}
         </div>
       </div>
     </article>
+    <!-- 06 企业协同（脱敏演示） -->
+    <article class="proj" style="--index:5">
+      <div class="proj-head">
+        <span class="proj-no">06</span>
+        <div><p class="kind">移动端 · 企业协同</p><h3>云枢协同 · 企业办公 App</h3></div>
+        <button class="pill pill-sm" type="button" data-open="5">查看项目 ↗</button>
+      </div>
+      <div class="proj-body">
+        <div class="ui">
+          <div class="ui-bar"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">工作台 · 今日 5 项待办</span><span class="spacer"></span><span class="badge">协同在线</span></div>
+          <div class="ui-body">
+            <div class="phones phones--blue">
+              <div class="phone">
+                <div class="ph-bar"><span>9:41</span><span>5G</span></div>
+                <div class="ph-h ph-h--blue"></div>
+                <div class="ph-card ph-card--blue hi"></div>
+                <div class="ph-card ph-card--blue"></div>
+                <div class="ph-row ph-row--blue"></div>
+                <div class="ph-row ph-row--blue" style="width:70%"></div>
+                <div class="ph-tab ph-tab--blue"><i></i><i></i><i></i><i></i></div>
+              </div>
+              <div class="phone">
+                <div class="ph-bar"><span>9:41</span><span>5G</span></div>
+                <div class="ph-h ph-h--blue" style="width:40%"></div>
+                <div class="ph-card ph-card--blue"></div>
+                <div class="ph-card ph-card--blue hi"></div>
+                <div class="ph-row ph-row--blue"></div>
+                <div class="ph-row ph-row--blue" style="width:80%"></div>
+                <div class="ph-tab ph-tab--blue"><i></i><i></i><i></i><i></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="proj-meta">
+          <dl>
+            <dt>角色</dt><dd>设计负责人</dd>
+            <dt>周期</dt><dd>20 周</dd>
+            <dt>产出</dt><dd>App / UI 规范 / 组件库</dd>
+          </dl>
+          <p class="sum">把审批、待办、日程、知识库收进一个 App：工作台聚合今日要务，33 个基础组件统一多业务线体验。</p>
+          <div class="stack-tags"><span class="pill pill-sm" style="min-height:26px;padding:.25rem .6rem;font-size:.56rem">Design System</span><span class="pill pill-sm" style="min-height:26px;padding:.25rem .6rem;font-size:.56rem">协同办公</span></div>
+        </div>
+      </div>
+    </article>
+
   </div>
 </section>
 
@@ -1878,6 +1958,7 @@ section,footer{scroll-margin-top:92px}
     <div class="foot">
       <span>© 2026 Oscar · 数字产品设计</span>
       <span>作品集中的数据均为脱敏演示</span>
+      <span class="foot-ver" title="发版记录 v1.2.0 · 2026-11-16">v1.2.0</span>
       <a href="#top">回到顶部 ↑</a>
     </div>
   </div>
@@ -1886,20 +1967,713 @@ section,footer{scroll-margin-top:92px}
 
 <!-- 项目弹窗 -->
 <dialog id="projDialog" aria-labelledby="dlgTitle">
-  <div class="dlg-head"><h2 id="dlgTitle"></h2><form method="dialog"><button class="pill pill-sm">关闭 ×</button></form></div>
-  <div class="dlg-body" id="dlgBody"></div>
+  <div class="dlg-scroll" id="pdScroll">
+    <div class="dlg-controls">
+      <button type="button" class="dlg-ctrl dlg-ctrl--fs" id="pdFullscreenBtn" aria-label="全屏展示" aria-pressed="false" title="全屏展示">
+        <svg class="ico-fs" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>
+        <svg class="ico-min" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9h5V4M19 9h-5V4M5 15h5v5M19 15h-5v5"/></svg>
+      </button>
+      <form method="dialog"><button class="dlg-ctrl dlg-ctrl--close" aria-label="关闭" title="关闭">×</button></form>
+    </div>
+
+    <!-- 1. 封面大图（CSS/SVG 生成，无外部图片） -->
+    <header class="pd-cover" id="pdCover">
+      <div class="pd-cover__art" aria-hidden="true">
+        <span class="pd-cover__band pd-cover__band--a"></span>
+        <span class="pd-cover__band pd-cover__band--b"></span>
+        <span class="pd-cover__glow"></span>
+        <svg class="pd-cover__lines" viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid slice">
+          <path d="M-40,360 C260,240 420,420 700,250 S1080,120 1260,220"/>
+          <path d="M-40,410 C300,300 460,470 760,300 S1100,180 1260,270"/>
+          <path d="M-40,300 C220,200 520,360 820,190 S1120,60 1260,150"/>
+        </svg>
+      </div>
+      <div class="pd-cover__inner">
+        <div class="pd-cover__top">
+          <span class="pd-cover__brand">DESIGN<br>WORKS</span>
+          <span class="pd-cover__year">20<span id="pdYear">25</span></span>
+        </div>
+        <div class="pd-cover__center">
+          <span class="pd-cover__code" id="pdCode">CASE — 01</span>
+          <h2 id="dlgTitle">项目名称</h2>
+          <p class="pd-cover__slogan" id="pdSlogan"></p>
+        </div>
+        <div class="pd-cover__foot">
+          <span class="pd-cover__by">DESIGN BY <b>OSCAR</b></span>
+          <span class="pd-cover__num" id="pdHueLabel">DIGITAL PRODUCT DESIGN</span>
+          <span class="pd-cover__social"><i>◉</i> <span id="pdViews">3,993</span> &nbsp; <i>♥</i> <span id="pdLikes">128</span></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. 信息条 -->
+    <div class="pd-infobar" id="pdFacts"></div>
+
+    <!-- 3. 图集：多视角展示 -->
+    <section class="pd-gallery">
+      <div class="pd-sec-title"><span class="pd-sec-no">01</span> 界面展示 <em>/ SHOWCASE</em></div>
+
+      <figure class="pd-fig pd-fig--main">
+        <div class="pd-fig__stage" id="pdStage">
+          <div class="device" id="pdDevice">
+            <div class="device__frame">
+              <div class="device__cam" aria-hidden="true"></div>
+              <div class="device__screen" id="pdScreen"></div>
+            </div>
+            <div class="device__base" aria-hidden="true"><span></span></div>
+          </div>
+          <div class="phone-rigs" id="pdPhoneRigs" aria-hidden="true">
+            <div class="phone-rig"><div class="phone-rig__notch"></div><div class="phone-rig__screen" id="pdPhoneScreenA"></div></div>
+            <div class="phone-rig"><div class="phone-rig__notch"></div><div class="phone-rig__screen" id="pdPhoneScreenB"></div></div>
+          </div>
+        </div>
+        <figcaption><b id="pdCap1">主界面</b><span>整体信息架构与视觉语言</span></figcaption>
+      </figure>
+
+      <div class="pd-fig-grid">
+        <figure class="pd-fig">
+          <div class="pd-shot pd-shot--browser" id="pdShot2">
+            <div class="pd-browser">
+              <div class="pd-browser__bar"><i></i><i></i><i></i><span id="pdUrl">app.oscar.design</span></div>
+              <div class="pd-browser__view" id="pdShot2View"></div>
+            </div>
+          </div>
+          <figcaption><b id="pdCap2">细节一 · 信息密度</b><span>关键数据的层级处理</span></figcaption>
+        </figure>
+        <figure class="pd-fig">
+          <div class="pd-shot pd-shot--zoom" id="pdShot3">
+            <div class="pd-shot__window" id="pdShot3View"></div>
+          </div>
+          <figcaption><b id="pdCap3">细节二 · 交互状态</b><span>高频任务的路径收敛</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 3.5 版型与样机：参考专业作品集的四种呈现方式 -->
+    <section class="pd-variants">
+      <div class="pd-sec-title"><span class="pd-sec-no">+</span> 版型与样机 <em>/ LAYOUTS &amp; MOCKUPS</em></div>
+
+      <div class="pd-var-grid">
+
+        <!-- A. 主视觉 -->
+        <figure class="pd-var pd-var--hero">
+          <div class="pd-var__canvas m-only hero-cv">
+            <span class="pd-var__badge">MOBILE APP</span>
+            <span class="pd-var__sign">DESIGN BY OSCAR</span>
+            <div class="hero-mock">
+              <div class="hero-copy">
+                <span class="k">WORKBENCH / 工作台</span>
+                <h4>把今天要做的事<br>一次排在眼前</h4>
+                <p>待办、审批、日程按紧急度聚合，打开 App 就知道下一步做什么。</p>
+                <div class="dots">
+                  <i style="background:#3D6EE8"></i><i style="background:#6D9BFF"></i>
+                  <i style="background:#A9C4FF"></i>
+                  <i style="background:transparent;border:1px solid rgba(255,255,255,.35)"></i>
+                </div>
+              </div>
+              <div class="hero-phones">
+                <div class="mp" data-mp="work"></div>
+                <div class="mp" data-mp="device"></div>
+              </div>
+            </div>
+          </div>
+          <div class="pd-var__canvas d-only">
+            <span class="pd-var__badge">UI DESIGN</span>
+            <span class="pd-var__sign">DESIGN BY OSCAR</span>
+            <div class="tilt-tablet"><div class="tilt-tablet__screen" id="pdVarTilt"></div></div>
+            <span class="orb orb--blue"></span><span class="orb orb--orange"></span>
+            <span class="pd-var__bigword" id="pdVarWord">DATA</span>
+          </div>
+          <figcaption class="m-only"><b>主视觉 · 双机并排</b><span>真实界面比例 · 工作台与设备总览</span></figcaption>
+          <figcaption class="d-only"><b>倾斜平板</b><span>数据平台 · 关键指标总览</span></figcaption>
+        </figure>
+
+        <!-- B. 横屏适配 / 可视化大屏 -->
+        <figure class="pd-var pd-var--wide">
+          <div class="pd-var__canvas m-only">
+            <span class="pd-var__badge">TABLET</span>
+            <div class="tab-frame">
+              <div class="tab-scr">
+                <div class="tab-rail"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+                <div class="tab-list">
+                  <div class="h">待我审批</div>
+                  <div class="it on"><b>设备借用申请</b><s>AGV-03 · 10 分钟前</s></div>
+                  <div class="it"><b>接口权限开通</b><s>张工 · 32 分钟前</s></div>
+                  <div class="it"><b>转运任务排期</b><s>调度中心 · 1 小时前</s></div>
+                  <div class="it"><b>设备巡检计划</b><s>设备科 · 2 小时前</s></div>
+                </div>
+                <div class="tab-detail">
+                  <div class="dh"><b>设备借用申请</b><u>待处理</u></div>
+                  <div class="kv"><span>申请人 <b>张工</b></span><span>时长 <b>4 h</b></span><span>设备 <b>AGV-03</b></span></div>
+                  <div class="box"><span style="width:88%"></span><span class="w70"></span><span class="w50"></span><span class="w70"></span></div>
+                  <div class="acts"><span></span><span class="pri"></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pd-var__canvas d-only">
+            <span class="pd-var__badge">VISUALIZATION</span>
+            <div class="data-wall"><div class="data-wall__glow"></div><div class="data-wall__screen" id="pdVarWall"></div></div>
+          </div>
+          <figcaption class="m-only"><b>横屏适配 · 平板分栏</b><span>列表与详情同屏，审批不用来回跳</span></figcaption>
+          <figcaption class="d-only"><b>可视化大屏</b><span>指挥中心 · 场景化呈现</span></figcaption>
+        </figure>
+
+        <!-- C. 透视双机 / 机房场景 -->
+        <figure class="pd-var pd-var--scene">
+          <div class="pd-var__canvas m-only tilt-cv">
+            <span class="pd-var__badge">PERSPECTIVE</span>
+            <div class="tilt-phones">
+              <div class="mp mp--left" data-mp="approve"></div>
+              <div class="mp mp--right" data-mp="task"></div>
+            </div>
+          </div>
+          <div class="pd-var__canvas d-only">
+            <span class="pd-var__badge">SCENE</span>
+            <div class="room-scene">
+              <span class="room-scene__cabinet room-scene__cabinet--l"></span>
+              <span class="room-scene__cabinet room-scene__cabinet--r"></span>
+              <div class="room-scene__screen" id="pdVarRoom"></div>
+              <span class="room-scene__floor"></span>
+            </div>
+          </div>
+          <figcaption class="m-only"><b>透视样机 · 双机错落</b><span>审批流与今日任务的真实层级</span></figcaption>
+          <figcaption class="d-only"><b>机房场景</b><span>大屏投放 · 真实环境模拟</span></figcaption>
+        </figure>
+
+        <!-- D. 设计规范 / 12 列栅格 -->
+        <figure class="pd-var pd-var--spec">
+          <div class="pd-var__canvas m-only spec-cv">
+            <span class="pd-var__badge">DESIGN SYSTEM</span>
+            <div class="spec-board">
+              <div class="band">
+                <div class="band-h"><b>色彩系统</b><span>COLOR</span></div>
+                <div class="sw-grid">
+                  <div class="sw-item"><i style="background:#A9C4FF"></i><div><b>品牌浅蓝</b><s>#A9C4FF</s></div></div>
+                  <div class="sw-item"><i style="background:#6D9BFF"></i><div><b>品牌次蓝</b><s>#6D9BFF</s></div></div>
+                  <div class="sw-item"><i style="background:#3D6EE8"></i><div><b>品牌主色</b><s>#3D6EE8</s></div></div>
+                  <div class="sw-item"><i style="background:#1F4FC4"></i><div><b>按压态</b><s>#1F4FC4</s></div></div>
+                  <div class="sw-item"><i style="background:#12308F"></i><div><b>深色强调</b><s>#12308F</s></div></div>
+                </div>
+              </div>
+              <div class="band">
+                <div class="band-h"><b>字阶</b><span>TYPOGRAPHY / SOURCE HAN SANS</span></div>
+                <div class="tp-grid">
+                  <div class="tp"><b style="font-size:2.4em">Aa</b><span>32 / BOLD · 页面标题</span></div>
+                  <div class="tp"><b style="font-size:1.7em">Aa</b><span>24 / SEMIBOLD · 模块标题</span></div>
+                  <div class="tp"><b style="font-size:1.2em">Aa</b><span>16 / MEDIUM · 正文强调</span></div>
+                  <div class="tp"><b style="font-size:.86em">Aa</b><span>12 / REGULAR · 辅助说明</span></div>
+                </div>
+              </div>
+              <div class="band">
+                <div class="band-h"><b>组件</b><span>COMPONENTS / 33 BASIC</span></div>
+                <div class="comp-row">
+                  <span class="comp-pill">主要按钮</span>
+                  <span class="comp-ghost">次要按钮</span>
+                  <span class="comp-tag">已通过</span>
+                  <span class="comp-tag red">已驳回</span>
+                  <span class="comp-switch"></span>
+                  <span class="comp-field"></span>
+                </div>
+              </div>
+              </div>
+          </div>
+          <div class="pd-var__canvas d-only">
+            <span class="pd-var__badge">GRID SYSTEM</span>
+            <div class="grid-system">
+              <div class="grid-system__base" id="pdVarGrid"></div>
+              <div class="grid-system__lines"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <span class="grid-system__label">12 列栅格<br><i>GRID LAYOUT</i></span>
+            </div>
+          </div>
+          <figcaption class="m-only"><b>设计规范 · 资产化</b><span>色彩 / 字阶 / 组件，跨模块复用</span></figcaption>
+          <figcaption class="d-only"><b>12 列栅格</b><span>信息规范化 · 响应式布局</span></figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- 4. 分段正文 -->
+    <section class="pd-story">
+      <div class="pd-sec-title"><span class="pd-sec-no">02</span> 设计过程 <em>/ PROCESS</em></div>
+      <p class="pd-story__lead" id="pdLead"></p>
+      <div class="pd-story__grid" id="pdStory"></div>
+    </section>
+
+    <!-- 5. 设计亮点 -->
+    <section class="pd-hl-wrap">
+      <div class="pd-sec-title"><span class="pd-sec-no">03</span> 设计亮点 <em>/ HIGHLIGHTS</em></div>
+      <div class="pd-hl" id="pdHighlights"></div>
+    </section>
+
+    <!-- 6. 成果 + 技术栈 -->
+    <section class="pd-outcome">
+      <div class="pd-outcome__col">
+        <div class="pd-eyebrow">关键成果 / IMPACT</div>
+        <div class="pd-stats" id="pdStats"></div>
+      </div>
+      <div class="pd-outcome__col">
+        <div class="pd-eyebrow">技术栈 / STACK</div>
+        <div class="pd-tags" id="pdTags"></div>
+      </div>
+    </section>
+
+    <!-- 7. 作者卡 -->
+    <section class="pd-author">
+      <div class="pd-author__avatar">O</div>
+      <div class="pd-author__info">
+        <b>Oscar</b>
+        <span>数字产品设计师 · 专注 B 端复杂系统，把业务翻译成界面。</span>
+      </div>
+      <a class="pill pill-sm" href="mailto:hello@oscar.design"> helllo@oscar.design ↗</a>
+    </section>
+
+    <!-- 7.5 完整 16:9 设计案例入口 -->
+    <section class="pd-case-link" id="pdCaseLink">
+      <div class="pd-case-link__txt">
+        <span class="eyebrow">FULL CASE · 16:9</span>
+        <h4>查看完整设计案例</h4>
+        <p>界面 / 样机 / 色彩 · 字体 · 组件规范，8 屏完整呈现。</p>
+      </div>
+      <a class="pd-case-link__btn" href="case-teamhub.html" target="_blank" rel="noopener">打开演示 ↗</a>
+    </section>
+
+    <!-- 8. 更多作品 -->
+    <section class="pd-more-wrap">
+      <div class="pd-sec-title"><span class="pd-sec-no">04</span> 更多作品 <em>/ MORE</em></div>
+      <div class="pd-more" id="pdMore"></div>
+    </section>
+  </div>
 </dialog>
 
 <style>
-dialog{width:min(94vw,1000px);max-height:88vh;padding:clamp(18px,3vw,32px);color:var(--ink);
-  background:#101318;border:1px solid var(--edge);border-radius:22px}
-dialog::backdrop{background:rgba(2,3,5,.78);backdrop-filter:blur(6px)}
-.dlg-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}
-.dlg-head h2{font-size:clamp(1.3rem,3vw,2rem);font-weight:800;letter-spacing:-.03em}
-.dlg-body{font-size:.84rem;line-height:1.9;color:var(--muted)}
-.dlg-body p{margin-bottom:14px}
-</style>
+dialog{width:min(96vw,1180px);max-height:94vh;padding:0;color:var(--ink);
+  background:#0d1015;border:1px solid var(--edge);border-radius:22px;overflow:hidden;position:relative;
+  transition:width .3s ease,height .3s ease,max-width .3s ease,max-height .3s ease,border-radius .3s ease}
+dialog.is-fullscreen{width:100vw;max-width:100vw;height:100vh;max-height:100vh;border-radius:0;border-color:transparent}
+dialog::backdrop{background:rgba(2,3,5,.86);backdrop-filter:blur(10px)}
+.dlg-controls{position:fixed;top:18px;right:18px;z-index:2147483647;display:flex;align-items:center;gap:8px}
+.dlg-ctrl{width:38px;height:38px;min-height:38px;padding:0;display:grid;place-items:center;border-radius:50%;
+  font-size:1.15rem;line-height:1;color:var(--ink);background:rgba(8,11,15,.5);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.12);cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+.dlg-ctrl:hover{background:rgba(18,183,155,.28);border-color:rgba(92,242,208,.6);transform:translateY(-1px)}
+.dlg-ctrl--fs svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dlg-ctrl--fs .ico-min{display:none}
+dialog.is-fullscreen .dlg-ctrl--fs .ico-fs{display:none}
+dialog.is-fullscreen .dlg-ctrl--fs .ico-min{display:block}
+.dlg-scroll{max-height:94vh;height:94vh;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(92,242,208,.35) transparent}
+dialog.is-fullscreen .dlg-scroll{max-height:100vh;height:100vh}
+@media(max-width:640px){.dlg-controls{top:12px;right:12px}.dlg-ctrl{width:34px;height:34px;min-height:34px}}
+.dlg-scroll::-webkit-scrollbar{width:9px}
+.dlg-scroll::-webkit-scrollbar-thumb{background:rgba(92,242,208,.3);border-radius:8px}
+/* 完整设计案例入口 */
+.pd-case-link{margin:clamp(30px,4vw,54px) clamp(20px,4vw,48px) 0;padding:clamp(20px,3vw,30px) clamp(22px,3.4vw,36px);
+  border:1px solid var(--edge);border-radius:16px;display:flex;align-items:center;gap:24px;
+  background:linear-gradient(120deg,rgba(61,110,232,.10),rgba(92,242,208,.05) 60%,transparent)}
+.pd-case-link__txt{flex:1}
+.pd-case-link__txt .eyebrow{display:block;font-size:10px;letter-spacing:.2em;color:var(--mint);font-weight:700;margin-bottom:8px}
+.pd-case-link__txt h4{font-size:clamp(18px,2vw,24px);font-weight:800;margin-bottom:6px}
+.pd-case-link__txt p{font-size:12px;color:var(--muted);line-height:1.6}
+.pd-case-link__btn{flex:none;padding:12px 22px;border-radius:99px;text-decoration:none;font-size:13px;font-weight:700;
+  color:#fff;background:linear-gradient(135deg,#3d6ee8,#6d9bff);box-shadow:0 10px 26px -10px rgba(61,110,232,.8);transition:transform .2s,box-shadow .2s}
+.pd-case-link__btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(61,110,232,.95)}
+@media(max-width:640px){.pd-case-link{flex-direction:column;align-items:flex-start;gap:18px}}
 
+
+/* ===== 1. 封面大图 ===== */
+.pd-cover{--pd-h:168;position:relative;min-height:clamp(300px,42vw,460px);isolation:isolate;overflow:hidden;
+  background:linear-gradient(135deg,hsl(var(--pd-h) 42% 9%),#05070a 62%,hsl(calc(var(--pd-h) + 32) 38% 8%))}
+.pd-cover__art{position:absolute;inset:0;z-index:-1}
+.pd-cover__art::after{content:"";position:absolute;inset:0;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:52px 52px;mask-image:radial-gradient(ellipse at 70% 40%,#000,transparent 72%)}
+.pd-cover__glow{position:absolute;top:-30%;right:-8%;width:62%;height:170%;
+  background:radial-gradient(ellipse at 60% 40%,hsl(var(--pd-h) 85% 52% / .34),transparent 62%),
+             radial-gradient(ellipse at 78% 72%,hsl(calc(var(--pd-h) + 40) 80% 58% / .26),transparent 58%);
+  filter:blur(16px)}
+.pd-cover__band{position:absolute;width:150%;height:120px;left:-20%;transform:rotate(-19deg);filter:blur(2px)}
+.pd-cover__band--a{top:26%;background:linear-gradient(90deg,transparent,hsl(var(--pd-h) 90% 60% / .16) 40%,hsl(calc(var(--pd-h) + 55) 90% 62% / .30) 62%,transparent)}
+.pd-cover__band--b{top:60%;height:70px;background:linear-gradient(90deg,transparent,hsl(calc(var(--pd-h) + 30) 90% 58% / .20) 45%,transparent)}
+.pd-cover__lines{position:absolute;inset:0;width:100%;height:100%;opacity:.5;fill:none;stroke:hsl(var(--pd-h) 90% 70% / .35);stroke-width:1.2}
+.pd-cover__lines path:nth-child(2){stroke:hsl(calc(var(--pd-h) + 45) 90% 68% / .3)}
+.pd-cover__lines path:nth-child(3){stroke:hsl(var(--pd-h) 90% 74% / .2)}
+.pd-cover__inner{position:relative;min-height:inherit;display:flex;flex-direction:column;justify-content:space-between;
+  padding:clamp(22px,3.4vw,40px) clamp(22px,4vw,56px)}
+.pd-cover__top{display:flex;justify-content:space-between;align-items:flex-start}
+.pd-cover__brand{font-family:var(--mono);font-size:.6rem;line-height:1.4;letter-spacing:.26em;color:rgba(255,255,255,.72);font-weight:600}
+.pd-cover__year{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;letter-spacing:-.06em;line-height:.8;
+  color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.35)}
+.pd-cover__center{max-width:74%}
+.pd-cover__code{display:inline-block;font-family:var(--mono);font-size:.62rem;letter-spacing:.22em;color:hsl(var(--pd-h) 90% 72%);
+  border:1px solid hsl(var(--pd-h) 80% 60% / .4);border-radius:6px;padding:5px 10px;background:hsl(var(--pd-h) 80% 50% / .1);margin-bottom:14px}
+.pd-cover h2{font-size:clamp(2rem,6.4vw,4.4rem);font-weight:800;letter-spacing:-.05em;line-height:1.02;margin:0 0 14px;
+  color:#f4f8fb;text-shadow:0 8px 40px rgba(0,0,0,.5)}
+.pd-cover__slogan{font-size:clamp(.82rem,1.6vw,1.05rem);line-height:1.6;color:rgba(236,244,250,.82);max-width:56ch;margin:0}
+.pd-cover__foot{display:flex;align-items:center;gap:22px;flex-wrap:wrap;font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;color:rgba(255,255,255,.55)}
+.pd-cover__by b{color:#fff}
+.pd-cover__social i{font-style:normal;color:hsl(var(--pd-h) 90% 72%)}
+
+/* ===== 2. 信息条 ===== */
+.pd-infobar{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--edge);background:rgba(255,255,255,.015)}
+.pd-infobar > div{flex:1;min-width:130px;padding:16px clamp(18px,2.6vw,32px);display:flex;flex-direction:column;gap:5px;border-right:1px solid var(--edge)}
+.pd-infobar > div:last-child{border-right:0}
+.pd-infobar .k{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(233,238,244,.4)}
+.pd-infobar .v{font-size:.86rem;font-weight:600;color:#e6edf4}
+
+/* ===== 通用分区标题 ===== */
+.pd-sec-title{display:flex;align-items:center;gap:12px;font-size:.95rem;font-weight:700;letter-spacing:.02em;margin:0 0 22px}
+.pd-sec-title em{font-style:normal;font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;color:rgba(233,238,244,.38);font-weight:500}
+.pd-sec-no{font-family:var(--mono);font-size:.6rem;color:var(--mint);border:1px solid rgba(92,242,208,.35);border-radius:5px;padding:3px 7px}
+
+/* ===== 3. 图集 ===== */
+.pd-gallery,.pd-story,.pd-hl-wrap,.pd-outcome,.pd-author,.pd-more-wrap{padding:clamp(28px,4.4vw,52px) clamp(20px,4vw,56px)}
+.pd-gallery{border-bottom:1px solid var(--edge)}
+.pd-fig{margin:0 0 20px}
+.pd-fig figcaption{display:flex;align-items:baseline;gap:14px;margin-top:12px;font-size:.78rem}
+.pd-fig figcaption b{color:var(--ink);font-weight:600}
+.pd-fig figcaption span{color:rgba(233,238,244,.42);font-size:.68rem}
+.pd-fig__stage,.pd-shot{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:16px;
+  background:radial-gradient(ellipse at 50% 120%,rgba(92,242,208,.10),transparent 58%),#0a0d11;isolation:isolate}
+.pd-fig__stage::before,.pd-shot::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.5;
+  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:40px 40px;mask-image:radial-gradient(ellipse at center,#000 20%,transparent 74%)}
+.pd-fig__stage{padding:clamp(34px,5vw,64px) clamp(16px,4vw,52px) clamp(24px,3.5vw,44px);min-height:330px}
+.device{width:min(100%,880px);transform:perspective(1600px) rotateX(3deg);transition:transform .4s ease}
+.device__frame{position:relative;padding:11px 11px 12px;border-radius:14px 14px 4px 4px;
+  background:linear-gradient(150deg,#2b3138,#0f1318 60%);
+  box-shadow:0 30px 70px -24px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.14),0 0 0 1px rgba(255,255,255,.06)}
+.device__cam{position:absolute;top:5px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;
+  background:#0a0c0f;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.device__screen{border-radius:5px;overflow:hidden;background:#070a0e;aspect-ratio:16/9;display:flex;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+.device__screen .ui{flex:1;width:100%;height:100%;border-radius:5px}
+.device__base{height:12px;margin:0 -3.5%;border-radius:0 0 16px 16px;
+  background:linear-gradient(180deg,#c2c9d0,#6d757e 40%,#3a4149);box-shadow:0 16px 24px -12px rgba(0,0,0,.85);position:relative}
+.device__base span{position:absolute;top:0;left:50%;transform:translateX(-50%);width:11%;height:5px;border-radius:0 0 7px 7px;
+  background:linear-gradient(180deg,#7c848d,#4b5259)}
+/* 手机样机壳（移动端项目）：两台手机并排，各套真实外壳 */
+.phone-rigs{display:none;align-items:center;justify-content:center;gap:30px;width:100%;transform:perspective(1400px) rotateX(2deg)}
+.phone-rig{position:relative;width:200px;height:410px;border-radius:32px;padding:9px;flex:none;
+  background:linear-gradient(150deg,#3a424b,#101419 55%);box-shadow:0 30px 60px -18px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.16),0 0 0 1px rgba(255,255,255,.07)}
+.phone-rig:nth-child(1){transform:rotate(-4deg)}
+.phone-rig:nth-child(2){transform:translateY(16px) rotate(3.5deg)}
+.phone-rig__notch{position:absolute;top:15px;left:50%;transform:translateX(-50%);width:66px;height:14px;border-radius:0 0 10px 10px;background:#0a0c0f;z-index:2}
+.phone-rig__screen{border-radius:24px;overflow:hidden;height:100%;background:#070a0e;display:flex;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.phone-rig__screen .phone{width:100%;height:100%;border:0;border-radius:24px;padding:16px 10px 10px;background:
+  linear-gradient(180deg,#0f151b,#080b0f);gap:9px;transform:none}
+.phone-rig__screen .phone .ph-bar{font-size:.6rem;padding:0 8px}
+.phone-rig__screen .phone .ph-h{height:16px}
+.phone-rig__screen .phone .ph-card{height:58px}
+.phone-rig__screen .phone .ph-row{height:18px}
+.phone-rig__screen .phone .ph-tab{height:30px}
+.pd-fig__stage.is-mobile .device{display:none}
+.pd-fig__stage.is-mobile .phone-rigs{display:flex}
+@media (max-width:560px){.phone-rigs{gap:14px}.phone-rig{width:44%;height:auto;aspect-ratio:200/410}}
+
+.pd-fig-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.pd-shot{height:clamp(220px,26vw,320px)}
+.pd-shot--browser{align-items:flex-start;padding:0}
+.pd-browser{width:100%;height:100%;display:flex;flex-direction:column}
+.pd-browser__bar{height:30px;flex:none;display:flex;align-items:center;gap:6px;padding:0 12px;background:#151a20;border-bottom:1px solid rgba(255,255,255,.07)}
+.pd-browser__bar i{width:7px;height:7px;border-radius:50%;background:#4b5560}
+.pd-browser__bar i:first-child{background:#e0695f}.pd-browser__bar i:nth-child(2){background:#d9a441}.pd-browser__bar i:nth-child(3){background:#4fae7a}
+.pd-browser__bar span{margin-left:10px;font-family:var(--mono);font-size:.54rem;letter-spacing:.06em;color:rgba(233,238,244,.4)}
+.pd-browser__view{flex:1;overflow:hidden;background:#080b0f}
+.pd-browser__view .ui{height:100%;border-radius:0;transform:scale(1.35);transform-origin:12% 8%}
+.pd-shot--zoom{padding:0}
+.pd-shot__window{width:100%;height:100%;overflow:hidden}
+.pd-shot__window .ui{transform:scale(1.7);transform-origin:70% 70%}
+
+/* ===== 3.5 版型与样机（统一 16:9） ===== */
+.pd-variants{padding:clamp(28px,4.4vw,52px) clamp(20px,4vw,56px);border-bottom:1px solid var(--edge)}
+.pd-var-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,22px)}
+.pd-var{grid-column:span 1;margin:0;min-width:0}
+.pd-var--hero{grid-column:1/-1}
+.pd-var--spec{grid-column:1/-1}
+.pd-var__canvas{position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;isolation:isolate;
+  display:flex;align-items:center;justify-content:center;container-type:inline-size}
+.pd-var figcaption{display:flex;align-items:baseline;gap:12px;margin-top:10px;font-size:.72rem}
+.pd-var figcaption b{color:var(--ink);font-weight:600}
+.pd-var figcaption span{color:rgba(233,238,244,.42);font-size:.66rem}
+.pd-var__badge{position:absolute;top:14px;left:16px;z-index:5;font-family:var(--mono);font-size:.54rem;letter-spacing:.18em;
+  color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.22);border-radius:4px;padding:4px 8px;background:rgba(0,0,0,.18)}
+.pd-var__sign{position:absolute;top:16px;right:18px;z-index:5;font-family:var(--mono);font-size:.54rem;letter-spacing:.16em;color:rgba(255,255,255,.6)}
+/* 移动端 / 桌面端两套内容切换 */
+.pd-variants .m-only{display:none}
+.pd-variants.is-mobile .m-only{display:flex}
+.pd-variants.is-mobile .d-only{display:none!important}
+
+/* ---------- A. 主视觉：左侧文案 + 双机（移动端） ---------- */
+.hero-cv{background:linear-gradient(115deg,#0d1830,#17264a 46%,#0a1120)}
+.hero-cv::before{content:"";position:absolute;inset:0;opacity:.55;pointer-events:none;
+  background-image:radial-gradient(circle at 76% 34%,rgba(61,110,232,.45),transparent 56%),
+    linear-gradient(rgba(120,160,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(120,160,255,.07) 1px,transparent 1px);
+  background-size:auto,54px 54px,54px 54px}
+.hero-mock{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1.06fr;align-items:center;
+  padding:0 5cqw;gap:2cqw}
+.hero-copy{position:relative;z-index:2;min-width:0}
+.hero-copy .k{font-family:var(--mono);font-size:.86cqw;font-size:clamp(7px,.88cqw,11px);letter-spacing:.2em;color:var(--mint);display:block}
+.hero-copy h4{font-size:clamp(14px,2.05cqw,26px);line-height:1.18;font-weight:800;margin:.55em 0 .5em;letter-spacing:-.02em}
+.hero-copy p{font-size:clamp(8px,1.02cqw,13px);line-height:1.75;color:rgba(233,238,244,.62);max-width:24ch}
+.hero-copy .dots{display:flex;gap:.5em;margin-top:1.6em}
+.hero-copy .dots i{display:block;width:1.4em;height:1.4em;border-radius:50%;font-size:clamp(8px,1cqw,12px)}
+.hero-phones{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;
+  gap:2.4cqw;font-size:9px;font-size:.78cqw;height:100%}
+.hero-phones .mp:nth-child(1){transform:translateY(-1.6em) rotate(-2.5deg)}
+.hero-phones .mp:nth-child(2){transform:translateY(2em) rotate(2deg)}
+
+/* ---------- 手机样机（em 基准，随卡片等比缩放） ---------- */
+.mp{position:relative;flex:none;width:24em;height:49.4em;border-radius:2.7em;padding:.66em;
+  background:linear-gradient(152deg,#7c8496 0%,#2c3340 15%,#0d1118 52%,#05070b);
+  box-shadow:0 1.8em 3em -1.4em rgba(0,0,0,.8),inset 0 0 0 .08em rgba(255,255,255,.2),inset 0 .12em 0 rgba(255,255,255,.28)}
+.mp::after{content:"";position:absolute;left:-.14em;top:9.4em;width:.14em;height:3.6em;border-radius:.2em;background:#3c4354}
+.mp__notch{position:absolute;top:1.5em;left:50%;transform:translateX(-50%);width:7em;height:1.45em;border-radius:1em;background:#05070b;z-index:6}
+.mp__scr{position:relative;width:100%;height:100%;border-radius:2.1em;overflow:hidden;background:#f5f7fc;color:#0f1729;
+  display:flex;flex-direction:column}
+.mp__status{display:flex;align-items:center;justify-content:space-between;padding:3.1em 1.5em .1em;font-size:.56em;font-weight:700;color:#5c6578}
+.mp__sig{display:flex;align-items:flex-end;gap:.16em}
+.mp__sig i{display:block;width:.22em;border-radius:.08em;background:#7c8698}
+.mp__sig i:nth-child(1){height:.34em}.mp__sig i:nth-child(2){height:.5em}
+.mp__sig i:nth-child(3){height:.66em}.mp__sig i:nth-child(4){height:.82em;background:#3d6ee8}
+.mp__top{display:flex;align-items:center;justify-content:space-between;padding:1em 1.2em .7em}
+.mp__top b{display:block;font-size:.74em;font-weight:800;letter-spacing:-.01em}
+.mp__top span{display:block;font-size:.52em;color:#8b94a8;margin-top:.3em}
+.mp__ava{width:2.2em;height:2.2em;border-radius:50%;flex:none;
+  background:linear-gradient(140deg,#7ba4ff,#3d6ee8);box-shadow:0 .3em .8em -.2em rgba(61,110,232,.75)}
+.mp__hero{margin:0 1.1em;padding:1em 1.1em;border-radius:1.1em;color:#fff;
+  background:linear-gradient(135deg,#3d6ee8,#2a53c6);box-shadow:0 .9em 1.8em -.9em rgba(61,110,232,.95)}
+.mp__hero-k{font-size:.5em;letter-spacing:.08em;opacity:.8;display:block}
+.mp__hero-n{font-size:1.62em;font-weight:800;line-height:1.15;display:block;margin-top:.15em}
+.mp__hero-n em{font-size:.4em;font-weight:600;opacity:.82;font-style:normal;margin-left:.25em}
+.mp__bar{display:block;height:.34em;border-radius:1em;background:rgba(255,255,255,.3);margin:.75em 0 .45em;overflow:hidden}
+.mp__bar i{display:block;height:100%;border-radius:1em;background:#fff}
+.mp__hero-f{font-size:.48em;opacity:.82;display:block}
+.mp__quick{display:grid;grid-template-columns:repeat(4,1fr);gap:.45em;padding:1em 1.1em .7em}
+.mp__quick span{height:2.5em;border-radius:.65em;background:#e9eefb;position:relative}
+.mp__quick span::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:.85em;height:.85em;border-radius:.24em;background:#3d6ee8;opacity:.8}
+.mp__rows{display:flex;flex-direction:column;justify-content:space-between;gap:.45em;padding:0 1.1em;flex:1;min-height:0}
+.mp__row{display:flex;align-items:center;gap:.6em;padding:.62em .7em;border-radius:.62em;background:#fff;
+  box-shadow:0 .12em .5em rgba(16,24,40,.08)}
+.mp__row > i{width:1.5em;height:1.5em;border-radius:.42em;background:#eef2fd;flex:none;position:relative}
+.mp__row > i::after{content:"";position:absolute;inset:.42em;border-radius:.14em;background:#3d6ee8;opacity:.55}
+.mp__row div{flex:1;min-width:0}
+.mp__row b{display:block;font-size:.5em;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mp__row s{display:block;font-size:.44em;color:#98a1b3;text-decoration:none;margin-top:.25em}
+.mp__row u{flex:none;font-size:.42em;text-decoration:none;padding:.35em .6em;border-radius:1em;
+  background:#eef3ff;color:#3d6ee8;font-weight:700}
+.mp__row u.warn{background:#fff1e8;color:#e2701c}
+.mp__row u.ok{background:#e8f8ec;color:#2f9e44}
+.mp__row u.bad{background:#feeaec;color:#e03131}
+.mp__tab{display:flex;align-items:center;justify-content:space-around;padding:.9em .8em 1.3em;border-top:1px solid #eaedf5;margin-top:.4em}
+.mp__tab i{display:block;width:1.05em;height:1.05em;border-radius:.3em;background:#dbe1ef}
+.mp__tab i.on{background:#3d6ee8;box-shadow:0 .2em .5em -.1em rgba(61,110,232,.7)}
+.mp__stat{margin:0 1.1em;padding:.9em 1em;border-radius:1em;background:#fff;box-shadow:0 .12em .5em rgba(16,24,40,.08);
+  display:flex;align-items:flex-end;justify-content:space-between}
+.mp__stat b{font-size:1.5em;font-weight:800;line-height:1}
+.mp__stat b em{font-size:.38em;font-weight:600;color:#98a1b3;font-style:normal;margin-left:.2em}
+.mp__stat span{font-size:.44em;color:#8b94a8}
+.mp__spark{display:flex;align-items:flex-end;gap:.22em;height:2.2em}
+.mp__spark i{display:block;width:.5em;border-radius:.15em .15em 0 0;background:#c9d8ff}
+.mp__spark i.hi{background:#3d6ee8}
+.mp__segs{display:flex;gap:.4em;padding:.9em 1.1em .6em}
+.mp__segs span{flex:1;height:1.6em;border-radius:1em;background:#e9eefb}
+.mp__segs span.on{background:#3d6ee8}
+.mp__ck{width:1.3em;height:1.3em;border-radius:50%;background:#eef2fd;border:.14em solid #dbe3f4;flex:none;position:relative}
+.mp__ck.on{background:#3d6ee8;border-color:#3d6ee8}
+
+/* ---------- B. 横屏平板（分栏） ---------- */
+.tab-frame{position:relative;z-index:2;font-size:11px;font-size:2.35cqw;width:31em;height:20.6em;border-radius:1.05em;padding:.5em;
+  background:linear-gradient(152deg,#485167,#141922 46%,#06080d);
+  box-shadow:0 1.4em 2.6em -1.1em rgba(0,0,0,.85),inset 0 0 0 .06em rgba(255,255,255,.18)}
+.tab-scr{width:100%;height:100%;border-radius:.62em;overflow:hidden;background:#f5f7fc;color:#0f1729;display:flex}
+.tab-rail{width:3.4em;flex:none;background:#0f2148;display:flex;flex-direction:column;align-items:center;gap:.75em;padding:.9em 0}
+.tab-rail i{display:block;width:1.1em;height:1.1em;border-radius:.3em;background:rgba(255,255,255,.24)}
+.tab-rail i.on{background:#6d9bff;box-shadow:0 0 .8em rgba(109,155,255,.9)}
+.tab-list{width:11.6em;flex:none;border-right:1px solid #e6eaf4;display:flex;flex-direction:column;padding:.8em .7em;gap:.5em;overflow:hidden}
+.tab-list .h{font-size:.62em;font-weight:800;margin-bottom:.2em}
+.tab-list .it{border-radius:.5em;padding:.55em .6em;background:#fff;box-shadow:0 .1em .4em rgba(16,24,40,.07)}
+.tab-list .it.on{background:#eef3ff;box-shadow:inset 0 0 0 .1em #3d6ee8}
+.tab-list .it b{font-size:.52em;display:block;font-weight:700;color:#18213a}
+.tab-list .it s{font-size:.44em;color:#98a1b3;text-decoration:none;display:block;margin-top:.25em}
+.tab-detail{flex:1;padding:1em 1.1em;display:flex;flex-direction:column;gap:.55em;min-width:0}
+.tab-detail .dh{display:flex;align-items:center;justify-content:space-between}
+.tab-detail .dh b{font-size:.68em;font-weight:800}
+.tab-detail .dh u{font-size:.42em;text-decoration:none;padding:.3em .6em;border-radius:1em;background:#fff1e8;color:#e2701c;font-weight:700}
+.tab-detail .kv{display:flex;gap:.6em;font-size:.46em;color:#6b768c}
+.tab-detail .kv b{color:#18213a;font-weight:700}
+.tab-detail .box{flex:1;border-radius:.55em;background:#fff;box-shadow:0 .1em .5em rgba(16,24,40,.06);padding:.7em .8em;display:flex;flex-direction:column;gap:.4em}
+.tab-detail .box span{display:block;height:.4em;border-radius:1em;background:#e8ecf6}
+.tab-detail .box span.w70{width:70%}.tab-detail .box span.w50{width:52%}
+.tab-detail .acts{display:flex;gap:.5em}
+.tab-detail .acts span{flex:1;height:1.7em;border-radius:.5em;background:#eef2fd}
+.tab-detail .acts span.pri{background:linear-gradient(135deg,#3d6ee8,#6d9bff);box-shadow:0 .4em 1em -.4em rgba(61,110,232,.9)}
+
+/* ---------- C. 透视双机 ---------- */
+.tilt-cv{background:linear-gradient(125deg,#1b2f6b,#33259c 50%,#0f1730)}
+.tilt-cv::before{content:"";position:absolute;inset:0;opacity:.4;
+  background-image:radial-gradient(circle at 30% 78%,rgba(109,155,255,.5),transparent 52%),
+    repeating-linear-gradient(135deg,rgba(255,255,255,.06) 0 1px,transparent 1px 10px)}
+.tilt-phones{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:2.6em;
+  font-size:9px;font-size:.93cqw;perspective:1100px;height:100%}
+.mp--left{transform:rotateY(16deg) rotateX(5deg) rotateZ(-4deg)}
+.mp--right{transform:rotateY(-16deg) rotateX(5deg) rotateZ(4deg) translateY(1em)}
+
+/* ---------- D. 设计规范板 ---------- */
+.spec-cv{background:linear-gradient(150deg,#0a1120,#101a2c 60%,#080d18)}
+.spec-board{position:absolute;inset:0;padding:5.6cqw 5.2cqw;display:flex;flex-direction:column;justify-content:space-between;
+  font-size:11px;font-size:1.5cqw}
+.band{min-width:0}
+.band-h{display:flex;align-items:baseline;gap:.7em;margin-bottom:1em}
+.band-h b{font-size:.95em;font-weight:800;letter-spacing:-.01em}
+.band-h span{font-family:var(--mono);font-size:.6em;letter-spacing:.22em;color:var(--mint)}
+.sw-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.9em}
+.sw-item{border-radius:.42em;overflow:hidden;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07)}
+.sw-item i{display:block;height:4.1em}
+.sw-item div{padding:.5em .6em}
+.sw-item b{display:block;font-size:.52em;font-weight:700;color:rgba(233,238,244,.86)}
+.sw-item s{display:block;font-family:var(--mono);font-size:.46em;color:rgba(233,238,244,.4);text-decoration:none;margin-top:.25em}
+.tp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2em}
+.tp b{display:block;font-weight:800;letter-spacing:-.03em;line-height:1}
+.tp span{display:block;font-family:var(--mono);font-size:.56em;color:rgba(233,238,244,.42);margin-top:.45em}
+.comp-row{display:flex;align-items:center;gap:.8em;flex-wrap:wrap}
+.comp-pill{padding:.62em 1.25em;border-radius:99px;background:linear-gradient(135deg,#3d6ee8,#6d9bff);
+  color:#fff;font-size:.62em;font-weight:700;box-shadow:0 .7em 1.4em -.7em rgba(61,110,232,.95)}
+.comp-ghost{padding:.58em 1.1em;border-radius:99px;border:1px solid rgba(233,238,244,.26);color:rgba(233,238,244,.82);font-size:.62em}
+.comp-tag{padding:.35em .8em;border-radius:.4em;font-size:.55em;font-weight:700;background:rgba(92,242,208,.14);color:var(--mint);border:1px solid rgba(92,242,208,.3)}
+.comp-tag.red{background:rgba(243,0,39,.14);color:#ff8a9b;border-color:rgba(243,0,39,.35)}
+.comp-field{flex:1 1 7em;height:2em;border-radius:.45em;border:1px solid rgba(233,238,244,.18);background:rgba(255,255,255,.03)}
+.comp-switch{width:2.6em;height:1.4em;border-radius:1em;background:rgba(61,110,232,.9);position:relative;flex:none}
+.comp-switch::after{content:"";position:absolute;right:.15em;top:.15em;width:1.1em;height:1.1em;border-radius:50%;background:#fff}
+
+/* ---------- 桌面端四种样机 ---------- */
+.pd-var--hero .pd-var__canvas.d-only{background:linear-gradient(125deg,#1e3a8a,#4338ca 46%,#6d28d9);perspective:1200px}
+.pd-var--hero .pd-var__canvas.d-only::before{content:"";position:absolute;inset:0;opacity:.3;
+  background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.09) 0 1px,transparent 1px 9px)}
+.pd-var__bigword{position:absolute;right:-6px;bottom:2px;font-size:clamp(3rem,8vw,6rem);font-weight:800;letter-spacing:-.05em;
+  color:rgba(255,255,255,.06);line-height:1;z-index:0}
+.orb{position:absolute;border-radius:50%;z-index:1}
+.orb--blue{width:70px;height:70px;right:12%;bottom:16%;background:radial-gradient(circle at 32% 30%,#93c5fd,#2563eb 46%,#1e3a8a);box-shadow:0 12px 26px -8px rgba(0,0,0,.6),inset -6px -8px 14px rgba(0,0,0,.35)}
+.orb--orange{width:22px;height:22px;right:30%;bottom:30%;background:radial-gradient(circle at 35% 30%,#fed7aa,#f97316 55%,#c2410c);box-shadow:0 6px 12px -4px rgba(0,0,0,.5)}
+.tilt-tablet{position:relative;z-index:2;width:min(56%,600px);transform:rotateY(-16deg) rotateX(6deg) rotateZ(-3deg);transform-style:preserve-3d;
+  border-radius:14px;padding:8px;background:linear-gradient(150deg,#1b2230,#080b10);
+  box-shadow:22px 26px 44px -16px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.2),0 0 0 1px rgba(255,255,255,.08)}
+.tilt-tablet__screen{width:100%;aspect-ratio:16/10;border-radius:7px;overflow:hidden;background:#0a0d12}
+.tilt-tablet__screen .ui{height:100%!important;width:100%;border-radius:5px}
+
+.pd-var--wide .pd-var__canvas.d-only{background:radial-gradient(ellipse at 50% 40%,#123a6b,#060d18 70%)}
+.pd-var--wide .pd-var__canvas.d-only::before{content:"";position:absolute;inset:0;opacity:.28;
+  background-image:linear-gradient(rgba(96,165,250,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(96,165,250,.12) 1px,transparent 1px);background-size:34px 34px}
+.data-wall{position:relative;z-index:2;width:76%;transform:perspective(1100px) rotateX(8deg) rotateY(-10deg);border-radius:10px;padding:7px;
+  background:linear-gradient(150deg,#1a2740,#0a101c);box-shadow:0 0 32px -6px rgba(59,130,246,.5),0 26px 40px -18px rgba(0,0,0,.85),inset 0 1px 0 rgba(147,197,253,.3)}
+.data-wall__glow{position:absolute;inset:-2px;border-radius:12px;box-shadow:0 0 26px rgba(59,130,246,.4);pointer-events:none}
+.data-wall__screen{width:100%;aspect-ratio:16/10;border-radius:5px;overflow:hidden;background:#060a12}
+.data-wall__screen .ui{height:100%!important;width:100%;border-radius:3px}
+
+.pd-var--scene .pd-var__canvas.d-only{background:linear-gradient(180deg,#050a14,#0a1424 60%,#04070d);perspective:900px}
+.room-scene{position:absolute;inset:0;z-index:2}
+.room-scene__cabinet{position:absolute;top:0;bottom:24%;width:16%;background:repeating-linear-gradient(0deg,#0e1826 0 8px,#070d16 8px 13px);opacity:.7}
+.room-scene__cabinet--l{left:0;transform:rotateY(24deg);transform-origin:left}
+.room-scene__cabinet--r{right:0;transform:rotateY(-24deg);transform-origin:right}
+.room-scene__floor{position:absolute;left:0;right:0;bottom:0;height:34%;transform:rotateX(64deg);transform-origin:bottom;
+  background-image:linear-gradient(rgba(96,165,250,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(96,165,250,.14) 1px,transparent 1px);background-size:30px 26px;opacity:.5}
+.room-scene__screen{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(58%,430px);aspect-ratio:16/9;border-radius:6px;padding:5px;
+  background:linear-gradient(150deg,#1b2740,#080e19);box-shadow:0 0 30px -4px rgba(56,189,248,.45),0 18px 34px -14px rgba(0,0,0,.9)}
+.room-scene__screen::after{content:"";position:absolute;left:50%;bottom:-46px;transform:translateX(-50%);width:2px;height:40px;background:linear-gradient(#1e3a5f,transparent)}
+.room-scene__screen .ui{height:100%!important;width:100%;border-radius:3px;overflow:hidden}
+.room-scene__screen .ui .ui-body{min-height:0}
+
+.pd-var--spec .pd-var__canvas.d-only{background:#08101c}
+.grid-system{position:absolute;inset:0;z-index:2}
+.grid-system__base{position:absolute;inset:0;overflow:hidden;opacity:.9}
+.grid-system__base .ui{transform:scale(1.2);transform-origin:20% 0;height:100%!important}
+.grid-system__base::after{content:"";position:absolute;inset:0;background:rgba(4,10,20,.42)}
+.grid-system__lines{position:absolute;inset:5% 4%;display:grid;grid-template-columns:repeat(12,1fr);gap:0}
+.grid-system__lines::before{content:"";position:absolute;inset:-4px;border:1px solid rgba(96,165,250,.5)}
+.grid-system__lines span{border-left:1px solid rgba(96,165,250,.38);background:rgba(59,130,246,.05)}
+.grid-system__lines span:last-child{border-right:1px solid rgba(96,165,250,.38)}
+.grid-system__label{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;text-align:center;
+  font-size:clamp(.9rem,2vw,1.3rem);font-weight:700;color:#eaf3ff;letter-spacing:.05em;text-shadow:0 2px 12px rgba(0,0,0,.8)}
+.grid-system__label i{font-family:var(--mono);font-style:normal;font-size:.55rem;letter-spacing:.2em;color:rgba(147,197,253,.8)}
+
+@media (max-width:900px){
+  .pd-var-grid{grid-template-columns:1fr}
+  .pd-var--hero{grid-column:1}
+  .tilt-tablet{width:74%}
+  .data-wall{width:86%}
+  .room-scene__screen{width:72%}
+  .hero-mock{grid-template-columns:1fr;padding:0 4cqw}
+  .hero-copy p{max-width:none}
+  .hero-phones{display:none}
+}
+/* ===== 4. 正文 ===== */
+.pd-story{border-bottom:1px solid var(--edge)}
+.pd-story__lead{font-size:clamp(1rem,1.8vw,1.2rem);line-height:1.7;color:var(--ink);font-weight:600;max-width:70ch;margin:0 0 30px;
+  padding-left:18px;border-left:3px solid var(--mint)}
+.pd-story__grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 34px}
+.pd-story__item{position:relative;padding-left:22px}
+.pd-story__item::before{content:"";position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 4px rgba(92,242,208,.12)}
+.pd-story__item h4{font-size:.9rem;font-weight:700;margin:0 0 8px;color:var(--ink)}
+.pd-story__item h4 span{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;color:rgba(233,238,244,.4);margin-left:8px;font-weight:500}
+.pd-story__item p{font-size:.82rem;line-height:1.85;color:var(--muted);margin:0}
+
+/* ===== 5. 亮点卡 ===== */
+.pd-hl-wrap{border-bottom:1px solid var(--edge)}
+.pd-hl{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pd-hl__card{padding:22px;border:1px solid var(--edge);border-radius:14px;background:rgba(255,255,255,.02);transition:border-color .3s,transform .3s}
+.pd-hl__card:hover{border-color:rgba(92,242,208,.5);transform:translateY(-3px)}
+.pd-hl__ico{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-size:1rem;margin-bottom:14px;
+  background:rgba(92,242,208,.1);border:1px solid rgba(92,242,208,.28)}
+.pd-hl__card h4{font-size:.86rem;font-weight:700;margin:0 0 7px;color:var(--ink)}
+.pd-hl__card p{font-size:.76rem;line-height:1.75;color:var(--muted);margin:0}
+
+/* ===== 6. 成果 + 技术栈 ===== */
+.pd-outcome{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(28px,5vw,64px);border-bottom:1px solid var(--edge)}
+.pd-eyebrow{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;color:var(--mint);margin-bottom:18px}
+.pd-stats{display:flex;flex-direction:column;gap:16px}
+.pd-stat{border-left:2px solid var(--mint);padding-left:14px}
+.pd-stat b{display:block;font-size:1.6rem;font-weight:800;letter-spacing:-.03em;color:#eaf3f1;line-height:1}
+.pd-stat span{font-size:.68rem;letter-spacing:.08em;color:rgba(233,238,244,.5)}
+.pd-tags{display:flex;flex-wrap:wrap;gap:8px}
+
+/* ===== 7. 作者卡 ===== */
+.pd-author{display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--edge)}
+.pd-author__avatar{width:52px;height:52px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:1.3rem;font-weight:800;
+  background:linear-gradient(135deg,rgba(92,242,208,.28),rgba(167,139,250,.28));border:1px solid rgba(92,242,208,.4);color:#eaf3f1}
+.pd-author__info{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.pd-author__info b{font-size:.92rem;color:var(--ink)}
+.pd-author__info span{font-size:.74rem;color:var(--muted);line-height:1.5}
+
+/* ===== 8. 更多作品 ===== */
+.pd-more{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pd-more__card{text-align:left;cursor:pointer;padding:16px;border:1px solid var(--edge);border-radius:12px;background:rgba(255,255,255,.02);
+  color:var(--ink);transition:border-color .3s,transform .3s,background .3s}
+.pd-more__card:hover{border-color:rgba(92,242,208,.5);transform:translateY(-3px);background:rgba(92,242,208,.04)}
+.pd-more__card .mn{font-family:var(--mono);font-size:.58rem;color:var(--mint);letter-spacing:.12em}
+.pd-more__card .mt{display:block;font-size:.82rem;font-weight:600;margin:8px 0 5px}
+.pd-more__card .mk{font-size:.64rem;color:var(--muted)}
+
+/* ===== 响应式 & 浅色 ===== */
+@media (max-width:760px){
+  .pd-cover__center{max-width:92%}
+  .pd-fig-grid,.pd-story__grid,.pd-hl,.pd-outcome,.pd-more{grid-template-columns:1fr}
+  .device{transform:none}
+  .pd-infobar > div{min-width:50%}
+  .pd-author{flex-wrap:wrap}
+}
+:root[data-theme="light"] dialog{background:#f4f7fa;border-color:rgba(15,23,42,.14)}
+:root[data-theme="light"] .pd-cover{background:linear-gradient(135deg,hsl(var(--pd-h) 40% 16%),#0a1018 62%,hsl(calc(var(--pd-h) + 32) 38% 14%))}
+:root[data-theme="light"] .pd-infobar{background:rgba(15,23,42,.02)}
+:root[data-theme="light"] .pd-infobar .v,:root[data-theme="light"] .pd-stat b,:root[data-theme="light"] .pd-story__lead,:root[data-theme="light"] .pd-sec-title{color:#0f172a}
+:root[data-theme="light"] .pd-infobar .k,:root[data-theme="light"] .pd-sec-title em,:root[data-theme="light"] .pd-fig figcaption span,:root[data-theme="light"] .pd-story__item h4 span,:root[data-theme="light"] .pd-stat span{color:rgba(15,23,42,.5)}
+:root[data-theme="light"] .pd-story__item p,:root[data-theme="light"] .pd-hl__card p,:root[data-theme="light"] .pd-author__info span,:root[data-theme="light"] .pd-more__card .mk{color:#475569}
+:root[data-theme="light"] .pd-fig__stage,:root[data-theme="light"] .pd-shot{background:radial-gradient(ellipse at 50% 120%,rgba(13,148,136,.10),transparent 58%),#e9eef4}
+:root[data-theme="light"] .pd-fig__stage::before,:root[data-theme="light"] .pd-shot::before{background-image:linear-gradient(rgba(15,23,42,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.05) 1px,transparent 1px)}
+:root[data-theme="light"] .device__frame{background:linear-gradient(150deg,#e2e8ef,#b6c0cb 60%)}
+:root[data-theme="light"] .pd-browser__bar{background:#dfe5ec}
+:root[data-theme="light"] .pd-hl__card,:root[data-theme="light"] .pd-more__card{background:rgba(15,23,42,.02)}
+:root[data-theme="light"] .pd-author__avatar{color:#0f172a}
+</style>
 <script>
 /* ===== Three.js r170 离线内联（MIT） ===== */
 (function(){
@@ -2785,7 +3559,7 @@ void main() {
       powerPreference: 'high-performance',
       stencil: false
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.12;
@@ -2824,7 +3598,13 @@ void main() {
     refTexture.colorSpace = THREE.SRGBColorSpace;
 
     const auroraCanvas = document.getElementById('auroraCanvas');
-    const updateRefractionSource = () => {
+    let lastRefrUpdate = 0;
+    const updateRefractionSource = force => {
+      // 折射源是低频背景（大字+光斑），无需每帧全屏重绘与上传；节流到 ~15fps。
+      // resize / 主题切换传 force=true 立即刷新，避免延迟一帧出现旧底色。
+      const tNow = performance.now();
+      if (!force && tNow - lastRefrUpdate < 66) return;
+      lastRefrUpdate = tNow;
       const isLight = document.documentElement.dataset.theme === 'light';
       scene.environmentIntensity = isLight ? 0.52 : 1.15;
       const w = Math.max(1, window.innerWidth);
@@ -3001,7 +3781,7 @@ void main() {
         const t = i / 32;
         points.push(new THREE.Vector2(t * rShoulder, -halfT * Math.cos(t * Math.PI * 0.43)));
       }
-      const geo = new THREE.LatheGeometry(points, 128);
+      const geo = new THREE.LatheGeometry(points, 72);
       geo.rotateX(Math.PI * 0.5);
       geo.computeVertexNormals();
       return geo;
@@ -3017,7 +3797,7 @@ void main() {
       shape.lineTo(-straightHalf, r);
 
       const geo = new THREE.ExtrudeGeometry(shape, {
-        depth: 0.20, bevelEnabled: true, bevelSegments: 22, steps: 2, bevelSize: 0.15, bevelThickness: 0.15, curveSegments: 48
+        depth: 0.20, bevelEnabled: true, bevelSegments: 14, steps: 2, bevelSize: 0.15, bevelThickness: 0.15, curveSegments: 32
       });
       geo.center();
       const pos = geo.attributes.position;
@@ -3062,7 +3842,7 @@ void main() {
       }
       shape.closePath();
       const geo = new THREE.ExtrudeGeometry(shape, {
-        depth: 0.36, bevelEnabled: true, bevelSegments: 22, bevelSize: 0.18, bevelThickness: 0.18
+        depth: 0.36, bevelEnabled: true, bevelSegments: 14, bevelSize: 0.18, bevelThickness: 0.18
       });
       geo.center();
       geo.computeVertexNormals();
@@ -3078,19 +3858,19 @@ void main() {
         const y = -Math.cos(angle) * 1.05;
         pts.push(new THREE.Vector2(Math.max(0.0001, r), y));
       }
-      const geo = new THREE.LatheGeometry(pts, 96);
+      const geo = new THREE.LatheGeometry(pts, 64);
       geo.computeVertexNormals();
       return geo;
     }
 
     const SHAPE_LIST = [
-      { label: 'LENS · 双凸光学透镜',   geo: createLensGeometry(),                       ior: 1.28, thick: 1.35, chroma: 0.055, blob: 0.0, mode: 'lens' },
-      { label: 'CUBE · 流体圆角立方',   geo: createRoundedCubeGeometry(1.46, 0.28, 32),  ior: 1.36, thick: 1.55, chroma: 0.068, blob: 0.0, mode: 'spin' },
-      { label: 'BAR · 胶囊玻璃条',      geo: createBarGeometry(),                        ior: 1.26, thick: 1.25, chroma: 0.050, blob: 0.0, mode: 'bar'  },
-      { label: 'TORUS · 光学圆环',      geo: new THREE.TorusGeometry(0.76, 0.30, 64, 128),ior: 1.34, thick: 1.30, chroma: 0.062, blob: 0.0, mode: 'spin' },
-      { label: 'BLOB · 液态水滴',       geo: new THREE.SphereGeometry(0.96, 96, 96),     ior: 1.30, thick: 1.40, chroma: 0.058, blob: 1.0, mode: 'lens' },
-      { label: 'PRISM · 圆角三棱镜',    geo: createRoundedPrismGeometry(),               ior: 1.42, thick: 1.50, chroma: 0.082, blob: 0.0, mode: 'spin' },
-      { label: 'DROP · 精切水滴晶',     geo: createSmoothDropGeometry(),                 ior: 1.38, thick: 1.45, chroma: 0.072, blob: 0.0, mode: 'spin' }
+      { label: 'LENS',   geo: createLensGeometry(),                       ior: 1.28, thick: 1.35, chroma: 0.055, blob: 0.0, mode: 'lens' },
+      { label: 'CUBE',   geo: createRoundedCubeGeometry(1.46, 0.28, 20),  ior: 1.36, thick: 1.55, chroma: 0.068, blob: 0.0, mode: 'spin' },
+      { label: 'BAR',      geo: createBarGeometry(),                        ior: 1.26, thick: 1.25, chroma: 0.050, blob: 0.0, mode: 'bar'  },
+      { label: 'TORUS',      geo: new THREE.TorusGeometry(0.76, 0.30, 40, 80),ior: 1.34, thick: 1.30, chroma: 0.062, blob: 0.0, mode: 'spin' },
+      { label: 'BLOB',       geo: new THREE.SphereGeometry(0.96, 48, 48),     ior: 1.30, thick: 1.40, chroma: 0.058, blob: 1.0, mode: 'lens' },
+      { label: 'PRISM',    geo: createRoundedPrismGeometry(),               ior: 1.42, thick: 1.50, chroma: 0.082, blob: 0.0, mode: 'spin' },
+      { label: 'DROP',     geo: createSmoothDropGeometry(),                 ior: 1.38, thick: 1.45, chroma: 0.072, blob: 0.0, mode: 'spin' }
     ];
 
     let shapeIdx = 0;
@@ -3162,10 +3942,11 @@ void main() {
     const syncVisibility = () => {
       const rect = heroEl.getBoundingClientRect();
       pointer.inHero = rect.bottom > 100;
-      leftHost.style.opacity = pointer.inHero ? '1' : '0';
+      leftHost.style.opacity = (pointer.inHero && !window.__crystalOff) ? '1' : '0';
       const hudEl = window.__crystalHud;
       if (hudEl) { hudEl.style.opacity = pointer.inHero ? '1' : '0'; hudEl.style.pointerEvents = pointer.inHero ? 'auto' : 'none'; }
     };
+    window.__syncCrystalVisibility = syncVisibility;
     window.addEventListener('scroll', syncVisibility, { passive: true });
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -3173,17 +3954,19 @@ void main() {
       renderer.setSize(window.innerWidth, window.innerHeight);
       syncBackdropPlane();
       syncVisibility();
+      updateRefractionSource(true);
     }, { passive: true });
 
     // 深浅色模式联动
     window.__updateCrystalTheme = isLight => {
+      updateRefractionSource(true);
       fluidGlassMaterial.attenuationColor.set(isLight ? '#dce9f5' : '#f0fdfa');
       fluidGlassMaterial.envMapIntensity = isLight ? 1.5 : 1.25;   // 浅色下把边缘高光提亮，勾出玻璃轮廓
       scene.environmentIntensity = isLight ? 0.52 : 1.15;
     };
 
     requestAnimationFrame(() => {
-      leftHost.style.opacity = '1';
+      if (!window.__crystalOff) leftHost.style.opacity = '1';
       document.dispatchEvent(new CustomEvent('fgl:shape', { detail: SHAPE_LIST[shapeIdx].label }));
     });
 
@@ -3191,7 +3974,7 @@ void main() {
     const clock = new THREE.Clock();
     function animate() {
       requestAnimationFrame(animate);
-      if (!pointer.inHero || document.hidden) return;
+      if (!pointer.inHero || document.hidden || window.__crystalOff) return;
 
       const dt = Math.min(clock.getDelta(), 0.05);
       const elapsed = clock.getElapsedTime();
@@ -7045,30 +7828,298 @@ const wrap = (value, span) => ((value % span) + span) % span;
   isoCity(document.getElementById('twinScene'), { cols: 12, rows: 7, tw: 34, seed: 31, skip: 0.14 });
   isoCity(document.getElementById('cardCity'), { cols: 13, rows: 6, tw: 40, seed: 91, skip: 0.22 });
 
-  /* ---------- 8. 项目弹窗 ---------- */
+  /* ---------- 8. 项目详情页（封面 + 多视角图集 + 分段叙事） ---------- */
   const dialog = document.getElementById('projDialog');
   const projects = [
-    { t:'澄海新区数字孪生驾驶舱', d:'面向新区管委会的城市运行驾驶舱。核心挑战是 12 个委办局的数据口径不一致，且值班员在 3 分钟内必须判断"哪里出了问题"。<br><br>做法：以空间为索引重构信息层级，把告警从弹窗改为场景内的颜色与脉冲；为每种事件定义"严重度—影响面—处置建议"三段式卡片刻度；建立 6 类可视化图元规范，让不同厂商的子系统在同一套视觉语言下对齐。' },
-    { t:'星海 IoT 设备云', d:'覆盖 40+ 品类设备的物联网平台。设计支点是"物模型"：属性、事件、服务三段结构可以直接映射为界面结构，因此建立了一套由模型驱动的通用渲染器。<br><br>结果：新品类设备接入不再需要新设计稿，只需要配置模型；告警中心从列表改为"设备—产线—厂区"三层收敛，日均处理时长下降 40%。' },
-    { t:'湖仓数据资产工作台', d:'面向数据工程师与分析师的资产工作台。难点是"表"这种对象对业务方毫无语义。<br><br>做法：以指标为中心重排资产卡片，血缘图支持逐层下钻并高亮影响面；建立数据质量评分与责任人的双维度筛选。取数需求平均响应时间从 3 天缩短到 4 小时。' },
-    { t:'组态工坊 Config Studio', d:'面向工艺工程师的可视化组态平台。目标人群不会写代码，但非常熟悉工艺流程。<br><br>设计上把"画"和"绑"分开：画布负责图形与布局，右侧面板负责变量绑定；提供 72 个行业组态元件与 12 套产线模板。上线后 90% 的产线画面由业务侧自行搭建。' },
-    { t:'巡检宝 · 现场作业 App', d:'为工业现场设计的移动端。真实场景是：戴手套、噪音大、信号差、单手操作。<br><br>设计策略：把可点击区域放大到 48px 以上并集中在下半屏；采用离线优先架构，巡检记录本地队列化后按优先级同步；异常上报改为"拍照 + 语音转写 + 三档严重度"。误操作率下降 62%。' }
+    {
+      t:'澄海新区数字孪生驾驶舱', kind:'数字孪生 · 城市运行', no:'01', code:'CASE — 01', year:'25',
+      hue:168, hueLabel:'DIGITAL TWIN / CITY OPS', views:'3,993', likes:'128', url:'twin.chenghai.gov.cn',
+      slogan:'把 12 个委办局的数据，收进一个能"看见问题"的三维城市。',
+      facts:[['角色','主设计师'],['周期','14 周'],['产出','大屏 / 组件库 / 规范'],['团队','设计 2 · 前端 5']],
+      stats:[['3 秒','问题定位时间'],['12 → 1','委办局口径统一'],['6 类','可视化图元规范']],
+      tags:['Three.js','BIM','GIS','数据可视化','Design System'],
+      lead:'一个面向新区管委会的城市运行驾驶舱。真正的难点不是把三维城市做出来，而是让值班员在 3 分钟内回答"哪里出了问题、影响多大、该怎么处置"。',
+      story:[
+        {h:'项目背景',en:'BACKGROUND',p:'新区全面建设数字化底座，12 个委办局各自有一套系统，数据口径、更新频率、命名规则都不一致。管委会需要一个统一的大屏，做全局态势感知与应急指挥。'},
+        {h:'核心挑战',en:'CHALLENGE',p:'信息维度极多，但值班员只有极短的判断窗口。传统"列表 + 弹窗告警"的方式会让关键信息被淹没，且不同厂商子系统视觉语言互不统一。'},
+        {h:'设计做法',en:'APPROACH',p:'以空间为索引重构信息层级，把告警从弹窗改为场景内的颜色与脉冲；为每类事件定义"严重度—影响面—处置建议"三段式卡片刻度；建立 6 类可视化图元规范，让所有子系统对齐同一套语言。'},
+        {h:'项目结果',en:'OUTCOME',p:'问题定位时间从分钟级缩短到 3 秒，12 个委办局的数据口径完成统一。图元规范沉淀为组件库，后续新子系统接入直接复用。'}
+      ],
+      highlights:[
+        {i:'◎',t:'空间索引',d:'用三维场景替代平铺列表，让"哪里出问题"一眼可见，而不是逐条翻找。'},
+        {i:'◈',t:'告警刻度',d:'严重度用颜色与脉冲强度编码，减少弹窗打断，值班员扫一眼就能分级。'},
+        {i:'▦',t:'图元规范',d:'6 类可视化图元统一各厂商子系统，同一套语言降低认知切换成本。'}
+      ],
+      caps:['数字孪生主场景 · 全域态势','设备与告警总览','事件处置面板细节'],
+      d:'面向新区管委会的城市运行驾驶舱。'
+    },
+    {
+      t:'星海 IoT 设备云', kind:'物联网 · SaaS 平台', no:'02', code:'CASE — 02', year:'25',
+      hue:190, hueLabel:'IoT / SAAS PLATFORM', views:'2,617', likes:'96', url:'cloud.xinghai-iot.com',
+      slogan:'一套由"物模型"驱动的渲染器，覆盖 40+ 品类设备，接入新品类零设计稿。',
+      facts:[['角色','设计负责人'],['周期','22 周'],['产出','Web / 配置端 / 图表规范'],['团队','设计 3 · 前端 8']],
+      stats:[['40+','设备品类'],['↓ 40%','告警处理时长'],['1.4s','数据上报延迟']],
+      tags:['物模型','ECharts','Design System','SaaS','配置化'],
+      lead:'覆盖 40+ 品类设备的物联网平台。设计的核心支点是一个词——物模型：属性、事件、服务三段结构可以直接映射为界面结构。',
+      story:[
+        {h:'项目背景',en:'BACKGROUND',p:'平台需要接入来自不同厂商的 40 多类设备，每类设备的属性、状态、告警都不一样。按传统方式，每接一个新品类就要重新画一套界面，设计与前端都成为瓶颈。'},
+        {h:'核心挑战',en:'CHALLENGE',p:'设备数量庞大且实时变化，告警中心原是长列表，运维人员难以判断优先级；同时新品类接入成本高，无法规模化。'},
+        {h:'设计做法',en:'APPROACH',p:'把物模型的"属性—事件—服务"三段结构直接映射为通用渲染器：新品类只需配置模型，无需新设计稿。告警中心从列表改为"设备—产线—厂区"三层收敛，配合统一图表规范。'},
+        {h:'项目结果',en:'OUTCOME',p:'新品类接入实现零设计稿，告警日均处理时长下降 40%。渲染器与图表规范成为平台的核心资产。'}
+      ],
+      highlights:[
+        {i:'⬡',t:'模型驱动',d:'界面由物模型自动生成，属性/事件/服务一一映射，配置即界面。'},
+        {i:'▤',t:'三层收敛',d:'告警按设备—产线—厂区逐级聚合，运维先看到范围，再看细节。'},
+        {i:'◴',t:'图表规范',d:'统一图表类型与配色语义，让不同品类的监控数据可读且一致。'}
+      ],
+      caps:['设备总览 · 实时在线','监控明细与负载趋势','告警处理工作台'],
+      d:'覆盖 40+ 品类设备的物联网平台。'
+    },
+    {
+      t:'湖仓数据资产工作台', kind:'数据湖 · 数据资产', no:'03', code:'CASE — 03', year:'24',
+      hue:258, hueLabel:'DATA LAKE / ASSETS', views:'1,884', likes:'74', url:'data.hucang.io',
+      slogan:'把"表"翻译成业务语言，让取数从 3 天变成 4 小时。',
+      facts:[['角色','交互 + 视觉'],['周期','18 周'],['产出','工作台 / 血缘视图'],['团队','设计 2 · 数据 6']],
+      stats:[['3天→4h','取数响应时间'],['4,206','纳管数据表'],['逐层','血缘下钻']],
+      tags:['数据治理','知识图谱','信息架构','数据血缘'],
+      lead:'面向数据工程师与分析师的资产工作台。要解决的根本问题是："表"这种技术对象，对业务方毫无语义。',
+      story:[
+        {h:'项目背景',en:'BACKGROUND',p:' lak 仓纳管了 4,206 张表，但业务方想找一份数据时，面对的是英文表名和技术字段，根本不知道哪张表能用、谁负责、质量如何。'},
+        {h:'核心挑战',en:'CHALLENGE',p:'数据资产缺少业务语义，血缘关系复杂难以追溯，取数需求平均要 3 天才能响应，且常常取错。'},
+        {h:'设计做法',en:'APPROACH',p:'以指标为中心重排资产卡片，把技术表翻译成"业务含义 + 负责人 + 质量评分"；血缘图支持逐层下钻并高亮影响面；建立数据质量评分与责任人的双维度筛选。'},
+        {h:'项目结果',en:'OUTCOME',p:'取数需求平均响应时间从 3 天缩短到 4 小时，业务方可以自主找到可信数据。'}
+      ],
+      highlights:[
+        {i:'◫',t:'指标中心',d:'以业务指标而非技术表组织资产，让业务方看得懂、找得到。'},
+        {i:'⤳',t:'血缘下钻',d:'逐层展开数据血缘并高亮影响面，改一张表能立刻看到谁会受影响。'},
+        {i:'✓',t:'质量评分',d:'把质量分与责任人做成可筛选维度，用数据说话，减少取错。'}
+      ],
+      caps:['资产总览 · 指标视图','数据血缘 · 逐层下钻','质量评分与责任人'],
+      d:'面向数据工程师与分析师的资产工作台。'
+    },
+    {
+      t:'组态工坊 Config Studio', kind:'组态 · 低代码平台', no:'04', code:'CASE — 04', year:'24',
+      hue:38, hueLabel:'CONFIG / LOW-CODE', views:'2,105', likes:'83', url:'studio.config.works',
+      slogan:'让不懂代码的工艺工程师，自己搭出 90% 的产线画面。',
+      facts:[['角色','设计负责人'],['周期','26 周'],['产出','编辑器 / 组件规范'],['团队','设计 2 · 前端 6']],
+      stats:[['90%','业务侧自建率'],['72','行业组态元件'],['12','产线模板']],
+      tags:['画布引擎','SCADA','低代码','组件规范'],
+      lead:'面向工艺工程师的可视化组态平台。目标人群不会写代码，但对工艺流程了如指掌——设计要把"搭建界面"变成他们熟悉的方式。',
+      story:[
+        {h:'项目背景',en:'BACKGROUND',p:'传统产线监控画面由 frontend 工程师按照工艺需求逐一开发，交付周期长，工艺改动又要重新排期。业务侧希望自己就能搭建和调整画面。'},
+        {h:'核心挑战',en:'CHALLENGE',p:'目标用户没有编程经验，但熟悉工艺逻辑。既要提供足够的搭建自由度，又不能让界面变成需要培训的复杂工具。'},
+        {h:'设计做法',en:'APPROACH',p:'把"画"和"绑"分开：画布负责图形与布局，右侧面板负责变量绑定；提供 72 个行业组态元件与 12 套产线模板，让工程师从模板起步，所见即所得。'},
+        {h:'项目结果',en:'OUTCOME',p:'上线后 90% 的产线画面由业务侧自行搭建，交付周期从周级降到小时级。'}
+      ],
+      highlights:[
+        {i:'✥',t:'画绑分离',d:'画布只管图形与布局，变量绑定独立到右侧面板，心智负担降到最低。'},
+        {i:'▧',t:'元件库',d:'72 个行业组态元件覆盖常见工艺对象，拖拽即用，无需从头绘制。'},
+        {i:'▣',t:'模板起步',d:'12 套产线模板作为起点，工程师改参数即可，不必从空白画布开始。'}
+      ],
+      caps:['组态画布 · 所见即所得','元件与变量绑定','产线模板库'],
+      d:'面向工艺工程师的可视化组态平台。'
+    },
+    {
+      t:'巡检宝 · 现场作业 App', kind:'移动端 · 现场作业', no:'05', code:'CASE — 05', year:'23',
+      hue:205, hueLabel:'MOBILE / FIELD OPS', views:'3,248', likes:'117', url:'app.xunjianbao.cn',
+      slogan:'为"戴手套、噪音里、信号差"的现场，重新定义每一次点击。',
+      facts:[['角色','主设计师'],['周期','11 周'],['产出','iOS / Android / 小程序'],['团队','设计 1 · 客户端 4']],
+      stats:[['↓ 62%','误操作率'],['48px+','最小热区'],['离线优先','同步策略']],
+      tags:['移动设计','离线优先','可用性测试','无障碍'],
+      lead:'为工业现场设计的移动端。真实场景是：戴着手套、噪音大、信号差、常常单手操作——这决定了每一个交互细节。',
+      story:[
+        {h:'项目背景',en:'BACKGROUND',p:'一线巡检人员需要在设备上记录读数、拍照上报异常。原有 App 沿用普通消费级设计，在现场频繁误触、无信号时无法使用。'},
+        {h:'核心挑战',en:'CHALLENGE',p:'戴手套点击精度低，噪音环境听不清提示音，现场信号不稳定，且多数时候需要单手操作。误操作率居高不下。'},
+        {h:'设计做法',en:'APPROACH',p:'把可点击区域放大到 48px 以上并集中在下半屏，便于单手拇指操作；采用离线优先架构，巡检记录本地队列化后按优先级同步；异常上报改为"拍照 + 语音转写 + 三档严重度"。'},
+        {h:'项目结果',en:'OUTCOME',p:'误操作率下降 62%，无信号环境下依然可以完成完整巡检流程并可靠同步。'}
+      ],
+      highlights:[
+        {i:'◎',t:'拇指热区',d:'关键操作集中在下半屏、热区 48px 以上，戴手套也能准确点击。'},
+        {i:'⇅',t:'离线优先',d:'记录本地队列化，按优先级同步，弱网无网都能完成作业。'},
+        {i:'◉',t:'三档上报',d:'拍照 + 语音转写 + 严重度三档，异常上报快且信息完整。'}
+      ],
+      caps:['今日巡检任务','异常上报流程','离线同步状态'],
+      d:'为工业现场设计的移动端。'
+    },
+    {
+      t:'云枢协同 · 企业办公 App', kind:'移动端 · 企业协同', no:'06', code:'CASE — 06', year:'26',
+      hue:222, hueLabel:'TEAMHUB / ENTERPRISE COLLABORATION', views:'4,286', likes:'152', url:'teamhub.example.cn',
+      slogan:'把审批、待办、日程、知识库收进一个 App，让协作不再散落在十几个系统里。',
+      facts:[['角色','设计负责人'],['周期','20 周'],['产出','App / UI 规范 / 组件库'],['团队','设计 3 · 前端 9']],
+      stats:[['33','基础组件'],['16 → 1','高频入口收敛'],['#3D6EE8','品牌主色']],
+      tags:['MasterGo','Design System','移动端','协同办公','组件库'],
+      lead:'面向集团员工的一站式协同办公 App。真正的设计命题不是再加功能，而是把散落在多个系统里的高频任务，收敛成一条清晰的移动端路径，并用一套组件规范支撑长期迭代。',
+      story:[
+        {h:'项目背景',en:'BACKGROUND',p:'集团内部协同工具分散在多个系统：审批、待办、日程、消息、知识库、通讯录各自为政，员工完成一件日常事项常常要在几个 App 之间来回切换。云枢协同的目标是把这些能力整合为一个移动端入口。'},
+        {h:'核心挑战',en:'CHALLENGE',p:'功能多不等于好用。移动端的挑战在于：如何在有限的屏幕里排出任务的优先级，让"我现在要做什么"一眼可见；同时不同业务线各自的实现会让视觉与交互越来越不一致，维护成本极高。'},
+        {h:'设计做法',en:'APPROACH',p:'以工作台为中枢，把待办、审批、日程按"今天要处理"聚合；统一使用主色 #3D6EE8 建立品牌识别，配合语义色（红 #F30027 / 绿 #39AD00）表达状态。同步在 MasterGo 中搭建云枢 UI 组件库（33 个组件）与产品色彩规范库（30 个组件），字体统一为思源黑体（Source Han Sans CN）。'},
+        {h:'项目结果',en:'OUTCOME',p:'高频入口从多个系统收敛为一个 App，登录、工作台、我的、消息、待办、日程、知识库、通讯录等核心场景形成一致体验。组件库与设计变量成为资产，新业务模块可直接复用规范接入。'}
+      ],
+      highlights:[
+        {i:'◎',t:'工作台中枢',d:'待办、审批、日程按"今天要处理"聚合，打开 App 就知道下一步做什么。'},
+        {i:'⬡',t:'组件规范',d:'33 个基础组件 + 30 个产品颜色变量，多业务线共用同一套视觉语言。'},
+        {i:'◈',t:'语义配色',d:'主色 #3D6EE8 建立识别，语义红绿表达状态，信息层级清楚不靠堆装饰。'}
+      ],
+      caps:['工作台 · 今日待办','审批与日程处理','消息与知识库'],
+      d:'面向集团员工的一站式企业协同办公 App。'
+    }
   ];
-  document.querySelectorAll('[data-open]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const p = projects[Number(btn.dataset.open)];
-      if (!p) return;
-      document.getElementById('dlgTitle').textContent = p.t;
-      document.getElementById('dlgBody').innerHTML = `<p>${p.d}</p><p style="color:rgba(233,238,244,.34);font-size:.72rem">＊此处为示意文案，替换为你的真实项目描述。</p>`;
-      dialog.showModal();
-    });
+  const $ = id => document.getElementById(id);
+  const isMobileProject = idx => idx === 4 || idx === 5;
+
+  /* ===== 手机样机内容（em 基准，随 16:9 卡片等比缩放） ===== */
+  const MP_STATUS = '<div class="mp__status"><span>9:41</span><span class="mp__sig"><i></i><i></i><i></i><i></i></span></div>';
+  const MP_TAB = '<div class="mp__tab"><i class="on"></i><i></i><i></i><i></i></div>';
+  const MP_SCREENS = {
+    // 工作台
+    work: () => MP_STATUS
+      + '<div class="mp__top"><div><b>上午好，Oscar</b><span>今天 5 件事待处理</span></div><span class="mp__ava"></span></div>'
+      + '<div class="mp__hero"><span class="mp__hero-k">今日待办</span><b class="mp__hero-n">5<em>项</em></b>'
+      + '<span class="mp__bar"><i style="width:62%"></i></span><span class="mp__hero-f">已完成 3 / 8 · 2 项待审批</span></div>'
+      + '<div class="mp__quick"><span></span><span></span><span></span><span></span></div>'
+      + '<div class="mp__rows">'
+      + '<div class="mp__row"><i></i><div><b>设备借用申请</b><s>AGV-03 · 10 分钟前</s></div><u class="warn">待审批</u></div>'
+      + '<div class="mp__row"><i></i><div><b>转运任务排期</b><s>调度中心 · 32 分钟前</s></div><u>处理</u></div>'
+      + '<div class="mp__row"><i></i><div><b>周例会纪要</b><s>知识库 · 1 小时前</s></div><u class="ok">已读</u></div>'
+      + '<div class="mp__row"><i></i><div><b>接口联调确认</b><s>研发 · 2 小时前</s></div><u>处理</u></div>'
+      + '<div class="mp__row"><i></i><div><b>设备巡检打卡</b><s>现场 · 3 小时前</s></div><u class="ok">已完成</u></div>'
+      + '</div>' + MP_TAB,
+    // 设备总览
+    device: () => MP_STATUS
+      + '<div class="mp__top"><div><b>设备总览</b><span>132 台设备 · 实时状态</span></div><span class="mp__ava"></span></div>'
+      + '<div class="mp__stat"><div><b>128<em>台</em></b><span style="margin-top:.3em">在线率 97%</span></div>'
+      + '<div class="mp__spark"><i style="height:38%"></i><i style="height:62%"></i><i class="hi" style="height:88%"></i><i style="height:54%"></i><i style="height:72%"></i><i class="hi" style="height:96%"></i></div></div>'
+      + '<div class="mp__segs"><span class="on"></span><span></span><span></span></div>'
+      + '<div class="mp__rows" style="padding-top:.2em">'
+      + '<div class="mp__row"><i></i><div><b>AGV-03 搬运机器人</b><s>接口记录 · 12 次调用</s></div><u class="ok">正常</u></div>'
+      + '<div class="mp__row"><i></i><div><b>AGV-07 搬运机器人</b><s>电量 18% · 需充电</s></div><u class="warn">告警</u></div>'
+      + '<div class="mp__row"><i></i><div><b>AGV-11 搬运机器人</b><s>接口记录 · 8 次调用</s></div><u class="ok">正常</u></div>'
+      + '<div class="mp__row"><i></i><div><b>产线终端 P-02</b><s>心跳正常 · 30 秒前</s></div><u class="ok">正常</u></div>'
+      + '<div class="mp__row"><i></i><div><b>充电桩 C-04</b><s>空闲 · 可用</s></div><u class="ok">正常</u></div>'
+      + '</div>' + MP_TAB,
+    // 审批中心
+    approve: () => MP_STATUS
+      + '<div class="mp__top"><div><b>审批中心</b><span>3 条待你处理</span></div><span class="mp__ava"></span></div>'
+      + '<div class="mp__segs"><span class="on"></span><span></span></div>'
+      + '<div class="mp__rows" style="padding-top:.3em">'
+      + '<div class="mp__row"><i></i><div><b>设备借用申请</b><s>张工 · 4 小时 · AGV-03</s></div><u class="warn">待批</u></div>'
+      + '<div class="mp__row"><i></i><div><b>接口权限开通</b><s>李工 · 只读权限</s></div><u class="warn">待批</u></div>'
+      + '<div class="mp__row"><i></i><div><b>转运任务排期</b><s>调度中心 · 已确认</s></div><u class="ok">通过</u></div>'
+      + '<div class="mp__row"><i></i><div><b>加班调休申请</b><s>王工 · 2 天</s></div><u class="bad">驳回</u></div>'
+      + '<div class="mp__row"><i></i><div><b>设备报废审批</b><s>设备科 · 已归档</s></div><u class="ok">通过</u></div>'
+      + '</div>' + MP_TAB,
+    // 今日任务
+    task: () => MP_STATUS
+      + '<div class="mp__top"><div><b>今日任务</b><span>5 项 · 2 项紧急</span></div><span class="mp__ava"></span></div>'
+      + '<div class="mp__hero" style="background:linear-gradient(135deg,#1f4fc4,#3d6ee8)">'
+      + '<span class="mp__hero-k">完成度</span><b class="mp__hero-n">60<em>%</em></b>'
+      + '<span class="mp__bar"><i style="width:60%"></i></span><span class="mp__hero-f">3 / 5 已完成</span></div>'
+      + '<div class="mp__rows" style="padding-top:.85em">'
+      + '<div class="mp__row"><span class="mp__ck on"></span><div><b>确认 AGV 转运路线</b><s>09:30 · 已完成</s></div></div>'
+      + '<div class="mp__row"><span class="mp__ck on"></span><div><b>回复接口联调问题</b><s>10:15 · 已完成</s></div></div>'
+      + '<div class="mp__row"><span class="mp__ck"></span><div><b>设备信息面板走查</b><s>14:00 · 进行中</s></div></div>'
+      + '<div class="mp__row"><span class="mp__ck"></span><div><b>转运任务复盘</b><s>16:30 · 待开始</s></div></div>'
+      + '<div class="mp__row"><span class="mp__ck"></span><div><b>周报提交</b><s>18:00 · 待开始</s></div></div>'
+      + '</div>' + MP_TAB
+  };
+  document.querySelectorAll('[data-mp]').forEach(el => {
+    const build = MP_SCREENS[el.dataset.mp];
+    if (!build) return;
+    el.innerHTML = '<span class="mp__notch"></span><div class="mp__scr">' + build() + '</div>';
   });
+
+  const openProject = idx => {
+    const p = projects[idx];
+    if (!p) return;
+    // 封面
+    $('dlgTitle').textContent = p.t;
+    $('pdCode').textContent = p.code;
+    $('pdYear').textContent = p.year;
+    $('pdSlogan').textContent = p.slogan;
+    $('pdHueLabel').textContent = p.hueLabel;
+    $('pdViews').textContent = p.views;
+    $('pdLikes').textContent = p.likes;
+    $('pdCover').style.setProperty('--pd-h', p.hue);
+    // 信息条
+    $('pdFacts').innerHTML = p.facts.map(([k,v]) => `<div><span class="k">${k}</span><span class="v">${v}</span></div>`).join('');
+    // 分段正文
+    $('pdLead').textContent = p.lead;
+    $('pdStory').innerHTML = p.story.map(s => `<div class="pd-story__item"><h4>${s.h}<span>${s.en}</span></h4><p>${s.p}</p></div>`).join('');
+    // 亮点
+    $('pdHighlights').innerHTML = p.highlights.map(h => `<div class="pd-hl__card"><div class="pd-hl__ico">${h.i}</div><h4>${h.t}</h4><p>${h.d}</p></div>`).join('');
+    // 成果 + 技术栈
+    $('pdStats').innerHTML = p.stats.map(([b,s]) => `<div class="pd-stat"><b>${b}</b><span>${s}</span></div>`).join('');
+    $('pdTags').innerHTML = p.tags.map(t => `<span class="pill pill-sm" style="min-height:26px;padding:.25rem .6rem;font-size:.58rem">${t}</span>`).join('');
+    // 图注 + 地址
+    $('pdCap1').textContent = p.caps[0]; $('pdCap2').textContent = p.caps[1]; $('pdCap3').textContent = p.caps[2];
+    $('pdUrl').textContent = p.url;
+    // 克隆对应卡片的 live mockup，注入三个视角（深拷贝，各自独立）
+    const card = document.querySelectorAll('.proj')[idx];
+    const ui = card ? card.querySelector('.ui') : null;
+    const mount = (elId, addClass) => {
+      const el = $(elId); el.innerHTML = '';
+      if (ui) { const c = ui.cloneNode(true); if (addClass) c.classList.add(addClass); el.appendChild(c); }
+    };
+    mount('pdScreen'); mount('pdShot2View'); mount('pdShot3View');
+    // 版型与样机：克隆同一界面填入四种呈现场景
+    ['pdVarTilt','pdVarWall','pdVarRoom','pdVarGrid'].forEach(id => {
+      const el = $(id); if (!el) return; el.innerHTML = '';
+      if (ui) el.appendChild(ui.cloneNode(true));
+    });
+    $('pdVarWord').textContent = ['DATA','CLOUD','LAKE','STUDIO','FIELD'][idx] || 'DATA';
+    // 版型与样机：移动端项目切到手机样机，其他项目保留桌面端样机
+    const varRoot = document.querySelector('.pd-variants');
+    if (varRoot) varRoot.classList.toggle('is-mobile', isMobileProject(idx));
+    // 主图：移动端项目切到"双手机"样机壳，克隆卡片里原本的两台 .phone 分别注入
+    $('pdStage').classList.toggle('is-mobile', isMobileProject(idx));
+    if (isMobileProject(idx)) {
+      const phonesWrap = card ? card.querySelector('.phones') : null;
+      const phones = card ? card.querySelectorAll('.phones .phone') : [];
+      const isBlue = !!(phonesWrap && phonesWrap.classList.contains('phones--blue'));
+      ['pdPhoneScreenA','pdPhoneScreenB'].forEach((id,i) => {
+        const el = $(id); el.innerHTML = '';
+        if (phones[i]) {
+          const c = phones[i].cloneNode(true);
+          if (isBlue) c.classList.add('phone--blue');
+          el.appendChild(c);
+        }
+      });
+    }
+    // 更多作品：除当前外的 3 个
+    $('pdMore').innerHTML = projects.map((q,i) => ({q,i})).filter(o => o.i !== idx).slice(0,3).map(o =>
+      `<button class="pd-more__card" type="button" data-goto="${o.i}"><span class="mn">${o.q.no}</span><span class="mt">${o.q.t}</span><span class="mk">${o.q.kind}</span></button>`
+    ).join('');
+    $('pdMore').querySelectorAll('[data-goto]').forEach(b => b.addEventListener('click', () => openProject(Number(b.dataset.goto))));
+    // 完整 16:9 案例入口：仅云枢协同项目显示
+    const caseLink = $('pdCaseLink'); if (caseLink) caseLink.style.display = idx === 5 ? 'flex' : 'none';
+    const scroller = $('pdScroll'); if (scroller) scroller.scrollTop = 0;
+    if (!dialog.open) { setDialogFullscreen(false); dialog.showModal(); }
+  };
+  document.querySelectorAll('[data-open]').forEach(btn => {
+    btn.addEventListener('click', () => openProject(Number(btn.dataset.open)));
+  });
+  function setDialogFullscreen(on) {
+    if (on && !dialog.open) dialog.showModal();
+    dialog.classList.toggle('is-fullscreen', !!on);
+    const btn = $('pdFullscreenBtn');
+    if (btn) {
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      btn.setAttribute('aria-label', on ? '缩小窗口' : '全屏展示');
+      btn.title = on ? '缩小窗口' : '全屏展示';
+    }
+  }
+  $('pdFullscreenBtn')?.addEventListener('click', () => {
+    setDialogFullscreen(!dialog.classList.contains('is-fullscreen'));
+  });
+  addEventListener('keydown', e => {
+    if (dialog.open && (e.key === 'Escape' || e.key === 'Esc')) setDialogFullscreen(false);
+  });
+  dialog.addEventListener('close', () => setDialogFullscreen(false));
   dialog.addEventListener('click', e => {
     if (e.target !== dialog) return;
     const b = dialog.getBoundingClientRect();
     if (e.clientX < b.left || e.clientX > b.right || e.clientY < b.top || e.clientY > b.bottom) dialog.close();
   });
-
   /* ---------- 9. 滚动监听初始化 ---------- */
   addEventListener('resize', onScroll);
   onScroll();
@@ -7078,8 +8129,6 @@ const wrap = (value, span) => ((value % span) + span) % span;
   (function themeAndPolish() {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
-    const ico = document.getElementById('themeIco');
-    const lbl = document.getElementById('themeLabel');
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     const readSaved = () => { try { return localStorage.getItem('oscar-theme'); } catch (e) { return null; } };
     const saveTheme = v => { try { localStorage.setItem('oscar-theme', v); } catch (e) {} };
@@ -7088,8 +8137,6 @@ const wrap = (value, span) => ((value % span) + span) % span;
       const isLight = theme === 'light';
       root.dataset.theme = theme;                 // MutationObserver 会自动刷新晶体折射底图
       saveTheme(theme);
-      if (ico) ico.textContent = isLight ? '☾' : '☀';
-      if (lbl) lbl.textContent = isLight ? '深色' : '浅色';
       if (metaTheme) metaTheme.setAttribute('content', isLight ? '#fafbfd' : '#07080a');
       if (typeof window.__updateCrystalTheme === 'function') window.__updateCrystalTheme(isLight);
       window.dispatchEvent(new Event('resize'));  // 触发首屏矢量大字按新配色重绘
@@ -7101,29 +8148,49 @@ const wrap = (value, span) => ((value % span) + span) % span;
     applyTheme('dark');
     if (btn) btn.addEventListener('click', () => applyTheme(root.dataset.theme === 'light' ? 'dark' : 'light'));
 
-    /* 通用形态胶囊：两套晶体引擎共用，靠 __fglMorph / __fglShape / fgl:shape 驱动 */
-    const LABELS = {
-      cube: 'CUBE · 流体立方', diamond: 'DIAMOND · 钻石切工',
-      prism: 'PRISM · 三棱镜', torus: 'TORUS · 光学圆环',
-      pill: 'PILL · 胶囊玻璃', blob: 'BLOB · 液态水滴', lens: 'LENS · 双凸透镜'
-    };
-    const hud = document.createElement('button');
-    hud.type = 'button';
+    /* 通用形态胶囊：仅显示英文形态名（去掉中文描述）；右侧 × 关闭 3D，再点可恢复 */
+    const hud = document.createElement('div');
     hud.className = 'crystal-hud';
-    hud.setAttribute('aria-label', '切换晶体形态');
-    hud.innerHTML = '<i aria-hidden="true"></i><span id="crystalName">CUBE · 流体立方</span><span style="opacity:.5">↻</span>';
+    hud.innerHTML =
+      '<button class="ch-btn" type="button" aria-label="切换晶体形态">' +
+        '<i aria-hidden="true"></i><span id="crystalName">CUBE</span><span class="ch-morph" aria-hidden="true">↻</span>' +
+      '</button>' +
+      '<button class="ch-close" type="button" aria-label="关闭 3D 晶体" title="关闭 3D">×</button>';
     document.body.appendChild(hud);
     const nameEl = hud.querySelector('#crystalName');
-    const setLabel = v => { if (nameEl) nameEl.textContent = LABELS[v] || v || 'CUBE · 流体立方'; };
+    const morphEl = hud.querySelector('.ch-morph');
+    const morphBtn = hud.querySelector('.ch-btn');
+    const closeBtn = hud.querySelector('.ch-close');
+    const shortLabel = v => String(v || '').split('·')[0].trim().toUpperCase() || 'CUBE';
+    const setLabel = v => { if (nameEl) nameEl.textContent = shortLabel(v); };
     window.__setCrystalLabel = setLabel;
     const syncHud = () => { if (typeof window.__fglShape === 'function') setLabel(window.__fglShape()); };
-    hud.addEventListener('click', e => {
+    const applyOff = off => {
+      window.__crystalOff = !!off;
+      hud.classList.toggle('is-off', !!off);
+      if (nameEl) nameEl.textContent = off ? '3D OFF' : '';
+      if (morphEl) morphEl.style.display = off ? 'none' : '';
+      if (closeBtn) {
+        closeBtn.textContent = off ? '⏻' : '×';
+        closeBtn.setAttribute('aria-label', off ? '开启 3D 晶体' : '关闭 3D 晶体');
+        closeBtn.title = off ? '开启 3D' : '关闭 3D';
+      }
+      if (!off) syncHud();
+      if (typeof window.__syncCrystalVisibility === 'function') window.__syncCrystalVisibility();
+    };
+    window.__crystalOff = false;
+    morphBtn.addEventListener('click', e => {
       e.stopPropagation();
+      if (window.__crystalOff) { applyOff(false); return; }
       if (typeof window.__fglMorph === 'function') window.__fglMorph();
     });
-    document.addEventListener('fgl:shape', e => setLabel(e.detail));
+    closeBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      applyOff(!window.__crystalOff);
+    });
+    document.addEventListener('fgl:shape', e => { if (!window.__crystalOff) setLabel(e.detail); });
     syncHud();
-    setTimeout(syncHud, 1500);   // 异步 CDN 引擎可能晚于本控制器就绪
+    setTimeout(syncHud, 1500);   // 引擎可能晚于本控制器就绪
     window.__crystalHud = hud;
 
     /* 页脚邮箱一键复制 */
