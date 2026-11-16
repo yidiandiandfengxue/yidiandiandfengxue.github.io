@@ -1144,6 +1144,11 @@ section,footer{scroll-margin-top:92px}
 }
 :root[data-theme="light"] .mini-stats b { color: #0f172a; }
 :root[data-theme="light"] .mini-stats span { color: rgba(15, 23, 42, 0.48); }
+/* 补全能力卡 01 等距城市建筑线框在白底上的清晰度 */
+:root[data-theme="light"] #cardCity polygon {
+  stroke: rgba(13, 148, 136, 0.55);
+  fill: rgba(13, 148, 136, 0.08);
+}
 
 :root[data-theme="light"] .work {
   background: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(13, 148, 136, 0.08), transparent 70%), var(--bg);
@@ -6985,7 +6990,8 @@ const wrap = (value, span) => ((value % span) + span) % span;
 
     const saved = readSaved();
     const preferLight = matchMedia('(prefers-color-scheme: light)').matches;
-    applyTheme(saved || (preferLight ? 'light' : 'dark'));
+    // 默认深色：不跟随系统偏好，只有用户手动保存过主题时才沿用
+    applyTheme(saved || 'dark');
     if (btn) btn.addEventListener('click', () => applyTheme(root.dataset.theme === 'light' ? 'dark' : 'light'));
 
     /* 通用形态胶囊：两套晶体引擎共用，靠 __fglMorph / __fglShape / fgl:shape 驱动 */
