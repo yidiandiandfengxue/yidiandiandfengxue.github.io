@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>iWork · 综合业务平台（行业标准 MES）— 设计案例</title>
+<style>
+@font-face{font-family:Bricolage;src:url(assets/BricolageGrotesque-latin.woff2) format('woff2');font-display:swap}
+@font-face{font-family:JBMono;src:url(assets/JetBrainsMono-latin.woff2) format('woff2');font-display:swap}
+:root{
+  --bg:#050a16; --bg2:#081226; --panel:#0c1830; --panel2:#10203f;
+  --blue:#1f7bff; --blue2:#4d9bff; --blue3:#8dc0ff; --cyan:#25d6e8;
+  --ink:#eef4ff; --ink2:#c8d5ec; --muted:#9aabc7; --dim:#7b8bac;
+  --line:rgba(120,165,240,.14); --line2:rgba(120,165,240,.26);
+  --red:#ff4d5e; --green:#2fd08a; --amber:#ffb238;
+  --font:"PingFang SC","Microsoft YaHei","Source Han Sans CN",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --disp:Bricolage,"PingFang SC",sans-serif; --mono:JBMono,ui-monospace,monospace;
+  --ease:cubic-bezier(.22,.9,.28,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
+
+/* ===== 全局氛围背景 ===== */
+.amb{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.amb .glow{position:absolute;border-radius:50%;filter:blur(120px);opacity:.5}
+.amb .g1{width:820px;height:820px;background:radial-gradient(circle,#1647a8,transparent 68%);top:-320px;left:-220px}
+.amb .g2{width:680px;height:680px;background:radial-gradient(circle,#0e7fa8,transparent 68%);top:38%;right:-260px}
+.amb .g3{width:720px;height:720px;background:radial-gradient(circle,#3a1f8a,transparent 70%);bottom:-300px;left:30%}
+.amb .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(120,165,240,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(120,165,240,.05) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 30%,#000 0%,transparent 75%)}
+#stars{position:absolute;inset:0;width:100%;height:100%}
+
+/* ===== 进度条 & 导航 ===== */
+#prog{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--blue),var(--cyan));z-index:80;box-shadow:0 0 12px var(--blue)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:70;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,72px);backdrop-filter:blur(14px);background:linear-gradient(180deg,rgba(5,10,22,.82),rgba(5,10,22,0));transition:padding .3s}
+.nav.solid{padding:12px clamp(20px,5vw,72px);background:rgba(6,12,26,.86);border-bottom:1px solid var(--line)}
+.nav .brand{display:flex;align-items:center;gap:12px;font-family:var(--disp);font-weight:800;font-size:19px;letter-spacing:.02em}
+.nav .brand .mk{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;font-size:15px;box-shadow:0 6px 22px rgba(31,123,255,.5)}
+.nav .brand small{font-family:var(--font);font-weight:500;font-size:11px;color:var(--muted);letter-spacing:.14em;margin-left:2px}
+.navlinks{display:flex;gap:6px}
+.navlinks a{color:var(--muted);text-decoration:none;font-size:13px;padding:8px 14px;border-radius:8px;transition:.25s}
+.navlinks a:hover,.navlinks a.on{color:var(--ink);background:rgba(120,165,240,.1)}
+.nav .back{display:flex;align-items:center;gap:8px;color:var(--ink2);text-decoration:none;font-size:13px;border:1px solid var(--line2);padding:8px 15px;border-radius:9px;transition:.25s}
+.nav .back:hover{border-color:var(--blue);color:#fff;background:rgba(31,123,255,.12)}
+@media(max-width:900px){.navlinks{display:none}}
+
+/* ===== 容器 ===== */
+main{position:relative;z-index:1}
+.wrap{max-width:1280px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+section{position:relative}
+.pad-sec{padding:clamp(90px,11vw,160px) 0}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--blue2);text-transform:uppercase;font-weight:600}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--blue2)}
+.sec-h{font-size:clamp(30px,4.6vw,54px);line-height:1.14;font-weight:800;letter-spacing:-.02em;margin:18px 0 0}
+.sec-h .hl{background:linear-gradient(100deg,var(--blue3),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sec-sub{color:var(--ink2);font-size:clamp(15px,1.6vw,18px);max-width:640px;margin-top:18px}
+.hair{height:1px;background:linear-gradient(90deg,var(--line2),transparent);margin-top:30px}
+
+/* ===== reveal 动效 ===== */
+.rv{opacity:0;transform:translateY(38px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}
+
+/* ===== 1 HERO ===== */
+.hero{min-height:100svh;display:flex;align-items:center;position:relative;overflow:hidden}
+.hero .halo{position:absolute;width:900px;height:900px;left:50%;top:44%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(31,123,255,.22),transparent 62%);pointer-events:none}
+.hero-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;width:100%;padding-top:60px}
+.hero-copy h1{font-family:var(--disp);font-size:clamp(58px,8.4vw,116px);line-height:.94;font-weight:800;letter-spacing:-.04em;margin:20px 0 6px}
+.hero-copy h1 .i{background:linear-gradient(120deg,var(--blue3),var(--cyan) 60%,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-copy .zh{font-size:clamp(19px,2.2vw,26px);font-weight:700;letter-spacing:.04em;margin-top:6px}
+.hero-copy .lead{color:var(--ink2);font-size:clamp(15px,1.6vw,18px);max-width:480px;margin-top:22px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.hero-tags span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--blue3);border:1px solid var(--line2);padding:7px 12px;border-radius:99px;background:rgba(31,123,255,.06)}
+.hero-cta{display:flex;gap:14px;margin-top:36px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-size:14px;font-weight:600;padding:14px 22px;border-radius:11px;transition:.3s var(--ease)}
+.btn-p{color:#061228;background:linear-gradient(120deg,var(--blue3),var(--cyan));box-shadow:0 12px 34px rgba(37,214,232,.24)}
+.btn-p:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(37,214,232,.36)}
+.btn-g{color:var(--ink2);border:1px solid var(--line2)}
+.btn-g:hover{color:#fff;border-color:var(--blue2);background:rgba(31,123,255,.1)}
+.hero-stage{position:relative;height:560px;perspective:1500px}
+.hero-stage .ring{position:absolute;border:1px solid rgba(120,165,240,.16);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none}
+.hero-stage .r1{width:400px;height:400px;border-style:dashed;opacity:.55;animation:spin 80s linear infinite}
+.hero-stage .r2{width:560px;height:560px;border-color:rgba(37,214,232,.13)}
+.hero-stage .r3{width:690px;height:690px;border-style:dashed;border-color:rgba(120,165,240,.08);animation:spin 120s linear infinite reverse}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.hero-stage .stage-glow{position:absolute;left:50%;bottom:-26px;transform:translateX(-50%);width:78%;height:130px;border-radius:50%;background:radial-gradient(ellipse,rgba(31,123,255,.34),rgba(37,214,232,.09) 46%,transparent 72%);filter:blur(18px);pointer-events:none}
+/* ===== 真实设备样机（三处展示通用） ===== */
+.dev{position:relative;aspect-ratio:393/852;border-radius:24px;padding:4px;transform-style:preserve-3d;
+  background:linear-gradient(140deg,#677694 0%,#24314a 20%,#0d1424 48%,#1c2740 78%,#53627e 100%);
+  box-shadow:0 1px 0 rgba(255,255,255,.26) inset,0 -1px 0 rgba(0,0,0,.75) inset,0 0 0 1px rgba(2,6,14,.9),0 3px 5px rgba(0,0,0,.55),0 28px 54px -16px rgba(0,0,0,.85),0 54px 100px -38px rgba(31,123,255,.5)}
+.dev::before{content:"";position:absolute;right:-3px;top:23%;width:3px;height:12%;border-radius:0 3px 3px 0;background:linear-gradient(90deg,#232d46,#8d9ab5)}
+.dev::after{content:"";position:absolute;left:-3px;top:17%;width:3px;height:16%;border-radius:3px 0 0 3px;background:linear-gradient(90deg,#8d9ab5,#232d46);box-shadow:0 24px 0 #475575}
+.dev-screen{position:relative;aspect-ratio:393/852;border-radius:20px;overflow:hidden;background:#0a1220;box-shadow:0 0 0 1px rgba(0,0,0,.9) inset}
+.dev-screen img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+/* 扁平卡片样机：保留 iOS 比例，但去掉金属边框/侧键/灵动岛 */
+.dev.is-card{padding:0;border-radius:20px;border:1px solid rgba(120,170,255,.28);
+  background:linear-gradient(160deg,rgba(18,34,66,.96),rgba(7,14,28,.96));
+  box-shadow:0 22px 48px -22px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.06)}
+.dev.is-card::before,.dev.is-card::after{display:none}
+.dev.is-card .dev-screen{border-radius:19px;box-shadow:none}
+.dev.is-card .island{display:none}
+.dev.is-card .glare{background:linear-gradient(132deg,rgba(255,255,255,.06),transparent 38%)}
+.dev-screen .island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:31%;height:15px;border-radius:99px;background:#03060c;box-shadow:0 0 0 1px rgba(140,180,240,.13),inset 0 0 5px #000;z-index:3;pointer-events:none}
+.dev-screen .island::after{content:"";position:absolute;right:9%;top:50%;transform:translateY(-50%);width:5px;height:5px;border-radius:50%;background:#0c1830;box-shadow:inset 0 0 2px rgba(120,180,255,.8)}
+.dev-screen .glare{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(122deg,rgba(255,255,255,.14),rgba(255,255,255,.03) 17%,transparent 33%,transparent 100%)}
+/* 首屏三机 */
+.float-dev{position:absolute;will-change:transform;transform-style:preserve-3d}
+.float-dev .bob{animation:bob 6.5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+.fd-1{left:6%;top:74px;width:224px;z-index:3;transform:rotate(-9deg)}
+.fd-2{left:35%;top:0;width:244px;z-index:5;transform:rotate(3deg)}
+.fd-3{right:1%;top:118px;width:224px;z-index:2;transform:rotate(11deg)}
+.fd-2 .bob{animation-delay:-1.8s}.fd-3 .bob{animation-delay:-3.4s}
+.float-chip{position:absolute;z-index:6;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;border:1px solid var(--line2);background:linear-gradient(140deg,rgba(16,32,63,.94),rgba(8,16,32,.94));backdrop-filter:blur(12px);box-shadow:0 14px 34px rgba(0,0,0,.5),0 0 26px rgba(31,123,255,.18);animation:chipfloat 7s ease-in-out infinite}
+.float-chip .ic{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#05101f;font:800 13px var(--disp)}
+.float-chip .ic.alert{background:linear-gradient(135deg,var(--red),var(--amber));color:#200608}
+.float-chip b{display:block;font-size:12px;line-height:1.25;color:var(--ink)}
+.float-chip small{display:block;font:10px var(--mono);color:var(--muted);letter-spacing:.05em}
+.chip-a{left:-2%;top:30px}
+.chip-b{right:-3%;bottom:70px;animation-delay:-3s}
+@keyframes chipfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-family:var(--mono);font-size:10px;letter-spacing:.2em}
+.scroll-hint .mouse{width:22px;height:34px;border:1px solid var(--line2);border-radius:12px;position:relative}
+.scroll-hint .mouse::after{content:"";position:absolute;top:6px;left:50%;width:3px;height:7px;border-radius:2px;background:var(--cyan);transform:translateX(-50%);animation:scrolldot 1.6s infinite}
+@keyframes scrolldot{0%{opacity:0;transform:translate(-50%,0)}40%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
+
+/* ===== 2 概览统计 ===== */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:56px}
+.stat{background:linear-gradient(160deg,var(--panel),var(--bg2));padding:32px 26px;position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 40%,rgba(77,155,255,.08));opacity:0;transition:.4s}
+.stat:hover::after{opacity:1}
+.stat .n{font-family:var(--disp);font-size:clamp(38px,5vw,60px);font-weight:800;letter-spacing:-.03em;line-height:1;background:linear-gradient(120deg,#fff,var(--blue3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .n .u{font-size:.42em;color:var(--cyan);margin-left:4px;-webkit-text-fill-color:var(--cyan)}
+.stat .l{color:var(--muted);font-size:13px;margin-top:12px;letter-spacing:.03em}
+.overview-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
+.fact-list{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.fact{background:var(--panel);padding:20px 22px}
+.fact .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+.fact .v{font-size:16px;font-weight:600;margin-top:8px;color:var(--ink)}
+
+/* ===== 通用 feature 块：场景化展示，而非贴图 ===== */
+.feature{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,100px);align-items:center}
+.feature.rev .fx-copy{order:2}
+.fx-tag{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase}
+.fx-copy h3{font-size:clamp(28px,3.6vw,44px);font-weight:800;line-height:1.16;letter-spacing:-.02em;margin:16px 0}
+.fx-copy p{color:var(--ink2);font-size:16px;max-width:520px}
+.fx-points{list-style:none;margin-top:26px;display:grid;gap:12px}
+.fx-points li{display:flex;gap:12px;align-items:flex-start;color:var(--ink2);font-size:14px}
+.fx-points li b{color:var(--cyan);font-family:var(--disp);font-size:15px;flex:none;width:18px}
+.fx-points li i{font-style:normal;color:var(--blue3);flex:none;margin-top:2px}
+
+.fx-stage{position:relative;min-height:560px;display:flex;align-items:center;justify-content:center;perspective:1400px;isolation:isolate}
+.scene-frame{position:relative;width:min(100%,580px);height:540px;border-radius:22px;overflow:hidden;
+  border:1px solid var(--line2);background:radial-gradient(ellipse at 52% 24%,rgba(31,123,255,.2),transparent 48%),linear-gradient(160deg,rgba(18,36,70,.92),rgba(6,13,28,.94));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 30px 80px -30px rgba(0,0,0,.9),0 0 50px rgba(31,123,255,.08)}
+.scene-frame::before{content:"";position:absolute;inset:0;opacity:.4;pointer-events:none;
+  background-image:linear-gradient(rgba(120,165,240,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(120,165,240,.06) 1px,transparent 1px);background-size:34px 34px;
+  mask-image:radial-gradient(ellipse at 50% 42%,#000 10%,transparent 74%)}
+.scene-frame::after{content:"";position:absolute;left:50%;bottom:-120px;width:520px;height:260px;transform:translateX(-50%);
+  background:radial-gradient(ellipse,rgba(37,214,232,.22),transparent 68%);filter:blur(24px);pointer-events:none}
+.scene-top{position:absolute;left:20px;right:20px;top:18px;z-index:8;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--dim)}
+.scene-top .live{display:flex;align-items:center;gap:7px;color:var(--cyan)}
+.scene-top .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 9px var(--cyan);animation:pulse 1.7s infinite}
+.scene-orbit{position:absolute;left:50%;top:46%;width:360px;height:360px;transform:translate(-50%,-50%);border:1px dashed rgba(120,165,240,.22);border-radius:50%;animation:orbitSpin 60s linear infinite;pointer-events:none}
+.scene-orbit.alt{width:460px;height:460px;border-style:solid;border-color:rgba(37,214,232,.1);animation-direction:reverse;animation-duration:90s}
+@keyframes orbitSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+.scene-device{position:absolute;left:50%;top:52%;width:200px;transform:translate(-50%,-50%) rotate(-3deg);z-index:4;
+  transition:transform .7s var(--ease),filter .5s;filter:drop-shadow(0 26px 36px rgba(0,0,0,.65))}
+.scene-device .dev{border-radius:22px;padding:4px}
+.scene-device .dev-screen{border-radius:18px}
+.scene-device.is-dim{transform:translate(-50%,-50%) translateX(96px) rotate(10deg) scale(.84);opacity:.55;filter:blur(.4px) drop-shadow(0 20px 28px rgba(0,0,0,.55))}
+.scene-device.is-front{transform:translate(-50%,-50%) translateX(-14px) rotate(-5deg) scale(1.04);opacity:1;z-index:5}
+.scene-device.right.is-front{transform:translate(-50%,-50%) translateX(14px) rotate(5deg) scale(1.04)}
+.scene-device.right.is-dim{transform:translate(-50%,-50%) translateX(-96px) rotate(-10deg) scale(.84)}
+.scene-label{position:absolute;z-index:9;display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:10px;
+  border:1px solid var(--line2);background:rgba(8,17,34,.82);backdrop-filter:blur(10px);box-shadow:0 12px 28px rgba(0,0,0,.42);
+  font-size:11px;color:var(--ink2);opacity:0;transform:translateY(10px);animation:labelIn .7s var(--ease) forwards}
+.scene-label::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);flex:none}
+.scene-label.alert::before{background:var(--red);box-shadow:0 0 10px var(--red)}
+.scene-label b{color:var(--ink);font-weight:700}
+.scene-label small{font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--dim);display:block;line-height:1.2}
+@keyframes labelIn{to{opacity:1;transform:none}}
+.scene-label.l1{left:16px;top:31%;animation-delay:.15s}
+.scene-label.l2{right:14px;top:25%;animation-delay:.35s}
+.scene-label.l3{left:24px;bottom:22%;animation-delay:.55s}
+.scene-label.l4{right:22px;bottom:18%;animation-delay:.75s}
+.scene-leader{position:absolute;z-index:3;height:1px;background:linear-gradient(90deg,rgba(37,214,232,.8),rgba(37,214,232,0));transform-origin:left center;opacity:.55;pointer-events:none}
+.scene-leader.l1{left:118px;top:34%;width:86px;transform:rotate(-8deg)}
+.scene-leader.l2{right:104px;top:29%;width:90px;transform:rotate(168deg)}
+.scene-leader.l3{left:132px;bottom:25%;width:70px;transform:rotate(10deg)}
+.scene-leader.l4{right:124px;bottom:21%;width:78px;transform:rotate(190deg)}
+.scene-switch{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:10;display:flex;gap:6px;padding:5px;border-radius:11px;border:1px solid var(--line2);background:rgba(6,13,28,.78);backdrop-filter:blur(10px)}
+.scene-switch button{border:0;background:transparent;color:var(--muted);font:11px var(--font);padding:7px 13px;border-radius:7px;cursor:pointer;transition:.25s var(--ease)}
+.scene-switch button.on{background:linear-gradient(120deg,var(--blue),var(--cyan));color:#04101f;font-weight:700}
+.scene-scan{position:absolute;left:26%;right:26%;top:18%;height:2px;z-index:6;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 18px var(--cyan);opacity:.65;animation:sceneScan 5.5s ease-in-out infinite;pointer-events:none}
+@keyframes sceneScan{0%,100%{transform:translateY(0);opacity:0}15%{opacity:.65}85%{opacity:.65}50%{transform:translateY(260px)}}
+.scene-frame.agv .scene-scan{background:linear-gradient(90deg,transparent,#ffb238,transparent);box-shadow:0 0 18px #ffb238}
+
+/* feature 交替底色带 */
+.band{position:relative}
+.band::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(12,24,48,.5),transparent);pointer-events:none}
+
+/* ===== 截图墙 ===== */
+/* ===== 02 SHOWCASE：3D 横向画廊（coverflow） ===== */
+.story{position:relative;margin-top:52px}
+.story-rail{position:relative;display:flex;gap:clamp(18px,3vw,40px);overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;perspective:1300px;padding:44px 0 28px;cursor:grab;
+  scrollbar-width:none;-ms-overflow-style:none;touch-action:pan-x}
+.story-rail::-webkit-scrollbar{display:none}
+.story-rail.drag{cursor:grabbing;scroll-snap-type:none}
+.shotcard{flex:0 0 clamp(228px,27vw,286px);scroll-snap-align:center;position:relative;padding:4px;border-radius:16px;cursor:pointer;
+  transform-style:preserve-3d;will-change:transform,opacity;backface-visibility:hidden;
+  background:linear-gradient(140deg,#5c6b88,#1c2740 30%,#0d1424 55%,#1c2740 80%,#4a5975);
+  box-shadow:0 0 0 1px rgba(2,6,14,.85),0 18px 38px -14px rgba(0,0,0,.8)}
+.shotcard .sc-screen{position:relative;aspect-ratio:393/852;border-radius:12px;overflow:hidden;background:#0a1220}
+.shotcard img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.shotcard.is-card{padding:0;border-radius:14px;border:1px solid rgba(120,170,255,.26);
+  background:linear-gradient(160deg,rgba(18,34,66,.9),rgba(7,14,28,.94));
+  box-shadow:0 18px 38px -18px rgba(0,0,0,.82),inset 0 1px 0 rgba(255,255,255,.05)}
+.shotcard.is-card .sc-screen{border-radius:13px}
+.shotcard.is-card .island{display:none}
+.shotcard.is-card .cap{border-radius:0 0 13px 13px}
+.shotcard .island{position:absolute;top:7px;left:50%;transform:translateX(-50%);width:31%;height:13px;border-radius:99px;background:#03060c;box-shadow:0 0 0 1px rgba(140,180,240,.12);z-index:3}
+.shotcard .glare{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(122deg,rgba(255,255,255,.12),transparent 32%)}
+.shotcard .no{position:absolute;top:10px;left:10px;z-index:4;font:10px var(--mono);letter-spacing:.06em;color:#dce9ff;background:rgba(5,10,22,.72);border:1px solid var(--line2);padding:3px 7px;border-radius:6px;backdrop-filter:blur(6px)}
+.shotcard .cap{position:absolute;left:4px;right:4px;bottom:4px;padding:24px 14px 12px;border-radius:0 0 12px 12px;background:linear-gradient(transparent,rgba(4,9,20,.94));font-size:13px;font-weight:600;opacity:0;transform:translateY(8px);transition:.35s;z-index:4}
+.shotcard:hover .cap{opacity:1;transform:none}
+.shotcard .cap span{display:block;font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.12em;margin-bottom:3px}
+/* 当前界面信息条 */
+.story-bar{display:flex;align-items:center;gap:clamp(16px,3vw,34px);padding:22px 0 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.story-num{font-family:var(--disp);font-weight:800;font-size:clamp(34px,5vw,52px);line-height:1;letter-spacing:-.03em;
+  background:linear-gradient(120deg,#fff,var(--blue3));-webkit-background-clip:text;background-clip:text;color:transparent;flex:none}
+.story-num small{font-family:var(--mono);font-size:.3em;color:var(--dim);-webkit-text-fill-color:var(--dim);margin-left:5px;letter-spacing:.05em}
+.story-info{min-width:0;flex:1}
+.story-info .t{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan)}
+.story-info h4{font-size:clamp(16px,2vw,21px);font-weight:700;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.story-nav{display:flex;align-items:center;gap:10px;flex:none}
+.story-nav button{width:44px;height:44px;border-radius:12px;border:1px solid var(--line2);background:rgba(12,24,48,.8);color:var(--ink);font-size:20px;cursor:pointer;transition:.25s var(--ease);display:grid;place-items:center}
+.story-nav button:hover{border-color:var(--blue2);background:rgba(31,123,255,.18);color:#fff;transform:translateY(-2px)}
+.story-nav button:disabled{opacity:.35;cursor:default;transform:none}
+.story-dots{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;width:100%;padding-top:6px}
+.story-dots button{width:7px;height:7px;border-radius:99px;border:0;padding:0;background:rgba(120,165,240,.28);cursor:pointer;transition:.3s var(--ease)}
+.story-dots button.on{width:26px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.story-tip{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--dim);text-align:center;margin-top:14px}
+@media(max-width:700px){
+  .story-rail{gap:14px;padding:26px 0 18px}
+  .shotcard{flex-basis:200px}
+  .story-nav button{width:40px;height:40px}
+  .shotcard .cap{display:none}
+}
+
+/* ===== 监控数据演示 ===== */
+.mon-demo{margin-top:56px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,var(--panel),var(--bg2));padding:clamp(22px,3vw,36px);position:relative;overflow:hidden}
+.mon-demo .sweep{position:absolute;top:0;bottom:0;width:180px;background:linear-gradient(90deg,transparent,rgba(77,155,255,.12),transparent);transform:translateX(-260px)}
+.mon-demo.sweep-on .sweep{animation:sweep 1.6s ease-out 1}
+@keyframes sweep{0%{transform:translateX(-260px)}100%{transform:translateX(760px)}}
+.mon-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+.mon-head .t{font-size:18px;font-weight:700}
+.mon-head .tabs{display:flex;gap:8px}
+.mon-head .tabs span{font-size:12px;padding:6px 14px;border-radius:99px;border:1px solid var(--line2);color:var(--muted)}
+.mon-head .tabs span.on{background:linear-gradient(120deg,var(--blue),var(--blue2));color:#fff;border-color:transparent}
+.mon-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.mcard{border:1px solid var(--line);border-radius:13px;padding:20px;background:rgba(8,18,38,.7)}
+.mcard.warn{border-color:rgba(255,77,94,.32);background:linear-gradient(160deg,rgba(255,77,94,.07),rgba(8,18,38,.7))}
+.mcard .mt{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.mcard .mt .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+.mcard.warn .mt .dot{background:var(--red);box-shadow:0 0 10px var(--red);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.mcard .mv{font-family:var(--disp);font-size:clamp(28px,3.4vw,42px);font-weight:800;margin:12px 0 4px;letter-spacing:-.02em}
+.mcard.warn .mv{color:var(--red)}
+.mcard .cmp{font-size:12px;color:var(--dim);display:flex;justify-content:space-between}
+.mcard .cmp b{color:var(--ink2);font-weight:600}
+.mcard .bar{height:4px;border-radius:3px;background:rgba(120,165,240,.14);margin-top:14px;overflow:hidden}
+.mcard .bar i{display:block;height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width 1.4s var(--ease)}
+.mcard.warn .bar i{background:linear-gradient(90deg,var(--red),var(--amber))}
+@media(max-width:820px){.mon-cards{grid-template-columns:1fr}}
+
+/* ===== 设计系统 ===== */
+.ds-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:56px}
+.ds-card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,var(--panel),var(--bg2));padding:30px}
+.ds-card h4{font-size:14px;letter-spacing:.04em;margin-bottom:20px;display:flex;justify-content:space-between}
+.ds-card h4 em{font-family:var(--mono);font-style:normal;font-size:11px;color:var(--dim)}
+.swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.sw{border-radius:11px;overflow:hidden;border:1px solid var(--line)}
+.sw .c{height:64px}
+.sw .n{font-family:var(--mono);font-size:10px;color:var(--ink2);padding:7px 8px;background:rgba(0,0,0,.2)}
+.type-scale{display:grid;gap:14px}
+.ts{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.ts .s{font-family:var(--mono);font-size:10px;color:var(--dim);width:52px;flex:none}
+.ts .x{font-weight:700}
+.comp-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.chip{padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;background:rgba(31,123,255,.14);border:1px solid var(--blue2);color:var(--blue3)}
+.chip.primary{background:linear-gradient(120deg,var(--blue),var(--blue2));color:#fff;border-color:transparent}
+.chip.ghost{background:transparent;border:1px solid var(--line2);color:var(--ink2)}
+.chip.red{background:rgba(255,77,94,.14);border-color:var(--red);color:#ff8b96}
+@media(max-width:820px){.ds-grid{grid-template-columns:1fr}}
+
+/* ===== 结尾 CTA ===== */
+.outro{text-align:center;padding:clamp(100px,13vw,180px) 0;position:relative}
+.outro .big{font-family:var(--disp);font-size:clamp(52px,9vw,120px);font-weight:800;letter-spacing:-.04em;line-height:.96;background:linear-gradient(120deg,#fff,var(--blue3) 55%,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.outro p{color:var(--ink2);font-size:18px;margin:24px auto 34px;max-width:560px}
+.outro .meta{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--dim);margin-top:60px}
+
+/* ===== 响应式适配 ===== */
+@media(max-width:1100px){
+  .hero{min-height:auto;padding:140px 0 96px}
+  .hero-inner{grid-template-columns:1fr;gap:24px}
+  .hero-copy{text-align:center}
+  .hero-copy .lead{margin-left:auto;margin-right:auto}
+  .hero-tags,.hero-cta{justify-content:center}
+  .hero-stage{height:460px;width:100%;max-width:660px;margin:0 auto}
+  .fd-1{left:0}.fd-2{left:32%}.fd-3{right:-2%}
+  .float-chip{display:none}
+  .scroll-hint{display:none}
+}
+@media(max-width:900px){
+  .feature{grid-template-columns:1fr;gap:36px}
+  .feature.rev .fx-copy{order:0}
+  .fx-stage{min-height:510px}
+  .scene-frame{height:500px}
+  .scene-device{width:190px}
+  .scene-device.is-front{transform:translate(-50%,-50%) translateX(-10px) rotate(-4deg) scale(1.02)}
+  .scene-device.right.is-front{transform:translate(-50%,-50%) translateX(10px) rotate(4deg) scale(1.02)}
+  .scene-device.is-dim{transform:translate(-50%,-50%) translateX(70px) rotate(9deg) scale(.8)}
+  .scene-device.right.is-dim{transform:translate(-50%,-50%) translateX(-70px) rotate(-9deg) scale(.8)}
+  .scene-label.l1,.scene-label.l3{left:10px}.scene-label.l2,.scene-label.l4{right:10px}
+  .overview-grid{grid-template-columns:1fr;gap:38px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .ds-grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .eyebrow{justify-content:center;text-align:center;max-width:290px;margin:0 auto}
+  .eyebrow::before{display:none}
+  .hero-copy h1{font-size:clamp(52px,15vw,76px)}
+  .hero-stage{height:390px;transform:scale(.84);transform-origin:top center;margin-bottom:-64px}
+  .float-dev{width:196px}.fd-2{width:210px}
+  .float-chip{display:none}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{padding:22px 16px}
+  .stat .n{font-size:34px}
+  .stat .l{font-size:12px}
+  .fact-list{grid-template-columns:1fr}
+  .ds-card{padding:22px}
+  .fx-stage{min-height:470px}
+  .scene-frame{height:460px}
+  .scene-device{width:158px}
+  .scene-label{padding:7px 9px;font-size:10px}
+  .scene-label small{font-size:8px}
+  .scene-leader{display:none}
+  .scene-switch button{padding:6px 9px;font-size:10px}
+  .mon-demo{padding:18px}
+  .mon-head .tabs{display:none}
+  .mcard{padding:16px}
+  .mcard .mv{font-size:28px}
+  .nav .brand small{display:none}
+  .nav .brand{font-size:16px}
+  .nav .back{font-size:12px;padding:7px 10px}
+  .outro .big{font-size:clamp(48px,15vw,72px)}
+  .outro p{font-size:15px}
+  .foot .wrap{flex-direction:column;text-align:center;align-items:center}
+  #lb{padding:14px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+  .sweep{display:none}
+}
+/* ===== 返回顶部 ===== */
+.totop{position:fixed;right:24px;bottom:28px;z-index:60;width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:rgba(12,24,48,.9);border:1px solid var(--line2);color:var(--cyan);text-decoration:none;font-size:18px;opacity:0;transform:translateY(12px);pointer-events:none;transition:.3s var(--ease);backdrop-filter:blur(10px)}
+.totop.on{opacity:1;transform:none;pointer-events:auto}
+.totop:hover{border-color:var(--cyan);background:rgba(31,123,255,.2)}
+#lb .x{background:none;border:0;font-family:inherit}
+/* ===== lightbox ===== */
+#lb{position:fixed;inset:0;z-index:100;background:rgba(3,7,16,.92);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.3s;padding:40px}
+#lb.on{opacity:1;visibility:visible}
+#lb img{max-height:88vh;max-width:92vw;border-radius:12px;box-shadow:0 30px 90px rgba(0,0,0,.7);transform:scale(.94);transition:.4s var(--ease)}
+#lb.on img{transform:none}
+#lb .x{position:absolute;top:24px;right:30px;color:#fff;font-size:34px;cursor:pointer;line-height:1;opacity:.8}
+#lb .x:hover{opacity:1}
+#lb .lbcap{position:absolute;bottom:26px;left:0;right:0;text-align:center;color:var(--ink2);font-size:13px}
+
+.foot{position:relative;z-index:1;border-top:1px solid var(--line);padding:28px 0;color:var(--dim);font-size:12px}
+.foot .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.foot a{color:var(--muted);text-decoration:none}
+.foot a:hover{color:var(--cyan)}
+
+/* ===== 中文排版：避免单字吊在行尾 ===== */
+h1,h2,h3,h4,h5,h6,.headline,.sec-head h2,.pd-sec-title,.pd-sec-ti,.fx-copy h3,.card h3,.proj h3,.pd-story__item h4,.pd-hl__card h4{
+  text-wrap:balance;line-break:strict;
+}
+p,li,dd,dt,figcaption,blockquote,.hero-copy,.about-lead,.pd-lead,.pd-rail-sub,.pd-story__item p,.pd-hl__card p,.pd-fig figcaption,.pd-x p,.fx-copy p,.pd-author__info{
+  text-wrap:pretty;line-break:strict;word-break:normal;
+}
+.nb{white-space:nowrap;display:inline-block}
+/* 弹窗内窄栏标题：略收字号与字距，让两行自然均分 */
+.pd-iwork .iw-copy h3,.fx-copy h3{letter-spacing:-.015em}
+
+/* 中文排版补强：末尾两字永不拆行、缩略图标签单行不吊字 */
+.nb{white-space:nowrap}
+.pd-x .shotcard .cap,.story-rail .shotcard .cap{
+  font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.pd-x .shotcard .cap span,.story-rail .shotcard .cap span{
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+</style>
+</head>
+<body>
+<div class="amb">
+  <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
+  <div class="grid"></div><canvas id="stars"></canvas>
+</div>
+<div id="prog"></div>
+
+<nav class="nav" id="nav">
+  <a class="brand" href="#top"><span class="mk">iW</span> iWork <small>CASE STUDY · 2026</small></a>
+  <div class="navlinks">
+    <a href="#overview">概览</a><a href="#gallery">界面全景</a><a href="#monitor">指标监控</a>
+    <a href="#agv">AGV 调度</a><a href="#system">设计系统</a>
+  </div>
+  <a class="back" href="index.html">← 返回作品集</a>
+</nav>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="halo"></div>
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow rv in">ZHANWAN · STANDARD MES / INDUSTRIAL MOBILE</span>
+        <h1 class="rv d1 in">i<span class="i">Work</span></h1>
+        <div class="zh rv d2 in">综合业务平台 · 行业标准 MES</div>
+        <p class="lead rv d3 in">工厂的「神经系统」与「数据基石」：把设备、生产、品质、能源、仓储、安环六大模块收进一个 App。<br>从异常监测到工单执行，让每个决策都落在现场。</p>
+        <div class="hero-tags rv d4 in">
+          <span>STANDARD MES</span><span>INDUSTRIAL IoT</span><span>DESIGN SYSTEM</span><span>BPW-6-4-0</span>
+        </div>
+        <div class="hero-cta rv d4 in">
+          <a class="btn btn-p" href="#gallery">浏览案例 <span>↘</span></a>
+          <a class="btn btn-g" href="#overview">项目概览</a>
+        </div>
+      </div>
+      <div class="hero-stage" id="heroStage">
+        <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+        <div class="stage-glow"></div>
+        <div class="float-dev fd-1" data-depth="18" data-base="-9">
+          <div class="bob"><div class="dev is-card"><div class="dev-screen"><img src="assets/dmtt/monitor-alert.png" alt="指标监控"><span class="island"></span><span class="glare"></span></div></div></div>
+        </div>
+        <div class="float-dev fd-2" data-depth="34" data-base="3">
+          <div class="bob"><div class="dev"><div class="dev-screen"><img src="assets/dmtt/workbench.png" alt="经营工作台"><span class="island"></span><span class="glare"></span></div></div></div>
+        </div>
+        <div class="float-dev fd-3" data-depth="24" data-base="11">
+          <div class="bob"><div class="dev is-card"><div class="dev-screen"><img src="assets/dmtt/agv-home.png" alt="AGV 叫料"><span class="island"></span><span class="glare"></span></div></div></div>
+        </div>
+        <div class="float-chip chip-a"><span class="ic">6</span><div><b>六大模块</b><small>业务全覆盖</small></div></div>
+        <div class="float-chip chip-b"><span class="ic alert">!</span><div><b>异常实时告警</b><small>指标 · 产线 · 时间</small></div></div>
+      </div>
+    </div>
+    <div class="scroll-hint"><div class="mouse"></div><span>SCROLL</span></div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="pad-sec" id="overview">
+    <div class="wrap">
+      <span class="eyebrow rv">01 / OVERVIEW — 项目概览</span>
+      <h2 class="sec-h rv d1">一个入口，<span class="hl">收拢现场全部业务</span></h2>
+      <p class="sec-sub rv d2">基于物联数据与行业经验的行业标准 MES。整合设备、生产、品质、能源、仓储、安环六大模块，实现全流程数据互通；从监测到执行形成决策—执行—反馈闭环，让运营效率提升 20%+。</p>
+      <div class="stats rv d3">
+        <div class="stat"><div class="n" data-count="14">0</div><div class="l">核心设计界面</div></div>
+        <div class="stat"><div class="n" data-count="6">0</div><div class="l">大业务模块</div></div>
+        <div class="stat"><div class="n" data-count="20" data-suffix="+">0</div><div class="l">制造业场景模板</div></div>
+        <div class="stat"><div class="n" data-count="4" data-suffix=" 周">0</div><div class="l">标准化部署</div></div>
+      </div>
+      <div class="overview-grid" style="margin-top:64px">
+        <div class="rv">
+          <h3 style="font-size:24px;font-weight:800;margin-bottom:16px">设计命题</h3>
+          <p style="color:var(--ink2)">生产进度不透明、品质追溯难、能源消耗无监控、库存数据滞后、安环被动响应——这是制造业共同的起点。真正的挑战不是再加一个看板，而是让异常自动触发工单与备件调拨，形成<strong style="color:var(--cyan)">决策—执行—反馈的管理闭环</strong>，让一线打开 App 就知道"现在要做什么"。</p>
+          <div class="hair"></div>
+        </div>
+        <div class="fact-list rv d1">
+          <div class="fact"><div class="k">Product / 产品</div><div class="v">iWork 综合业务平台</div></div>
+          <div class="fact"><div class="k">Category / 定位</div><div class="v">行业标准 MES</div></div>
+          <div class="fact"><div class="k">Modules / 模块</div><div class="v">设备·生产·品质·能源·仓储·安环</div></div>
+          <div class="fact"><div class="k">Platform / 平台</div><div class="v">iOS · Android</div></div>
+          <div class="fact"><div class="k">Version / 版本</div><div class="v">BPW-6-4-0</div></div>
+          <div class="fact"><div class="k">Standard / 体系</div><div class="v">ISO9001 · ISO50001</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="pad-sec band" id="gallery">
+    <div class="wrap">
+      <span class="eyebrow rv">02 / SHOWCASE — 界面全景</span>
+      <h2 class="sec-h rv d1">从启动到作业，<span class="hl">每一屏都经过推敲</span></h2>
+      <p class="sec-sub rv d2">14 张真实设计界面，覆盖启动、登录、经营工作台、指标监控、待办消息、AGV 叫料与点巡检等核心场景。点击任意界面可放大查看细节。</p>    <div class="story">
+      <div class="story-rail" id="storyRail" tabindex="0" aria-label="界面画廊，可拖动或使用左右方向键浏览">
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/splash.png" alt="启动页"><span class="island"></span><span class="glare"></span></div><span class="no">01</span><figcaption class="cap"><span>01 · SPLASH</span>启动页 · 综合业务移动平台</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/workbench.png" alt="经营工作台"><span class="island"></span><span class="glare"></span></div><span class="no">02</span><figcaption class="cap"><span>02 · WORKBENCH</span>经营工作台 · 常用功能聚合</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/monitor-all.png" alt="指标监控全部"><span class="island"></span><span class="glare"></span></div><span class="no">03</span><figcaption class="cap"><span>03 · MONITOR</span>指标监控 · 全部指标</figcaption></figure>
+        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/monitor-alert.png" alt="指标监控异常"><span class="island"></span><span class="glare"></span></div><span class="no">04</span><figcaption class="cap"><span>04 · ALERT</span>指标监控 · 异常告警</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/agv-home.png" alt="AGV"><span class="island"></span><span class="glare"></span></div><span class="no">05</span><figcaption class="cap"><span>05 · AGV</span>AGV 物料调度入口</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/todo.png" alt="待办"><span class="island"></span><span class="glare"></span></div><span class="no">06</span><figcaption class="cap"><span>06 · TODO</span>待办 · 任务中心</figcaption></figure>
+        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/message.png" alt="消息"><span class="island"></span><span class="glare"></span></div><span class="no">07</span><figcaption class="cap"><span>07 · MESSAGE</span>消息 · 通知中心</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/monitor-detail.png" alt="监控详情"><span class="island"></span><span class="glare"></span></div><span class="no">08</span><figcaption class="cap"><span>08 · DETAIL</span>指标监控 · 异常详情</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/agv-inbound.png" alt="AGV入库"><span class="island"></span><span class="glare"></span></div><span class="no">09</span><figcaption class="cap"><span>09 · INBOUND</span>AGV · 物料入库提交</figcaption></figure>
+        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/agv-scan.png" alt="AGV扫描"><span class="island"></span><span class="glare"></span></div><span class="no">10</span><figcaption class="cap"><span>10 · SCAN</span>AGV · 扫描识别</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/inspection.png" alt="点巡检"><span class="island"></span><span class="glare"></span></div><span class="no">11</span><figcaption class="cap"><span>11 · INSPECTION</span>点巡检工单</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/login.png" alt="登录"><span class="island"></span><span class="glare"></span></div><span class="no">12</span><figcaption class="cap"><span>12 · LOGIN</span>登录 · 账号验证</figcaption></figure>
+        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/mine.png" alt="我的"><span class="island"></span><span class="glare"></span></div><span class="no">13</span><figcaption class="cap"><span>13 · PROFILE</span>我的 · 个人中心</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/home.png" alt="自定义组"><span class="island"></span><span class="glare"></span></div><span class="no">14</span><figcaption class="cap"><span>14 · CUSTOM</span>首页 · 自定义常用功能</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/approval.png" alt="审批中心"><span class="island"></span><span class="glare"></span></div><span class="no">15</span><figcaption class="cap"><span>15 · APPROVAL</span>审批中心 · 待办 / 已审批分栏</figcaption></figure>
+        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/approval-detail.png" alt="审批详情"><span class="island"></span><span class="glare"></span></div><span class="no">16</span><figcaption class="cap"><span>16 · APPROVAL</span>审批详情 · 决策依据一屏到位</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/msg-step-maint-open.png" alt="设备故障工单"><span class="island"></span><span class="glare"></span></div><span class="no">17</span><figcaption class="cap"><span>17 · WORK ORDER</span>设备故障工单 · 保全协同处理</figcaption></figure>
+        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/verify-account.png" alt="账号验证"><span class="island"></span><span class="glare"></span></div><span class="no">18</span><figcaption class="cap"><span>18 · LOGIN</span>账号验证 · 状态反馈</figcaption></figure>
+      </div>
+      <div class="story-bar">
+        <div class="story-num"><span id="storyNow">01</span><small id="storyTotal">/ 14</small></div>
+        <div class="story-info"><div class="t" id="storyTag">01 · SPLASH</div><h4 id="storyTitle">启动页 · 综合业务移动平台</h4></div>
+        <div class="story-nav">
+          <button id="storyPrev" aria-label="上一张">‹</button>
+          <button id="storyNext" aria-label="下一张">›</button>
+        </div>
+        <div class="story-dots" id="storyDots" aria-label="界面导航"></div>
+      </div>
+      <div class="story-tip">DRAG · SCROLL · ← → 浏览 14 张真实界面　/　点击放大查看细节</div>
+    </div>
+    </div>
+  </section>
+
+  <!-- MONITOR FEATURE -->
+  <section class="pad-sec" id="monitor">
+    <div class="wrap">
+      <div class="feature">
+        <div class="fx-copy rv">
+          <span class="fx-tag">03 / FEATURE — 指标监控</span>
+          <h3>让异常指标<br>自己"跳"出来</h3>
+          <p>成本、质量等多主题指标统一聚合；结合用能监控与能耗告警，未达标数据用语义红即时标记，配合触发式告警动效，让一线在第一时间锁定需要处理的产线与时间。</p>
+          <ul class="fx-points">
+            <li><b>01</b><span>按"层级"与"时间维度"双维度筛选，快速定位范围。</span></li>
+            <li><b>02</b><span>实际值与目标值同屏对比，偏差方向一眼可辨。</span></li>
+            <li><b>03</b><span>告警按设备—产线—厂区逐级收敛，先看范围再看细节。</span></li>
+          </ul>
+        </div>
+        <div class="fx-stage rv d1">
+          <div class="scene-frame" id="monitorScene" data-scene="monitor">
+            <div class="scene-top"><span>SCENARIO / MONITOR</span><span class="live">LIVE DATA</span></div>
+            <div class="scene-orbit"></div><div class="scene-orbit alt"></div><div class="scene-scan"></div>
+            <div class="scene-leader l1"></div><div class="scene-leader l2"></div><div class="scene-leader l3"></div><div class="scene-leader l4"></div>
+            <div class="scene-device is-dim" data-screen="0"><div class="dev is-card"><div class="dev-screen"><img loading="lazy" src="assets/dmtt/monitor-detail.png" alt="异常详情"><span class="island"></span><span class="glare"></span></div></div></div>
+            <div class="scene-device is-front" data-screen="1"><div class="dev"><div class="dev-screen"><img loading="lazy" src="assets/dmtt/monitor-alert.png" alt="异常告警"><span class="island"></span><span class="glare"></span></div></div></div>
+            <div class="scene-label l1 alert"><div><b>语义红</b><small>未达标即时标记</small></div></div>
+            <div class="scene-label l2"><div><b>双维筛选</b><small>层级 × 时间</small></div></div>
+            <div class="scene-label l3"><div><b>偏差对比</b><small>实际 / 目标同屏</small></div></div>
+            <div class="scene-label l4 alert"><div><b>逐级收敛</b><small>设备—产线—厂区</small></div></div>
+            <div class="scene-switch" aria-label="切换监控界面">
+              <button type="button" data-go="0">异常详情</button><button type="button" class="on" data-go="1">指标总览</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mon-demo rv d2" id="monDemo">
+        <div class="sweep"></div>
+        <div class="mon-head">
+          <div class="t">指标监控数据 · 成本主题</div>
+          <div class="tabs"><span class="on">全部</span><span>异常</span></div>
+        </div>
+        <div class="mon-cards">
+          <div class="mcard warn"><div class="mt"><i class="dot"></i>成本指标 · 未达标</div><div class="mv">1212.86 <span style="font-size:.4em;color:var(--muted)">吨</span></div><div class="cmp"><span>目标 <b>1129.32 吨</b></span><span style="color:var(--red)">↗ 超出 +83.54</span></div><div class="bar"><i data-w="93%"></i></div></div>
+          <div class="mcard warn"><div class="mt"><i class="dot"></i>质量指标 · 未达标</div><div class="mv">3.82 <span style="font-size:.4em;color:var(--muted)">%</span></div><div class="cmp"><span>不良率 · <b>BPW-6 产线</b></span><span style="color:var(--red)">2026-08-25</span></div><div class="bar"><i data-w="86%"></i></div></div>
+          <div class="mcard"><div class="mt"><i class="dot"></i>能耗指标 · 达标</div><div class="mv">872.16 <span style="font-size:.4em;color:var(--muted)">吨</span></div><div class="cmp"><span>目标 <b>900.00 吨</b></span><span style="color:var(--green)">✓ 优于目标 27.84</span></div><div class="bar"><i data-w="72%"></i></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AGV FEATURE -->
+  <section class="pad-sec band" id="agv">
+    <div class="wrap">
+      <div class="feature rev">
+        <div class="fx-copy rv">
+          <span class="fx-tag">04 / FEATURE — AGV 叫料与物流</span>
+          <h3>物料流转，<br>全程可视可控</h3>
+          <p>面向厂区 AGV 自动搬运的成套流程：扫描识别、自动叫料、物料入库、成品移出；对接单件追溯、标签、仓储与发运的谱系关系，每一步都有明确的状态反馈，让调度从"靠喊"变成"看得见"。</p>
+          <ul class="fx-points">
+            <li><b>01</b><span>扫码即识别物料与任务，减少手工录入差错。</span></li>
+            <li><b>02</b><span>自动叫料弹窗就近调度，物料入库提交即时确认。</span></li>
+            <li><b>03</b><span>成品移出双重提示，关键操作不误触、不遗漏。</span></li>
+          </ul>
+        </div>
+        <div class="fx-stage rv d1">
+          <div class="scene-frame agv" id="agvScene" data-scene="agv">
+            <div class="scene-top"><span>SCENARIO / AGV LOGISTICS</span><span class="live">TASK FLOW</span></div>
+            <div class="scene-orbit"></div><div class="scene-orbit alt"></div><div class="scene-scan"></div>
+            <div class="scene-leader l1"></div><div class="scene-leader l2"></div><div class="scene-leader l3"></div><div class="scene-leader l4"></div>
+            <div class="scene-device is-dim" data-screen="0"><div class="dev is-card"><div class="dev-screen"><img loading="lazy" src="assets/dmtt/agv-scan.png" alt="扫描识别"><span class="island"></span><span class="glare"></span></div></div></div>
+            <div class="scene-device is-front right" data-screen="1"><div class="dev"><div class="dev-screen"><img loading="lazy" src="assets/dmtt/agv-inbound.png" alt="物料入库"><span class="island"></span><span class="glare"></span></div></div></div>
+            <div class="scene-label l1"><div><b>扫码识别</b><small>物料与任务自动匹配</small></div></div>
+            <div class="scene-label l2"><div><b>就近调度</b><small>AGV 自动叫料</small></div></div>
+            <div class="scene-label l3"><div><b>入库确认</b><small>状态即时反馈</small></div></div>
+            <div class="scene-label l4"><div><b>谱系追溯</b><small>标签 / 仓储 / 发运</small></div></div>
+            <div class="scene-switch" aria-label="切换 AGV 界面">
+              <button type="button" data-go="0">扫码识别</button><button type="button" class="on" data-go="1">物料入库</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYSTEM -->
+  <section class="pad-sec" id="system">
+    <div class="wrap">
+      <span class="eyebrow rv">05 / DESIGN SYSTEM — 设计系统</span>
+      <h2 class="sec-h rv d1">一套语言，<span class="hl">支撑长期迭代</span></h2>
+      <p class="sec-sub rv d2">以品牌蓝建立识别，以语义红绿表达状态；统一的字阶、圆角与组件规范，让新业务模块可以直接复用，接入<span class="nb">即一致。</span></p>
+      <div class="ds-grid">
+        <div class="ds-card rv d1">
+          <h4>色彩系统 <em>COLOR TOKENS</em></h4>
+          <div class="swatches">
+            <div class="sw"><div class="c" style="background:#1677ff"></div><div class="n">#1677FF</div></div>
+            <div class="sw"><div class="c" style="background:#4d9bff"></div><div class="n">#4D9BFF</div></div>
+            <div class="sw"><div class="c" style="background:#25d6e8"></div><div class="n">#25D6E8</div></div>
+            <div class="sw"><div class="c" style="background:#ff4d5e"></div><div class="n">#FF4D5E</div></div>
+            <div class="sw"><div class="c" style="background:#2fd08a"></div><div class="n">#2FD08A</div></div>
+            <div class="sw"><div class="c" style="background:#0c1830"></div><div class="n">#0C1830</div></div>
+          </div>
+        </div>
+        <div class="ds-card rv d2">
+          <h4>字阶规范 <em>TYPOGRAPHY</em></h4>
+          <div class="type-scale">
+            <div class="ts"><span class="s">H1 / 40</span><span class="x" style="font-size:26px">经营工作台</span></div>
+            <div class="ts"><span class="s">H2 / 28</span><span class="x" style="font-size:21px">欢迎您，admin</span></div>
+            <div class="ts"><span class="s">BODY / 16</span><span style="font-size:15px;color:var(--ink2)">常用功能与最近使用</span></div>
+            <div class="ts"><span class="s">CAP / 12</span><span style="font-size:12px;color:var(--muted)">版本号 BPW-6-4-0</span></div>
+          </div>
+        </div>
+        <div class="ds-card rv d3">
+          <h4>组件语义 <em>COMPONENTS</em></h4>
+          <div class="comp-row">
+            <span class="chip primary">主要操作</span>
+            <span class="chip">次要操作</span>
+            <span class="chip ghost">描边按钮</span>
+            <span class="chip red">异常告警</span>
+            <span class="chip">待处理 12</span>
+            <span class="chip ghost">达标</span>
+          </div>
+        </div>
+        <div class="ds-card rv d4">
+          <h4>界面基石 <em>FOUNDATION</em></h4>
+          <div class="fact-list" style="border:none;background:transparent;gap:0">
+            <div class="fact" style="background:rgba(8,18,38,.6);margin-bottom:8px"><div class="k">基准尺寸</div><div class="v">429 × 930 px</div></div>
+            <div class="fact" style="background:rgba(8,18,38,.6);margin-bottom:8px"><div class="k">圆角</div><div class="v">30 px 设备 / 20 px 卡片</div></div>
+            <div class="fact" style="background:rgba(8,18,38,.6)"><div class="k">网格</div><div class="v">4 pt 基准</div></div>
+            <div class="fact" style="background:rgba(8,18,38,.6)"><div class="k">字体</div><div class="v">Source Han Sans CN</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTRO -->
+  <section class="outro">
+    <div class="wrap">
+      <div class="big rv">THANK<br>YOU.</div>
+      <p class="rv d1">iWork · 综合业务平台（行业标准 MES）— 从业务收敛到设计系统，让工业现场的每个决策都清晰可达。</p>
+      <a class="btn btn-p rv d2" href="index.html">← 返回作品集</a>
+      <div class="meta rv d3">DESIGN BY OSCAR · MASTERGO · 2026</div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot"><div class="wrap"><span>© 2026 Oscar · 数字产品设计作品集</span><span>案例数据为脱敏演示 · <a href="index.html">返回首页</a></span></div></footer>
+
+<a class="totop" id="toTop" href="#top" aria-label="返回顶部">↑</a>
+<div id="lb" role="dialog" aria-modal="true" aria-label="界面预览"><button class="x" id="lbclose" aria-label="关闭预览">×</button><img id="lbimg" src="" alt=""><div class="lbcap" id="lbcap"></div></div>
+
+<script>
+/* ===== 星点背景 ===== */
+(function(){
+  const c=document.getElementById('stars'),x=c.getContext('2d');let w,h,pts=[],raf=0;
+  function size(){w=c.width=innerWidth;h=c.height=innerHeight;pts=[];const n=Math.min(90,Math.floor(w*h/18000));
+    for(let i=0;i<n;i++)pts.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.4+.3,a:Math.random(),s:Math.random()*.012+.004});}
+  function loop(){x.clearRect(0,0,w,h);for(const p of pts){p.a+=p.s;if(p.a>1||p.a<0)p.s*=-1;
+    x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.fillStyle='rgba(150,190,255,'+(Math.abs(p.a)*.5)+')';x.fill();}raf=requestAnimationFrame(loop);}
+  function start(){if(!raf)raf=requestAnimationFrame(loop)}
+  function stop(){if(raf){cancelAnimationFrame(raf);raf=0}}
+  document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
+  size();addEventListener('resize',size);start();
+})();
+
+/* ===== 进度条 & 导航 ===== */
+const prog=document.getElementById('prog'),nav=document.getElementById('nav');
+addEventListener('scroll',()=>{
+  const st=scrollY,dh=document.documentElement.scrollHeight-innerHeight;
+  prog.style.width=(st/dh*100)+'%';
+  nav.classList.toggle('solid',st>40);
+},{passive:true});
+
+/* ===== reveal ===== */
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+document.querySelectorAll('.rv:not(.in)').forEach(el=>io.observe(el));
+
+/* ===== 数字计数 ===== */
+function countUp(el){const target=+el.dataset.count,suf=el.dataset.suffix||'';let t0=null;
+  function step(ts){if(!t0)t0=ts;const p=Math.min(1,(ts-t0)/1300);const v=Math.round(target*(1-Math.pow(1-p,3)));
+    el.innerHTML=v+suf;if(p<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
+const nio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){countUp(e.target);nio.unobserve(e.target);}})},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>nio.observe(el));
+
+/* ===== 监控条动画 ===== */
+const mio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('sweep-on');e.target.querySelectorAll('.bar i').forEach(b=>b.style.width=b.dataset.w);mio.unobserve(e.target);}})},{threshold:.3});
+const md=document.getElementById('monDemo');if(md)mio.observe(md);
+
+/* ===== 场景化 feature：界面切换 + 进场 ===== */
+const sceneIO=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('scene-in');sceneIO.unobserve(e.target);}})},{threshold:.25});
+document.querySelectorAll('.scene-frame').forEach(scene=>{
+  sceneIO.observe(scene);
+  const devices=[...scene.querySelectorAll('.scene-device')];
+  const buttons=[...scene.querySelectorAll('.scene-switch button')];
+  function setScene(i){
+    devices.forEach((d,j)=>{d.classList.toggle('is-front',j===i);d.classList.toggle('is-dim',j!==i);});
+    buttons.forEach((b,j)=>b.classList.toggle('on',j===i));
+  }
+  buttons.forEach((b,i)=>b.addEventListener('click',()=>setScene(i)));
+  scene.addEventListener('mouseenter',()=>{if(!scene.dataset.touched)setScene(1);scene.dataset.touched='1';});
+});
+
+/* ===== Hero 视差 & 3D tilt ===== */
+const stage=document.getElementById('heroStage');
+if(stage){
+  const reduceMotion=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(!reduceMotion){
+    stage.addEventListener('mousemove',e=>{const r=stage.getBoundingClientRect();const px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+      stage.querySelectorAll('.float-dev').forEach(p=>{const d=+p.dataset.depth,base=+p.dataset.base;
+        p.style.transform='rotate('+base+'deg) translate3d('+(px*d)+'px,'+(py*d)+'px,0)';});});
+    stage.addEventListener('mouseleave',()=>{stage.querySelectorAll('.float-dev').forEach(p=>p.style.transform='');});}
+}
+
+/* ===== 3D 横向画廊控制器 ===== */
+(function(){
+  const rail=document.getElementById('storyRail');if(!rail)return;
+  const cards=[...rail.querySelectorAll('.shotcard')];
+  const now=document.getElementById('storyNow'),tag=document.getElementById('storyTag'),title=document.getElementById('storyTitle');
+  const prev=document.getElementById('storyPrev'),next=document.getElementById('storyNext'),dots=document.getElementById('storyDots');
+  const total=document.getElementById('storyTotal');if(total)total.textContent='/ '+cards.length;
+  const capData=cards.map(c=>{const cap=c.querySelector('.cap');const sp=cap?cap.querySelector('span'):null;
+    return {tag:sp?sp.textContent:'',title:cap?cap.textContent.replace(sp?sp.textContent:'' ,'').trim():c.querySelector('img').alt};});
+  cards.forEach((_,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','第'+(i+1)+'张：'+capData[i].title);
+    b.addEventListener('click',()=>go(i));dots.appendChild(b);});
+  const dotEls=[...dots.children];
+  let active=-1,raf=null,dragging=false,startX=0,startScroll=0,moved=false,justDragged=false;
+
+  function paint(){
+    raf=null;
+    const cx=rail.scrollLeft+rail.clientWidth/2, half=rail.clientWidth/2;
+    let best=0,bd=1e9;
+    cards.forEach((c,i)=>{
+      const cc=c.offsetLeft+c.offsetWidth/2;
+      const d=(cc-cx)/half;                 // 中心=0，边缘≈±1
+      const ad=Math.min(Math.abs(d),1.7);
+      const scale=Math.max(.52,1-ad*.34);
+      const ry=Math.max(-30,Math.min(30,-d*26));
+      const op=Math.max(.32,1-ad*.5);
+      c.style.transform='perspective(1300px) scale('+scale.toFixed(3)+') rotateY('+ry.toFixed(2)+'deg)';
+      c.style.opacity=op.toFixed(3);
+      c.style.zIndex=String(50-Math.round(ad*20));
+      const dist=Math.abs(cc-cx);if(dist<bd){bd=dist;best=i;}
+    });
+    if(best!==active){active=best;syncMeta();}
+  }
+  function syncMeta(){
+    if(now)now.textContent=String(active+1).padStart(2,'0');
+    if(tag)tag.textContent=capData[active].tag;
+    if(title)title.textContent=capData[active].title;
+    dotEls.forEach((b,i)=>b.classList.toggle('on',i===active));
+    if(prev)prev.disabled=active===0;
+    if(next)next.disabled=active===cards.length-1;
+  }
+  function go(i){i=Math.max(0,Math.min(cards.length-1,i));const c=cards[i];
+    rail.scrollTo({left:c.offsetLeft+c.offsetWidth/2-rail.clientWidth/2,behavior:'smooth'});}
+  rail.addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(paint)},{passive:true});
+  if(prev)prev.addEventListener('click',()=>go(active-1));
+  if(next)next.addEventListener('click',()=>go(active+1));
+  rail.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){go(active+1);e.preventDefault()}else if(e.key==='ArrowLeft'){go(active-1);e.preventDefault()}});
+  // 滚轮纵向 -> 横向巡览
+  rail.addEventListener('wheel',e=>{const dy=Math.abs(e.deltaY),dx=Math.abs(e.deltaX);
+    if(dy>dx){rail.scrollLeft+=e.deltaY;e.preventDefault();}},{passive:false});
+  // 拖拽
+  rail.addEventListener('pointerdown',e=>{if(e.pointerType==='touch')return;dragging=true;moved=false;startX=e.clientX;startScroll=rail.scrollLeft;rail.classList.add('drag');});
+  window.addEventListener('pointermove',e=>{if(!dragging)return;const dx=e.clientX-startX;if(Math.abs(dx)>5)moved=true;rail.scrollLeft=startScroll-dx;});
+  window.addEventListener('pointerup',()=>{if(!dragging)return;dragging=false;rail.classList.remove('drag');
+    if(moved){justDragged=true;setTimeout(()=>{justDragged=false},260);}});
+  // 供 lightbox 判断是否拖拽
+  rail._justDragged=()=>justDragged;window.__dmttRail=()=>justDragged;
+  function setPad(){const cw=cards[0].offsetWidth||260;const pad=Math.max(0,(rail.clientWidth-cw)/2);
+    rail.style.paddingLeft=pad+'px';rail.style.paddingRight=pad+'px';}
+  setPad();
+  addEventListener('resize',()=>{setPad();if(!raf)raf=requestAnimationFrame(paint)});
+  // 初始定位到第一张（不动画，避免首屏闪动）
+  rail.scrollLeft=cards[0].offsetLeft+cards[0].offsetWidth/2-rail.clientWidth/2;
+  setTimeout(paint,60);
+})();
+/* ===== lightbox ===== */
+const lb=document.getElementById('lb'),lbimg=document.getElementById('lbimg'),lbcap=document.getElementById('lbcap');
+document.querySelectorAll('.shotcard').forEach(c=>c.addEventListener('click',()=>{
+  if(window.__dmttRail&&window.__dmttRail())return;
+  const img=c.querySelector('img');lbimg.src=img.src;lbimg.alt=img.alt;(()=>{const cp=c.querySelector('.cap'),sp=cp?cp.querySelector('span'):null;lbcap.textContent=cp?(sp?cp.textContent.replace(sp.textContent,'').trim():cp.textContent.trim()):c.querySelector('img').alt;})();lb.classList.add('on');document.getElementById('lbclose').focus();}));
+function closeLb(){lb.classList.remove('on')}
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('x'))closeLb()});
+addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
+
+/* ===== 导航高亮 ===== */
+const secs=['overview','gallery','monitor','agv','system'].map(id=>document.getElementById(id));
+const navlinks=[...document.querySelectorAll('.navlinks a')];
+const nio2=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){const id=e.target.id;navlinks.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+id));}})},{rootMargin:'-45% 0px -50% 0px'});
+secs.forEach(s=>s&&nio2.observe(s));
+
+/* ===== 返回顶部 ===== */
+const toTop=document.getElementById('toTop');
+addEventListener('scroll',()=>{toTop.classList.toggle('on',scrollY>680)},{passive:true});
+</script>
+<script>
+/* 中文 widow-fix：把段落末尾 3 个实字（含标点）绑成不换行组，杜绝单字吊行 */
+(function(){
+  function clean(root){
+    (root||document).querySelectorAll('span.nb[data-w]').forEach(function(sp){
+      var p=sp.parentNode,prev=sp.previousSibling;
+      if(prev&&prev.nodeType===3){prev.appendData(sp.textContent);} 
+      else {p.insertBefore(document.createTextNode(sp.textContent),sp);}
+      p.removeChild(sp);
+    });
+  }
+  function fix(root){
+    clean(root);
+    var sels='p,h1,h2,h3,h4,h5,li,dd,figcaption,blockquote';
+    (root||document).querySelectorAll(sels).forEach(function(e){
+      var last=e.lastChild;
+      if(!last||last.nodeType!==3) return;
+      var t=last.textContent;
+      if(t.trim().length<5||/\n/.test(t)) return;
+      var i=t.length-1,solid=0,start=t.length;
+      while(i>=0){ start=i; if(/[\u4e00-\u9fa5A-Za-z0-9]/.test(t[i])) solid++; if(solid>=3)break; i--; }
+      if(solid<3||start>=t.length) return;
+      while(start<t.length&&!/[\u4e00-\u9fa5A-Za-z0-9]/.test(t[start])) start++;
+      if(start<=0||start>=t.length) return;
+      var tail=t.slice(start);
+      var sp=document.createElement('span');sp.className='nb';sp.setAttribute('data-w','1');sp.textContent=tail;
+      last.deleteData(start,t.length-start);
+      e.appendChild(sp);
+    });
+  }
+  window.__fixWidows=fix;
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){fix();});
+  else fix();
+  setTimeout(function(){fix();},1600);
+  document.addEventListener('click',function(){setTimeout(function(){fix();},280);},true);
+})();
+</script>
+
+</body>
+</html>

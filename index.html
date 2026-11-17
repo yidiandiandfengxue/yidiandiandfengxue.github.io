@@ -930,6 +930,7 @@ section,footer{scroll-margin-top:92px}
   font-size:.86rem;font-weight:800;color:#dffaf3;
   box-shadow:inset 0 0 0 1px var(--pc-tile-edge),inset 0 0 18px -10px rgba(92,242,208,.8);
 }
+.profile-card__avatar img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
 .profile-card__avatar img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
 .profile-card__meta{display:flex;flex:1;flex-direction:column;gap:3px;min-width:0}
 .profile-card__handle{overflow:hidden;font-size:.82rem;font-weight:600;line-height:1.25;color:var(--pc-ink);white-space:nowrap;text-overflow:ellipsis;letter-spacing:.01em}
@@ -1345,6 +1346,155 @@ section,footer{scroll-margin-top:92px}
 .theme-ico-moon{display:none}
 :root[data-theme="light"] .theme-ico-sun{display:none}
 :root[data-theme="light"] .theme-ico-moon{display:block}
+
+
+/* ===== iWork 真实截图样机（项目6）：宽幅场景主视觉 + 双机 ===== */
+.phones--iwork{gap:22px;padding:16px 20px;isolation:isolate;
+  background-image:url('assets/dmtt/iwork-card-hero.png');background-size:cover;background-position:center}
+.phones--iwork::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(4,10,22,.28),rgba(4,10,22,.06) 44%,rgba(4,10,22,.34))}
+.phones--iwork>*{position:relative;z-index:1}
+/* ===== 项目6卡片：浅蓝白晕光主视觉（浅底 + 原场景图淡透出 + 边缘渐隐） ===== */
+/* 主底换成浅蓝流光，让深蓝手机样机成为唯一视觉焦点；原深蓝场景图 13% 透出，保留斜切品牌卡与弧线记忆 */
+.phones--iwork{
+  background-image:url('assets/bg/flow-light.jpg');background-size:cover;background-position:center;
+  box-shadow:inset 0 0 46px 10px rgba(6,14,30,.32)}
+.phones--iwork::before{
+  background:
+    linear-gradient(180deg,rgba(6,14,30,.60) 0%,rgba(6,14,30,.10) 20%,rgba(6,14,30,0) 50%,rgba(6,14,30,.30) 100%),
+    linear-gradient(90deg,rgba(6,14,30,.24),transparent 16%,transparent 84%,rgba(6,14,30,.24))}
+.phones--iwork::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:url('assets/dmtt/iwork-card-hero.png') center/cover no-repeat;opacity:.13}
+/* 亮底下的卡片头：深色毛玻璃保证小字与 IWORK/08 角标对比度（仅暗色主题） */
+html:not([data-theme="light"]) .proj--iwork .ui-bar{background:rgba(8,18,36,.74);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+html:not([data-theme="light"]) .proj--iwork .ui-bar .badge{color:#a9d8ff;border-color:rgba(140,200,255,.42);background:rgba(20,50,95,.5)}
+
+.phones--iwork .phone.phone--shot{
+  width:126px;height:calc(100% - 10px);padding:0;overflow:hidden;
+  background:#0a1220;border-radius:19px;border:2px solid rgba(120,170,255,.38);
+  box-shadow:0 26px 48px -16px rgba(0,0,0,.9),0 0 0 4px rgba(20,40,80,.42),0 0 42px rgba(31,123,255,.3),inset 0 1px 0 rgba(255,255,255,.2);
+  transition:transform .6s var(--ease),box-shadow .5s var(--ease)
+}
+.phones--iwork .phone.phone--shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;border-radius:17px}
+.phones--iwork .phone:first-child{transform:rotate(-6deg) translateY(7px)}
+.phones--iwork .phone:last-child{transform:rotate(5deg) translateY(-4px)}
+.proj--iwork{border-color:rgba(90,170,255,.32);background:linear-gradient(168deg,#0d1729 0%,#0a101c 58%,#080b12 100%);box-shadow:0 -14px 50px -20px rgba(0,0,0,.95),0 0 50px -28px rgba(31,123,255,.45),inset 0 1px 0 rgba(255,255,255,.07)}
+.proj--iwork::before{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;z-index:1;
+  background:radial-gradient(circle at 18% 0%,rgba(31,123,255,.16),transparent 38%),radial-gradient(circle at 92% 100%,rgba(37,214,232,.09),transparent 34%)}
+.proj--iwork>*{position:relative;z-index:2}
+.proj--iwork .proj-no{color:#7fd4ff}
+.proj--iwork .proj-head h3{background:linear-gradient(100deg,#fff 30%,#a9d8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.proj--iwork .ui-bar .badge{color:#8fd6ff;border-color:rgba(120,205,255,.38);background:rgba(60,150,255,.12)}
+.proj--iwork .proj-meta{border-left-color:rgba(90,170,255,.22)}
+.proj--iwork .proj-meta .stack-tags .pill{border-color:rgba(120,205,255,.3);color:#a9d8ff;background:rgba(60,150,255,.08)}
+.proj--iwork[data-open]{cursor:pointer}
+.proj--iwork:hover .phones--iwork{background-position:center 46%}
+.proj--iwork:hover .phone:first-child{transform:rotate(-4deg) translateY(3px) translateX(-8px) scale(1.04)}
+.proj--iwork:hover .phone:last-child{transform:rotate(3deg) translateY(-6px) translateX(8px) scale(1.04)}
+.proj--iwork:hover .ui-bar .badge{box-shadow:0 0 18px rgba(90,200,255,.22)}
+/* 弹窗详情里的双手机样机壳：让克隆进来的真实截图铺满 */
+.pd-fig__stage.is-mobile .phone-rig{overflow:hidden;background:#0a1220;border:2px solid rgba(120,170,255,.28);box-shadow:0 26px 50px -18px rgba(0,0,0,.9),0 0 30px rgba(31,123,255,.18)}
+.phone-rig__screen .phone--shot{padding:0!important;height:100%!important;width:100%!important;border:0!important;background:transparent!important;border-radius:0!important;box-shadow:none!important}
+.phone-rig__screen .phone--shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+/* 版型墙四种呈现里的真实截图 */
+.pd-variants.is-mobile .pd-var .phone--shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;border-radius:12px}
+
+/* 项目6 iWork：版型区真实截图样机 */
+.mp--shot{overflow:hidden;background:#0a1220!important}
+.mp--shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;border-radius:inherit}
+
+
+/* ===== 项目6 iWork：交互式案例展示 ===== */
+.pd-iwork{display:none;padding:clamp(28px,4.4vw,52px) clamp(20px,4vw,56px);border-bottom:1px solid var(--edge);position:relative;overflow:hidden}
+.pd-iwork.is-on{display:block}
+.pd-iwork::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 78% 42%,rgba(31,123,255,.10),transparent 55%)}
+.iw-layout{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(28px,5vw,72px);align-items:center;position:relative}
+@media(max-width:900px){.iw-layout{grid-template-columns:1fr;gap:38px}}
+
+.iw-copy{opacity:0;transform:translateY(26px);transition:opacity .75s ease,transform .75s cubic-bezier(.18,.8,.22,1)}
+.pd-iwork.in .iw-copy{opacity:1;transform:none}
+.iw-kicker{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;color:var(--mint);margin-bottom:16px;text-transform:uppercase}
+.iw-copy h3{font-size:clamp(1.5rem,2.9vw,2.35rem);line-height:1.2;letter-spacing:-.02em;margin:0 0 16px;color:var(--ink);font-weight:700}
+.iw-copy p{font-size:.9rem;line-height:1.85;color:rgba(233,238,244,.64);margin:0 0 22px;max-width:36em}
+.iw-points{list-style:none;margin:0 0 28px;padding:0;display:grid;gap:11px}
+.iw-points li{position:relative;padding-left:20px;font-size:.8rem;line-height:1.5;color:rgba(233,238,244,.74);opacity:0;transform:translateX(-12px);transition:opacity .5s ease,transform .5s ease}
+.pd-iwork.in .iw-points li{opacity:1;transform:none}
+.pd-iwork.in .iw-points li:nth-child(1){transition-delay:.08s}
+.pd-iwork.in .iw-points li:nth-child(2){transition-delay:.16s}
+.pd-iwork.in .iw-points li:nth-child(3){transition-delay:.24s}
+.iw-points li::before{content:"";position:absolute;left:0;top:.5em;width:6px;height:6px;border-radius:2px;background:var(--mint);box-shadow:0 0 10px rgba(92,242,208,.55)}
+.iw-tabs{display:flex;flex-wrap:wrap;gap:8px}
+.iw-tabs button{font:inherit;font-size:.76rem;letter-spacing:.02em;color:rgba(233,238,244,.62);background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.09);border-radius:9px;padding:9px 14px;cursor:pointer;transition:all .25s ease;position:relative;overflow:hidden}
+.iw-tabs button:hover{color:var(--ink);border-color:rgba(92,242,208,.35);background:rgba(92,242,208,.07);transform:translateY(-2px)}
+.iw-tabs button.on{color:#07100d;background:var(--mint);border-color:var(--mint);font-weight:700;box-shadow:0 6px 18px -6px rgba(92,242,208,.6)}
+.iw-tabs button:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+.iw-hint{display:flex;align-items:center;gap:9px;margin-top:18px;font-size:.66rem;color:rgba(233,238,244,.38);font-family:var(--mono);letter-spacing:.06em}
+.iw-hint__dot{width:6px;height:6px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 0 rgba(92,242,208,.5);animation:iwPulse 2s infinite}
+@keyframes iwPulse{0%{box-shadow:0 0 0 0 rgba(92,242,208,.5)}70%{box-shadow:0 0 0 9px rgba(92,242,208,0)}100%{box-shadow:0 0 0 0 rgba(92,242,208,0)}}
+
+.iw-stage{position:relative;min-height:540px;display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:translateY(46px) scale(.95);transition:opacity .85s ease,transform .9s cubic-bezier(.18,.8,.22,1)}
+.pd-iwork.in .iw-stage{opacity:1;transform:none}
+.iw-glow{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(31,123,255,.26),transparent 62%);filter:blur(20px);z-index:0}
+.iw-ring{position:absolute;width:340px;height:340px;border-radius:50%;border:1px solid rgba(120,170,255,.14);z-index:0;
+  box-shadow:0 0 60px rgba(31,123,255,.1) inset;animation:iwSpin 26s linear infinite}
+.iw-ring::before,.iw-ring::after{content:"";position:absolute;width:6px;height:6px;border-radius:50%;background:var(--mint);top:50%;left:-3px;box-shadow:0 0 12px var(--mint)}
+.iw-ring::after{left:auto;right:-3px;background:#6d9bff;box-shadow:0 0 12px #6d9bff}
+@keyframes iwSpin{to{transform:rotate(360deg)}}
+.iw-device{position:relative;width:238px;height:497px;border-radius:22px;padding:8px;z-index:2;
+  background:linear-gradient(150deg,#454f5b,#11161d 48%,#080b0f);
+  box-shadow:0 40px 80px -26px rgba(0,0,0,.95),0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.2),
+             inset 0 0 2px rgba(255,255,255,.1),0 0 50px rgba(31,123,255,.18);
+  transform:perspective(1300px) rotateY(-9deg) rotateX(3deg);
+  transition:transform .55s cubic-bezier(.2,.8,.2,1);will-change:transform}
+.iw-device::before{content:"";position:absolute;inset:0;border-radius:22px;pointer-events:none;z-index:4;
+  background:linear-gradient(112deg,transparent 26%,rgba(255,255,255,.11) 42%,transparent 58%)}
+.iw-notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:70px;height:17px;border-radius:0 0 10px 10px;background:#05070a;z-index:5;
+  box-shadow:inset 0 -1px 0 rgba(255,255,255,.04)}
+.iw-screen{width:100%;height:100%;border-radius:15px;overflow:hidden;background:#070a0e;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.iw-screen img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;
+  transition:opacity .3s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+.iw-device.swap .iw-screen img{opacity:0;transform:scale(1.04)}
+.iw-scan{position:absolute;inset:8px;border-radius:15px;overflow:hidden;pointer-events:none;z-index:3}
+.iw-scan i{position:absolute;top:0;left:0;width:100%;height:30%;transform:translateY(-120%);
+  background:linear-gradient(180deg,transparent,rgba(140,190,255,.22),transparent)}
+.iw-device.swap .iw-scan i{animation:iwSweep .6s ease}
+@keyframes iwSweep{to{transform:translateY(420%)}}
+.iw-badge{position:absolute;z-index:6;display:flex;flex-direction:column;align-items:flex-start;gap:2px;
+  padding:11px 15px;border-radius:11px;background:rgba(14,20,28,.82);backdrop-filter:blur(12px);
+  border:1px solid rgba(120,170,255,.22);box-shadow:0 14px 30px -12px rgba(0,0,0,.8);
+  opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+.pd-iwork.in .iw-badge{opacity:1;transform:none}
+.iw-badge--a{left:2%;top:20%;transition-delay:.3s}
+.iw-badge--b{right:2%;bottom:20%;transition-delay:.42s}
+.iw-badge b{font-size:1.3rem;line-height:1;color:var(--mint);font-weight:700}
+.iw-badge span{font-size:.6rem;color:rgba(233,238,244,.55);letter-spacing:.06em}
+@media(max-width:560px){
+  .iw-stage{min-height:440px}
+  .iw-device{width:196px;height:406px;border-radius:18px}
+  .iw-device::before{border-radius:18px}
+  .iw-notch{top:6px;width:58px;height:14px;border-radius:0 0 8px 8px}
+  .iw-screen,.iw-scan{border-radius:12px}
+  .iw-glow{width:300px;height:300px}
+  .iw-ring{width:260px;height:260px}
+  .iw-badge{padding:8px 11px}
+  .iw-badge b{font-size:1.05rem}
+}
+
+.iw-thumbs{display:flex;gap:10px;margin-top:48px;overflow-x:auto;padding-bottom:6px;position:relative}
+.iw-thumb{flex:none;width:96px;cursor:pointer;border-radius:9px;overflow:hidden;position:relative;
+  border:1.5px solid rgba(255,255,255,.08);background:#0a0d11;transition:all .3s ease;opacity:.5}
+.iw-thumb:hover{opacity:.85;transform:translateY(-3px)}
+.iw-thumb.on{opacity:1;border-color:var(--mint);box-shadow:0 0 0 2px rgba(92,242,208,.18),0 10px 22px -10px rgba(92,242,208,.4)}
+.iw-thumb img{width:100%;height:150px;object-fit:cover;object-position:top center;display:block}
+.iw-thumb span{position:absolute;left:0;right:0;bottom:0;padding:5px 6px;font-size:.58rem;color:#eaf2f8;
+  background:linear-gradient(transparent,rgba(4,8,12,.92));text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(prefers-reduced-motion:reduce){
+  .iw-copy,.iw-stage,.iw-points li,.iw-badge{transition:none!important;opacity:1!important;transform:none!important}
+  .iw-ring,.iw-hint__dot{animation:none!important}
+}
 
 </style>
 </head>
@@ -1777,36 +1927,20 @@ section,footer{scroll-margin-top:92px}
         </div>
       </div>
     </article>
-    <!-- 06 企业协同（脱敏演示） -->
-    <article class="proj" style="--index:5">
+    <!-- 06 iWork 综合业务平台（真实截图场景卡） -->
+    <article class="proj proj--iwork" style="--index:5">
       <div class="proj-head">
         <span class="proj-no">06</span>
-        <div><p class="kind">移动端 · 企业协同</p><h3>云枢协同 · 企业办公 App</h3></div>
+        <div><p class="kind">行业标准 MES · 工业移动</p><h3>iWork · 综合业务平台</h3></div>
         <button class="pill pill-sm" type="button" data-open="5">查看项目 ↗</button>
       </div>
       <div class="proj-body">
         <div class="ui">
-          <div class="ui-bar"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">工作台 · 今日 5 项待办</span><span class="spacer"></span><span class="badge">协同在线</span></div>
+          <div class="ui-bar"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">登录 · 首页 · iWork 综合业务平台</span><span class="spacer"></span><span class="badge">iWORK / 06</span></div>
           <div class="ui-body">
-            <div class="phones phones--blue">
-              <div class="phone">
-                <div class="ph-bar"><span>9:41</span><span>5G</span></div>
-                <div class="ph-h ph-h--blue"></div>
-                <div class="ph-card ph-card--blue hi"></div>
-                <div class="ph-card ph-card--blue"></div>
-                <div class="ph-row ph-row--blue"></div>
-                <div class="ph-row ph-row--blue" style="width:70%"></div>
-                <div class="ph-tab ph-tab--blue"><i></i><i></i><i></i><i></i></div>
-              </div>
-              <div class="phone">
-                <div class="ph-bar"><span>9:41</span><span>5G</span></div>
-                <div class="ph-h ph-h--blue" style="width:40%"></div>
-                <div class="ph-card ph-card--blue"></div>
-                <div class="ph-card ph-card--blue hi"></div>
-                <div class="ph-row ph-row--blue"></div>
-                <div class="ph-row ph-row--blue" style="width:80%"></div>
-                <div class="ph-tab ph-tab--blue"><i></i><i></i><i></i><i></i></div>
-              </div>
+            <div class="phones phones--blue phones--iwork">
+              <div class="phone phone--shot"><img src="assets/dmtt/login.png" alt="iWork 登录页"></div>
+              <div class="phone phone--shot"><img src="assets/dmtt/home.png" alt="iWork 经营首页"></div>
             </div>
           </div>
         </div>
@@ -1814,10 +1948,10 @@ section,footer{scroll-margin-top:92px}
           <dl>
             <dt>角色</dt><dd>设计负责人</dd>
             <dt>周期</dt><dd>20 周</dd>
-            <dt>产出</dt><dd>App / UI 规范 / 组件库</dd>
+            <dt>产出</dt><dd>App / 组件库 / 规范</dd>
           </dl>
-          <p class="sum">把审批、待办、日程、知识库收进一个 App：工作台聚合今日要务，33 个基础组件统一多业务线体验。</p>
-          <div class="stack-tags"><span class="pill pill-sm" style="min-height:26px;padding:.25rem .6rem;font-size:.56rem">Design System</span><span class="pill pill-sm" style="min-height:26px;padding:.25rem .6rem;font-size:.56rem">协同办公</span></div>
+          <p class="sum">工厂的「神经系统」与「数据基石」：整合设备、生产、品质、能源、仓储、安环六大模块，形成决策—执行—反馈的管理闭环。</p>
+          <div class="stack-tags"><span class="pill pill-sm" style="min-height:26px;padding:.25rem .6rem;font-size:.56rem">Design System</span><span class="pill pill-sm" style="min-height:26px;padding:.25rem .6rem;font-size:.56rem">行业标准 MES</span></div>
         </div>
       </div>
     </article>
@@ -1838,7 +1972,7 @@ section,footer{scroll-margin-top:92px}
     <div class="step" data-reveal>
       <span class="sn">STEP 01</span>
       <h3>业务建模</h3>
-      <p>跟现场、跟运维、跟老板各聊一遍，先把实体、关系和状态画出来。界面结构不稳，多半是模型没想清楚。</p>
+      <p>跟现场、跟运维、跟老板各聊一遍，先把实体、关系和状态画出来。界面结构不稳，多半是模型<span class="nb">没想清楚。</span></p>
     </div>
     <div class="step" data-reveal>
       <span class="sn">STEP 02</span>
@@ -1898,7 +2032,7 @@ section,footer{scroll-margin-top:92px}
               <span class="profile-card__holo-glow"></span>
               <span class="profile-card__holo-shift"></span>
             </span>
-            <span class="profile-card__mono" aria-hidden="true"><span>O</span></span>
+            <img class="profile-card__photo" src="assets/avatar-3d.jpg" alt="Oscar 的 3D 设计师形象" style="object-position:center 28%">
             <span class="profile-card__scrim" aria-hidden="true"></span>
             <div class="profile-card__info">
               <h3 class="profile-card__name">Oscar</h3>
@@ -1908,7 +2042,7 @@ section,footer{scroll-margin-top:92px}
           </div>
 
           <div class="profile-card__footer">
-            <span class="profile-card__avatar" aria-hidden="true">O</span>
+            <span class="profile-card__avatar" aria-hidden="true"><img src="assets/avatar-face.jpg" alt=""></span>
             <div class="profile-card__meta">
               <span class="profile-card__handle">@oscar · 8Y</span>
               <span class="profile-card__status">开放新项目 · 上海</span>
@@ -1958,7 +2092,7 @@ section,footer{scroll-margin-top:92px}
     <div class="foot">
       <span>© 2026 Oscar · 数字产品设计</span>
       <span>作品集中的数据均为脱敏演示</span>
-      <span class="foot-ver" title="发版记录 v1.2.0 · 2026-11-16">v1.2.0</span>
+      <span class="foot-ver" title="发版记录 v1.3.0 · 2026-11-17">v1.3.0</span>
       <a href="#top">回到顶部 ↑</a>
     </div>
   </div>
@@ -2193,6 +2327,373 @@ section,footer{scroll-margin-top:92px}
       </div>
     </section>
 
+
+    <!-- 3.6 项目6 iWork：交互式案例展示（点击切换 + 3D样机 + 滚动动效） -->
+    
+    <!-- ===== 项目6 专属叙事：主页面 → 概览 → 背景现状 → 业务目标 → 设计方向 → 设计原则 → 关键词 → 图标 → 设计内容 ===== -->
+
+    <!-- 01 项目概览 -->
+    <section class="pd-x pj" id="pdOverview">
+      <div class="pd-sec-title"><span class="pd-sec-no">01</span> 项目概览 <em>/ OVERVIEW</em></div>
+      <div class="pj-lead">
+        <h3>把一座工厂，收进一个 App</h3>
+        <p>iWork 是面向模具制造多基地协同的移动综合业务平台。设备、生产、品质、能源、仓储、安环六大模块原本散落在 MES、ERP、SCADA 与纸质巡检表里。这次改版要解决的不是「功能有没有搬上手机」，而是<mark>一线在现场打开 App 的 3 秒内，能不能知道现在该处理什么</mark>。</p>
+      </div>
+      <div class="pj-kpi">
+        <div><b>6</b><span>大业务模块</span><em>设备 / 生产 / 品质 / 能源 / 仓储 / 安环</em></div>
+        <div><b>18</b><span>屏核心界面</span><em>启动 → 登录 → 工作台 → 监控 → 审批 → 工单</em></div>
+        <div><b>20+</b><span>覆盖场景</span><em>含 AGV 叫料、点巡检、异常下钻</em></div>
+        <div><b>1</b><span>套组件库与规范</span><em>新模块接入即一致</em></div>
+      </div>
+      <div class="pj-meta-strip"><span>角色 <b>设计负责人</b></span><i></i><span>周期 <b>20 周</b></span><i></i><span>团队 <b>设计 1 · 前端 1</b></span><i></i><span>基准 <b>429 × 930</b></span><i></i><span>工具 <b>MasterGo</b></span></div>
+    </section>
+
+    <!-- 02 项目背景与现状 -->
+    <section class="pd-x pj" id="pdContext">
+      <div class="pd-sec-title"><span class="pd-sec-no">02</span> 项目背景以及现状 <em>/ CONTEXT &amp; CURRENT STATE</em></div>
+      <div class="pj-two">
+        <div class="pj-panel">
+          <div class="pj-panel__eyebrow">项目背景 / BACKGROUND</div>
+          <h4>多系统并行，现场却只有一个手持终端</h4>
+          <p>工厂已有 MES、ERP、SCADA 与巡检台账，数据并不缺，缺的是「在正确的时刻、给正确的人、以能直接行动的形式」呈现。厂长看汇总、车间主任看进度、保全看工单、仓管看物料，各自登录不同系统，口径还常常对不上。</p>
+          <p>手机端最初的定位是「把 PC 功能搬过来」，于是出现了一个按系统菜单排列的功能列表——功能齐全，但没人愿意在车间里用它。</p>
+        </div>
+        <div class="pj-panel pj-panel--list">
+          <div class="pj-panel__eyebrow">现状问题 / PAIN POINTS</div>
+          <ol class="pj-pains">
+            <li><b>01</b><span>生产进度不透明</span><em>要问班组长、翻报表才知道当前状态</em></li>
+            <li><b>02</b><span>品质问题追溯难</span><em>异常与批次、工序、工单之间断链</em></li>
+            <li><b>03</b><span>能源消耗无监控</span><em>超限只能事后统计，无法现场干预</em></li>
+            <li><b>04</b><span>库存数据滞后</span><em>叫料靠电话，物料到哪一步说不清</em></li>
+            <li><b>05</b><span>安环被动响应</span><em>隐患上报路径长，闭环不可见</em></li>
+          </ol>
+        </div>
+      </div>
+      <div class="pj-roles"><span class="pj-roles__t">现场角色 / USERS</span><span>厂长 · 看全局与偏差</span><span>车间主任 · 看进度与派工</span><span>设备保全 · 看异常与工单</span><span>仓管 · 看叫料与入库</span><span>一线操作 · 看今天要做什么</span></div>
+      <div class="pj-conclusion"><span>现状结论</span><p>信息都在系统里，不在人手里。<mark>改版的起点不是加功能，而是重排信息的出现时机与顺序。</mark></p></div>
+    </section>
+
+    <!-- 03 拆解业务目标 -->
+    <section class="pd-x pj" id="pdGoals">
+      <div class="pd-sec-title"><span class="pd-sec-no">03</span> 拆解业务目标 <em>/ DISASSEMBLE BUSINESS GOALS</em></div>
+      <p class="pj-sub">把「做一个移动平台」这句业务诉求，拆成可被设计回应、可被度量的四组目标。</p>
+      <div class="pj-goals">
+        <div class="pj-goals__col">
+          <div class="pj-goals__label">业务目标 <em>BUSINESS</em></div>
+          <div class="pj-goal">让异常主动找人，而不是人找异常</div>
+          <div class="pj-goal">缩短现场从发现到决策的链路</div>
+          <div class="pj-goal">减少跨系统切换与重复录入</div>
+          <div class="pj-goal">沉淀可复用的界面规范</div>
+        </div>
+        <div class="pj-goals__mid">
+          <div class="pj-goals__core"><span>DESIGN<br>STRATEGY</span><b>设计策略</b></div>
+          <div class="pj-goals__chips"><span>状态前置</span><span>信息降噪</span><span>路径最短</span><span>一致可复用</span></div>
+        </div>
+        <div class="pj-goals__col is-right">
+          <div class="pj-goals__label">可度量结果 <em>OUTCOME</em></div>
+          <div class="pj-goal">关键指标 <b>3 秒</b>可读</div>
+          <div class="pj-goal">高频任务 <b>一屏</b>完成</div>
+          <div class="pj-goal">新模块 <b>接入即一致</b></div>
+          <div class="pj-goal">异常响应链路 <b>收敛 3 级</b></div>
+        </div>
+      </div>
+      <div class="pj-priority"><span>优先级</span><b>异常可见</b><i>›</i><b>决策提速</b><i>›</i><b>操作减负</b><i>›</i><b>规范复用</b><em>先解决「看不看得到」，再优化「快不快」。</em></div>
+    </section>
+
+    <!-- 04 基于业务目标与用户研究拆分设计方向 -->
+    <section class="pd-x pj" id="pdDirection">
+      <div class="pd-sec-title"><span class="pd-sec-no">04</span> 基于业务目标与用户研究拆分设计方向 <em>/ DESIGN DIRECTION</em></div>
+      <p class="pj-sub">输入是业务目标、现场研究与问题数据；输出是三条可以指导每一次取舍的设计方向。</p>
+      <div class="pj-flow">
+        <div class="pj-flow__in">
+          <div class="pj-flow__label">输入 / INPUT</div>
+          <div class="pj-flow__item"><b>用户研究</b><span>跟班观察 · 角色访谈 · 工单复盘</span></div>
+          <div class="pj-flow__item"><b>业务需求</b><span>六大模块协同 · 异常闭环</span></div>
+          <div class="pj-flow__item"><b>产品问题与数据反馈</b><span>功能列表弃用 · 跨系统切换频繁</span></div>
+        </div>
+        <div class="pj-flow__mid">
+          <div class="pj-flow__label">聚焦 / FOCUS</div>
+          <div class="pj-flow__bubble">感知</div>
+          <div class="pj-flow__bubble">体验</div>
+          <span>拆分业务目标 → 聚焦设计目标</span>
+        </div>
+        <div class="pj-flow__out">
+          <div class="pj-flow__label">设计方向 / DIRECTION</div>
+          <article class="pj-dir"><div class="pj-dir__head"><b>使用表现</b><em>Performance</em></div><div class="pj-dir__row"><span>研究发现</span><p>现场跟班发现：一线平均每 8 分钟切换一次系统，找数据的时间多于处理时间。</p></div><div class="pj-dir__row"><span>设计动作</span><p>高频任务一屏直达；关键指标 3 秒可读；异常主动浮现并附带建议动作。</p></div><div class="pj-dir__row is-v"><span>验证方式</span><p>以「从打开 App 到开始处理」的步数与耗时作为验证口径。</p></div></article>
+        <article class="pj-dir"><div class="pj-dir__head"><b>视觉氛围</b><em>Visual atmosphere</em></div><div class="pj-dir__row"><span>研究发现</span><p>车间强光与夜班环境并存，纯白列表刺眼、小字辨识差；不同系统配色混乱，缺少统一识别。</p></div><div class="pj-dir__row"><span>设计动作</span><p>品牌蓝建立识别，语义红绿表达状态，深色数据底降低眩光；统一字阶与圆角。</p></div><div class="pj-dir__row is-v"><span>验证方式</span><p>20px 图标可辨识、关键数字在 1 米外可读、跨模块视觉一致。</p></div></article>
+        <article class="pj-dir"><div class="pj-dir__head"><b>感知突破</b><em>Perception breakthrough</em></div><div class="pj-dir__row"><span>研究发现</span><p>旧版是「人找数据」：异常靠巡检发现，工单靠电话通知，决策依赖经验。</p></div><div class="pj-dir__row"><span>设计动作</span><p>改成「数据找人」：异常主动推送、扫码带出上下文、审批依据一屏到位、谱系可追溯。</p></div><div class="pj-dir__row is-v"><span>验证方式</span><p>以异常响应链路的层级数与跨系统切换次数作为验证口径。</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 设计原则 · 人机交互（重点章节） -->
+    <section class="pd-x pj pj--core" id="pdPrinciples">
+      <div class="pd-sec-title"><span class="pd-sec-no">05</span> 设计原则 · 人机交互 <em>/ DESIGN PRINCIPLES &amp; HCI</em><span class="pj-core-badge">CORE · 本项目的评判标准</span></div>
+      <div class="pj-core-lead">
+        <div class="pj-core-lead__mark">★</div>
+        <div><h3>功能只是载体，<mark>设计原则与人机交互才是这个项目的核心</mark></h3>
+        <p>这是一个设计作品集，不是功能清单。下面 10 条尼尔森可用性原则与 6 条交互定律，是 iWork 每一次取舍的依据：每一条都对应到真实界面、写清设计动作与验证口径。后续「设计内容」里出现的每个界面，都可以对照这里的编号回看。</p></div>
+      </div>
+      <div class="pj-principles"><article class="pj-principle"><div class="pj-principle__no">NN#01</div><div class="pj-principle__body"><h4>系统状态可见性 <em>Visibility of system status</em></h4><p class="pj-principle__def">系统必须在合理时间内，用恰当的反馈让用户知道正在发生什么。</p><div class="pj-principle__row"><span>项目落地</span><p>首页「今日待办 / 异常数」实时更新；指标卡带刷新时间戳；AGV 扫码后立刻给出「识别成功 → 已通知就近车辆 → 入库确认」三段状态。</p></div><div class="pj-principle__row is-verify"><span>可验证</span><p>一线不用反复下拉刷新，也能判断数据是不是最新。</p></div></div></article>
+        <article class="pj-principle"><div class="pj-principle__no">NN#02</div><div class="pj-principle__body"><h4>系统与现实世界匹配 <em>Match between system and the real world</em></h4><p class="pj-principle__def">用用户的语言、按真实世界的顺序与概念来表达，而不是系统内部术语。</p><div class="pj-principle__row"><span>项目落地</span><p>沿用车间口语「叫料 / 点巡检 / 保全工单 / 偏差」，指标口径与现场日报一致；不出现 MES 字段名、表编号或数据库术语。</p></div><div class="pj-principle__row is-verify"><span>可验证</span><p>新用户无需培训即可看懂 6 个模块入口。</p></div></div></article>
+        <article class="pj-principle"><div class="pj-principle__no">NN#03</div><div class="pj-principle__body"><h4>用户控制与自由 <em>User control and freedom</em></h4><p class="pj-principle__def">用户常会误操作，需要清晰的「撤销 / 返回 / 退出」路径，而不是被流程困住。</p><div class="pj-principle__row"><span>项目落地</span><p>双维筛选一键清空；异常详情可逐级返回不丢失筛选条件；审批提交前可撤回修改；扫码识别错误可重扫。</p></div><div class="pj-principle__row is-verify"><span>可验证</span><p>误触后 1 步回到原位，不重填表单。</p></div></div></article>
+        <article class="pj-principle"><div class="pj-principle__no">NN#04</div><div class="pj-principle__body"><h4>一致性与标准 <em>Consistency and standards</em></h4><p class="pj-principle__def">同一概念在不同页面必须用同样的词、同样的控件、同样的行为。</p><div class="pj-principle__row"><span>项目落地</span><p>统一字阶（5 级）、圆角（12 / 16 / 22px）、语义色与 18 屏组件库；「异常」在指标监控、审批、工单里始终是同一红色语义。</p></div><div class="pj-principle__row is-verify"><span>可验证</span><p>新业务模块接入即一致，无需重新定义。</p></div></div></article>
+        <article class="pj-principle"><div class="pj-principle__no">NN#05</div><div class="pj-principle__body"><h4>错误预防 <em>Error prevention</em></h4><p class="pj-principle__def">比一条好的报错更重要的，是从设计上让错误不发生。</p><div class="pj-principle__row"><span>项目落地</span><p>入库数量超出工单上限即时阻断；危险操作二次确认；表单字段就地校验；AGV 叫料自动带出物料编码，避免手输。</p></div><div class="pj-principle__row is-verify"><span>可验证</span><p>把事后纠错成本前移为一次输入校验。</p></div></div></article>
+        <article class="pj-principle"><div class="pj-principle__no">NN#06</div><div class="pj-principle__body"><h4>识别而非回忆 <em>Recognition rather than recall</em></h4><p class="pj-principle__def">让选项、信息与动作可见，减少用户记忆负担。</p><div class="pj-principle__row"><span>项目落地</span><p>首页九宫格常驻高频功能；扫码直接带出物料与库位；审批详情把决策依据「一屏到位」；自定义常用功能保留个人习惯。</p></div><div class="pj-principle__row is-verify"><span>可验证</span><p>戴手套、站着、单手操作也能完成。</p></div></div></article>
+        <article class="pj-principle"><div class="pj-principle__no">NN#07</div><div class="pj-principle__body"><h4>灵活性与效率 <em>Flexibility and efficiency of use</em></h4><p class="pj-principle__def">为新手提供引导，同时为熟练用户留快捷键与批量路径。</p><div class="pj-principle__row"><span>项目落地</span><p>首页自定义常用功能；审批列表支持批量通过；异常卡片一键下钻到明细；高频任务收敛到首屏 3 步内。</p></div><div class="pj-principle__row is-verify"><span>可验证</span><p>熟练用户的高频路径比改版前缩短一半。</p></div></div></article>
+        <article class="pj-principle"><div class="pj-principle__no">NN#08</div><div class="pj-principle__body"><h4>美学与极简设计 <em>Aesthetic and minimalist design</em></h4><p class="pj-principle__def">对话不应包含无关或很少用到的信息，每个多余信息都在竞争注意力。</p><div class="pj-principle__row"><span>项目落地</span><p>单屏只回答一个问题；指标卡只放「实绩 / 目标 / 偏差」3 个数字；次要操作收进「更多」，主操作始终只有一个。</p></div><div class="pj-principle__row is-verify"><span>可验证</span><p>3 秒读懂一屏，不被数字淹没。</p></div></div></article>
+        <article class="pj-principle"><div class="pj-principle__no">NN#09</div><div class="pj-principle__body"><h4>帮助识别、诊断并恢复错误 <em>Help users recognize, diagnose, and recover from errors</em></h4><p class="pj-principle__def">错误信息要用平实的语言说清问题、原因与可执行的下一步。</p><div class="pj-principle__row"><span>项目落地</span><p>异常告警不只标红，还写清「哪个指标 / 偏差多少 / 从哪一级开始查 / 建议动作」；空状态给出下一步入口。</p></div><div class="pj-principle__row is-verify"><span>可验证</span><p>从「看到红点」到「知道该做什么」。</p></div></div></article>
+        <article class="pj-principle"><div class="pj-principle__no">NN#10</div><div class="pj-principle__body"><h4>帮助与文档 <em>Help and documentation</em></h4><p class="pj-principle__def">最好不需要帮助；需要时，说明应就近、可检索、指向具体动作。</p><div class="pj-principle__row"><span>项目落地</span><p>字段说明就近展示；首次进入的模块有轻量引导；指标口径点击即展开解释，不跳转独立帮助中心。</p></div><div class="pj-principle__row is-verify"><span>可验证</span><p>现场不用离开当前任务去查文档。</p></div></div></article></div>
+      <div class="pj-laws-head"><span>交互定律补充 / INTERACTION LAWS</span><em>除了可用性原则，这些人机交互规律同样约束着界面细节</em></div>
+      <div class="pj-laws"><div class="pj-law"><b>希克定律</b><span>决策时间随选项数增长</span><p>首页把 20+ 功能收敛为 6 个模块 + 8 个常用入口，其余按需下钻。</p></div>
+        <div class="pj-law"><b>菲茨定律</b><span>目标越小越远越难点</span><p>主操作按钮 ≥ 44px、固定在拇指热区；扫码入口在首屏右下。</p></div>
+        <div class="pj-law"><b>米勒定律</b><span>短时记忆约 7±2 组块</span><p>指标卡只保留 3 个关键数字，长表单按步骤分组。</p></div>
+        <div class="pj-law"><b>格式塔·接近性</b><span>相邻元素被视为一组</span><p>标注胶囊用引导线贴近对应界面区域，数据与说明同组。</p></div>
+        <div class="pj-law"><b>认知负荷</b><span>减少无关的心智加工</span><p>把「查数据」改成「被提醒」，异常主动浮现而不是逐层查找。</p></div>
+        <div class="pj-law"><b>对比度与无障碍</b><span>WCAG AA 4.5:1</span><p>语义红绿同时配图标与文案，不单靠颜色传达状态。</p></div></div>
+    </section>
+
+    <!-- 06 设计关键词 / 改版策略 -->
+    <section class="pd-x pj" id="pdKeywords">
+      <div class="pd-sec-title"><span class="pd-sec-no">06</span> 改版策略与设计关键词 <em>/ KEYWORDS</em></div>
+      <div class="pj-redesign"><span>改版前</span><p>按系统功能罗列，用户自己找入口、自己拼信息</p><i>→</i><span>改版后</span><p>按现场任务组织，异常主动浮现、决策依据同屏</p></div>
+      <div class="pj-kws"><div class="pj-kw"><span class="pj-kw__dot"></span><b>状态前置</b><em>Status first</em><p>把「现在要处理什么」放在首屏第一眼，而不是功能列表。</p></div>
+        <div class="pj-kw"><span class="pj-kw__dot"></span><b>一屏决策</b><em>One-screen decision</em><p>决策所需的信息与动作同屏，减少来回跳转。</p></div>
+        <div class="pj-kw"><span class="pj-kw__dot"></span><b>语义色彩</b><em>Semantic color</em><p>红=异常、绿=正常、蓝=品牌，颜色从不单独承载信息。</p></div>
+        <div class="pj-kw"><span class="pj-kw__dot"></span><b>逐级收敛</b><em>Progressive drill-down</em><p>总览 → 指标 → 明细 → 工单，每一级只回答一个问题。</p></div>
+        <div class="pj-kw"><span class="pj-kw__dot"></span><b>组件复用</b><em>Component reuse</em><p>18 屏共用一套组件，新模块接入即一致。</p></div>
+        <div class="pj-kw"><span class="pj-kw__dot"></span><b>现场友好</b><em>Field-ready</em><p>戴手套、单手、强光下也能完成高频操作。</p></div></div>
+    </section>
+
+    <!-- 07 图标设计 -->
+    <section class="pd-x pj" id="pdIcons">
+      <div class="pd-sec-title"><span class="pd-sec-no">07</span> 图标设计 <em>/ ICONOGRAPHY</em></div>
+      <p class="pj-sub">六大业务模块与高频动作共用一套线性图标：在车间强光、20px 尺寸、深色数据底下仍要能一眼分辨。</p>
+      <div class="pj-icon-spec"><span>栅格 <b>24 × 24</b></span><i></i><span>线宽 <b>1.8 px</b></span><i></i><span>端点 <b>圆角</b></span><i></i><span>安全边距 <b>2 px</b></span><i></i><span>最小可辨 <b>20 px</b></span><i></i><span>语义色 <b>蓝 / 红 / 绿</b></span></div>
+      <div class="pj-icons"><div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.6v3M12 18.4v3M2.6 12h3M18.4 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1"/></svg><b>设备</b><span>设备台账 · 状态监测</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 20h17M6 20v-6M11 20V9M16 20v-9M21 20V5"/><path d="M4 5h9l3 3"/></svg><b>生产</b><span>生产进度 · 工单排程</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l7.4 3v5.6c0 4.6-3 8-7.4 9.8-4.4-1.8-7.4-5.2-7.4-9.8V5.8z"/><path d="M8.7 12.1l2.3 2.3 4.4-4.6"/></svg><b>品质</b><span>品质追溯 · 检验记录</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.4 2.6L5.8 13.2h5.3l-1 8.2 7.9-11.1h-5.4z"/></svg><b>能源</b><span>能耗监控 · 异常告警</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.2 7.6L12 3.2l8.8 4.4v8.8L12 20.8l-8.8-4.4z"/><path d="M3.2 7.6L12 12l8.8-4.4M12 12v8.8"/></svg><b>仓储</b><span>库存查询 · 物料档案</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 9v4.6M12 16.5v.2"/></svg><b>安环</b><span>安环巡检 · 隐患上报</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 2.8h9l4 4v14.4H5.5z"/><path d="M14.5 2.8v4h4M8.5 12.5l2 2 4-4"/></svg><b>审批</b><span>审批中心 · 决策依据</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="7.5" width="12" height="8.5" rx="2"/><circle cx="7" cy="18" r="1.6"/><circle cx="12" cy="18" r="1.6"/><path d="M17 10h2.6l1.6 2.6v3.4h-4.2"/><path d="M6.5 11.6h5.2"/></svg><b>AGV 叫料</b><span>扫码识别 · 就近调度</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="3" width="15" height="18" rx="2.4"/><path d="M8 8h8M8 12h8M8 16h5"/><path d="M8 8l1 1 1.8-2"/></svg><b>点巡检</b><span>巡检工单 · 逐项确认</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.6c0 4-3.4 7.2-7.6 7.2-1 0-2-.2-2.9-.5L4.5 20l1.5-4.2a6.9 6.9 0 01-1.5-4.2C4.5 7.6 7.9 4.4 12 4.4s8.5 3.2 8.5 7.2z"/><path d="M9 11.4h6"/></svg><b>消息</b><span>通知中心 · 异常推送</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.2" r="3.6"/><path d="M4.8 20c.7-3.7 3.5-5.8 7.2-5.8s6.5 2.1 7.2 5.8"/></svg><b>我的</b><span>个人中心 · 常用功能</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V5.8A1.8 1.8 0 015.8 4H9M15 4h3.2A1.8 1.8 0 0120 5.8V9M20 15v3.2a1.8 1.8 0 01-1.8 1.8H15M9 20H5.8A1.8 1.8 0 014 18.2V15"/><path d="M3.6 12h16.8"/></svg><b>扫描</b><span>扫码识别 · 入库确认</span></div></div>
+      <div class="pj-icon-note"><b>设计取舍</b><p>不用填充拟物：填充图标在小尺寸下容易糊成一团；统一线性 + 圆角端点，既能与数据卡片的几何语言保持一致，也便于后续按模块扩展。语义色只作辅助，状态始终同时靠图形与文案表达（见 <b>NN#09</b>）。</p></div>
+    </section>
+
+    <!-- 设计内容分组横幅（不参与编号） -->
+    <div class="pd-x pj-band" id="pdContentBand">
+      <div class="pj-band__no">↓</div>
+      <div class="pj-band__txt"><span>DESIGN CONTENT / 设计内容</span><h3>从策略落到界面</h3><p>以下四节是完整交付物：8 屏交互界面 · 2 组场景样机 · 18 张界面全景 · 设计系统。每个区块都标了对应的设计原则编号，可回看上方「设计原则 · 人机交互」。</p></div>
+      <div class="pj-band__chips"><span>8 屏</span><span>2 场景</span><span>18 界面</span><span>4 项规范</span></div>
+    </div>
+
+    <section class="pd-iwork" id="pdIwork">
+      <div class="pd-sec-title"><span class="pd-sec-no">01</span> 界面展示 <em>/ INTERACTIVE SHOWCASE</em></div>
+      <div class="pj-tags"><span>NN#01 状态可见性</span><span>NN#06 识别而非回忆</span><span class="is-blue">希克定律</span><span class="is-blue">菲茨定律</span></div>
+      <div class="iw-layout">
+        <div class="iw-copy" id="iwCopy">
+          <div class="iw-kicker" id="iwKicker">01 / 08 · 经营工作台</div>
+          <h3 id="iwTitle">打开 App，就知道今天要做什么</h3>
+          <p id="iwDesc">工作台是整座工厂的移动中枢。待办、指标与任务按“今天要处理”聚合，把散落在各系统里的高频事项收敛成一条清晰的路径。</p>
+          <ul class="iw-points" id="iwPoints">
+            <li>高频任务按紧急度聚合，首屏只回答一个问题</li>
+            <li>关键指标实时呈现，异常一眼可辨</li>
+            <li>3 层导航收敛 200+ 功能点，路径最短</li>
+          </ul>
+          <div class="iw-tabs" id="iwTabs" role="tablist" aria-label="切换 iWork 界面">
+            <button type="button" class="on" data-iw="0" role="tab" aria-selected="true">01 工作台</button>
+            <button type="button" data-iw="1" role="tab" aria-selected="false">02 指标监控</button>
+            <button type="button" data-iw="2" role="tab" aria-selected="false">03 AGV 叫料</button>
+            <button type="button" data-iw="3" role="tab" aria-selected="false">04 异常详情</button>
+            <button type="button" data-iw="4" role="tab" aria-selected="false">05 审批中心</button>
+            <button type="button" data-iw="5" role="tab" aria-selected="false">06 审批详情</button>
+            <button type="button" data-iw="6" role="tab" aria-selected="false">07 设备故障工单</button>
+            <button type="button" data-iw="7" role="tab" aria-selected="false">08 待办消息</button>
+          </div>
+          <div class="iw-hint"><span class="iw-hint__dot"></span>点击标签或下方缩略图，切换 8 张真实界面</div>
+        </div>
+        <div class="iw-stage" id="iwStage">
+          <span class="iw-glow"></span>
+          <span class="iw-ring"></span>
+          <div class="iw-device" id="iwDevice">
+            <span class="iw-notch" aria-hidden="true"></span>
+            <div class="iw-screen"><img id="iwScreen" src="assets/dmtt/workbench.png" alt="iWork 经营工作台"></div>
+            <span class="iw-scan" aria-hidden="true"><i></i></span>
+          </div>
+          <div class="iw-badge iw-badge--a"><b>6</b><span>业务模块</span></div>
+          <div class="iw-badge iw-badge--b"><b>20+</b><span>场景模板</span></div>
+        </div>
+      </div>
+      <div class="iw-thumbs" id="iwThumbs" aria-label="界面缩略图"></div>
+    </section>
+
+    <!-- 项目6：卡片内完整演示 —— 场景样机 / 界面全景 / 设计系统（不再跳转第三级页面） -->
+    <section class="pd-x" id="pdScenes">
+      <div class="pd-sec-title"><span class="pd-sec-no">02</span> 场景样机 <em>/ SCENARIOS</em></div>
+      <div class="pj-tags"><span>NN#01 状态可见性</span><span>NN#09 错误诊断与恢复</span><span class="is-blue">格式塔 · 接近性</span></div>
+      <div class="feature">
+        <div class="fx-copy rv">
+          <span class="fx-tag">FEATURE 01 — 指标监控</span>
+          <h3>让异常指标<br>自己“跳”出来</h3>
+          <p>成本、质量等多主题指标统一聚合；结合用能监控与能耗告警，未达标数据用语义红即时标记，配合触发式告警动效，让一线在第一时间锁定需要处理的产线与时间。</p>
+          <ul class="fx-points">
+            <li><b>01</b><span>按“层级”与“时间维度”双维度筛选，快速定位范围。</span></li>
+            <li><b>02</b><span>实际值与目标值同屏对比，偏差方向一眼可辨。</span></li>
+            <li><b>03</b><span>告警按设备—产线—厂区逐级收敛，先看范围再看细节。</span></li>
+          </ul>
+        </div>
+        <div class="fx-stage rv d1">
+          <div class="scene-frame" id="monitorScene" data-scene="monitor">
+            <div class="scene-top"><span>SCENARIO / MONITOR</span><span class="live">LIVE DATA</span></div>
+            <div class="scene-orbit"></div><div class="scene-orbit alt"></div><div class="scene-scan"></div>
+            <div class="scene-leader l1"></div><div class="scene-leader l2"></div><div class="scene-leader l3"></div><div class="scene-leader l4"></div>
+            <div class="scene-device is-dim" data-screen="0"><div class="dev is-card"><div class="dev-screen"><img loading="lazy" src="assets/dmtt/monitor-detail.png" alt="异常详情"><span class="island"></span><span class="glare"></span></div></div></div>
+            <div class="scene-device is-front" data-screen="1"><div class="dev"><div class="dev-screen"><img loading="lazy" src="assets/dmtt/monitor-alert.png" alt="异常告警"><span class="island"></span><span class="glare"></span></div></div></div>
+            <div class="scene-label l1 alert"><div><b>语义红</b><small>未达标即时标记</small></div></div>
+            <div class="scene-label l2"><div><b>双维筛选</b><small>层级 × 时间</small></div></div>
+            <div class="scene-label l3"><div><b>偏差对比</b><small>实际 / 目标同屏</small></div></div>
+            <div class="scene-label l4 alert"><div><b>逐级收敛</b><small>设备—产线—厂区</small></div></div>
+            <div class="scene-switch" aria-label="切换监控界面">
+              <button type="button" data-go="0">异常详情</button><button type="button" class="on" data-go="1">指标总览</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mon-demo rv d2" id="pdMonDemo">
+        <div class="sweep"></div>
+        <div class="mon-head">
+          <div class="t">指标监控数据 · 成本主题</div>
+          <div class="tabs"><span class="on">全部</span><span>异常</span></div>
+        </div>
+        <div class="mon-cards">
+          <div class="mcard warn"><div class="mt"><i class="dot"></i>成本指标 · 未达标</div><div class="mv">1212.86 <span style="font-size:.4em;color:var(--muted)">吨</span></div><div class="cmp"><span>目标 <b>1129.32 吨</b></span><span style="color:var(--red)">↗ 超出 +83.54</span></div><div class="bar"><i data-w="93%"></i></div></div>
+          <div class="mcard warn"><div class="mt"><i class="dot"></i>质量指标 · 未达标</div><div class="mv">3.82 <span style="font-size:.4em;color:var(--muted)">%</span></div><div class="cmp"><span>不良率 · <b>BPW-6 产线</b></span><span style="color:var(--red)">2026-08-25</span></div><div class="bar"><i data-w="86%"></i></div></div>
+          <div class="mcard"><div class="mt"><i class="dot"></i>能耗指标 · 达标</div><div class="mv">872.16 <span style="font-size:.4em;color:var(--muted)">吨</span></div><div class="cmp"><span>目标 <b>900.00 吨</b></span><span style="color:var(--green)">✓ 优于目标 27.84</span></div><div class="bar"><i data-w="72%"></i></div></div>
+        </div>
+      </div>
+      <div class="feature rev">
+        <div class="fx-copy rv">
+          <span class="fx-tag">FEATURE 02 — AGV 叫料与物流</span>
+          <h3>物料流转，<br>全程可视可控</h3>
+          <p>面向厂区 AGV 自动搬运的成套流程：扫描识别、自动叫料、物料入库、成品移出；对接单件追溯、标签、仓储与发运的谱系关系，每一步都有明确的状态反馈，让调度从“靠喊”变成“看得见”。</p>
+          <ul class="fx-points">
+            <li><b>01</b><span>扫码即识别物料与任务，减少手工录入差错。</span></li>
+            <li><b>02</b><span>自动叫料弹窗就近调度，物料入库提交即时确认。</span></li>
+            <li><b>03</b><span>成品移出双重提示，关键操作不误触、不遗漏。</span></li>
+          </ul>
+        </div>
+        <div class="fx-stage rv d1">
+          <div class="scene-frame agv" id="agvScene" data-scene="agv">
+            <div class="scene-top"><span>SCENARIO / AGV LOGISTICS</span><span class="live">TASK FLOW</span></div>
+            <div class="scene-orbit"></div><div class="scene-orbit alt"></div><div class="scene-scan"></div>
+            <div class="scene-leader l1"></div><div class="scene-leader l2"></div><div class="scene-leader l3"></div><div class="scene-leader l4"></div>
+            <div class="scene-device is-dim" data-screen="0"><div class="dev is-card"><div class="dev-screen"><img loading="lazy" src="assets/dmtt/agv-scan.png" alt="扫描识别"><span class="island"></span><span class="glare"></span></div></div></div>
+            <div class="scene-device is-front right" data-screen="1"><div class="dev"><div class="dev-screen"><img loading="lazy" src="assets/dmtt/agv-inbound.png" alt="物料入库"><span class="island"></span><span class="glare"></span></div></div></div>
+            <div class="scene-label l1"><div><b>扫码识别</b><small>物料与任务自动匹配</small></div></div>
+            <div class="scene-label l2"><div><b>就近调度</b><small>AGV 自动叫料</small></div></div>
+            <div class="scene-label l3"><div><b>入库确认</b><small>状态即时反馈</small></div></div>
+            <div class="scene-label l4"><div><b>谱系追溯</b><small>标签 / 仓储 / 发运</small></div></div>
+            <div class="scene-switch" aria-label="切换 AGV 界面">
+              <button type="button" data-go="0">扫码识别</button><button type="button" class="on" data-go="1">物料入库</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pd-x" id="pdRailSec">
+      <div class="pd-sec-title"><span class="pd-sec-no">03</span> 界面全景 <em>/ FULL GALLERY</em></div>
+      <div class="pj-tags"><span>NN#04 一致性与标准</span><span>NN#08 美学与极简</span><span class="is-blue">米勒定律</span></div>
+      <p class="pd-rail-sub">18 张真实设计界面，覆盖启动、登录、经营工作台、指标监控、AGV 叫料、审批协同与点巡检等核心场景——可拖拽、滚轮或方向键浏览，点击任意界面放大查看细节。</p>
+      <div class="pd-spec-strip" aria-label="交付规格"><span><b>整套 18 屏</b>真实界面</span><i></i><span>基准 <b>429 × 930</b> px</span><i></i><span><b>iPhone</b> 真机比例</span><i></i><span><b>MasterGo</b> 组件化设计稿</span><i></i><span>覆盖 <b>6 大模块 · 20+</b> 场景</span></div>
+      <div class="story">
+        <div class="story-rail" id="pdRail" tabindex="0" aria-label="界面画廊，可拖动或使用左右方向键浏览">
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/splash.png" alt="启动页"><span class="island"></span><span class="glare"></span></div><span class="no">01</span><figcaption class="cap"><span>01 · SPLASH</span>启动页 · 综合业务移动平台</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/workbench.png" alt="经营工作台"><span class="island"></span><span class="glare"></span></div><span class="no">02</span><figcaption class="cap"><span>02 · WORKBENCH</span>经营工作台 · 常用功能聚合</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/monitor-all.png" alt="指标监控全部"><span class="island"></span><span class="glare"></span></div><span class="no">03</span><figcaption class="cap"><span>03 · MONITOR</span>指标监控 · 全部指标</figcaption></figure>
+        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/monitor-alert.png" alt="指标监控异常"><span class="island"></span><span class="glare"></span></div><span class="no">04</span><figcaption class="cap"><span>04 · ALERT</span>指标监控 · 异常告警</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/agv-home.png" alt="AGV"><span class="island"></span><span class="glare"></span></div><span class="no">05</span><figcaption class="cap"><span>05 · AGV</span>AGV 物料调度入口</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/todo.png" alt="待办"><span class="island"></span><span class="glare"></span></div><span class="no">06</span><figcaption class="cap"><span>06 · TODO</span>待办 · 任务中心</figcaption></figure>
+        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/message.png" alt="消息"><span class="island"></span><span class="glare"></span></div><span class="no">07</span><figcaption class="cap"><span>07 · MESSAGE</span>消息 · 通知中心</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/monitor-detail.png" alt="监控详情"><span class="island"></span><span class="glare"></span></div><span class="no">08</span><figcaption class="cap"><span>08 · DETAIL</span>指标监控 · 异常详情</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/agv-inbound.png" alt="AGV入库"><span class="island"></span><span class="glare"></span></div><span class="no">09</span><figcaption class="cap"><span>09 · INBOUND</span>AGV · 物料入库提交</figcaption></figure>
+        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/agv-scan.png" alt="AGV扫描"><span class="island"></span><span class="glare"></span></div><span class="no">10</span><figcaption class="cap"><span>10 · SCAN</span>AGV · 扫描识别</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/inspection.png" alt="点巡检"><span class="island"></span><span class="glare"></span></div><span class="no">11</span><figcaption class="cap"><span>11 · INSPECTION</span>点巡检工单</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/login.png" alt="登录"><span class="island"></span><span class="glare"></span></div><span class="no">12</span><figcaption class="cap"><span>12 · LOGIN</span>登录 · 账号验证</figcaption></figure>
+        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/mine.png" alt="我的"><span class="island"></span><span class="glare"></span></div><span class="no">13</span><figcaption class="cap"><span>13 · PROFILE</span>我的 · 个人中心</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/home.png" alt="自定义组"><span class="island"></span><span class="glare"></span></div><span class="no">14</span><figcaption class="cap"><span>14 · CUSTOM</span>首页 · 自定义常用功能</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/approval.png" alt="审批中心"><span class="island"></span><span class="glare"></span></div><span class="no">15</span><figcaption class="cap"><span>15 · APPROVAL</span>审批中心 · 待办 / 已审批分栏</figcaption></figure>
+        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/approval-detail.png" alt="审批详情"><span class="island"></span><span class="glare"></span></div><span class="no">16</span><figcaption class="cap"><span>16 · APPROVAL</span>审批详情 · 决策依据一屏到位</figcaption></figure>
+        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/msg-step-maint-open.png" alt="设备故障工单"><span class="island"></span><span class="glare"></span></div><span class="no">17</span><figcaption class="cap"><span>17 · WORK ORDER</span>设备故障工单 · 保全协同处理</figcaption></figure>
+        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/verify-account.png" alt="账号验证"><span class="island"></span><span class="glare"></span></div><span class="no">18</span><figcaption class="cap"><span>18 · LOGIN</span>账号验证 · 状态反馈</figcaption></figure>
+        </div>
+        <div class="story-bar">
+          <div class="story-num"><span id="pdRailNow">01</span><small id="pdRailTotal">/ 18</small></div>
+          <div class="story-info"><div class="t" id="pdRailTag">01 · SPLASH</div><h4 id="pdRailTitle">启动页 · 综合业务移动平台</h4></div>
+          <div class="story-nav">
+            <button id="pdRailPrev" aria-label="上一张" type="button">‹</button>
+            <button id="pdRailNext" aria-label="下一张" type="button">›</button>
+          </div>
+          <div class="story-dots" id="pdRailDots" aria-label="界面导航"></div>
+        </div>
+        <div class="story-tip">DRAG · SCROLL · ← → 浏览 18 张真实界面　/　点击放大查看细节</div>
+      </div>
+    </section>
+
+    <section class="pd-x" id="pdSpec">
+      <div class="pd-sec-title"><span class="pd-sec-no">04</span> 设计系统 <em>/ DESIGN SYSTEM</em></div>
+      <div class="pj-tags"><span>NN#04 一致性与标准</span><span>NN#10 帮助与文档</span><span class="is-blue">对比度 / WCAG AA</span></div>
+      <p class="pd-rail-sub">以品牌蓝建立识别，以语义红绿表达状态；统一的字阶、圆角与组件规范，让新业务模块可以直接复用，接入<span class="nb">即一致。</span></p>
+      <div class="ds-grid">
+        <div class="ds-card rv d1">
+          <h4>色彩系统 <em>COLOR TOKENS</em></h4>
+          <div class="swatches">
+            <div class="sw"><div class="c" style="background:#1677ff"></div><div class="n">#1677FF</div></div>
+            <div class="sw"><div class="c" style="background:#4d9bff"></div><div class="n">#4D9BFF</div></div>
+            <div class="sw"><div class="c" style="background:#25d6e8"></div><div class="n">#25D6E8</div></div>
+            <div class="sw"><div class="c" style="background:#ff4d5e"></div><div class="n">#FF4D5E</div></div>
+            <div class="sw"><div class="c" style="background:#2fd08a"></div><div class="n">#2FD08A</div></div>
+            <div class="sw"><div class="c" style="background:#0c1830"></div><div class="n">#0C1830</div></div>
+          </div>
+        </div>
+        <div class="ds-card rv d2">
+          <h4>字阶规范 <em>TYPOGRAPHY</em></h4>
+          <div class="type-scale">
+            <div class="ts"><span class="s">H1 / 40</span><span class="x" style="font-size:26px">经营工作台</span></div>
+            <div class="ts"><span class="s">H2 / 28</span><span class="x" style="font-size:21px">欢迎您，admin</span></div>
+            <div class="ts"><span class="s">BODY / 16</span><span style="font-size:15px;color:var(--ink2)">常用功能与最近使用</span></div>
+            <div class="ts"><span class="s">CAP / 12</span><span style="font-size:12px;color:var(--muted)">版本号 BPW-6-4-0</span></div>
+          </div>
+        </div>
+        <div class="ds-card rv d3">
+          <h4>组件语义 <em>COMPONENTS</em></h4>
+          <div class="comp-row">
+            <span class="chip primary">主要操作</span>
+            <span class="chip">次要操作</span>
+            <span class="chip ghost">描边按钮</span>
+            <span class="chip red">异常告警</span>
+            <span class="chip">待处理 12</span>
+            <span class="chip ghost">达标</span>
+          </div>
+        </div>
+        <div class="ds-card rv d4">
+          <h4>界面基石 <em>FOUNDATION</em></h4>
+          <div class="fact-list">
+            <div class="fact"><div class="k">基准尺寸</div><div class="v">429 × 930 px</div></div>
+            <div class="fact"><div class="k">圆角</div><div class="v">30 px 设备 / 20 px 卡片</div></div>
+            <div class="fact"><div class="k">网格</div><div class="v">4 pt 基准</div></div>
+            <div class="fact"><div class="k">字体</div><div class="v">Source Han Sans CN</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
     <!-- 4. 分段正文 -->
     <section class="pd-story">
       <div class="pd-sec-title"><span class="pd-sec-no">02</span> 设计过程 <em>/ PROCESS</em></div>
@@ -2228,14 +2729,25 @@ section,footer{scroll-margin-top:92px}
       <a class="pill pill-sm" href="mailto:hello@oscar.design"> helllo@oscar.design ↗</a>
     </section>
 
-    <!-- 7.5 完整 16:9 设计案例入口 -->
-    <section class="pd-case-link" id="pdCaseLink">
+    <!-- 7.5 卡片内演示导览：内容都在本卡片，不做第三级跳转 -->
+    <section class="pd-case-link pd-case-nav" id="pdCaseLink">
       <div class="pd-case-link__txt">
-        <span class="eyebrow">FULL CASE · 16:9</span>
-        <h4>查看完整设计案例</h4>
-        <p>界面 / 样机 / 色彩 · 字体 · 组件规范，8 屏完整呈现。</p>
+        <span class="eyebrow">FULL DEMO IN CARD · iWork</span>
+        <h4>完整演示，就在这张卡片里</h4>
+        <p>从项目概览、背景现状、业务目标与设计方向，到尼尔森可用性原则、设计关键词、图标设计，再到 8 屏交互界面、场景样机与 18 张界面全景——完整叙事全部内置于本卡片，点击按钮直达对应区块。</p>
       </div>
-      <a class="pd-case-link__btn" href="case-teamhub.html" target="_blank" rel="noopener">打开演示 ↗</a>
+      <div class="pd-case-nav__btns">
+        <button type="button" class="pd-case-link__btn" data-jump="#pdPrinciples">设计原则 ★ ↑</button>
+        <button type="button" class="pd-case-link__btn is-ghost" data-jump="#pdOverview">项目概览 ↑</button>
+        <button type="button" class="pd-case-link__btn is-ghost" data-jump="#pdContext">背景与现状 ↑</button>
+        <button type="button" class="pd-case-link__btn is-ghost" data-jump="#pdGoals">拆解业务目标 ↑</button>
+        <button type="button" class="pd-case-link__btn is-ghost" data-jump="#pdDirection">设计方向 ↑</button>
+        <button type="button" class="pd-case-link__btn is-ghost" data-jump="#pdKeywords">设计关键词 ↑</button>
+        <button type="button" class="pd-case-link__btn is-ghost" data-jump="#pdIcons">图标设计 ↑</button>
+        <button type="button" class="pd-case-link__btn is-ghost" data-jump="#pdContentBand">设计内容 ↑</button>
+        <button type="button" class="pd-case-link__btn is-ghost" data-jump="#pdIwork">交互界面 8 屏 ↑</button>
+        <button type="button" class="pd-case-link__btn is-ghost" data-jump="#pdRailSec">界面全景 18 张 ↑</button>
+      </div>
     </section>
 
     <!-- 8. 更多作品 -->
@@ -2244,6 +2756,7 @@ section,footer{scroll-margin-top:92px}
       <div class="pd-more" id="pdMore"></div>
     </section>
   </div>
+  <div id="pdLb" role="dialog" aria-modal="true" aria-label="界面预览"><button class="x" id="pdLbClose" aria-label="关闭预览" type="button">×</button><img id="pdLbImg" src="" alt=""><div class="lbcap" id="pdLbCap"></div></div>
 </dialog>
 
 <style>
@@ -2274,10 +2787,13 @@ dialog.is-fullscreen .dlg-scroll{max-height:100vh;height:100vh}
 .pd-case-link__txt .eyebrow{display:block;font-size:10px;letter-spacing:.2em;color:var(--mint);font-weight:700;margin-bottom:8px}
 .pd-case-link__txt h4{font-size:clamp(18px,2vw,24px);font-weight:800;margin-bottom:6px}
 .pd-case-link__txt p{font-size:12px;color:var(--muted);line-height:1.6}
-.pd-case-link__btn{flex:none;padding:12px 22px;border-radius:99px;text-decoration:none;font-size:13px;font-weight:700;
-  color:#fff;background:linear-gradient(135deg,#3d6ee8,#6d9bff);box-shadow:0 10px 26px -10px rgba(61,110,232,.8);transition:transform .2s,box-shadow .2s}
+.pd-case-nav__btns{flex:none;display:flex;flex-wrap:wrap;gap:10px}
+.pd-case-link__btn{flex:none;padding:12px 20px;border:1px solid transparent;border-radius:99px;text-decoration:none;font-family:inherit;font-size:13px;font-weight:700;
+  color:#fff;background:linear-gradient(135deg,#3d6ee8,#6d9bff);box-shadow:0 10px 26px -10px rgba(61,110,232,.8);transition:transform .2s,box-shadow .2s,background .2s;cursor:pointer}
+.pd-case-link__btn.is-ghost{background:rgba(61,110,232,.10);border-color:rgba(120,170,255,.32);color:#cfe2ff;box-shadow:none}
 .pd-case-link__btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(61,110,232,.95)}
-@media(max-width:640px){.pd-case-link{flex-direction:column;align-items:flex-start;gap:18px}}
+.pd-case-link__btn.is-ghost:hover{background:rgba(61,110,232,.20);box-shadow:0 10px 24px -12px rgba(61,110,232,.6)}
+@media(max-width:640px){.pd-case-link{flex-direction:column;align-items:flex-start;gap:18px}.pd-case-nav__btns{width:100%}.pd-case-link__btn{flex:1 1 auto}}
 
 
 /* ===== 1. 封面大图 ===== */
@@ -2352,11 +2868,11 @@ dialog.is-fullscreen .dlg-scroll{max-height:100vh;height:100vh}
   background:linear-gradient(180deg,#7c848d,#4b5259)}
 /* 手机样机壳（移动端项目）：两台手机并排，各套真实外壳 */
 .phone-rigs{display:none;align-items:center;justify-content:center;gap:30px;width:100%;transform:perspective(1400px) rotateX(2deg)}
-.phone-rig{position:relative;width:200px;height:410px;border-radius:32px;padding:9px;flex:none;
+.phone-rig{position:relative;width:200px;height:434px;border-radius:32px;padding:9px;flex:none;
   background:linear-gradient(150deg,#3a424b,#101419 55%);box-shadow:0 30px 60px -18px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.16),0 0 0 1px rgba(255,255,255,.07)}
 .phone-rig:nth-child(1){transform:rotate(-4deg)}
 .phone-rig:nth-child(2){transform:translateY(16px) rotate(3.5deg)}
-.phone-rig__notch{position:absolute;top:15px;left:50%;transform:translateX(-50%);width:66px;height:14px;border-radius:0 0 10px 10px;background:#0a0c0f;z-index:2}
+.phone-rig__notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:70px;height:17px;border-radius:0 0 10px 10px;background:#05070a;z-index:2}
 .phone-rig__screen{border-radius:24px;overflow:hidden;height:100%;background:#070a0e;display:flex;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
 .phone-rig__screen .phone{width:100%;height:100%;border:0;border-radius:24px;padding:16px 10px 10px;background:
   linear-gradient(180deg,#0f151b,#080b0f);gap:9px;transform:none}
@@ -2367,7 +2883,7 @@ dialog.is-fullscreen .dlg-scroll{max-height:100vh;height:100vh}
 .phone-rig__screen .phone .ph-tab{height:30px}
 .pd-fig__stage.is-mobile .device{display:none}
 .pd-fig__stage.is-mobile .phone-rigs{display:flex}
-@media (max-width:560px){.phone-rigs{gap:14px}.phone-rig{width:44%;height:auto;aspect-ratio:200/410}}
+@media (max-width:560px){.phone-rigs{gap:14px}.phone-rig{width:44%;height:auto;aspect-ratio:200/434}}
 
 .pd-fig-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .pd-shot{height:clamp(220px,26vw,320px)}
@@ -2673,6 +3189,443 @@ dialog.is-fullscreen .dlg-scroll{max-height:100vh;height:100vh}
 :root[data-theme="light"] .pd-browser__bar{background:#dfe5ec}
 :root[data-theme="light"] .pd-hl__card,:root[data-theme="light"] .pd-more__card{background:rgba(15,23,42,.02)}
 :root[data-theme="light"] .pd-author__avatar{color:#0f172a}
+
+/* ===== 项目6卡片内完整演示（.pd-x 作用域：场景样机 / 3D画廊 / 设计系统） ===== */
+.pd-x{display:none;--blue:#1f7bff;--blue2:#4d9bff;--blue3:#8dc0ff;--cyan:#25d6e8;--ink2:#c8d5ec;--dim:#7b8bac;--line:rgba(120,165,240,.14);--line2:rgba(120,165,240,.26);--red:#ff4d5e;--green:#2fd08a;--amber:#ffb238;--panel:#0c1830;--bg2:#081226;--disp:"Bricolage Grotesque","PingFang SC",sans-serif;--mono:ui-monospace,"SF Mono",Menlo,monospace;--ease:cubic-bezier(.22,.9,.28,1);padding:clamp(28px,4.4vw,52px) clamp(20px,4vw,56px);border-bottom:1px solid var(--edge)}
+.pd-x.is-on{display:block}
+.pd-rail-sub{color:#8b95a1;font-size:14px;max-width:700px;margin:14px 0 4px;line-height:1.8}
+.pd-x .rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.pd-x .rv.in{opacity:1;transform:none}
+.pd-x .d1{transition-delay:.1s}.pd-x .d2{transition-delay:.2s}.pd-x .d3{transition-delay:.3s}.pd-x .d4{transition-delay:.4s}
+/* 设备样机（iOS 比例 + 扁平卡片变体） */
+.pd-x .dev{position:relative;aspect-ratio:393/852;border-radius:24px;padding:4px;transform-style:preserve-3d;
+  background:linear-gradient(140deg,#677694 0%,#24314a 20%,#0d1424 48%,#1c2740 78%,#53627e 100%);
+  box-shadow:0 1px 0 rgba(255,255,255,.26) inset,0 -1px 0 rgba(0,0,0,.75) inset,0 0 0 1px rgba(2,6,14,.9),0 3px 5px rgba(0,0,0,.55),0 28px 54px -16px rgba(0,0,0,.85),0 54px 100px -38px rgba(31,123,255,.5)}
+.pd-x .dev::before{content:"";position:absolute;right:-3px;top:23%;width:3px;height:12%;border-radius:0 3px 3px 0;background:linear-gradient(90deg,#232d46,#8d9ab5)}
+.pd-x .dev::after{content:"";position:absolute;left:-3px;top:17%;width:3px;height:16%;border-radius:3px 0 0 3px;background:linear-gradient(90deg,#8d9ab5,#232d46);box-shadow:0 24px 0 #475575}
+.pd-x .dev-screen{position:relative;aspect-ratio:393/852;border-radius:20px;overflow:hidden;background:#0a1220;box-shadow:0 0 0 1px rgba(0,0,0,.9) inset}
+.pd-x .dev-screen img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+.pd-x .dev.is-card{padding:0;border-radius:20px;border:1px solid rgba(120,170,255,.28);
+  background:linear-gradient(160deg,rgba(18,34,66,.96),rgba(7,14,28,.96));
+  box-shadow:0 22px 48px -22px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.06)}
+.pd-x .dev.is-card::before,.pd-x .dev.is-card::after{display:none}
+.pd-x .dev.is-card .dev-screen{border-radius:19px;box-shadow:none}
+.pd-x .dev.is-card .island{display:none}
+.pd-x .dev.is-card .glare{background:linear-gradient(132deg,rgba(255,255,255,.06),transparent 38%)}
+.pd-x .dev-screen .island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:31%;height:15px;border-radius:99px;background:#03060c;box-shadow:0 0 0 1px rgba(140,180,240,.13),inset 0 0 5px #000;z-index:3;pointer-events:none}
+.pd-x .dev-screen .island::after{content:"";position:absolute;right:9%;top:50%;transform:translateY(-50%);width:5px;height:5px;border-radius:50%;background:#0c1830;box-shadow:inset 0 0 2px rgba(120,180,255,.8)}
+.pd-x .dev-screen .glare{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(122deg,rgba(255,255,255,.14),rgba(255,255,255,.03) 17%,transparent 33%,transparent 100%)}
+/* feature 场景块 */
+.pd-x .feature{display:grid;grid-template-columns:.94fr 1.06fr;gap:clamp(24px,4vw,56px);align-items:center}
+.pd-x .feature.rev .fx-copy{order:2}
+.pd-x .feature+.feature{margin-top:52px}
+.pd-x .fx-tag{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase}
+.pd-x .fx-copy h3{font-size:clamp(24px,3vw,36px);font-weight:800;line-height:1.16;letter-spacing:-.02em;margin:14px 0}
+.pd-x .fx-copy p{color:var(--ink2);font-size:15px;max-width:520px}
+.pd-x .fx-points{list-style:none;margin-top:22px;display:grid;gap:12px}
+.pd-x .fx-points li{display:flex;gap:12px;align-items:flex-start;color:var(--ink2);font-size:14px}
+.pd-x .fx-points li b{color:var(--cyan);font-family:var(--disp);font-size:15px;flex:none;width:18px}
+.pd-x .fx-stage{position:relative;min-height:520px;display:flex;align-items:center;justify-content:center;perspective:1400px;isolation:isolate}
+.pd-x .scene-frame{position:relative;width:min(100%,540px);height:520px;border-radius:22px;overflow:hidden;
+  border:1px solid var(--line2);background:radial-gradient(ellipse at 52% 24%,rgba(31,123,255,.2),transparent 48%),linear-gradient(160deg,rgba(18,36,70,.92),rgba(6,13,28,.94));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 30px 80px -30px rgba(0,0,0,.9),0 0 50px rgba(31,123,255,.08)}
+.pd-x .scene-frame::before{content:"";position:absolute;inset:0;opacity:.4;pointer-events:none;
+  background-image:linear-gradient(rgba(120,165,240,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(120,165,240,.06) 1px,transparent 1px);background-size:34px 34px;
+  -webkit-mask-image:radial-gradient(ellipse at 50% 42%,#000 10%,transparent 74%);mask-image:radial-gradient(ellipse at 50% 42%,#000 10%,transparent 74%)}
+.pd-x .scene-frame::after{content:"";position:absolute;left:50%;bottom:-120px;width:520px;height:260px;transform:translateX(-50%);
+  background:radial-gradient(ellipse,rgba(37,214,232,.22),transparent 68%);filter:blur(24px);pointer-events:none}
+.pd-x .scene-top{position:absolute;left:20px;right:20px;top:18px;z-index:8;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--dim)}
+.pd-x .scene-top .live{display:flex;align-items:center;gap:7px;color:var(--cyan)}
+.pd-x .scene-top .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 9px var(--cyan);animation:pdxPulse 1.7s infinite}
+.pd-x .scene-orbit{position:absolute;left:50%;top:46%;width:340px;height:340px;transform:translate(-50%,-50%);border:1px dashed rgba(120,165,240,.22);border-radius:50%;animation:pdxOrbitSpin 60s linear infinite;pointer-events:none}
+.pd-x .scene-orbit.alt{width:440px;height:440px;border-style:solid;border-color:rgba(37,214,232,.1);animation-direction:reverse;animation-duration:90s}
+@keyframes pdxOrbitSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes pdxPulse{50%{opacity:.35}}
+.pd-x .scene-device{position:absolute;left:50%;top:52%;width:196px;transform:translate(-50%,-50%) rotate(-3deg);z-index:4;
+  transition:transform .7s var(--ease),filter .5s;filter:drop-shadow(0 26px 36px rgba(0,0,0,.65))}
+.pd-x .scene-device .dev{border-radius:22px;padding:4px}
+.pd-x .scene-device .dev-screen{border-radius:18px}
+.pd-x .scene-device.is-dim{transform:translate(-50%,-50%) translateX(88px) rotate(10deg) scale(.84);opacity:.55;filter:blur(.4px) drop-shadow(0 20px 28px rgba(0,0,0,.55))}
+.pd-x .scene-device.is-front{transform:translate(-50%,-50%) translateX(-14px) rotate(-5deg) scale(1.04);opacity:1;z-index:5}
+.pd-x .scene-device.right.is-front{transform:translate(-50%,-50%) translateX(14px) rotate(5deg) scale(1.04)}
+.pd-x .scene-device.right.is-dim{transform:translate(-50%,-50%) translateX(-88px) rotate(-10deg) scale(.84)}
+.pd-x .scene-label{position:absolute;z-index:9;display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:10px;
+  border:1px solid var(--line2);background:rgba(8,17,34,.82);backdrop-filter:blur(10px);box-shadow:0 12px 28px rgba(0,0,0,.42);
+  font-size:11px;color:var(--ink2);opacity:0;transform:translateY(10px);animation:pdxLabelIn .7s var(--ease) forwards}
+.pd-x .scene-label::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);flex:none}
+.pd-x .scene-label.alert::before{background:var(--red);box-shadow:0 0 10px var(--red)}
+.pd-x .scene-label b{color:var(--ink);font-weight:700}
+.pd-x .scene-label small{font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--dim);display:block;line-height:1.2}
+@keyframes pdxLabelIn{to{opacity:1;transform:none}}
+.pd-x .scene-label.l1{left:16px;top:31%;animation-delay:.15s}
+.pd-x .scene-label.l2{right:14px;top:25%;animation-delay:.35s}
+.pd-x .scene-label.l3{left:24px;bottom:22%;animation-delay:.55s}
+.pd-x .scene-label.l4{right:22px;bottom:18%;animation-delay:.75s}
+.pd-x .scene-leader{position:absolute;z-index:3;height:1px;background:linear-gradient(90deg,rgba(37,214,232,.8),rgba(37,214,232,0));transform-origin:left center;opacity:.55;pointer-events:none}
+.pd-x .scene-leader.l1{left:112px;top:34%;width:80px;transform:rotate(-8deg)}
+.pd-x .scene-leader.l2{right:100px;top:29%;width:84px;transform:rotate(168deg)}
+.pd-x .scene-leader.l3{left:126px;bottom:25%;width:66px;transform:rotate(10deg)}
+.pd-x .scene-leader.l4{right:118px;bottom:21%;width:74px;transform:rotate(190deg)}
+.pd-x .scene-switch{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:10;display:flex;gap:6px;padding:5px;border-radius:11px;border:1px solid var(--line2);background:rgba(6,13,28,.78);backdrop-filter:blur(10px)}
+.pd-x .scene-switch button{border:0;background:transparent;color:var(--muted);font:11px var(--font);padding:7px 13px;border-radius:7px;cursor:pointer;transition:.25s var(--ease)}
+.pd-x .scene-switch button.on{background:linear-gradient(120deg,var(--blue),var(--cyan));color:#04101f;font-weight:700}
+.pd-x .scene-scan{position:absolute;left:26%;right:26%;top:18%;height:2px;z-index:6;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 18px var(--cyan);opacity:.65;animation:pdxSceneScan 5.5s ease-in-out infinite;pointer-events:none}
+@keyframes pdxSceneScan{0%,100%{transform:translateY(0);opacity:0}15%{opacity:.65}85%{opacity:.65}50%{transform:translateY(250px)}}
+.pd-x .scene-frame.agv .scene-scan{background:linear-gradient(90deg,transparent,#ffb238,transparent);box-shadow:0 0 18px #ffb238}
+/* 监控数据演示 */
+.pd-x .mon-demo{margin-top:48px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,var(--panel),var(--bg2));padding:clamp(22px,3vw,36px);position:relative;overflow:hidden}
+.pd-x .mon-demo .sweep{position:absolute;top:0;bottom:0;width:180px;background:linear-gradient(90deg,transparent,rgba(77,155,255,.12),transparent);transform:translateX(-260px)}
+.pd-x .mon-demo.sweep-on .sweep{animation:pdxSweep 1.6s ease-out 1}
+@keyframes pdxSweep{0%{transform:translateX(-260px)}100%{transform:translateX(760px)}}
+.pd-x .mon-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+.pd-x .mon-head .t{font-size:18px;font-weight:700;color:var(--ink)}
+.pd-x .mon-head .tabs{display:flex;gap:8px}
+.pd-x .mon-head .tabs span{font-size:12px;padding:6px 14px;border-radius:99px;border:1px solid var(--line2);color:var(--muted)}
+.pd-x .mon-head .tabs span.on{background:linear-gradient(120deg,var(--blue),var(--blue2));color:#fff;border-color:transparent}
+.pd-x .mon-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pd-x .mcard{border:1px solid var(--line);border-radius:13px;padding:20px;background:rgba(8,18,38,.7)}
+.pd-x .mcard.warn{border-color:rgba(255,77,94,.32);background:linear-gradient(160deg,rgba(255,77,94,.07),rgba(8,18,38,.7))}
+.pd-x .mcard .mt{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.pd-x .mcard .mt .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+.pd-x .mcard.warn .mt .dot{background:var(--red);box-shadow:0 0 10px var(--red);animation:pdxPulse 1.8s infinite}
+.pd-x .mcard .mv{font-family:var(--disp);font-size:clamp(28px,3.4vw,42px);font-weight:800;margin:12px 0 4px;letter-spacing:-.02em;color:var(--ink)}
+.pd-x .mcard.warn .mv{color:var(--red)}
+.pd-x .mcard .cmp{font-size:12px;color:var(--dim);display:flex;justify-content:space-between}
+.pd-x .mcard .cmp b{color:var(--ink2);font-weight:600}
+.pd-x .mcard .bar{height:4px;border-radius:3px;background:rgba(120,165,240,.14);margin-top:14px;overflow:hidden}
+.pd-x .mcard .bar i{display:block;height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width 1.4s var(--ease)}
+.pd-x .mcard.warn .bar i{background:linear-gradient(90deg,var(--red),var(--amber))}
+/* 3D 横向画廊（coverflow） */
+.pd-x .story{position:relative;margin-top:34px}
+.pd-x .story-rail{position:relative;display:flex;gap:clamp(18px,3vw,40px);overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;perspective:1300px;padding:40px 0 26px;cursor:grab;
+  scrollbar-width:none;-ms-overflow-style:none;touch-action:pan-x}
+.pd-x .story-rail::-webkit-scrollbar{display:none}
+.pd-x .story-rail.drag{cursor:grabbing;scroll-snap-type:none}
+.pd-x .shotcard{flex:0 0 clamp(196px,24vw,258px);scroll-snap-align:center;position:relative;padding:4px;border-radius:16px;cursor:pointer;
+  transform-style:preserve-3d;will-change:transform,opacity;backface-visibility:hidden;
+  background:linear-gradient(140deg,#5c6b88,#1c2740 30%,#0d1424 55%,#1c2740 80%,#4a5975);
+  box-shadow:0 0 0 1px rgba(2,6,14,.85),0 18px 38px -14px rgba(0,0,0,.8)}
+.pd-x .shotcard .sc-screen{position:relative;aspect-ratio:393/852;border-radius:12px;overflow:hidden;background:#0a1220}
+.pd-x .shotcard img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.pd-x .shotcard.is-card{padding:0;border-radius:14px;border:1px solid rgba(120,170,255,.26);
+  background:linear-gradient(160deg,rgba(18,34,66,.9),rgba(7,14,28,.94));
+  box-shadow:0 18px 38px -18px rgba(0,0,0,.82),inset 0 1px 0 rgba(255,255,255,.05)}
+.pd-x .shotcard.is-card .sc-screen{border-radius:13px}
+.pd-x .shotcard.is-card .island{display:none}
+.pd-x .shotcard.is-card .cap{border-radius:0 0 13px 13px}
+.pd-x .shotcard .island{position:absolute;top:7px;left:50%;transform:translateX(-50%);width:31%;height:13px;border-radius:99px;background:#03060c;box-shadow:0 0 0 1px rgba(140,180,240,.12);z-index:3}
+.pd-x .shotcard .glare{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(122deg,rgba(255,255,255,.12),transparent 32%)}
+.pd-x .shotcard .no{position:absolute;top:10px;left:10px;z-index:4;font:10px var(--mono);letter-spacing:.06em;color:#dce9ff;background:rgba(5,10,22,.72);border:1px solid var(--line2);padding:3px 7px;border-radius:6px;backdrop-filter:blur(6px)}
+.pd-x .shotcard .cap{position:absolute;left:4px;right:4px;bottom:4px;padding:24px 14px 12px;border-radius:0 0 12px 12px;background:linear-gradient(transparent,rgba(4,9,20,.94));font-size:13px;font-weight:600;opacity:0;transform:translateY(8px);transition:.35s;z-index:4}
+.pd-x .shotcard:hover .cap{opacity:1;transform:none}
+.pd-x .shotcard .cap span{display:block;font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.12em;margin-bottom:3px}
+.pd-x .story-bar{display:flex;align-items:center;gap:clamp(16px,3vw,34px);padding:22px 0 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.pd-x .story-num{font-family:var(--disp);font-weight:800;font-size:clamp(34px,5vw,52px);line-height:1;letter-spacing:-.03em;
+  background:linear-gradient(120deg,#fff,var(--blue3));-webkit-background-clip:text;background-clip:text;color:transparent;flex:none}
+.pd-x .story-num small{font-family:var(--mono);font-size:.3em;color:var(--dim);-webkit-text-fill-color:var(--dim);margin-left:5px;letter-spacing:.05em}
+.pd-x .story-info{min-width:0;flex:1}
+.pd-x .story-info .t{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan)}
+.pd-x .story-info h4{font-size:clamp(16px,2vw,21px);font-weight:700;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
+.pd-x .story-nav{display:flex;align-items:center;gap:10px;flex:none}
+.pd-x .story-nav button{width:44px;height:44px;border-radius:12px;border:1px solid var(--line2);background:rgba(12,24,48,.8);color:var(--ink);font-size:20px;cursor:pointer;transition:.25s var(--ease);display:grid;place-items:center}
+.pd-x .story-nav button:hover{border-color:var(--blue2);background:rgba(31,123,255,.18);color:#fff;transform:translateY(-2px)}
+.pd-x .story-nav button:disabled{opacity:.35;cursor:default;transform:none}
+.pd-x .story-dots{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;width:100%;padding-top:6px}
+.pd-x .story-dots button{width:7px;height:7px;border-radius:99px;border:0;padding:0;background:rgba(120,165,240,.28);cursor:pointer;transition:.3s var(--ease)}
+.pd-x .story-dots button.on{width:26px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.pd-x .story-tip{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--dim);text-align:center;margin-top:14px}
+/* 设计系统 */
+.pd-x .ds-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:30px}
+.pd-x .ds-card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,var(--panel),var(--bg2));padding:26px}
+.pd-x .ds-card h4{font-size:14px;letter-spacing:.04em;margin-bottom:18px;display:flex;justify-content:space-between;color:var(--ink)}
+.pd-x .ds-card h4 em{font-family:var(--mono);font-style:normal;font-size:11px;color:var(--dim)}
+.pd-x .swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pd-x .sw{border-radius:11px;overflow:hidden;border:1px solid var(--line)}
+.pd-x .sw .c{height:56px}
+.pd-x .sw .n{font-family:var(--mono);font-size:10px;color:var(--ink2);padding:7px 8px;background:rgba(0,0,0,.2)}
+.pd-x .type-scale{display:grid;gap:14px}
+.pd-x .ts{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.pd-x .ts .s{font-family:var(--mono);font-size:10px;color:var(--dim);width:52px;flex:none}
+.pd-x .ts .x{font-weight:700;color:var(--ink)}
+.pd-x .comp-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.pd-x .chip{padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;background:rgba(31,123,255,.14);border:1px solid var(--blue2);color:var(--blue3)}
+.pd-x .chip.primary{background:linear-gradient(120deg,var(--blue),var(--blue2));color:#fff;border-color:transparent}
+.pd-x .chip.ghost{background:transparent;border:1px solid var(--line2);color:var(--ink2)}
+.pd-x .chip.red{background:rgba(255,77,94,.14);border-color:var(--red);color:#ff8b96}
+.pd-x .fact-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pd-x .fact{background:rgba(8,18,38,.6);border-radius:10px;padding:14px 16px}
+.pd-x .fact .k{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--dim)}
+.pd-x .fact .v{font-size:14px;font-weight:600;margin-top:6px;color:var(--ink)}
+/* 弹窗内 lightbox（置于 dialog 内以覆盖 top-layer） */
+.pd-spec-strip{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:14px 0 4px;padding:12px 16px;border:1px solid rgba(120,165,240,.18);border-radius:12px;background:rgba(12,24,48,.5);font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;letter-spacing:.06em;color:#8b95a1}
+.pd-spec-strip b{color:#8dc0ff;font-weight:700;margin-right:4px}
+.pd-spec-strip i{width:3px;height:3px;border-radius:50%;background:rgba(120,165,240,.4);flex:none}
+#pdLb{position:fixed;inset:0;z-index:100;background:rgba(3,7,16,.92);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.3s;padding:40px}
+#pdLb.on{opacity:1;visibility:visible}
+#pdLb img{max-height:80vh;max-width:86vw;border-radius:12px;box-shadow:0 30px 90px rgba(0,0,0,.7);transform:scale(.94);transition:.4s cubic-bezier(.22,.9,.28,1)}
+#pdLb.on img{transform:none}
+#pdLb .x{position:absolute;top:24px;right:30px;color:#fff;font-size:34px;cursor:pointer;line-height:1;opacity:.8;background:none;border:0}
+#pdLb .x:hover{opacity:1}
+#pdLb .lbcap{position:absolute;bottom:26px;left:0;right:0;text-align:center;color:#c8d5ec;font-size:13px}
+/* 响应式 */
+@media(max-width:860px){
+  .pd-x .mon-cards{grid-template-columns:1fr}
+  .pd-x .ds-grid{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .pd-x .feature{grid-template-columns:1fr;gap:34px}
+  .pd-x .feature.rev .fx-copy{order:0}
+  .pd-x .fx-stage{min-height:470px}
+  .pd-x .scene-frame{height:460px}
+  .pd-x .scene-device{width:158px}
+  .pd-x .scene-device.is-dim{transform:translate(-50%,-50%) translateX(70px) rotate(9deg) scale(.8)}
+  .pd-x .scene-device.right.is-dim{transform:translate(-50%,-50%) translateX(-70px) rotate(-9deg) scale(.8)}
+  .pd-x .scene-label{padding:7px 9px;font-size:10px}
+  .pd-x .scene-label small{font-size:8px}
+  .pd-x .scene-leader{display:none}
+  .pd-x .scene-switch button{padding:6px 9px;font-size:10px}
+}
+@media(max-width:700px){
+  .pd-x .story-rail{gap:14px;padding:26px 0 18px}
+  .pd-x .shotcard{flex-basis:200px}
+  .pd-x .story-nav button{width:40px;height:40px}
+  .pd-x .shotcard .cap{display:none}
+}
+
+/* ===== 项目区域晕光背景（首页封面 / 弹窗封面保持原样，不改动） ===== */
+/* 项目卡片头部横条：毛玻璃 + 旋涡流光 */
+.ui-bar{
+  position:relative;isolation:isolate;
+  background:linear-gradient(180deg,rgba(120,170,255,.10),rgba(10,18,34,.36));
+  -webkit-backdrop-filter:blur(16px) saturate(1.35);
+  backdrop-filter:blur(16px) saturate(1.35);
+  border-bottom:1px solid rgba(150,190,255,.17);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 8px 26px -16px rgba(31,123,255,.65);
+  z-index:2;
+}
+.ui-bar::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:url(assets/bg/flow-d.jpg) center/cover no-repeat;opacity:.15;
+}
+:root[data-theme="light"] .ui-bar{
+  background:linear-gradient(180deg,rgba(255,255,255,.82),rgba(226,235,248,.66));
+  border-bottom-color:rgba(15,23,42,.12);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+}
+:root[data-theme="light"] .ui-bar::before{opacity:.05}
+
+/* 项目卡片：蓝卡与黑底之间的过渡光晕，消除硬边割裂 */
+.proj--iwork{
+  background:linear-gradient(168deg,#0b1424 0%,#0a0e18 56%,#080a0f 100%);
+  box-shadow:0 -14px 50px -20px rgba(0,0,0,.9),
+             0 0 90px -30px rgba(31,123,255,.55),
+             0 0 180px -80px rgba(120,80,220,.40),
+             inset 0 1px 0 rgba(255,255,255,.06);
+}
+/* 项目弹窗内容区：蓝调晕光底（不含封面），让深蓝模块不贴在纯黑上 */
+.dlg-scroll{
+  background:
+    radial-gradient(900px 600px at 12% 4%, rgba(31,90,180,.14), transparent 60%),
+    radial-gradient(800px 620px at 92% 40%, rgba(84,54,168,.10), transparent 62%),
+    #0a0d13;
+}
+:root[data-theme="light"] .dlg-scroll{background:#f4f7fa}
+.pd-x.is-on{
+  background:
+    radial-gradient(720px 380px at 8% 0%, rgba(31,96,190,.13), transparent 66%),
+    radial-gradient(680px 420px at 96% 88%, rgba(88,56,172,.10), transparent 68%);
+}
+.pd-x .scene-frame{
+  box-shadow:0 30px 80px -40px rgba(31,123,255,.55),0 0 60px -30px rgba(80,120,255,.35);
+}
+.pd-x .pd-spec-strip{
+  background:rgba(12,24,48,.42);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+}
+/* 项目内容区（非封面）：晕光 + 三张流光壁纸，压暗后作柔和底纹 */
+.pd-x.pj,.pj-band{position:relative;isolation:isolate}
+.pd-x.pj::before,.pj-band::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(620px 300px at 10% 0%, rgba(31,96,190,.15), transparent 65%),
+    radial-gradient(520px 320px at 92% 92%, rgba(88,56,172,.11), transparent 68%);
+}
+#pdOverview::before{
+  background:linear-gradient(rgba(8,14,28,.80),rgba(8,14,28,.80)),
+             url(assets/bg/flow-a.jpg) center/cover no-repeat;
+  opacity:.55;
+}
+#pdKeywords::before{
+  background:linear-gradient(rgba(8,14,28,.82),rgba(8,14,28,.82)),
+             url(assets/bg/flow-c.jpg) center/cover no-repeat;
+  opacity:.50;
+}
+.pj-band::before{
+  background:linear-gradient(rgba(8,14,28,.72),rgba(8,14,28,.72)),
+             url(assets/bg/flow-b.jpg) center/cover no-repeat;
+  opacity:.60;
+}
+/* ===== 中文排版：避免单字吊在行尾 ===== */
+h1,h2,h3,h4,h5,h6,.headline,.sec-head h2,.pd-sec-title,.pd-sec-ti,.fx-copy h3,.card h3,.proj h3,.pd-story__item h4,.pd-hl__card h4{
+  text-wrap:balance;line-break:strict;
+}
+p,li,dd,dt,figcaption,blockquote,.hero-copy,.about-lead,.pd-lead,.pd-rail-sub,.pd-story__item p,.pd-hl__card p,.pd-fig figcaption,.pd-x p,.fx-copy p,.pd-author__info{
+  text-wrap:pretty;line-break:strict;word-break:normal;
+}
+.nb{white-space:nowrap;display:inline-block}
+/* 弹窗内窄栏标题：略收字号与字距，让两行自然均分 */
+.pd-iwork .iw-copy h3,.fx-copy h3{letter-spacing:-.015em}
+
+/* 中文排版补强：末尾两字永不拆行、缩略图标签单行不吊字 */
+.nb{white-space:nowrap}
+.pd-x .shotcard .cap,.story-rail .shotcard .cap{
+  font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.pd-x .shotcard .cap span,.story-rail .shotcard .cap span{
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+
+/* ===== 项目6 叙事章节（.pj 作用域，仅 idx=5 显示） ===== */
+.pj{--pj-blue:#1f7bff;--pj-blue2:#8dc0ff;--pj-cyan:#25d6e8;--pj-mint:#5cf2d0;--pj-amber:#ffb238;--pj-dim:#8b9ab4;--pj-line:rgba(120,165,240,.16)}
+.pj h3,.pj h4,.pj p{margin-top:0}
+.pj mark{background:linear-gradient(90deg,rgba(92,242,208,.20),rgba(31,123,255,.14));color:#dff7ff;padding:1px 4px;border-radius:4px;box-shadow:inset 0 -1px 0 rgba(92,242,208,.45)}
+.pj .pd-sec-title{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.pj-sub{color:var(--pj-dim);font-size:13.5px;max-width:820px;margin:0 0 22px;line-height:1.8}
+.pj-lead{margin-bottom:26px}
+.pj-lead h3{font-size:clamp(24px,2.5vw,34px);font-weight:750;letter-spacing:-.02em;margin:0 0 12px;color:#eef4ff}
+.pj-lead p{max-width:880px;color:#aebbd0;font-size:14px;line-height:1.9;margin:0}
+.pj-kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.pj-kpi>div{padding:18px 16px;border-radius:14px;border:1px solid var(--pj-line);background:linear-gradient(160deg,rgba(23,48,92,.55),rgba(10,18,34,.5));-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.pj-kpi b{display:block;font-family:var(--mono);font-size:34px;line-height:1;color:#8dc0ff;letter-spacing:-.04em}
+.pj-kpi>div>span{display:block;margin:8px 0 5px;font-size:13px;font-weight:650;color:#e6efff}
+.pj-kpi em{display:block;font-style:normal;font-size:11px;color:var(--pj-dim);line-height:1.6}
+.pj-meta-strip,.pj-icon-spec{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:12px 16px;border:1px solid var(--pj-line);border-radius:12px;background:rgba(12,24,48,.42);font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:#8b9ab4}
+.pj-meta-strip b,.pj-icon-spec b{color:#8dc0ff;font-weight:700;margin-left:4px}
+.pj-meta-strip i,.pj-icon-spec i{width:3px;height:3px;border-radius:50%;background:rgba(120,165,240,.45);flex:none}
+.pj-two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pj-panel{padding:24px;border-radius:16px;border:1px solid var(--pj-line);background:linear-gradient(160deg,rgba(23,48,92,.42),rgba(10,18,34,.4))}
+.pj-panel__eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--pj-mint);margin-bottom:14px}
+.pj-panel h4{font-size:18px;margin:0 0 14px;color:#eaf2ff;line-height:1.5}
+.pj-panel p{font-size:13px;line-height:1.85;color:#a9b8ce;margin:0 0 10px}
+.pj-pains{list-style:none;margin:0;padding:0}
+.pj-pains li{display:grid;grid-template-columns:28px 1fr;gap:2px 10px;padding:10px 0;border-bottom:1px dashed rgba(120,165,240,.16)}
+.pj-pains li:last-child{border-bottom:0}
+.pj-pains b{grid-row:span 2;font-family:var(--mono);font-size:12px;color:#ff8a96}
+.pj-pains span{font-size:13px;font-weight:650;color:#e6efff}
+.pj-pains em{font-style:normal;font-size:11.5px;color:var(--pj-dim)}
+.pj-roles{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;align-items:center}
+.pj-roles__t{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--pj-mint);margin-right:4px}
+.pj-roles>span:not(.pj-roles__t){font-size:11.5px;color:#b7c6dd;padding:6px 11px;border-radius:99px;border:1px solid var(--pj-line);background:rgba(20,38,70,.4)}
+.pj-conclusion{margin-top:18px;display:flex;gap:16px;align-items:flex-start;padding:16px 20px;border-radius:12px;border-left:3px solid var(--pj-mint);background:rgba(31,123,255,.09)}
+.pj-conclusion>span{flex:none;font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--pj-mint);padding-top:3px}
+.pj-conclusion p{margin:0;font-size:13.5px;line-height:1.8;color:#d7e5f8}
+.pj-goals{display:grid;grid-template-columns:1fr .82fr 1fr;gap:16px;align-items:stretch}
+.pj-goals__col,.pj-goals__mid{padding:20px;border-radius:16px;border:1px solid var(--pj-line);background:linear-gradient(160deg,rgba(23,48,92,.4),rgba(10,18,34,.4))}
+.pj-goals__label{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--pj-mint);margin-bottom:16px}
+.pj-goals__label em{font-style:normal;color:var(--pj-dim);margin-left:6px}
+.pj-goal{padding:11px 12px;margin-bottom:9px;border-radius:9px;background:rgba(120,165,240,.07);border:1px solid rgba(120,165,240,.1);font-size:12.5px;color:#d5e3f7;line-height:1.6}
+.pj-goal b{color:#8dc0ff}
+.pj-goals__mid{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(circle at 50% 35%,rgba(31,123,255,.22),transparent 65%),rgba(10,18,34,.4)}
+.pj-goals__core{width:132px;height:132px;border-radius:50%;display:grid;place-content:center;text-align:center;border:1px solid rgba(120,165,240,.4);background:linear-gradient(160deg,#14294d,#0a1426);box-shadow:0 0 46px -12px rgba(31,123,255,.7)}
+.pj-goals__core span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--pj-cyan);line-height:1.7}
+.pj-goals__core b{font-size:17px;color:#fff;margin-top:6px}
+.pj-goals__chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.pj-goals__chips span{font-size:11px;padding:5px 10px;border-radius:99px;border:1px solid rgba(120,165,240,.3);color:#bcd2f0}
+.pj-priority{margin-top:16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:12.5px;color:#c8d8ef}
+.pj-priority>span{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--pj-mint);margin-right:4px}
+.pj-priority b{padding:5px 10px;border-radius:7px;background:rgba(31,123,255,.14);color:#8dc0ff;font-weight:650}
+.pj-priority i{font-style:normal;color:var(--pj-dim)}
+.pj-priority em{font-style:normal;color:var(--pj-dim);margin-left:auto;font-size:11.5px}
+.pj-flow{display:grid;grid-template-columns:.86fr .48fr 1.4fr;gap:14px}
+.pj-flow__in,.pj-flow__mid,.pj-flow__out{padding:18px;border-radius:16px;border:1px solid var(--pj-line);background:linear-gradient(160deg,rgba(23,48,92,.38),rgba(10,18,34,.38))}
+.pj-flow__label{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--pj-mint);margin-bottom:14px}
+.pj-flow__item{padding:11px 12px;margin-bottom:9px;border-radius:9px;background:rgba(120,165,240,.07)}
+.pj-flow__item b{display:block;font-size:12.5px;color:#e3edff;margin-bottom:3px}
+.pj-flow__item span{font-size:11px;color:var(--pj-dim);line-height:1.6}
+.pj-flow__mid{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center}
+.pj-flow__mid .pj-flow__label{align-self:flex-start}
+.pj-flow__bubble{width:74px;height:74px;border-radius:50%;display:grid;place-items:center;font-size:17px;font-weight:700;color:#fff;background:linear-gradient(160deg,#1a3a6d,#0d1c36);border:1px solid rgba(120,165,240,.4);box-shadow:0 0 30px -12px rgba(31,123,255,.8)}
+.pj-flow__mid>span{font-size:10.5px;color:var(--pj-dim);line-height:1.6}
+.pj-flow__out{background:linear-gradient(160deg,rgba(31,123,255,.13),rgba(10,18,34,.4))}
+.pj-dir{border:1px solid rgba(120,165,240,.22);border-radius:12px;padding:14px 16px;margin-bottom:10px;background:rgba(8,16,32,.55)}
+.pj-dir:last-child{margin-bottom:0}
+.pj-dir__head{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.pj-dir__head b{font-size:15px;color:#fff}
+.pj-dir__head em{font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--pj-cyan)}
+.pj-dir__row{display:grid;grid-template-columns:56px 1fr;gap:10px;padding:5px 0}
+.pj-dir__row span{font-size:10.5px;color:var(--pj-mint);letter-spacing:.06em;padding-top:2px}
+.pj-dir__row p{margin:0;font-size:12px;line-height:1.7;color:#b9c9e0}
+.pj-dir__row.is-v p{color:#8dc0ff}
+.pj--core{border-top:2px solid rgba(255,178,56,.55);background:radial-gradient(700px 320px at 12% 0%,rgba(255,178,56,.10),transparent 62%),radial-gradient(600px 380px at 92% 60%,rgba(31,123,255,.12),transparent 66%)}
+.pj-core-badge{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:#ffcf8a;padding:5px 11px;border-radius:99px;border:1px solid rgba(255,178,56,.5);background:rgba(255,178,56,.12)}
+.pj-core-lead{display:flex;gap:18px;align-items:flex-start;padding:20px 22px;margin-bottom:22px;border-radius:14px;border:1px solid rgba(255,178,56,.34);background:linear-gradient(100deg,rgba(255,178,56,.11),rgba(31,123,255,.08))}
+.pj-core-lead__mark{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:20px;color:#ffcf8a;background:rgba(255,178,56,.16);border:1px solid rgba(255,178,56,.4)}
+.pj-core-lead h3{margin:0 0 8px;font-size:clamp(18px,2vw,23px);line-height:1.5;color:#fff3e0}
+.pj-core-lead p{margin:0;font-size:12.5px;line-height:1.85;color:#c9d6e8;max-width:900px}
+.pj-principles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pj-principle{display:grid;grid-template-columns:56px 1fr;gap:14px;padding:16px;border-radius:13px;border:1px solid var(--pj-line);border-left:3px solid rgba(92,242,208,.55);background:linear-gradient(160deg,rgba(23,48,92,.36),rgba(10,18,34,.42))}
+.pj-principle__no{font-family:var(--mono);font-size:12px;color:var(--pj-mint);letter-spacing:.04em;padding-top:2px}
+.pj-principle__body h4{margin:0 0 7px;font-size:14.5px;color:#eaf2ff}
+.pj-principle__body h4 em{font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--pj-dim);margin-left:7px;font-weight:400}
+.pj-principle__def{margin:0 0 10px;font-size:12px;line-height:1.7;color:#9fb0c8}
+.pj-principle__row{display:grid;grid-template-columns:52px 1fr;gap:8px;padding:6px 0;border-top:1px dashed rgba(120,165,240,.18)}
+.pj-principle__row span{font-size:10px;color:var(--pj-cyan);letter-spacing:.06em;padding-top:2px}
+.pj-principle__row p{margin:0;font-size:11.8px;line-height:1.7;color:#c5d4e9}
+.pj-principle__row.is-verify span{color:var(--pj-mint)}
+.pj-principle__row.is-verify p{color:#8dc0ff}
+.pj-laws-head{margin:26px 0 12px;display:flex;flex-wrap:wrap;align-items:baseline;gap:12px}
+.pj-laws-head span{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--pj-mint)}
+.pj-laws-head em{font-style:normal;font-size:11.5px;color:var(--pj-dim)}
+.pj-laws{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pj-law{padding:14px;border-radius:11px;border:1px solid var(--pj-line);background:rgba(12,24,48,.42)}
+.pj-law b{display:block;font-size:12.5px;color:#8dc0ff;margin-bottom:4px}
+.pj-law span{display:block;font-size:11px;color:var(--pj-mint);margin-bottom:7px}
+.pj-law p{margin:0;font-size:11.5px;line-height:1.7;color:#b3c3da}
+.pj-redesign{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:20px;padding:14px 18px;border-radius:12px;border:1px solid var(--pj-line);background:rgba(12,24,48,.42)}
+.pj-redesign span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--pj-mint)}
+.pj-redesign p{margin:0;font-size:12.5px;color:#b9c9e0}
+.pj-redesign i{font-style:normal;color:var(--pj-blue2);font-size:16px}
+.pj-kws{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pj-kw{position:relative;padding:18px 18px 18px 22px;border-radius:13px;border:1px solid var(--pj-line);background:linear-gradient(160deg,rgba(23,48,92,.38),rgba(10,18,34,.42))}
+.pj-kw__dot{position:absolute;left:0;top:18px;bottom:18px;width:3px;border-radius:0 3px 3px 0;background:linear-gradient(var(--pj-mint),var(--pj-blue))}
+.pj-kw b{display:block;font-size:15px;color:#eaf2ff;margin-bottom:3px}
+.pj-kw em{display:block;font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--pj-cyan);margin-bottom:8px}
+.pj-kw p{margin:0;font-size:11.8px;line-height:1.75;color:#aebdd2}
+.pj-icons{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.pj-icon{padding:16px 10px;text-align:center;border-radius:12px;border:1px solid var(--pj-line);background:linear-gradient(160deg,rgba(23,48,92,.36),rgba(10,18,34,.42))}
+.pj-icon svg{width:34px;height:34px;fill:none;stroke:#8dc0ff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;margin-bottom:10px}
+.pj-icon b{display:block;font-size:12.5px;color:#e6efff;margin-bottom:3px}
+.pj-icon span{display:block;font-size:10.5px;color:var(--pj-dim);line-height:1.5}
+.pj-icon-note{display:flex;gap:14px;padding:16px 18px;border-radius:12px;border-left:3px solid var(--pj-blue);background:rgba(31,123,255,.09)}
+.pj-icon-note b{flex:none;font-size:12px;color:#8dc0ff;padding-top:2px}
+.pj-icon-note p{margin:0;font-size:12px;line-height:1.8;color:#b9c9e0}
+.pj-band{display:none;align-items:center;gap:22px;padding:26px clamp(20px,4vw,56px)!important;background:linear-gradient(100deg,rgba(31,123,255,.18),rgba(92,242,208,.07))!important;border-top:1px solid rgba(120,165,240,.3);border-bottom:1px solid rgba(120,165,240,.2)}
+.pj-band.is-on{display:flex}
+.pj-band__no{font-family:var(--mono);font-size:44px;font-weight:700;color:rgba(141,192,255,.5);line-height:1}
+.pj-band__txt{flex:1}
+.pj-band__txt span{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--pj-mint)}
+.pj-band__txt h3{margin:6px 0;font-size:22px;color:#fff}
+.pj-band__txt p{margin:0;font-size:12px;line-height:1.8;color:#aebdd2;max-width:660px}
+.pj-band__chips{display:flex;flex-direction:column;gap:6px;flex:none}
+.pj-band__chips span{font-family:var(--mono);font-size:10.5px;color:#8dc0ff;padding:5px 10px;border-radius:99px;border:1px solid rgba(120,165,240,.3);text-align:center}
+/* 设计内容里的原则标注胶囊（重点标注） */
+.pj-tags{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 18px}
+.pj-tags span{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:#ffcf8a;padding:5px 10px;border-radius:99px;border:1px solid rgba(255,178,56,.42);background:rgba(255,178,56,.10)}
+.pj-tags span.is-blue{color:#8dc0ff;border-color:rgba(120,165,240,.38);background:rgba(31,123,255,.10)}
+@media(max-width:900px){
+ .pj-kpi{grid-template-columns:repeat(2,1fr)}
+ .pj-two,.pj-principles{grid-template-columns:1fr}
+ .pj-goals,.pj-flow{grid-template-columns:1fr}
+ .pj-laws,.pj-kws{grid-template-columns:repeat(2,1fr)}
+ .pj-icons{grid-template-columns:repeat(3,1fr)}
+ .pj-band{flex-wrap:wrap}
+}
+@media(max-width:560px){
+ .pj-kpi,.pj-laws,.pj-kws,.pj-icons{grid-template-columns:1fr 1fr}
+ .pj-band__chips{flex-direction:row;flex-wrap:wrap}
+ .pj-band__no{font-size:32px}
+}
 </style>
 <script>
 /* ===== Three.js r170 离线内联（MIT） ===== */
@@ -3574,7 +4527,7 @@ void main() {
     const roomEnv = new RoomEnvironment();
     const envRT = pmrem.fromScene(roomEnv, 0.035);
     scene.environment = envRT.texture;
-    scene.environmentIntensity = 1.15;
+    scene.environmentIntensity = 1.38;
     roomEnv.dispose();
 
     const keyLight = new THREE.DirectionalLight('#ffffff', 2.0);
@@ -3606,7 +4559,7 @@ void main() {
       if (!force && tNow - lastRefrUpdate < 66) return;
       lastRefrUpdate = tNow;
       const isLight = document.documentElement.dataset.theme === 'light';
-      scene.environmentIntensity = isLight ? 0.52 : 1.15;
+      scene.environmentIntensity = isLight ? 0.60 : 1.38;
       const w = Math.max(1, window.innerWidth);
       const h = Math.max(1, window.innerHeight);
       if (refCanvas.width !== w || refCanvas.height !== h) {
@@ -3614,8 +4567,14 @@ void main() {
         refCanvas.height = h;
       }
 
-      refCtx.fillStyle = isLight ? '#c3d6e8' : '#07080a';
-      refCtx.fillRect(0, 0, w, h);
+      if (isLight) { refCtx.fillStyle = '#c3d6e8'; refCtx.fillRect(0, 0, w, h); }
+      else {
+        const refrBg = refCtx.createLinearGradient(0, 0, w, h);
+        refrBg.addColorStop(0, '#101c38');
+        refrBg.addColorStop(0.52, '#0a1226');
+        refrBg.addColorStop(1, '#07080a');
+        refCtx.fillStyle = refrBg; refCtx.fillRect(0, 0, w, h);
+      }
 
       // 浅色下不把极光雾画进折射源，否则球心会出现一整块蓝紫色斑
       if (!isLight && auroraCanvas && auroraCanvas.width > 0) {
@@ -3636,8 +4595,8 @@ void main() {
         drawOrb(0.28, 0.36, 0.35, 'rgba(23, 104, 148, 0.20)');
         drawOrb(0.72, 0.56, 0.38, 'rgba(64, 128, 168, 0.18)');
       } else {
-        drawOrb(0.28, 0.36, 0.35, 'rgba(92, 242, 208, 0.22)');
-        drawOrb(0.72, 0.56, 0.38, 'rgba(167, 139, 250, 0.20)');
+        drawOrb(0.28, 0.36, 0.35, 'rgba(92, 242, 208, 0.30)');
+        drawOrb(0.72, 0.56, 0.38, 'rgba(167, 139, 250, 0.28)');
       }
 
       // 1:1 绘制“把数据 / 做成世界”高清矢量大字
@@ -3688,7 +4647,7 @@ void main() {
       transparent: true,
       opacity: 1.0,
       ior: 1.32,
-      thickness: 1.35,
+      thickness: 0.62,
       roughness: 0.015,
       metalness: 0.0,
       clearcoat: 1.0,
@@ -3697,8 +4656,8 @@ void main() {
       iridescenceIOR: 1.32,
       dispersion: 0.9,
       attenuationColor: new THREE.Color('#f0fdfa'),
-      attenuationDistance: 4.8,
-      envMapIntensity: 1.25
+      attenuationDistance: 12,
+      envMapIntensity: 1.55
     });
 
     fluidGlassMaterial.onBeforeCompile = shader => {
@@ -3962,7 +4921,7 @@ void main() {
       updateRefractionSource(true);
       fluidGlassMaterial.attenuationColor.set(isLight ? '#dce9f5' : '#f0fdfa');
       fluidGlassMaterial.envMapIntensity = isLight ? 1.5 : 1.25;   // 浅色下把边缘高光提亮，勾出玻璃轮廓
-      scene.environmentIntensity = isLight ? 0.52 : 1.15;
+      scene.environmentIntensity = isLight ? 0.60 : 1.38;
     };
 
     requestAnimationFrame(() => {
@@ -7942,26 +8901,26 @@ const wrap = (value, span) => ((value % span) + span) % span;
       d:'为工业现场设计的移动端。'
     },
     {
-      t:'云枢协同 · 企业办公 App', kind:'移动端 · 企业协同', no:'06', code:'CASE — 06', year:'26',
-      hue:222, hueLabel:'TEAMHUB / ENTERPRISE COLLABORATION', views:'4,286', likes:'152', url:'teamhub.example.cn',
-      slogan:'把审批、待办、日程、知识库收进一个 App，让协作不再散落在十几个系统里。',
-      facts:[['角色','设计负责人'],['周期','20 周'],['产出','App / UI 规范 / 组件库'],['团队','设计 3 · 前端 9']],
-      stats:[['33','基础组件'],['16 → 1','高频入口收敛'],['#3D6EE8','品牌主色']],
-      tags:['MasterGo','Design System','移动端','协同办公','组件库'],
-      lead:'面向集团员工的一站式协同办公 App。真正的设计命题不是再加功能，而是把散落在多个系统里的高频任务，收敛成一条清晰的移动端路径，并用一套组件规范支撑长期迭代。',
+      t:'iWork · 综合业务平台', kind:'行业标准 MES · 工业移动', no:'06', code:'CASE — 06', year:'26',
+      hue:212, hueLabel:'STANDARD MES / INDUSTRIAL MOBILE', views:'4,286', likes:'152', url:'iwork.zhan-wan.com',
+      slogan:'工厂的「神经系统」与「数据基石」：把设备、生产、品质、能源、仓储、安环六大模块收进一个 App。',
+      facts:[['角色','设计负责人'],['周期','20 周'],['产出','App / 组件库 / 规范'],['团队','设计 1 · 前端 1']],
+      stats:[['6','大业务模块'],['20+','场景模板'],['4 周','标准化部署']],
+      tags:['MasterGo','Design System','MES','移动端','组件库'],
+      lead:'面向工业现场的行业标准 MES。基于物联数据与行业经验，把原本散落在设备、生产、品质、能源、仓储、安环各系统里的任务，收敛为一条清晰的移动端路径，并形成决策—执行—反馈的管理闭环。',
       story:[
-        {h:'项目背景',en:'BACKGROUND',p:'集团内部协同工具分散在多个系统：审批、待办、日程、消息、知识库、通讯录各自为政，员工完成一件日常事项常常要在几个 App 之间来回切换。云枢协同的目标是把这些能力整合为一个移动端入口。'},
-        {h:'核心挑战',en:'CHALLENGE',p:'功能多不等于好用。移动端的挑战在于：如何在有限的屏幕里排出任务的优先级，让"我现在要做什么"一眼可见；同时不同业务线各自的实现会让视觉与交互越来越不一致，维护成本极高。'},
-        {h:'设计做法',en:'APPROACH',p:'以工作台为中枢，把待办、审批、日程按"今天要处理"聚合；统一使用主色 #3D6EE8 建立品牌识别，配合语义色（红 #F30027 / 绿 #39AD00）表达状态。同步在 MasterGo 中搭建云枢 UI 组件库（33 个组件）与产品色彩规范库（30 个组件），字体统一为思源黑体（Source Han Sans CN）。'},
-        {h:'项目结果',en:'OUTCOME',p:'高频入口从多个系统收敛为一个 App，登录、工作台、我的、消息、待办、日程、知识库、通讯录等核心场景形成一致体验。组件库与设计变量成为资产，新业务模块可直接复用规范接入。'}
+        {h:'项目背景',en:'BACKGROUND',p:'工业现场的数据与业务分散在多个系统：设备点巡检、指标监控、AGV 叫料、点巡检工单各自成体系。iWork 是工厂的「神经系统」与「数据基石」，目标是把这些能力整合为一个统一的移动端入口，为预警中心提供高质量数据原料。'},
+        {h:'核心挑战',en:'CHALLENGE',p:'生产进度不透明、品质问题追溯难、能源消耗无监控、库存数据滞后、安环被动响应——这是制造业普遍的起点。真正的挑战不是再加一个看板，而是让异常能够自动触发工单与备件调拨，跨模块高效联动，同时让一线在现场打开 App 就知道"现在要做什么"。'},
+        {h:'设计做法',en:'APPROACH',p:'整合设备、生产、品质、能源、仓储、安环六大模块，以工作台为中枢把待办、指标与任务按"今天要处理"聚合；指标监控用语义红标记不达标数据，异常自动触发维修工单与备件调拨，形成决策—执行—反馈闭环。视觉上以品牌蓝建立识别、语义红绿表达状态，并在 MasterGo 中搭建统一组件库与色彩规范，字体采用思源黑体（Source Han Sans CN），支撑长期迭代。'},
+        {h:'项目结果',en:'OUTCOME',p:'登录、经营工作台、指标监控、待办消息、AGV 叫料与点巡检等核心场景形成一致体验；内置 20+ 制造业细分场景模板，基于 ISO9001/ISO50001 预置管理流程，运营效率提升 20%+。组件库与设计变量成为可复用资产，新业务模块接入即一致。'}
       ],
       highlights:[
-        {i:'◎',t:'工作台中枢',d:'待办、审批、日程按"今天要处理"聚合，打开 App 就知道下一步做什么。'},
-        {i:'⬡',t:'组件规范',d:'33 个基础组件 + 30 个产品颜色变量，多业务线共用同一套视觉语言。'},
-        {i:'◈',t:'语义配色',d:'主色 #3D6EE8 建立识别，语义红绿表达状态，信息层级清楚不靠堆装饰。'}
+        {i:'◎',t:'工作台中枢',d:'待办、指标与任务按"今天要处理"聚合，打开 App 就知道下一步做什么。'},
+        {i:'⬡',t:'管理闭环',d:'设备异常自动触发维修工单 + 备件调拨，跨模块联动，不是简单的数据看板。'},
+        {i:'◈',t:'语义配色',d:'品牌蓝建立识别，语义红绿表达达标与告警，信息层级清楚不靠堆装饰。'}
       ],
-      caps:['工作台 · 今日待办','审批与日程处理','消息与知识库'],
-      d:'面向集团员工的一站式企业协同办公 App。'
+      caps:['经营工作台 · 常用功能','指标监控 · 异常告警','AGV 叫料与物流'],
+      d:'面向工业现场的行业标准 MES 综合业务平台。'
     }
   ];
   const $ = id => document.getElementById(id);
@@ -8085,13 +9044,67 @@ const wrap = (value, span) => ((value % span) + span) % span;
         }
       });
     }
+    // 项目6（iWork）：版型区通用样机替换为真实界面截图
+    if (idx === 5) {
+      const shots = ['workbench.png','monitor-alert.png','agv-home.png','inspection.png'];
+      const mps = document.querySelectorAll('#projDialog [data-mp]');
+      mps.forEach((el, k) => {
+        el.classList.add('mp--shot');
+        el.innerHTML = '<span class="mp__notch"></span><img src="assets/dmtt/' + (shots[k % shots.length]) + '" alt="iWork 界面">';
+      });
+      // 版型区文案换成 iWork
+      const hc = document.querySelector('#projDialog .hero-copy .k'); if (hc) hc.textContent = 'iW / 综合业务平台';
+      const hh = document.querySelector('#projDialog .hero-copy h4'); if (hh) hh.innerHTML = '把现场业务<br>收进一个 App';
+      const hp = document.querySelector('#projDialog .hero-copy p'); if (hp) hp.textContent = '设备、生产、品质、能源、仓储、安环六大模块，决策—执行—反馈闭环。';
+      const dv = document.getElementById('pdVarWord'); if (dv) dv.textContent = 'iWORK';
+      // 版型区其余卡片内的通用列表界面也换成截图（若存在）
+      document.querySelectorAll('#projDialog .pd-var .mp').forEach((el,k)=>{
+        if (el.classList.contains('mp--shot')) return;
+        el.classList.add('mp--shot');
+        el.innerHTML='<span class="mp__notch"></span><img src="assets/dmtt/'+(shots[k % shots.length])+'" alt="iWork 界面">';
+      });
+    }
     // 更多作品：除当前外的 3 个
     $('pdMore').innerHTML = projects.map((q,i) => ({q,i})).filter(o => o.i !== idx).slice(0,3).map(o =>
       `<button class="pd-more__card" type="button" data-goto="${o.i}"><span class="mn">${o.q.no}</span><span class="mt">${o.q.t}</span><span class="mk">${o.q.kind}</span></button>`
     ).join('');
     $('pdMore').querySelectorAll('[data-goto]').forEach(b => b.addEventListener('click', () => openProject(Number(b.dataset.goto))));
+    // 项目6（iWork）：显示交互式案例展示，隐藏平铺 gallery / variants
+    const iwSec = document.getElementById('pdIwork');
+    const oldGal = document.querySelector('.pd-gallery');
+    const oldVar = document.querySelector('.pd-variants');
+    if (iwSec && oldGal && oldVar) {
+      if (idx === 5) {
+        oldGal.style.display = 'none';
+        oldVar.style.display = 'none';
+        iwSec.classList.add('is-on');
+        if (typeof window.__iwReset === 'function') window.__iwReset();
+        requestAnimationFrame(()=>requestAnimationFrame(()=>iwSec.classList.add('in')));
+      } else {
+        oldGal.style.display = '';
+        oldVar.style.display = '';
+        iwSec.classList.remove('is-on','in');
+      }
+    }
     // 完整 16:9 案例入口：仅云枢协同项目显示
     const caseLink = $('pdCaseLink'); if (caseLink) caseLink.style.display = idx === 5 ? 'flex' : 'none';
+    // 项目6：显示卡片内完整演示区块（场景/画廊/设计系统），并重排可见章节编号
+    document.querySelectorAll('.pd-x').forEach(sec=>sec.classList.toggle('is-on', idx===5));
+    if (idx===5 && typeof window.__pdRailInit==='function') requestAnimationFrame(()=>requestAnimationFrame(()=>{window.__pdRailInit();if(window.__pdRvCheck)window.__pdRvCheck();}));
+    if (idx===5) setTimeout(()=>{if(window.__pdRvCheck)window.__pdRvCheck();},900);
+    (function renumPD(){
+      const secs=[...document.querySelectorAll('#pdScroll section')];
+      const hiddenForSix=sec=>sec.classList.contains('pd-gallery')||sec.classList.contains('pd-variants');
+      const onlySix=sec=>sec.id==='pdIwork'||sec.classList.contains('pd-x');
+      let n=0;
+      secs.forEach(sec=>{
+        const no=sec.querySelector('.pd-sec-no'); if(!no) return;
+        if(no.dataset.orig===undefined) no.dataset.orig=no.textContent;
+        if(idx===5 && !hiddenForSix(sec) && !onlySix(sec)){ n++; no.textContent=String(n).padStart(2,'0'); }
+        else if(idx===5 && onlySix(sec)){ n++; no.textContent=String(n).padStart(2,'0'); }
+        else no.textContent=no.dataset.orig;
+      });
+    })();
     const scroller = $('pdScroll'); if (scroller) scroller.scrollTop = 0;
     if (!dialog.open) { setDialogFullscreen(false); dialog.showModal(); }
   };
@@ -8215,6 +9228,246 @@ const wrap = (value, span) => ((value % span) + span) % span;
     }
   })();
   })();
+
+
+  /* ===== 项目6卡片内完整演示：场景切换 / 监控条 / 3D画廊 / lightbox ===== */
+  (function pdXDemo(){
+    const dlg=document.getElementById('projDialog'); if(!dlg)return;
+    const scroller=document.getElementById('pdScroll');
+    /* 进场 reveal：IO(threshold 0) + 滚动监听双保险，确保弹窗内一定触发 */
+    const rvIO=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvIO.unobserve(e.target);}})},{threshold:0,root:scroller});
+    dlg.querySelectorAll('.pd-x .rv').forEach(el=>rvIO.observe(el));
+    const rvCheck=()=>{if(!scroller)return;const sr=scroller.getBoundingClientRect();
+      dlg.querySelectorAll('.pd-x .rv:not(.in)').forEach(el=>{const b=el.getBoundingClientRect();
+        if(b.bottom>sr.top+30&&b.top<sr.bottom-30)el.classList.add('in');});};
+    scroller.addEventListener('scroll',()=>requestAnimationFrame(rvCheck),{passive:true});
+    window.__pdRvCheck=rvCheck;
+    /* 场景切换（双机前后景 + 按钮联动） */
+    dlg.querySelectorAll('.pd-x .scene-frame').forEach(scene=>{
+      const devices=[...scene.querySelectorAll('.scene-device')];
+      const buttons=[...scene.querySelectorAll('.scene-switch button')];
+      function setScene(i){devices.forEach((d,j)=>{d.classList.toggle('is-front',j===i);d.classList.toggle('is-dim',j!==i);});buttons.forEach((b,j)=>b.classList.toggle('on',j===i));}
+      buttons.forEach((b,i)=>b.addEventListener('click',()=>setScene(i)));
+      scene.addEventListener('mouseenter',()=>{if(!scene.dataset.touched)setScene(1);scene.dataset.touched='1';});
+    });
+    /* 监控条动画 */
+    const mon=document.getElementById('pdMonDemo');
+    if(mon){const mio=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('sweep-on');e.target.querySelectorAll('.bar i').forEach(b=>b.style.width=b.dataset.w);mio.unobserve(e.target);}})},{threshold:.3,root:scroller});mio.observe(mon);}
+    /* 3D coverflow：懒初始化（等区块显示后再量宽） */
+    let railInited=false;
+    window.__pdRailInit=function(){
+      const rail=document.getElementById('pdRail'); if(!rail)return;
+      const cards=[...rail.querySelectorAll('.shotcard')];
+      if(!cards.length)return;
+      if(!railInited){
+        railInited=true;
+        const now=document.getElementById('pdRailNow'),tag=document.getElementById('pdRailTag'),title=document.getElementById('pdRailTitle');
+        const prev=document.getElementById('pdRailPrev'),next=document.getElementById('pdRailNext'),dots=document.getElementById('pdRailDots');
+        const total=document.getElementById('pdRailTotal');if(total)total.textContent='/ '+cards.length;
+        const capData=cards.map(c=>{const cap=c.querySelector('.cap');const sp=cap?cap.querySelector('span'):null;return {tag:sp?sp.textContent:'',title:cap?cap.textContent.replace(sp?sp.textContent:'','').trim():c.querySelector('img').alt};});
+        cards.forEach((_,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','第'+(i+1)+'张：'+capData[i].title);b.addEventListener('click',()=>go(i));dots.appendChild(b);});
+        const dotEls=[...dots.children];
+        let active=-1,raf=null,dragging=false,startX=0,startScroll=0,moved=false,justDragged=false;
+        function paint(){raf=null;const cx=rail.scrollLeft+rail.clientWidth/2,half=rail.clientWidth/2||1;let best=0,bd=1e9;
+          cards.forEach((c,i)=>{const cc=c.offsetLeft+c.offsetWidth/2;const d=(cc-cx)/half;const ad=Math.min(Math.abs(d),1.7);
+            const scale=Math.max(.52,1-ad*.34);const ry=Math.max(-30,Math.min(30,-d*26));const op=Math.max(.32,1-ad*.5);
+            c.style.transform='perspective(1300px) scale('+scale.toFixed(3)+') rotateY('+ry.toFixed(2)+'deg)';c.style.opacity=op.toFixed(3);c.style.zIndex=String(50-Math.round(ad*20));
+            const dist=Math.abs(cc-cx);if(dist<bd){bd=dist;best=i;}});
+          if(best!==active){active=best;syncMeta();}}
+        function syncMeta(){if(now)now.textContent=String(active+1).padStart(2,'0');if(tag)tag.textContent=capData[active].tag;if(title)title.textContent=capData[active].title;
+          dotEls.forEach((b,i)=>b.classList.toggle('on',i===active));if(prev)prev.disabled=active===0;if(next)next.disabled=active===cards.length-1;}
+        function go(i){i=Math.max(0,Math.min(cards.length-1,i));const c=cards[i];rail.scrollTo({left:c.offsetLeft+c.offsetWidth/2-rail.clientWidth/2,behavior:'smooth'});}
+        rail.addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(paint)},{passive:true});
+        if(prev)prev.addEventListener('click',()=>go(active-1));
+        if(next)next.addEventListener('click',()=>go(active+1));
+        rail.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){go(active+1);e.preventDefault()}else if(e.key==='ArrowLeft'){go(active-1);e.preventDefault()}});
+        rail.addEventListener('wheel',e=>{const dy=Math.abs(e.deltaY),dx=Math.abs(e.deltaX);if(dy>dx){rail.scrollLeft+=e.deltaY;e.preventDefault();}},{passive:false});
+        rail.addEventListener('pointerdown',e=>{if(e.pointerType==='touch')return;dragging=true;moved=false;startX=e.clientX;startScroll=rail.scrollLeft;rail.classList.add('drag');});
+        window.addEventListener('pointermove',e=>{if(!dragging)return;const dx=e.clientX-startX;if(Math.abs(dx)>5)moved=true;rail.scrollLeft=startScroll-dx;});
+        window.addEventListener('pointerup',()=>{if(!dragging)return;dragging=false;rail.classList.remove('drag');if(moved){justDragged=true;setTimeout(()=>{justDragged=false},260);}});
+        rail._justDragged=()=>justDragged;
+        function setPad(){const cw=cards[0].offsetWidth||240;const pad=Math.max(0,(rail.clientWidth-cw)/2);rail.style.paddingLeft=pad+'px';rail.style.paddingRight=pad+'px';}
+        window.addEventListener('resize',()=>{setPad();if(!raf)raf=requestAnimationFrame(paint)});
+        setPad();
+        rail.scrollLeft=cards[0].offsetLeft+cards[0].offsetWidth/2-rail.clientWidth/2;
+        setTimeout(paint,60);
+      }
+      requestAnimationFrame(()=>{const r=document.getElementById('pdRail');if(r)r.dispatchEvent(new Event('scroll'))});
+    };
+    /* lightbox：置于 dialog 内部，覆盖 top-layer；Escape 优先关闭预览 */
+    const lb=document.getElementById('pdLb');
+    if(lb){
+      const lbimg=document.getElementById('pdLbImg'),lbcap=document.getElementById('pdLbCap');
+      dlg.querySelectorAll('.pd-x .shotcard').forEach(c=>c.addEventListener('click',()=>{
+        const r=document.getElementById('pdRail');if(r&&r._justDragged&&r._justDragged())return;
+        const img=c.querySelector('img');lbimg.src=img.src;lbimg.alt=img.alt;
+        const cp=c.querySelector('.cap'),sp=cp?cp.querySelector('span'):null;
+        lbcap.textContent=cp?(sp?cp.textContent.replace(sp.textContent,'').trim():cp.textContent.trim()):img.alt;
+        lb.classList.add('on');
+      }));
+      const closeLb=()=>lb.classList.remove('on');
+      lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('x'))closeLb()});
+      dlg.addEventListener('cancel',e=>{if(lb.classList.contains('on')){e.preventDefault();closeLb();}});
+    }
+  })();
+
+  /* ===== 项目6：卡片内演示导览（不跳转第三级，滚动到卡片内区块） ===== */
+  (function inCardDemoNav(){
+    const sc=document.getElementById('pdScroll');
+    document.querySelectorAll('#pdCaseLink [data-jump]').forEach(b=>{
+      b.addEventListener('click',()=>{
+        const t=document.querySelector(b.getAttribute('data-jump'));
+        if(!t||!sc) return;
+        const top=sc.scrollTop + t.getBoundingClientRect().top - sc.getBoundingClientRect().top - 16;
+        sc.scrollTo({top:Math.max(0,top),behavior:'smooth'});
+      });
+    });
+  })();
+
+  /* ===== 项目6 iWork：交互式案例展示控制器 ===== */
+  (function iWorkShowcase(){
+    const sec=document.getElementById('pdIwork');
+    if(!sec) return;
+    // 图片路径解析：离线版注入 window.__IW_IMGS 映射（base64），否则用相对路径
+    const imgSrc = name => (window.__IW_IMGS && window.__IW_IMGS[name]) ? window.__IW_IMGS[name] : ('assets/dmtt/'+name);
+    const PAGES=[
+      {img:'workbench.png',k:'01 / 08 · 经营工作台',t:'打开 App，就知道今天要做什么',
+       d:'工作台是整座工厂的移动中枢。待办、指标与任务按“今天要处理”聚合，把散落在各系统里的高频事项收敛成一条清晰的路径。',
+       pts:['高频任务按紧急度聚合，首屏只回答一个问题','关键指标实时呈现，异常一眼可辨','3 层导航收敛 200+ 功能点，路径最短']},
+      {img:'monitor-alert.png',k:'02 / 08 · 指标监控',t:'异常用语义红标出，不用去图里找',
+       d:'成本、质量等多主题监控：不达标数据以语义红直接标记（如 BPW-6-4-0 成本 1212.86 超出目标 1129.32），异常自动触发工单与备件调拨。',
+       pts:['语义配色：红=不达标、绿=达标，无需图例','主题可切换：成本 / 质量 / 能耗','异常自动联动维修工单，形成闭环']},
+      {img:'agv-home.png',k:'03 / 08 · AGV 叫料',t:'叫料到物流，一屏掌握',
+       d:'AGV 叫料与物流：现场发起叫料请求，任务、设备状态与转运进度在一屏内呈现，并与单件追溯、谱系关系打通。',
+       pts:['叫料请求即时下发，状态实时回传','AGV 设备在线率与电量一目了然','对接单件追溯，物流与质量数据同源']},
+      {img:'monitor-detail.png',k:'04 / 08 · 异常详情',t:'从告警到归因，一条线索追到底',
+       d:'异常详情页把不达标数据、发生位置、智能报告与关联指标串成一条线：不只看“哪里异常”，还能顺着谱系关系定位“为什么”。',
+       pts:['实际/目标/地点/时间一屏交代清楚','AI 节能方案与智能报告随异常推荐','关联指标分析图辅助根因定位']},
+      {img:'approval.png',k:'05 / 08 · 审批中心',t:'审批流，也能拖拽式配置',
+       d:'审批中心把待审批、已审批分栏收口：故障处理等审批事项按状态聚合，红点提示未读，查看详情直达业务表单。审批流支持 0 代码拖拽配置。',
+       pts:['待审批 / 已审批分栏，状态一眼分清','审批卡片直连故障设备与产线信息','零代码拖拽式搭建审批流']},
+      {img:'approval-detail.png',k:'06 / 08 · 审批详情',t:'一屏把决策依据交代清楚',
+       d:'审批详情页把审批内容、发生时间、产线、设备编号、故障详情与处理方式集中在一屏，审批人不必跳转即可做出判断。',
+       pts:['故障时间 / 产线 / 设备结构化呈现','故障详情与处理方式同屏可查','再次审批、确认双动作明确']},
+      {img:'msg-step-maint-open.png',k:'07 / 08 · 设备故障工单',t:'异常之后，跨模块闭环',
+       d:'从消息详情进入设备故障工单：时间、产线、设备编号与故障详情一条线交代，生产课处理与保全处理分工协同，一键进入故障处理。对应“设备异常 → 自动触发维修工单 + 备件调拨”的联动。',
+       pts:['消息直达工单，故障信息结构化','生产课 / 保全双线协同处理','异常自动联动维修工单，形成闭环']},
+      {img:'todo.png',k:'08 / 08 · 待办消息',t:'所有要处理的，都在这里',
+       d:'待办与消息统一收口：审批、任务、系统通知按紧急度排序，配合消息中心，让一线不被信息淹没。',
+       pts:['审批与任务按紧急度智能排序','消息分类聚合，降低打扰','与工作台数据同源，状态实时同步']}
+    ];
+    const screen=document.getElementById('iwScreen');
+    const device=document.getElementById('iwDevice');
+    const kicker=document.getElementById('iwKicker');
+    const title=document.getElementById('iwTitle');
+    const desc=document.getElementById('iwDesc');
+    const points=document.getElementById('iwPoints');
+    const tabs=Array.from(document.querySelectorAll('#iwTabs button'));
+    const thumbsWrap=document.getElementById('iwThumbs');
+    let cur=0, timer=null;
+
+    PAGES.forEach((p,i)=>{
+      const b=document.createElement('div');
+      b.className='iw-thumb'+(i===0?' on':'');
+      b.setAttribute('role','button'); b.setAttribute('tabindex','0');
+      b.setAttribute('aria-label','查看 '+p.k.split('· ')[1]);
+      b.innerHTML='<img src="'+imgSrc(p.img)+'" alt="'+p.k.split('· ')[1]+'"><span>'+p.k.split('· ')[1]+'</span>';
+      b.addEventListener('click',()=>go(i));
+      b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go(i)}});
+      thumbsWrap.appendChild(b);
+    });
+    const thumbs=Array.from(thumbsWrap.children);
+
+    function applyCopy(p){
+      kicker.textContent=p.k; title.textContent=p.t; desc.textContent=p.d;
+      points.innerHTML=p.pts.map(x=>'<li>'+x+'</li>').join('');
+      [kicker,title,desc,points].forEach(el=>{el.style.opacity='0';el.style.transform='translateY(8px)'});
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{
+        [kicker,title,desc,points].forEach((el,k)=>{
+          el.style.transition='opacity .4s ease '+(k*.05)+'s,transform .4s ease '+(k*.05)+'s';
+          el.style.opacity=''; el.style.transform='';
+        });
+      }));
+    }
+    function go(i){
+      if(i===cur || i<0 || i>=PAGES.length) return;
+      cur=i; const p=PAGES[i];
+      tabs.forEach((t,k)=>{t.classList.toggle('on',k===i);t.setAttribute('aria-selected',k===i?'true':'false')});
+      thumbs.forEach((t,k)=>t.classList.toggle('on',k===i));
+      device.classList.add('swap');
+      clearTimeout(timer);
+      timer=setTimeout(()=>{
+        screen.src=imgSrc(p.img);
+        screen.alt=p.k.split('· ')[1];
+        applyCopy(p);
+        device.classList.remove('swap');
+      },190);
+    }
+    tabs.forEach((t,i)=>t.addEventListener('click',()=>go(i)));
+
+    const stage=document.getElementById('iwStage');
+    stage.addEventListener('mousemove',e=>{
+      if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+      const r=stage.getBoundingClientRect();
+      const dx=(e.clientX-r.left)/r.width-.5, dy=(e.clientY-r.top)/r.height-.5;
+      device.style.transform='perspective(1300px) rotateY('+(-9+dx*10)+'deg) rotateX('+(3-dy*8)+'deg)';
+    });
+    stage.addEventListener('mouseleave',()=>{device.style.transform=''});
+
+    window.__iwReset=function(){
+      sec.classList.remove('in');
+      if(cur!==0){ cur=0;
+        tabs.forEach((t,k)=>{t.classList.toggle('on',k===0);t.setAttribute('aria-selected',k===0?'true':'false')});
+        thumbs.forEach((t,k)=>t.classList.toggle('on',k===0));
+        screen.src=imgSrc(PAGES[0].img);
+        kicker.textContent=PAGES[0].k; title.textContent=PAGES[0].t; desc.textContent=PAGES[0].d;
+        points.innerHTML=PAGES[0].pts.map(x=>'<li>'+x+'</li>').join('');
+      }
+    };
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(en=>{ if(en.isIntersecting && sec.classList.contains('is-on')) sec.classList.add('in'); });
+    },{threshold:.18});
+    io.observe(sec);
+  })();
+
 </script>
+<script>
+/* 中文 widow-fix：把段落末尾 3 个实字（含标点）绑成不换行组，杜绝单字吊行 */
+(function(){
+  function clean(root){
+    (root||document).querySelectorAll('span.nb[data-w]').forEach(function(sp){
+      var p=sp.parentNode,prev=sp.previousSibling;
+      if(prev&&prev.nodeType===3){prev.appendData(sp.textContent);} 
+      else {p.insertBefore(document.createTextNode(sp.textContent),sp);}
+      p.removeChild(sp);
+    });
+  }
+  function fix(root){
+    clean(root);
+    var sels='p,h1,h2,h3,h4,h5,li,dd,figcaption,blockquote';
+    (root||document).querySelectorAll(sels).forEach(function(e){
+      var last=e.lastChild;
+      if(!last||last.nodeType!==3) return;
+      var t=last.textContent;
+      if(t.trim().length<5||/\n/.test(t)) return;
+      var i=t.length-1,solid=0,start=t.length;
+      while(i>=0){ start=i; if(/[\u4e00-\u9fa5A-Za-z0-9]/.test(t[i])) solid++; if(solid>=3)break; i--; }
+      if(solid<3||start>=t.length) return;
+      while(start<t.length&&!/[\u4e00-\u9fa5A-Za-z0-9]/.test(t[start])) start++;
+      if(start<=0||start>=t.length) return;
+      var tail=t.slice(start);
+      var sp=document.createElement('span');sp.className='nb';sp.setAttribute('data-w','1');sp.textContent=tail;
+      last.deleteData(start,t.length-start);
+      e.appendChild(sp);
+    });
+  }
+  window.__fixWidows=fix;
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){fix();});
+  else fix();
+  setTimeout(function(){fix();},1600);
+  document.addEventListener('click',function(){setTimeout(function(){fix();},280);},true);
+})();
+</script>
+
 </body>
 </html>
