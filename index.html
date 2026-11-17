@@ -1354,20 +1354,35 @@ section,footer{scroll-margin-top:92px}
 .phones--iwork::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   background:linear-gradient(90deg,rgba(4,10,22,.28),rgba(4,10,22,.06) 44%,rgba(4,10,22,.34))}
 .phones--iwork>*{position:relative;z-index:1}
-/* ===== 项目6卡片：浅蓝白晕光主视觉（浅底 + 原场景图淡透出 + 边缘渐隐） ===== */
-/* 主底换成浅蓝流光，让深蓝手机样机成为唯一视觉焦点；原深蓝场景图 13% 透出，保留斜切品牌卡与弧线记忆 */
+/* ===== 项目6卡片：AI 生成发布会 KV 主视觉（生成背景 + 真实界面样机叠放） ===== */
+/* 背景为 AI 新生成的宽幅 KV：宝蓝渐变 / 中央发光展台 / 右侧 3D 工厂 / 金色光带；不含文字与手机 */
 .phones--iwork{
-  background-image:url('assets/bg/flow-light.jpg');background-size:cover;background-position:center;
-  box-shadow:inset 0 0 46px 10px rgba(6,14,30,.32)}
+  background-image:url('assets/bg/kv-iwork.jpg');background-size:cover;background-position:center 62%;
+  box-shadow:none}
 .phones--iwork::before{
-  background:
-    linear-gradient(180deg,rgba(6,14,30,.60) 0%,rgba(6,14,30,.10) 20%,rgba(6,14,30,0) 50%,rgba(6,14,30,.30) 100%),
-    linear-gradient(90deg,rgba(6,14,30,.24),transparent 16%,transparent 84%,rgba(6,14,30,.24))}
+  background:linear-gradient(90deg,rgba(2,20,66,.30),rgba(2,20,66,.04) 38%,transparent 64%)}
 .phones--iwork::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:url('assets/dmtt/iwork-card-hero.png') center/cover no-repeat;opacity:.13}
-/* 亮底下的卡片头：深色毛玻璃保证小字与 IWORK/08 角标对比度（仅暗色主题） */
+  background:radial-gradient(ellipse 26% 15% at 50% 87%,rgba(150,240,255,.50),transparent 72%)}
+/* 左侧 KV 标题：HTML 文字排版，不来自参考图 */
+.phones--iwork .iw-kv{position:absolute;left:3.6%;top:50%;transform:translateY(-50%);z-index:3;pointer-events:none;color:#fff}
+.iw-kv__brand{display:flex;align-items:center;gap:9px;font-size:.7rem;letter-spacing:.06em;color:rgba(255,255,255,.95);margin-bottom:9px;white-space:nowrap}
+.iw-kv__brand b{font-size:1.08rem;letter-spacing:-.02em}
+.iw-kv__brand i{width:1px;height:13px;background:rgba(255,255,255,.65)}
+.iw-kv strong{display:block;font-style:italic;font-weight:900;line-height:1.05;letter-spacing:.01em;transform:skewX(-8deg);text-shadow:0 6px 22px rgba(0,32,90,.5)}
+.iw-kv__a{font-size:clamp(24px,3vw,42px);color:#fff}
+.iw-kv__b{font-size:clamp(24px,3vw,42px);color:#ffd84d}
+/* 样机：立体透视 + 深色投影，踩在展台上、从亮底中跳出来 */
+.phones--iwork .phone.phone--shot{filter:drop-shadow(0 16px 18px rgba(0,20,60,.55));
+  box-shadow:0 34px 46px -14px rgba(0,20,60,.9),0 0 0 4px rgba(185,235,255,.30),0 0 52px rgba(120,215,255,.55),inset 0 1px 0 rgba(255,255,255,.24)}
+.phones--iwork .phone.phone--shot:first-child{transform:perspective(900px) rotateY(-10deg) rotate(-4deg) translateY(9px)}
+.phones--iwork .phone.phone--shot:last-child{transform:perspective(900px) rotateY(10deg) rotate(3deg) translateY(-5px)}
+.proj--iwork:hover .phones--iwork .phone.phone--shot:first-child{transform:perspective(900px) rotateY(-8deg) rotate(-3deg) translateY(3px)}
+.proj--iwork:hover .phones--iwork .phone.phone--shot:last-child{transform:perspective(900px) rotateY(8deg) rotate(2deg) translateY(-9px)}
+/* 亮底下的卡片头：深色毛玻璃保证小字与角标对比度（仅暗色主题） */
 html:not([data-theme="light"]) .proj--iwork .ui-bar{background:rgba(8,18,36,.74);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 html:not([data-theme="light"]) .proj--iwork .ui-bar .badge{color:#a9d8ff;border-color:rgba(140,200,255,.42);background:rgba(20,50,95,.5)}
+html:not([data-theme="light"]) .proj--iwork .ui-bar .ttl{color:rgba(226,242,255,.9)}
+@media(max-width:900px){.phones--iwork{padding-left:14px;background-position:46% 60%}.phones--iwork .iw-kv{display:none}}
 
 .phones--iwork .phone.phone--shot{
   width:126px;height:calc(100% - 10px);padding:0;overflow:hidden;
@@ -1941,6 +1956,7 @@ html:not([data-theme="light"]) .proj--iwork .ui-bar .badge{color:#a9d8ff;border-
             <div class="phones phones--blue phones--iwork">
               <div class="phone phone--shot"><img src="assets/dmtt/login.png" alt="iWork 登录页"></div>
               <div class="phone phone--shot"><img src="assets/dmtt/home.png" alt="iWork 经营首页"></div>
+          <div class="iw-kv" aria-hidden="true"><span class="iw-kv__brand"><b>iWork</b><i></i>综合业务移动平台</span><strong class="iw-kv__a">全新体验</strong><strong class="iw-kv__b">快捷操作</strong></div>
             </div>
           </div>
         </div>
