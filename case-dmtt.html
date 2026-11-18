@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>iWork · 综合业务平台（行业标准 MES）— 设计案例</title>
 <style>
+/*! Devices.css v0.2.0 | MIT License | github.com/picturepan2/devices.css */.dvc,.dvc *,.dvc ::after,.dvc ::before,.dvc::after,.dvc::before{box-sizing:border-box;display:block}.dvc{position:relative;transform:scale(1);z-index:1}.dvc .dvc-frame{z-index:1}.dvc .dvc-screen{background-color:#000;background-position:center center;background-size:cover;object-fit:cover;position:relative}.dvc-iphone-14-pro{height:868px;width:428px}.dvc-iphone-14-pro .dvc-frame{background:#010101;border:1px solid #1b1721;border-radius:68px;box-shadow:inset 0 0 4px 2px #c0b7cd,inset 0 0 0 6px #342c3f;height:868px;padding:19px;width:428px}.dvc-iphone-14-pro .dvc-screen{border-radius:49px;height:830px;width:390px}.dvc-iphone-14-pro .dvc-stripe::after,.dvc-iphone-14-pro .dvc-stripe::before{border:solid rgba(1,1,1,.25);border-width:0 7px;content:"";height:7px;left:0;position:absolute;width:100%;z-index:9}.dvc-iphone-14-pro .dvc-stripe::after{top:85px}.dvc-iphone-14-pro .dvc-stripe::before{bottom:85px}.dvc-iphone-14-pro .dvc-header{background:#010101;border-radius:20px;height:35px;left:50%;margin-left:-60px;position:absolute;top:29px;width:120px}.dvc-iphone-14-pro .dvc-sensors::after,.dvc-iphone-14-pro .dvc-sensors::before{content:"";position:absolute}.dvc-iphone-14-pro .dvc-sensors::after{background:#010101;border-radius:17px;height:33px;left:50%;margin-left:-60px;top:30px;width:74px}.dvc-iphone-14-pro .dvc-sensors::before{background:radial-gradient(farthest-corner at 20% 20%,#6074bf 0,transparent 40%),radial-gradient(farthest-corner at 80% 80%,#513785 0,#24555e 20%,transparent 50%);border-radius:50%;box-shadow:0 0 1px 1px rgba(255,255,255,.05);height:9px;left:50%;margin-left:36px;top:42px;width:9px}.dvc-iphone-14-pro .dvc-btns{background:#1b1721;border-radius:2px;height:32px;left:-2px;position:absolute;top:115px;width:3px}.dvc-iphone-14-pro .dvc-btns::after,.dvc-iphone-14-pro .dvc-btns::before{background:#1b1721;border-radius:2px;content:"";height:62px;left:0;position:absolute;width:3px}.dvc-iphone-14-pro .dvc-btns::after{top:60px}.dvc-iphone-14-pro .dvc-btns::before{top:140px}.dvc-iphone-14-pro .dvc-power{background:#1b1721;border-radius:2px;height:100px;position:absolute;right:-2px;top:200px;width:3px}.dvc-iphone-14-pro .dvc-home::after,.dvc-iphone-14-pro .dvc-home::before{border:solid rgba(1,1,1,.25);border-width:6px 0;content:"";height:6px;position:absolute;width:6px;z-index:9}.dvc-iphone-14-pro .dvc-home::after{right:86px;top:0}.dvc-iphone-14-pro .dvc-home::before{bottom:0;left:86px}.dvc-iphone-14-pro.dvc-silver .dvc-frame{border-color:#c8cacb;box-shadow:inset 0 0 4px 2px #fff,inset 0 0 0 6px #e2e3e4}.dvc-iphone-14-pro.dvc-silver .dvc-btns{background:#c8cacb}.dvc-iphone-14-pro.dvc-silver .dvc-btns::after,.dvc-iphone-14-pro.dvc-silver .dvc-btns::before{background:#c8cacb}.dvc-iphone-14-pro.dvc-silver .dvc-power{background:#c8cacb}.dvc-iphone-14-pro.dvc-black .dvc-frame{border-color:#5c5956;box-shadow:inset 0 0 4px 2px #fff,inset 0 0 0 6px #76726f}.dvc-iphone-14-pro.dvc-black .dvc-btns{background:#5c5956}.dvc-iphone-14-pro.dvc-black .dvc-btns::after,.dvc-iphone-14-pro.dvc-black .dvc-btns::before{background:#5c5956}.dvc-iphone-14-pro.dvc-black .dvc-power{background:#5c5956}.dvc-iphone-14-pro.dvc-gold .dvc-frame{border-color:#e7d19e;box-shadow:inset 0 0 4px 2px #fff,inset 0 0 0 6px #d2ab4c}.dvc-iphone-14-pro.dvc-gold .dvc-btns{background:#e7d19e}.dvc-iphone-14-pro.dvc-gold .dvc-btns::after,.dvc-iphone-14-pro.dvc-gold .dvc-btns::before{background:#e7d19e}.dvc-iphone-14-pro.dvc-gold .dvc-power{background:#e7d19e}
 @font-face{font-family:Bricolage;src:url(assets/BricolageGrotesque-latin.woff2) format('woff2');font-display:swap}
 @font-face{font-family:JBMono;src:url(assets/JetBrainsMono-latin.woff2) format('woff2');font-display:swap}
 :root{
@@ -84,32 +85,19 @@ section{position:relative}
 .hero-stage .r3{width:690px;height:690px;border-style:dashed;border-color:rgba(120,165,240,.08);animation:spin 120s linear infinite reverse}
 @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
 .hero-stage .stage-glow{position:absolute;left:50%;bottom:-26px;transform:translateX(-50%);width:78%;height:130px;border-radius:50%;background:radial-gradient(ellipse,rgba(31,123,255,.34),rgba(37,214,232,.09) 46%,transparent 72%);filter:blur(18px);pointer-events:none}
-/* ===== 真实设备样机（三处展示通用） ===== */
-.dev{position:relative;aspect-ratio:393/852;border-radius:24px;padding:4px;transform-style:preserve-3d;
-  background:linear-gradient(140deg,#677694 0%,#24314a 20%,#0d1424 48%,#1c2740 78%,#53627e 100%);
-  box-shadow:0 1px 0 rgba(255,255,255,.26) inset,0 -1px 0 rgba(0,0,0,.75) inset,0 0 0 1px rgba(2,6,14,.9),0 3px 5px rgba(0,0,0,.55),0 28px 54px -16px rgba(0,0,0,.85),0 54px 100px -38px rgba(31,123,255,.5)}
-.dev::before{content:"";position:absolute;right:-3px;top:23%;width:3px;height:12%;border-radius:0 3px 3px 0;background:linear-gradient(90deg,#232d46,#8d9ab5)}
-.dev::after{content:"";position:absolute;left:-3px;top:17%;width:3px;height:16%;border-radius:3px 0 0 3px;background:linear-gradient(90deg,#8d9ab5,#232d46);box-shadow:0 24px 0 #475575}
-.dev-screen{position:relative;aspect-ratio:393/852;border-radius:20px;overflow:hidden;background:#0a1220;box-shadow:0 0 0 1px rgba(0,0,0,.9) inset}
-.dev-screen img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
-/* 扁平卡片样机：保留 iOS 比例，但去掉金属边框/侧键/灵动岛 */
-.dev.is-card{padding:0;border-radius:20px;border:1px solid rgba(120,170,255,.28);
-  background:linear-gradient(160deg,rgba(18,34,66,.96),rgba(7,14,28,.96));
-  box-shadow:0 22px 48px -22px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.06)}
-.dev.is-card::before,.dev.is-card::after{display:none}
-.dev.is-card .dev-screen{border-radius:19px;box-shadow:none}
-.dev.is-card .island{display:none}
-.dev.is-card .glare{background:linear-gradient(132deg,rgba(255,255,255,.06),transparent 38%)}
-.dev-screen .island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:31%;height:15px;border-radius:99px;background:#03060c;box-shadow:0 0 0 1px rgba(140,180,240,.13),inset 0 0 5px #000;z-index:3;pointer-events:none}
-.dev-screen .island::after{content:"";position:absolute;right:9%;top:50%;transform:translateY(-50%);width:5px;height:5px;border-radius:50%;background:#0c1830;box-shadow:inset 0 0 2px rgba(120,180,255,.8)}
-.dev-screen .glare{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(122deg,rgba(255,255,255,.14),rgba(255,255,255,.03) 17%,transparent 33%,transparent 100%)}
+/* ===== 样机统一为 devices.css 官方 iPhone 14 Pro，仅整体缩放，不改机身几何 ===== */
+.float-dev>.bob>.dvc,.scene-device>.dvc,.shotcard>.dvc{transform-origin:top left}
+.scene-device>.dvc{transform:scale(var(--sc-s))}
+.float-dev>.bob>.dvc{transform:scale(var(--s))}
+.shotcard>.dvc{transform:scale(var(--sc-s));filter:drop-shadow(0 18px 30px rgba(0,0,0,.72))}
+.dvc-screen{object-position:top center}
 /* 首屏三机 */
-.float-dev{position:absolute;will-change:transform;transform-style:preserve-3d}
+.float-dev{position:absolute;will-change:transform;transform-style:preserve-3d;height:calc(868px * var(--s))}
 .float-dev .bob{animation:bob 6.5s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
-.fd-1{left:6%;top:74px;width:224px;z-index:3;transform:rotate(-9deg)}
-.fd-2{left:35%;top:0;width:244px;z-index:5;transform:rotate(3deg)}
-.fd-3{right:1%;top:118px;width:224px;z-index:2;transform:rotate(11deg)}
+.fd-1{--s:.5234;left:6%;top:74px;width:224px;z-index:3;transform:rotate(-9deg)}
+.fd-2{--s:.5701;left:35%;top:0;width:244px;z-index:5;transform:rotate(3deg)}
+.fd-3{--s:.5234;right:1%;top:118px;width:224px;z-index:2;transform:rotate(11deg)}
 .fd-2 .bob{animation-delay:-1.8s}.fd-3 .bob{animation-delay:-3.4s}
 .float-chip{position:absolute;z-index:6;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;border:1px solid var(--line2);background:linear-gradient(140deg,rgba(16,32,63,.94),rgba(8,16,32,.94));backdrop-filter:blur(12px);box-shadow:0 14px 34px rgba(0,0,0,.5),0 0 26px rgba(31,123,255,.18);animation:chipfloat 7s ease-in-out infinite}
 .float-chip .ic{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#05101f;font:800 13px var(--disp)}
@@ -165,10 +153,8 @@ section{position:relative}
 .scene-orbit.alt{width:460px;height:460px;border-style:solid;border-color:rgba(37,214,232,.1);animation-direction:reverse;animation-duration:90s}
 @keyframes orbitSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
 
-.scene-device{position:absolute;left:50%;top:52%;width:200px;transform:translate(-50%,-50%) rotate(-3deg);z-index:4;
+.scene-device{--sc-s:.4673;position:absolute;left:50%;top:52%;width:calc(428px * var(--sc-s));height:calc(868px * var(--sc-s));transform:translate(-50%,-50%) rotate(-3deg);z-index:4;
   transition:transform .7s var(--ease),filter .5s;filter:drop-shadow(0 26px 36px rgba(0,0,0,.65))}
-.scene-device .dev{border-radius:22px;padding:4px}
-.scene-device .dev-screen{border-radius:18px}
 .scene-device.is-dim{transform:translate(-50%,-50%) translateX(96px) rotate(10deg) scale(.84);opacity:.55;filter:blur(.4px) drop-shadow(0 20px 28px rgba(0,0,0,.55))}
 .scene-device.is-front{transform:translate(-50%,-50%) translateX(-14px) rotate(-5deg) scale(1.04);opacity:1;z-index:5}
 .scene-device.right.is-front{transform:translate(-50%,-50%) translateX(14px) rotate(5deg) scale(1.04)}
@@ -209,22 +195,13 @@ section{position:relative}
   scrollbar-width:none;-ms-overflow-style:none;touch-action:pan-x}
 .story-rail::-webkit-scrollbar{display:none}
 .story-rail.drag{cursor:grabbing;scroll-snap-type:none}
-.shotcard{flex:0 0 clamp(228px,27vw,286px);scroll-snap-align:center;position:relative;padding:4px;border-radius:16px;cursor:pointer;
-  transform-style:preserve-3d;will-change:transform,opacity;backface-visibility:hidden;
-  background:linear-gradient(140deg,#5c6b88,#1c2740 30%,#0d1424 55%,#1c2740 80%,#4a5975);
-  box-shadow:0 0 0 1px rgba(2,6,14,.85),0 18px 38px -14px rgba(0,0,0,.8)}
-.shotcard .sc-screen{position:relative;aspect-ratio:393/852;border-radius:12px;overflow:hidden;background:#0a1220}
-.shotcard img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
-.shotcard.is-card{padding:0;border-radius:14px;border:1px solid rgba(120,170,255,.26);
-  background:linear-gradient(160deg,rgba(18,34,66,.9),rgba(7,14,28,.94));
-  box-shadow:0 18px 38px -18px rgba(0,0,0,.82),inset 0 1px 0 rgba(255,255,255,.05)}
-.shotcard.is-card .sc-screen{border-radius:13px}
-.shotcard.is-card .island{display:none}
-.shotcard.is-card .cap{border-radius:0 0 13px 13px}
-.shotcard .island{position:absolute;top:7px;left:50%;transform:translateX(-50%);width:31%;height:13px;border-radius:99px;background:#03060c;box-shadow:0 0 0 1px rgba(140,180,240,.12);z-index:3}
-.shotcard .glare{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(122deg,rgba(255,255,255,.12),transparent 32%)}
-.shotcard .no{position:absolute;top:10px;left:10px;z-index:4;font:10px var(--mono);letter-spacing:.06em;color:#dce9ff;background:rgba(5,10,22,.72);border:1px solid var(--line2);padding:3px 7px;border-radius:6px;backdrop-filter:blur(6px)}
-.shotcard .cap{position:absolute;left:4px;right:4px;bottom:4px;padding:24px 14px 12px;border-radius:0 0 12px 12px;background:linear-gradient(transparent,rgba(4,9,20,.94));font-size:13px;font-weight:600;opacity:0;transform:translateY(8px);transition:.35s;z-index:4}
+.shotcard{--sc-s:.6682;flex:0 0 clamp(228px,27vw,286px);min-width:0;height:calc(868px * var(--sc-s));
+  scroll-snap-align:center;position:relative;padding:0;border:0;border-radius:0;background:none;box-shadow:none;cursor:pointer;
+  transform-style:preserve-3d;will-change:transform,opacity;backface-visibility:hidden}
+.shotcard .no{position:absolute;top:calc(30px * var(--sc-s));left:calc(26px * var(--sc-s));z-index:4;font:10px var(--mono);letter-spacing:.06em;color:#dce9ff;background:rgba(5,10,22,.72);border:1px solid var(--line2);padding:3px 7px;border-radius:6px;backdrop-filter:blur(6px)}
+.shotcard .cap{position:absolute;left:calc(19px * var(--sc-s));right:calc(19px * var(--sc-s));bottom:calc(19px * var(--sc-s));
+  padding:24px 14px 12px;border-radius:0 0 calc(49px * var(--sc-s)) calc(49px * var(--sc-s));
+  background:linear-gradient(transparent,rgba(4,9,20,.94));font-size:13px;font-weight:600;opacity:0;transform:translateY(8px);transition:.35s;z-index:4}
 .shotcard:hover .cap{opacity:1;transform:none}
 .shotcard .cap span{display:block;font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.12em;margin-bottom:3px}
 /* 当前界面信息条 */
@@ -245,7 +222,7 @@ section{position:relative}
 .story-tip{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--dim);text-align:center;margin-top:14px}
 @media(max-width:700px){
   .story-rail{gap:14px;padding:26px 0 18px}
-  .shotcard{flex-basis:200px}
+  .shotcard{flex-basis:200px;--sc-s:.4673}
   .story-nav button{width:40px;height:40px}
   .shotcard .cap{display:none}
 }
@@ -319,7 +296,7 @@ section{position:relative}
   .feature.rev .fx-copy{order:0}
   .fx-stage{min-height:510px}
   .scene-frame{height:500px}
-  .scene-device{width:190px}
+  .scene-device{--sc-s:.4439}
   .scene-device.is-front{transform:translate(-50%,-50%) translateX(-10px) rotate(-4deg) scale(1.02)}
   .scene-device.right.is-front{transform:translate(-50%,-50%) translateX(10px) rotate(4deg) scale(1.02)}
   .scene-device.is-dim{transform:translate(-50%,-50%) translateX(70px) rotate(9deg) scale(.8)}
@@ -334,7 +311,7 @@ section{position:relative}
   .eyebrow::before{display:none}
   .hero-copy h1{font-size:clamp(52px,15vw,76px)}
   .hero-stage{height:390px;transform:scale(.84);transform-origin:top center;margin-bottom:-64px}
-  .float-dev{width:196px}.fd-2{width:210px}
+  .float-dev{--s:.4579;width:196px}.fd-2{--s:.4907;width:210px}
   .float-chip{display:none}
   .stats{grid-template-columns:1fr 1fr}
   .stat{padding:22px 16px}
@@ -344,7 +321,7 @@ section{position:relative}
   .ds-card{padding:22px}
   .fx-stage{min-height:470px}
   .scene-frame{height:460px}
-  .scene-device{width:158px}
+  .scene-device{--sc-s:.369}
   .scene-label{padding:7px 9px;font-size:10px}
   .scene-label small{font-size:8px}
   .scene-leader{display:none}
@@ -405,6 +382,83 @@ p,li,dd,dt,figcaption,blockquote,.hero-copy,.about-lead,.pd-lead,.pd-rail-sub,.p
 .pd-x .shotcard .cap span,.story-rail .shotcard .cap span{
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
+/* ===== ReactBits · GooeyNav 动效格式（官方结构 + 站点配色） =====
+   运动参数与官方源码一致，见 gooey 引擎脚本注释 */
+.gooey-nav{
+  --gn-pad:5px;--gn-gap:5px;--gn-font:12.2px;--gn-x:13px;--gn-y:8px;
+  --gn-pill:#5cf2d0;--gn-active-ink:#04120e;--gn-ink:#e9eef4;--gn-muted:rgba(233,238,244,.62);
+  position:relative;display:inline-flex;max-width:100%;font-size:var(--gn-font);line-height:1.2;
+}
+.gooey-nav--sm{--gn-pad:4px;--gn-gap:2px;--gn-font:11px;--gn-x:12px;--gn-y:7px}
+.gooey-nav__stage{position:relative;max-width:100%;isolation:isolate}
+.gooey-nav__blob{
+  position:absolute;inset:0;z-index:0;pointer-events:none;background:var(--gn-pill);
+  filter:blur(.6px) drop-shadow(0 5px 13px rgba(92,242,208,.26));
+  clip-path:inset(100%);will-change:clip-path;
+}
+.gooey-nav__hover{
+  position:absolute;left:0;top:0;width:0;height:0;z-index:0;pointer-events:none;opacity:0;
+  border-radius:999px;background:radial-gradient(ellipse at center,rgba(92,242,208,.16),transparent 72%);
+}
+.gooey-nav__list{
+  position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:var(--gn-gap);
+  margin:0;padding:0;list-style:none;
+}
+.gooey-nav__list--active{
+  position:absolute;inset:0;z-index:2;color:var(--gn-active-ink);
+  visibility:hidden;clip-path:inset(100%);pointer-events:none;
+}
+.gooey-nav__item{display:flex}
+.gooey-nav__link{
+  display:inline-flex;align-items:center;gap:8px;padding:var(--gn-y) var(--gn-x);
+  border:0;border-radius:999px;background:none;color:var(--gn-muted);
+  font:inherit;font-weight:500;text-decoration:none;white-space:nowrap;
+  cursor:pointer;transition:color .2s ease;-webkit-tap-highlight-color:transparent;
+}
+.gooey-nav__list--active .gooey-nav__link{color:inherit}
+.gooey-nav__item[data-active] .gooey-nav__link{color:var(--gn-ink)}
+.gooey-nav__link:focus-visible{outline:2px solid var(--gn-pill);outline-offset:2px}
+@media(hover:hover){.gooey-nav__link:hover{color:var(--gn-ink)}}
+
+/* 8 屏切换：覆盖原来的方形描边卡 + .25s 生硬过渡 */
+#iwTabs.gooey-nav{display:block}
+#iwTabs.gooey-nav .gooey-nav__link,
+#iwTabs.gooey-nav .gooey-nav__link.on{
+  display:inline-flex;padding:var(--gn-y) var(--gn-x);text-align:center;
+  border:0;border-radius:999px;background:none;box-shadow:none;transform:none;
+  color:var(--gn-muted);font-size:var(--gn-font);font-weight:500;letter-spacing:.02em;
+  transition:color .2s ease;
+}
+#iwTabs.gooey-nav .gooey-nav__link:hover{
+  color:var(--gn-ink);background:none;border-color:transparent;transform:none;
+}
+#iwTabs.gooey-nav .gooey-nav__link.on{color:var(--gn-ink)}
+#iwTabs.gooey-nav .gooey-nav__list{gap:var(--gn-gap)}
+/* 反色文字层必须压过上面带 ID 的覆盖规则 */
+#iwTabs.gooey-nav .gooey-nav__list--active .gooey-nav__link,
+.scene-switch.gooey-nav .gooey-nav__list--active .gooey-nav__link{
+  color:var(--gn-active-ink);
+}
+
+/* 场景切换：保留原有绝对定位与深色底，去掉小圆角块 */
+.scene-switch.gooey-nav{
+  position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:10;
+  display:inline-flex;padding:var(--gn-pad);border:0;border-radius:999px;
+  background:rgba(6,13,28,.78);backdrop-filter:blur(10px);
+}
+.scene-switch.gooey-nav .gooey-nav__link,
+.scene-switch.gooey-nav .gooey-nav__link.on{
+  display:inline-flex;border:0;border-radius:999px;background:none;box-shadow:none;text-align:center;
+  color:var(--gn-muted);font:11px/1.2 var(--font);padding:var(--gn-y) var(--gn-x);
+  transition:color .2s ease;
+}
+.scene-switch.gooey-nav .gooey-nav__link.on{color:var(--gn-ink)}
+@media(max-width:560px){
+  .scene-switch.gooey-nav .gooey-nav__link{padding:6px 9px;font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  .gooey-nav__blob{filter:none;will-change:auto}
+}
 </style>
 </head>
 <body>
@@ -445,13 +499,13 @@ p,li,dd,dt,figcaption,blockquote,.hero-copy,.about-lead,.pd-lead,.pd-rail-sub,.p
         <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
         <div class="stage-glow"></div>
         <div class="float-dev fd-1" data-depth="18" data-base="-9">
-          <div class="bob"><div class="dev is-card"><div class="dev-screen"><img src="assets/dmtt/monitor-alert.png" alt="指标监控"><span class="island"></span><span class="glare"></span></div></div></div>
+          <div class="bob"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" src="assets/dmtt/monitor-alert.png" alt="指标监控"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
         </div>
         <div class="float-dev fd-2" data-depth="34" data-base="3">
-          <div class="bob"><div class="dev"><div class="dev-screen"><img src="assets/dmtt/workbench.png" alt="经营工作台"><span class="island"></span><span class="glare"></span></div></div></div>
+          <div class="bob"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" src="assets/dmtt/workbench.png" alt="经营工作台"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
         </div>
         <div class="float-dev fd-3" data-depth="24" data-base="11">
-          <div class="bob"><div class="dev is-card"><div class="dev-screen"><img src="assets/dmtt/agv-home.png" alt="AGV 叫料"><span class="island"></span><span class="glare"></span></div></div></div>
+          <div class="bob"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" src="assets/dmtt/agv-home.png" alt="AGV 叫料"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
         </div>
         <div class="float-chip chip-a"><span class="ic">6</span><div><b>六大模块</b><small>业务全覆盖</small></div></div>
         <div class="float-chip chip-b"><span class="ic alert">!</span><div><b>异常实时告警</b><small>指标 · 产线 · 时间</small></div></div>
@@ -497,24 +551,24 @@ p,li,dd,dt,figcaption,blockquote,.hero-copy,.about-lead,.pd-lead,.pd-rail-sub,.p
       <h2 class="sec-h rv d1">从启动到作业，<span class="hl">每一屏都经过推敲</span></h2>
       <p class="sec-sub rv d2">14 张真实设计界面，覆盖启动、登录、经营工作台、指标监控、待办消息、AGV 叫料与点巡检等核心场景。点击任意界面可放大查看细节。</p>    <div class="story">
       <div class="story-rail" id="storyRail" tabindex="0" aria-label="界面画廊，可拖动或使用左右方向键浏览">
-        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/splash.png" alt="启动页"><span class="island"></span><span class="glare"></span></div><span class="no">01</span><figcaption class="cap"><span>01 · SPLASH</span>启动页 · 综合业务移动平台</figcaption></figure>
-        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/workbench.png" alt="经营工作台"><span class="island"></span><span class="glare"></span></div><span class="no">02</span><figcaption class="cap"><span>02 · WORKBENCH</span>经营工作台 · 常用功能聚合</figcaption></figure>
-        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/monitor-all.png" alt="指标监控全部"><span class="island"></span><span class="glare"></span></div><span class="no">03</span><figcaption class="cap"><span>03 · MONITOR</span>指标监控 · 全部指标</figcaption></figure>
-        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/monitor-alert.png" alt="指标监控异常"><span class="island"></span><span class="glare"></span></div><span class="no">04</span><figcaption class="cap"><span>04 · ALERT</span>指标监控 · 异常告警</figcaption></figure>
-        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/agv-home.png" alt="AGV"><span class="island"></span><span class="glare"></span></div><span class="no">05</span><figcaption class="cap"><span>05 · AGV</span>AGV 物料调度入口</figcaption></figure>
-        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/todo.png" alt="待办"><span class="island"></span><span class="glare"></span></div><span class="no">06</span><figcaption class="cap"><span>06 · TODO</span>待办 · 任务中心</figcaption></figure>
-        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/message.png" alt="消息"><span class="island"></span><span class="glare"></span></div><span class="no">07</span><figcaption class="cap"><span>07 · MESSAGE</span>消息 · 通知中心</figcaption></figure>
-        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/monitor-detail.png" alt="监控详情"><span class="island"></span><span class="glare"></span></div><span class="no">08</span><figcaption class="cap"><span>08 · DETAIL</span>指标监控 · 异常详情</figcaption></figure>
-        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/agv-inbound.png" alt="AGV入库"><span class="island"></span><span class="glare"></span></div><span class="no">09</span><figcaption class="cap"><span>09 · INBOUND</span>AGV · 物料入库提交</figcaption></figure>
-        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/agv-scan.png" alt="AGV扫描"><span class="island"></span><span class="glare"></span></div><span class="no">10</span><figcaption class="cap"><span>10 · SCAN</span>AGV · 扫描识别</figcaption></figure>
-        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/inspection.png" alt="点巡检"><span class="island"></span><span class="glare"></span></div><span class="no">11</span><figcaption class="cap"><span>11 · INSPECTION</span>点巡检工单</figcaption></figure>
-        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/login.png" alt="登录"><span class="island"></span><span class="glare"></span></div><span class="no">12</span><figcaption class="cap"><span>12 · LOGIN</span>登录 · 账号验证</figcaption></figure>
-        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/mine.png" alt="我的"><span class="island"></span><span class="glare"></span></div><span class="no">13</span><figcaption class="cap"><span>13 · PROFILE</span>我的 · 个人中心</figcaption></figure>
-        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/home.png" alt="自定义组"><span class="island"></span><span class="glare"></span></div><span class="no">14</span><figcaption class="cap"><span>14 · CUSTOM</span>首页 · 自定义常用功能</figcaption></figure>
-        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/approval.png" alt="审批中心"><span class="island"></span><span class="glare"></span></div><span class="no">15</span><figcaption class="cap"><span>15 · APPROVAL</span>审批中心 · 待办 / 已审批分栏</figcaption></figure>
-        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/approval-detail.png" alt="审批详情"><span class="island"></span><span class="glare"></span></div><span class="no">16</span><figcaption class="cap"><span>16 · APPROVAL</span>审批详情 · 决策依据一屏到位</figcaption></figure>
-        <figure class="shotcard"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/msg-step-maint-open.png" alt="设备故障工单"><span class="island"></span><span class="glare"></span></div><span class="no">17</span><figcaption class="cap"><span>17 · WORK ORDER</span>设备故障工单 · 保全协同处理</figcaption></figure>
-        <figure class="shotcard is-card"><div class="sc-screen"><img loading="lazy" src="assets/dmtt/verify-account.png" alt="账号验证"><span class="island"></span><span class="glare"></span></div><span class="no">18</span><figcaption class="cap"><span>18 · LOGIN</span>账号验证 · 状态反馈</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/splash.png" alt="启动页"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">01</span><figcaption class="cap"><span>01 · SPLASH</span>启动页 · 综合业务移动平台</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/workbench.png" alt="经营工作台"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">02</span><figcaption class="cap"><span>02 · WORKBENCH</span>经营工作台 · 常用功能聚合</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/monitor-all.png" alt="指标监控全部"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">03</span><figcaption class="cap"><span>03 · MONITOR</span>指标监控 · 全部指标</figcaption></figure>
+        <figure class="shotcard is-card"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/monitor-alert.png" alt="指标监控异常"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">04</span><figcaption class="cap"><span>04 · ALERT</span>指标监控 · 异常告警</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/agv-home.png" alt="AGV"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">05</span><figcaption class="cap"><span>05 · AGV</span>AGV 物料调度入口</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/todo.png" alt="待办"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">06</span><figcaption class="cap"><span>06 · TODO</span>待办 · 任务中心</figcaption></figure>
+        <figure class="shotcard is-card"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/message.png" alt="消息"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">07</span><figcaption class="cap"><span>07 · MESSAGE</span>消息 · 通知中心</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/monitor-detail.png" alt="监控详情"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">08</span><figcaption class="cap"><span>08 · DETAIL</span>指标监控 · 异常详情</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/agv-inbound.png" alt="AGV入库"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">09</span><figcaption class="cap"><span>09 · INBOUND</span>AGV · 物料入库提交</figcaption></figure>
+        <figure class="shotcard is-card"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/agv-scan.png" alt="AGV扫描"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">10</span><figcaption class="cap"><span>10 · SCAN</span>AGV · 扫描识别</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/inspection.png" alt="点巡检"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">11</span><figcaption class="cap"><span>11 · INSPECTION</span>点巡检工单</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/login.png" alt="登录"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">12</span><figcaption class="cap"><span>12 · LOGIN</span>登录 · 账号验证</figcaption></figure>
+        <figure class="shotcard is-card"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/mine.png" alt="我的"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">13</span><figcaption class="cap"><span>13 · PROFILE</span>我的 · 个人中心</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/home.png" alt="自定义组"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">14</span><figcaption class="cap"><span>14 · CUSTOM</span>首页 · 自定义常用功能</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/approval.png" alt="审批中心"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">15</span><figcaption class="cap"><span>15 · APPROVAL</span>审批中心 · 待办 / 已审批分栏</figcaption></figure>
+        <figure class="shotcard is-card"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/approval-detail.png" alt="审批详情"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">16</span><figcaption class="cap"><span>16 · APPROVAL</span>审批详情 · 决策依据一屏到位</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/msg-step-maint-open.png" alt="设备故障工单"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">17</span><figcaption class="cap"><span>17 · WORK ORDER</span>设备故障工单 · 保全协同处理</figcaption></figure>
+        <figure class="shotcard is-card"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/verify-account.png" alt="账号验证"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">18</span><figcaption class="cap"><span>18 · LOGIN</span>账号验证 · 状态反馈</figcaption></figure>
       </div>
       <div class="story-bar">
         <div class="story-num"><span id="storyNow">01</span><small id="storyTotal">/ 14</small></div>
@@ -549,8 +603,8 @@ p,li,dd,dt,figcaption,blockquote,.hero-copy,.about-lead,.pd-lead,.pd-rail-sub,.p
             <div class="scene-top"><span>SCENARIO / MONITOR</span><span class="live">LIVE DATA</span></div>
             <div class="scene-orbit"></div><div class="scene-orbit alt"></div><div class="scene-scan"></div>
             <div class="scene-leader l1"></div><div class="scene-leader l2"></div><div class="scene-leader l3"></div><div class="scene-leader l4"></div>
-            <div class="scene-device is-dim" data-screen="0"><div class="dev is-card"><div class="dev-screen"><img loading="lazy" src="assets/dmtt/monitor-detail.png" alt="异常详情"><span class="island"></span><span class="glare"></span></div></div></div>
-            <div class="scene-device is-front" data-screen="1"><div class="dev"><div class="dev-screen"><img loading="lazy" src="assets/dmtt/monitor-alert.png" alt="异常告警"><span class="island"></span><span class="glare"></span></div></div></div>
+            <div class="scene-device is-dim" data-screen="0"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/monitor-detail.png" alt="异常详情"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
+            <div class="scene-device is-front" data-screen="1"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/monitor-alert.png" alt="异常告警"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
             <div class="scene-label l1 alert"><div><b>语义红</b><small>未达标即时标记</small></div></div>
             <div class="scene-label l2"><div><b>双维筛选</b><small>层级 × 时间</small></div></div>
             <div class="scene-label l3"><div><b>偏差对比</b><small>实际 / 目标同屏</small></div></div>
@@ -595,8 +649,8 @@ p,li,dd,dt,figcaption,blockquote,.hero-copy,.about-lead,.pd-lead,.pd-rail-sub,.p
             <div class="scene-top"><span>SCENARIO / AGV LOGISTICS</span><span class="live">TASK FLOW</span></div>
             <div class="scene-orbit"></div><div class="scene-orbit alt"></div><div class="scene-scan"></div>
             <div class="scene-leader l1"></div><div class="scene-leader l2"></div><div class="scene-leader l3"></div><div class="scene-leader l4"></div>
-            <div class="scene-device is-dim" data-screen="0"><div class="dev is-card"><div class="dev-screen"><img loading="lazy" src="assets/dmtt/agv-scan.png" alt="扫描识别"><span class="island"></span><span class="glare"></span></div></div></div>
-            <div class="scene-device is-front right" data-screen="1"><div class="dev"><div class="dev-screen"><img loading="lazy" src="assets/dmtt/agv-inbound.png" alt="物料入库"><span class="island"></span><span class="glare"></span></div></div></div>
+            <div class="scene-device is-dim" data-screen="0"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/agv-scan.png" alt="扫描识别"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
+            <div class="scene-device is-front right" data-screen="1"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/agv-inbound.png" alt="物料入库"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
             <div class="scene-label l1"><div><b>扫码识别</b><small>物料与任务自动匹配</small></div></div>
             <div class="scene-label l2"><div><b>就近调度</b><small>AGV 自动叫料</small></div></div>
             <div class="scene-label l3"><div><b>入库确认</b><small>状态即时反馈</small></div></div>
@@ -678,6 +732,349 @@ p,li,dd,dt,figcaption,blockquote,.hero-copy,.about-lead,.pd-lead,.pd-rail-sub,.p
 <div id="lb" role="dialog" aria-modal="true" aria-label="界面预览"><button class="x" id="lbclose" aria-label="关闭预览">×</button><img id="lbimg" src="" alt=""><div class="lbcap" id="lbcap"></div></div>
 
 <script>
+/* ===== ReactBits · GooeyNav 动效格式 / vanilla 移植 =====
+   运动参数逐项对应官方 GooeyNav.jsx：
+   animationTime 600 · particleCount 15 · timeVariance 300 · spread 56
+   gooeyness .5 · wobble .5 · omega 26 · zeta = 1 - .72*wobble
+   emergeTime .09 · absorbTime .12 · travelEase = 三次 in-out
+   hover 平滑 .06 / .08 · smooth = height*(.18 + .5*gooeyness)
+   官方用 WebGL2 SDF shader 画形状、同一 trace() 轮廓裁反色文字；
+   此处沿用官方自带的 CPU trace() 轮廓同时绘制形状与文字层，无 GPU 依赖。 */
+(function(){
+'use strict';
+var MAX_DROPS=32;
+var clamp01=function(v){return Math.min(1,Math.max(0,v));};
+var travelEase=function(t){var x=clamp01(t);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;};
+var bezier=function(a,b,c,d,t){var u=1-t;return u*u*u*a+3*u*u*t*b+3*u*t*t*c+t*t*t*d;};
+var f1=function(n){return n.toFixed(1);};
+var pillPath=function(x,y,w,h){
+  if(w<=.5||h<=.5)return '';
+  var r=Math.min(w,h)/2;
+  return 'M'+f1(x+r)+','+f1(y)+'H'+f1(x+w-r)+'A'+f1(r)+','+f1(r)+' 0 0 1 '+f1(x+w)+','+f1(y+r)+
+    'V'+f1(y+h-r)+'A'+f1(r)+','+f1(r)+' 0 0 1 '+f1(x+w-r)+','+f1(y+h)+
+    'H'+f1(x+r)+'A'+f1(r)+','+f1(r)+' 0 0 1 '+f1(x)+','+f1(y+h-r)+
+    'V'+f1(y+r)+'A'+f1(r)+','+f1(r)+' 0 0 1 '+f1(x+r)+','+f1(y)+'Z';
+};
+var reduced=false;
+try{reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;}catch(e){}
+
+function create(root,opts){
+  if(!root||root.__gooNav)return root?root.__gooNav:null;
+  opts=opts||{};
+  var S={
+    animationTime:opts.animationTime||600,
+    particleCount:opts.particleCount||15,
+    timeVariance:opts.timeVariance===0?0:(opts.timeVariance||300),
+    spread:opts.spread===0?0:(opts.spread||56),
+    gooeyness:opts.gooeyness===0?0:(opts.gooeyness||.5),
+    wobble:opts.wobble===0?0:(opts.wobble||.5),
+    hoverEffect:opts.hoverEffect!==false
+  };
+  var btns=[].slice.call(root.querySelectorAll('button'));
+  if(!btns.length)return null;
+
+  /* --- 官方 DOM 结构 --- */
+  var stage=document.createElement('div');stage.className='gooey-nav__stage';
+  var blobEl=document.createElement('span');blobEl.className='gooey-nav__blob';blobEl.setAttribute('aria-hidden','true');
+  var hoverEl=document.createElement('span');hoverEl.className='gooey-nav__hover';hoverEl.setAttribute('aria-hidden','true');
+  var list=document.createElement('ul');list.className='gooey-nav__list';
+  var overlay=document.createElement('ul');overlay.className='gooey-nav__list gooey-nav__list--active';
+  overlay.setAttribute('aria-hidden','true');
+  if(root.getAttribute('role')==='tablist'){
+    root.removeAttribute('role');list.setAttribute('role','tablist');
+    var al=root.getAttribute('aria-label');
+    if(al){list.setAttribute('aria-label',al);root.removeAttribute('aria-label');}
+  }
+  var initial=0;
+  btns.forEach(function(b,i){
+    if(b.classList.contains('on'))initial=i;
+    var li=document.createElement('li');li.className='gooey-nav__item';
+    li.setAttribute('role','presentation');li.setAttribute('data-gooey-index',i);
+    b.classList.add('gooey-nav__link');li.appendChild(b);list.appendChild(li);
+    var li2=document.createElement('li');li2.className='gooey-nav__item';
+    li2.setAttribute('role','presentation');
+    var sp=document.createElement('span');sp.className='gooey-nav__link';sp.innerHTML=b.innerHTML;
+    li2.appendChild(sp);overlay.appendChild(li2);
+  });
+  stage.appendChild(blobEl);stage.appendChild(hoverEl);stage.appendChild(list);stage.appendChild(overlay);
+  while(root.firstChild)root.removeChild(root.firstChild);
+  root.appendChild(stage);
+  root.classList.add('gooey-nav',opts.small?'gooey-nav--sm':'gooey-nav--md');
+
+  var rects=[],view={width:0,height:0};
+  var pills=new Map(),drops=[],target=-1,raf=0,last=0;
+  var hover={index:-1,x:0,y:0,w:0,h:0,alpha:0};
+
+  function measure(){
+    var box=stage.getBoundingClientRect();
+    view={width:Math.round(box.width),height:Math.round(box.height)};
+    rects=[].slice.call(list.children).map(function(li){
+      var r=li.getBoundingClientRect();
+      return {x:r.left-box.left,y:r.top-box.top,w:r.width,h:r.height};
+    });
+  }
+
+  /* --- 官方 SDF 轮廓（smooth-min 融合药丸与液滴尾巴） --- */
+  function trace(boxes,blobs,smooth){
+    var field=function(x,y){
+      var d=1e5;
+      var merge=function(value){
+        var h=clamp01(.5+(.5*(value-d))/smooth);
+        d=value+(d-value)*h-smooth*h*(1-h);
+      };
+      for(var i=0;i<boxes.length;i++){
+        var b=boxes[i],r=Math.min(b.hw,b.hh);
+        var qx=Math.abs(x-b.cx)-b.hw+r,qy=Math.abs(y-b.cy)-b.hh+r;
+        merge(Math.hypot(Math.max(qx,0),Math.max(qy,0))+Math.min(Math.max(qx,qy),0)-r);
+      }
+      for(var j=0;j<blobs.length;j++){
+        var o=blobs[j],px=x-o.x,py=y-o.y,bx=-o.tx,by=-o.ty;
+        var span=bx*bx+by*by;
+        var h=span>.0001?clamp01((px*bx+py*by)/span):0;
+        var value=Math.hypot(px-bx*h,py-by*h)-o.r;
+        if(value>d+smooth)continue;
+        merge(value);
+      }
+      return d;
+    };
+    var step=1,parts=[];
+    for(var y=0;y<view.height;y+=1){
+      var cy=y+.5,previous=field(0,cy),start=previous<0?0:null;
+      for(var x=step;x<=view.width+step;x+=step){
+        var value=field(Math.min(x,view.width),cy);
+        if((previous<0)!==(value<0)){
+          var cross=x-step+(step*previous)/(previous-value);
+          if(value<0)start=cross;
+          else if(start!==null){parts.push('M'+f1(start)+','+y+'H'+f1(cross)+'V'+(y+1)+'H'+f1(start)+'Z');start=null;}
+        }
+        previous=value;
+      }
+      if(start!==null)parts.push('M'+f1(start)+','+y+'H'+view.width+'V'+(y+1)+'H'+f1(start)+'Z');
+    }
+    return parts.join('');
+  }
+
+  function pill(index){
+    if(!pills.has(index))pills.set(index,{mass:0,scale:0,velocity:0,outgoing:0});
+    return pills.get(index);
+  }
+  function shape(index,amount){
+    var rect=rects[index];
+    if(!rect||amount<=.002)return null;
+    var h=rect.h*Math.min(1.08,.42+.58*Math.sqrt(Math.max(0,amount)));
+    var w=Math.max(h,rect.w*Math.pow(Math.max(0,amount),.75));
+    return {x:rect.x+rect.w/2-w/2,y:rect.y+rect.h/2-h/2,w:w,h:h};
+  }
+  function plan(drop,index,now,fresh){
+    var rect=rects[index];if(!rect)return;
+    var reach=Math.max(0,S.spread);
+    var ex=rect.x+rect.w/2+(Math.random()-.5)*rect.w*.45;
+    var ey=rect.y+rect.h/2+(Math.random()-.5)*rect.h*.2;
+    var base=Math.max(.15,S.animationTime/1000);
+    var variance=(Math.random()-.5)*(Math.max(0,S.timeVariance)/1000);
+    var duration=Math.max(.15,base*(.62+Math.random()*.32)+variance*.6);
+    var out=Math.random()*Math.PI*2,into=Math.random()*Math.PI*2;
+    var burst=reach*(.7+Math.random()*.6),swing=reach*(.55+Math.random()*.55);
+    var carry=Math.min(duration/3,.12);
+    drop.index=index;drop.start=now;drop.duration=duration;
+    drop.path=[
+      drop.x,drop.y,
+      fresh?drop.x+Math.cos(out)*burst*1.6:drop.x+drop.vx*carry,
+      fresh?drop.y+Math.sin(out)*burst*1.6:drop.y+drop.vy*carry,
+      ex+Math.cos(into)*swing*1.5,ey+Math.sin(into)*swing*1.5,
+      ex,ey
+    ];
+  }
+  function emit(from,to,now){
+    var source=pills.get(from),rect=rects[from];
+    if(!source||!rect||!rects[to])return;
+    var available=source.mass-source.outgoing;
+    if(available<=.002)return;
+    var room=MAX_DROPS-drops.length;
+    var count=Math.min(room,Math.max(1,Math.round(Math.max(1,S.particleCount)*available)));
+    if(count<=0)return;
+    var leaveWindow=Math.max(.15,S.animationTime/1000)*.16;
+    for(var i=0;i<count;i++){
+      var mass=available/count;source.outgoing+=mass;
+      drops.push({
+        x:rect.x+rect.w/2+(Math.random()-.5)*rect.w*.6,
+        y:rect.y+rect.h/2+(Math.random()-.5)*rect.h*.3,
+        vx:0,vy:0,mass:mass,size:.8+Math.random()*.4,given:0,
+        source:from,index:to,leave:now+Math.random()*leaveWindow*1000,
+        emerged:0,absorbed:0,state:'waiting',path:null
+      });
+    }
+  }
+  function syncActive(){
+    [].slice.call(list.children).forEach(function(li,i){
+      if(i===target)li.setAttribute('data-active','');
+      else li.removeAttribute('data-active');
+    });
+  }
+  function render(){
+    var height=(rects[target]||rects[0]||{h:36}).h;
+    var smooth=height*(.18+.5*clamp01(S.gooeyness));
+    var boxes=[],blobs=[];
+    pills.forEach(function(state,index){
+      var b=shape(index,state.scale);
+      if(b)boxes.push({cx:b.x+b.w/2,cy:b.y+b.h/2,hw:b.w/2,hh:b.h/2});
+    });
+    for(var i=0;i<drops.length;i++){
+      var drop=drops[i];
+      if(drop.state==='waiting')continue;
+      var radius=.26*height*drop.size*Math.min(drop.emerged,1-drop.absorbed);
+      if(radius<=.05)continue;
+      var speed=Math.hypot(drop.vx,drop.vy);
+      var length=Math.min(radius*1.1,speed*.018);
+      blobs.push({x:drop.x,y:drop.y,r:radius,
+        tx:speed>.01?(drop.vx/speed)*length:0,
+        ty:speed>.01?(drop.vy/speed)*length:0});
+    }
+    var d;
+    if(!blobs.length){
+      d=boxes.map(function(b){return pillPath(b.cx-b.hw,b.cy-b.hh,b.hw*2,b.hh*2);}).join('');
+    }else{
+      d=trace(boxes,blobs,smooth);
+    }
+    var cp=d?("path('"+d+"')"):'inset(100%)';
+    blobEl.style.clipPath=cp;
+    overlay.style.clipPath=cp;
+    overlay.style.visibility=d?'visible':'hidden';
+    if(hover.index>=0){
+      hoverEl.style.left=(hover.x-hover.w/2-6)+'px';
+      hoverEl.style.top=(hover.y-hover.h/2-6)+'px';
+      hoverEl.style.width=(hover.w+12)+'px';
+      hoverEl.style.height=(hover.h+12)+'px';
+    }
+    hoverEl.style.opacity=hover.alpha.toFixed(3);
+  }
+  function frame(now){
+    raf=0;
+    var dt=Math.min(.05,(now-last)/1000||0);last=now;
+    var emergeTime=.09,absorbTime=.12;
+    for(var i=drops.length-1;i>=0;i--){
+      var drop=drops[i];
+      if(drop.state==='waiting'){
+        if(now<drop.leave)continue;
+        drop.state='flying';plan(drop,drop.index,now,true);
+      }
+      if(drop.state==='flying'){
+        drop.emerged=Math.min(1,drop.emerged+dt/emergeTime);
+        var source=pills.get(drop.source);
+        if(source&&drop.given<drop.mass){
+          var step=Math.min(drop.mass*(dt/emergeTime),drop.mass-drop.given);
+          source.mass=Math.max(0,source.mass-step);
+          source.outgoing=Math.max(0,source.outgoing-step);
+          drop.given+=step;
+        }
+        var t=clamp01((now-drop.start)/1000/drop.duration),eased=travelEase(t);
+        var p=drop.path;
+        var x=bezier(p[0],p[2],p[4],p[6],eased),y=bezier(p[1],p[3],p[5],p[7],eased);
+        if(dt>0){drop.vx=(x-drop.x)/dt;drop.vy=(y-drop.y)/dt;}
+        drop.x=x;drop.y=y;
+        if(t>=1)drop.state='absorbing';
+      }
+      if(drop.state==='absorbing'){
+        var a=Math.min(1-drop.absorbed,dt/absorbTime);
+        drop.absorbed+=a;drop.vx*=.8;drop.vy*=.8;
+        var host=pill(drop.index);
+        host.mass=Math.min(1,host.mass+drop.mass*a);
+        if(drop.absorbed>=1)drops.splice(i,1);
+      }
+    }
+    var zeta=reduced?1:1-.72*clamp01(S.wobble);
+    var omega=26,steps=Math.max(1,Math.ceil(dt/(1/240))),h=dt/steps;
+    pills.forEach(function(state,index){
+      for(var n=0;n<steps;n++){
+        state.velocity+=(omega*omega*(state.mass-state.scale)-2*zeta*omega*state.velocity)*h;
+        state.scale+=state.velocity*h;
+      }
+      if(index!==target&&state.mass<=.002&&state.outgoing<=.002&&Math.abs(state.scale)<.004)pills.delete(index);
+    });
+    if(hover.index>=0&&rects[hover.index]){
+      var r=rects[hover.index],k=1-Math.exp(-dt/.06);
+      hover.x+=(r.x+r.w/2-hover.x)*k;
+      hover.y+=(r.y+r.h/2-hover.y)*k;
+      hover.w+=(r.w-hover.w)*k;
+      hover.h+=(r.h-hover.h)*k;
+    }
+    var hoverGoal=S.hoverEffect&&hover.index>=0&&hover.index!==target?1:0;
+    hover.alpha+=(hoverGoal-hover.alpha)*(1-Math.exp(-dt/.08));
+    render();
+    var host2=pills.get(target);
+    var resting=drops.length===0&&pills.size===1&&host2&&
+      Math.abs(host2.mass-host2.scale)<.0008&&Math.abs(host2.velocity)<.004&&
+      Math.abs(hover.alpha-hoverGoal)<.01;
+    if(!resting)raf=requestAnimationFrame(frame);
+  }
+  function wake(){if(!raf){last=performance.now();raf=requestAnimationFrame(frame);}}
+  function settle(index){
+    if(!rects.length){measure();}
+    target=index;drops.length=0;pills.clear();
+    var st=pill(index);st.mass=1;st.scale=1;st.velocity=0;st.outgoing=0;
+    if(raf){cancelAnimationFrame(raf);raf=0;}
+    syncActive();render();
+  }
+  function go(index,animate){
+    if(index===target)return;
+    if(!rects[index]||animate===false||reduced||target<0){settle(index);return;}
+    var now=performance.now();
+    target=index;pill(index);
+    drops.forEach(function(drop){
+      drop.index=index;
+      if(drop.state==='flying')plan(drop,index,now,false);
+      if(drop.state==='absorbing'){
+        drop.state='flying';drop.mass*=1-drop.absorbed;drop.absorbed=0;
+        plan(drop,index,now,false);
+      }
+    });
+    Array.from(pills.keys()).forEach(function(from){if(from!==index)emit(from,index,now);});
+    syncActive();wake();
+  }
+  function onOver(e){
+    var item=e.target.closest?e.target.closest('[data-gooey-index]'):null;
+    if(!item||!list.contains(item))return;
+    var index=Number(item.getAttribute('data-gooey-index')),r=rects[index];
+    if(!r)return;
+    if(hover.alpha<.01){hover.x=r.x+r.w/2;hover.y=r.y+r.h/2;hover.w=r.w;hover.h=r.h;}
+    hover.index=index;wake();
+  }
+  function onLeave(){hover.index=-1;wake();}
+  list.addEventListener('pointerover',onOver);
+  list.addEventListener('pointerleave',onLeave);
+
+  measure();settle(initial);
+  if(document.fonts&&document.fonts.ready){
+    document.fonts.ready.then(function(){measure();if(!drops.length)settle(target);});
+  }
+  if(window.ResizeObserver){
+    var ro=new ResizeObserver(function(){
+      var w=view.width,h=view.height;
+      measure();
+      if(view.width!==w||view.height!==h){if(!drops.length)settle(target);else render();}
+    });
+    ro.observe(stage);ro.observe(list);
+  }else{
+    window.addEventListener('resize',function(){measure();if(!drops.length)settle(target);});
+  }
+  var api={
+    go:function(i,anim){go(i,anim!==false);},
+    refresh:function(){measure();render();wake();},
+    get current(){return target;}
+  };
+  root.__gooNav=api;
+  return api;
+}
+
+window.GooeyNav={create:create};
+/* 弹窗里的三处切换控件：官方 gooey 动效 */
+[].slice.call(document.querySelectorAll('.scene-switch')).forEach(function(el){
+  el.__gooNav=create(el,{small:true,spread:26,particleCount:9,animationTime:480});
+});
+})();
+
+</script>
+<script>
 /* ===== 星点背景 ===== */
 (function(){
   const c=document.getElementById('stars'),x=c.getContext('2d');let w,h,pts=[],raf=0;
@@ -723,6 +1120,7 @@ document.querySelectorAll('.scene-frame').forEach(scene=>{
   function setScene(i){
     devices.forEach((d,j)=>{d.classList.toggle('is-front',j===i);d.classList.toggle('is-dim',j!==i);});
     buttons.forEach((b,j)=>b.classList.toggle('on',j===i));
+    const sw=scene.querySelector('.scene-switch');if(sw&&sw.__gooNav)sw.__gooNav.go(i);
   }
   buttons.forEach((b,i)=>b.addEventListener('click',()=>setScene(i)));
   scene.addEventListener('mouseenter',()=>{if(!scene.dataset.touched)setScene(1);scene.dataset.touched='1';});
@@ -743,6 +1141,9 @@ if(stage){
 (function(){
   const rail=document.getElementById('storyRail');if(!rail)return;
   const cards=[...rail.querySelectorAll('.shotcard')];
+  const fitDev=()=>cards.forEach(c=>{const w=c.offsetWidth;if(w)c.style.setProperty('--sc-s',(w/428).toFixed(4));});
+  fitDev(); addEventListener('resize',fitDev);
+  if(window.ResizeObserver){const ro=new ResizeObserver(fitDev);cards.forEach(c=>ro.observe(c));}
   const now=document.getElementById('storyNow'),tag=document.getElementById('storyTag'),title=document.getElementById('storyTitle');
   const prev=document.getElementById('storyPrev'),next=document.getElementById('storyNext'),dots=document.getElementById('storyDots');
   const total=document.getElementById('storyTotal');if(total)total.textContent='/ '+cards.length;
