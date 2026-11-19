@@ -101,10 +101,11 @@ def main():
     print("\n=== 4) Pages 构建 ===")
     for i in range(10):
         p, _ = req("GET", "/pages", timeout=30)
-        b = p.get("build", {})
+        b = p.get("build") or {}
         print("  status=%s build=%s commit=%s" % (
             p.get("status"), b.get("status"), (b.get("commit") or "")[:12]))
-        if p.get("status") == "built" and b.get("status") == "built":
+        # status=built 是权威判断；build 字段在 fine-grained token 下可能为 null，仅作参考
+        if p.get("status") == "built":
             break
         time.sleep(8)
     else:
