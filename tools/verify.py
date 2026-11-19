@@ -36,16 +36,21 @@ KEY_URLS = [
 ]
 
 
-def http_status(url, timeout=90):
-    r = urllib.request.Request(url, method="HEAD")
-    r.add_header("User-Agent", "workbuddy-verify")
-    try:
-        with urllib.request.urlopen(r, timeout=timeout) as f:
-            return f.status
-    except urllib.error.HTTPError as e:
-        return e.code
-    except Exception as e:
-        return "ERR:" + str(e)[:40]
+def http_status(url, timeout=90, retries=2):
+    """HEAD 探测；大文件在本机代理下偶发超时，做有限重试。"""
+    last = None
+    for i in range(retries + 1):
+        r = urllib.request.Request(url, method="HEAD")
+        r.add_header("User-Agent", "workbuddy-verify")
+        try:
+            with urllib.request.urlopen(r, timeout=timeout) as f:
+                return f.status
+        except urllib.error.HTTPError as e:
+            return e.code
+        except Exception as e:
+            last = e
+            time.sleep(2)
+    return "ERR:" + str(last)[:40]
 
 
 def main():
