@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#3662EC" />
+    <title>iWork · 综合业务移动平台</title>
+    <style>
+      /* 宽视口（桌面预览）下让应用保持设计稿等比尺寸并居中，
+         避免 rem 被放大成 520px 窄条、内容超出视口高度被裁切。 */
+      .app-root { width: 4.29rem !important; max-width: 100% !important; }
+      /* 已移除上一轮的 translateX(-0.24rem) 图标"校正"：
+         经 MCP 几何比对(设计稿 bound vs 运行页 rect)，该 transform 使 apps 页
+         图标偏左 24~48px（如 929:14454 设计 277 / 运行 252.6）。删除后
+         坐标回到 276.6，误差 <1px。禁止用无依据 transform 掩盖布局问题。 */
+      .app-root img[src*="img_026"] { z-index: 0 !important; }
+      /* D2C 短标签在小容器内被挤成两行，按 node-id 精确修正为单行 */
+      .app-root [data-node-id="929:22574"], .app-root [data-node-id="929:22547"],
+      .app-root [data-node-id="929:14448"], .app-root [data-node-id="929:14675"],
+      .app-root [data-node-id="929:14607"], .app-root [data-node-id="929:14632"],
+      .app-root [data-node-id="929:14620"], .app-root [data-node-id="1688:08344"],
+      .app-root [data-node-id="1688:08354"], .app-root [data-node-id="1688:09951"],
+      .app-root [data-node-id="1688:08980"], .app-root [data-node-id="929:18326"],
+      .app-root [data-node-id="929:7814"] { white-space: nowrap !important; }
+      /* 移动端签名：设计稿为横屏签名板(930x429)，D2C 把"待办页截图背景+半透明遮罩+
+         两个畸形旋转按钮"一并导出；按 MCP 原画板截图只保留白底签名板与真实按钮。 */
+      .app-root [data-node-id="1662:9622"],
+      .app-root [data-node-id="1662:9623"],
+      .app-root [data-node-id="1662:9994"],
+      .app-root [data-node-id="1662:9996"] { display: none !important; }
+      .app-root .sig-cleared [data-node-id="1662:00098"] { display: none !important; }
+      /* 字体：设计稿为思源黑体 CN，本机未安装且未打包字体文件。
+         此处显式声明合法近似替代栈（macOS 苹方/冬青黑体/微软雅黑），
+         避免浏览器静默回退到系统默认衬线字体造成中文字宽与基线偏移。
+         注意：这是近似替代，并非与思源黑体完全一致，已在验收报告如实标注。 */
+      .app-root [style*="Source Han Sans CN"] {
+        font-family: "Source Han Sans CN", "PingFang SC", "Hiragino Sans GB",
+                     "Microsoft YaHei", sans-serif !important;
+      }
+      /* 轻量入场动画：Toast/遮罩淡入、底部弹窗上滑，不改变静态视觉 */
+      @keyframes wbFade { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes wbRise { from { transform: translateY(24px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+      @keyframes wbDrop { from { transform: translateY(-14px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+      /* 页面切换：前进右滑淡入、返回左滑淡入，仅作用于路由容器，不改变内部布局 */
+      @keyframes wbPageIn { from { transform: translateX(18px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+      @keyframes wbPageBack { from { transform: translateX(-18px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+      .wb-page-fwd { animation: wbPageIn .24s cubic-bezier(.22,.61,.36,1) both; }
+      .wb-page-back { animation: wbPageBack .24s cubic-bezier(.22,.61,.36,1) both; }
+      /* 按钮按压反馈：所有可点击节点统一轻微缩放，不改变静态布局 */
+      .app-root [data-node-id] { transition: transform .14s ease, box-shadow .14s ease; }
+      .wb-pressable:active { transform: scale(.975); }
+      /* 展开/收起：高度用 grid-template-rows 过渡，内容不闪现、下方元素自然流动 */
+      .wb-expand { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .28s cubic-bezier(.22,.61,.36,1); }
+      .wb-expand.wb-open { grid-template-rows: 1fr; }
+      .wb-expand > .wb-expand-inner { overflow: hidden; min-height: 0; }
+      .wb-chevron { transition: transform .28s cubic-bezier(.22,.61,.36,1); }
+      .wb-chevron.wb-open { transform: rotate(180deg); }
+      /* 弹窗关闭动画（卸载前由 React 加 .wb-closing 触发） */
+      @keyframes wbSheetOut { from { transform: translateY(0); opacity: 1; } to { transform: translateY(100%); opacity: 0; } }
+      @keyframes wbMaskOut { from { opacity: 1; } to { opacity: 0; } }
+      .wb-closing .modal-sheet { animation: wbSheetOut .22s ease-in both; }
+      .wb-closing { animation: wbMaskOut .22s ease-in both; }
+      @media (prefers-reduced-motion: reduce) {
+        .wb-page-fwd, .wb-page-back, .wb-expand, .wb-chevron,
+        .wb-closing, .wb-closing .modal-sheet, .modal-sheet { animation: none !important; transition: none !important; }
+      }
+    </style>
+    <script>
+      // rem 按 429px 设计宽度换算；短屏通过滚动浏览，不压缩文字。
+      (function () {
+        var DESIGN_W = 429;
+        function setRem() {
+          var w = Math.min(window.innerWidth, 393);
+          var scale = w / DESIGN_W;
+          document.documentElement.style.fontSize = (scale * 100) + 'px';
+        }
+        setRem();
+        window.addEventListener('resize', setRem);
+        window.addEventListener('orientationchange', setRem);
+      })();
+    </script>
+    <script type="module" crossorigin src="./assets/index-CUjqUtCl.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-Dcm3BmVk.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

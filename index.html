@@ -1962,8 +1962,8 @@ body:has(.proj:hover) .glow-cursor{opacity:.10}
           <div class="ui-bar"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">登录 · 首页 · iWork 综合业务平台</span><span class="spacer"></span><span class="badge">iWORK / 06</span></div>
           <div class="ui-body">
             <div class="phones phones--blue phones--iwork">
-              <div class="phone phone--shot ip-dev"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" src="assets/dmtt/login.png" alt="iWork 登录页"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
-              <div class="phone phone--shot ip-dev"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" src="assets/dmtt/home.png" alt="iWork 经营首页"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
+              <div class="phone phone--shot ip-dev"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live dvc-screen--cover" src="./iwork-demo/index.html?embed=phone&v=20261123c#/home" title="iWork 经营工作台" loading="lazy"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
+              <div class="phone phone--shot ip-dev"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live dvc-screen--cover" src="./iwork-demo/index.html?embed=phone&v=20261123c#/metrics-detail" title="iWork 异常详情与根因树" loading="lazy"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
           <div class="iw-kv" aria-hidden="true"><span class="iw-kv__brand"><b>iWork</b><i></i>综合业务移动平台</span><strong class="iw-kv__a">全新体验</strong><strong class="iw-kv__b">快捷操作</strong></div>
             </div>
           </div>
@@ -2116,7 +2116,7 @@ body:has(.proj:hover) .glow-cursor{opacity:.10}
     <div class="foot">
       <span>© 2026 Oscar · 数字产品设计</span>
       <span>作品集中的数据均为脱敏演示</span>
-      <span class="foot-ver" title="发版记录 v1.5.0 · 2026-11-19">v1.5.0</span>
+      <span class="foot-ver" title="发版记录 v1.6.0 · 2026-11-24">v1.6.0</span>
       <a href="#top">回到顶部 ↑</a>
     </div>
   </div>
@@ -2664,21 +2664,42 @@ body:has(.proj:hover) .glow-cursor{opacity:.10}
     <!-- 07 图标设计 -->
     <section class="pd-x pj" id="pdIcons">
       <div class="pd-sec-title"><span class="pd-sec-no">07</span> 图标设计 <em>/ ICONOGRAPHY</em></div>
-      <p class="pj-sub">线性图标，在强光、20px、深色数据底下仍一眼可辨。</p>
-      <div class="pj-icon-spec"><span>栅格 <b>24 × 24</b></span><i></i><span>线宽 <b>1.8 px</b></span><i></i><span>端点 <b>圆角</b></span><i></i><span>安全边距 <b>2 px</b></span><i></i><span>最小可辨 <b>20 px</b></span><i></i><span>语义色 <b>蓝 / 红 / 绿</b></span></div>
-      <div class="pj-icons"><div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v3M12 18.4v3M2.6 12h3M18.4 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1"/></svg><b>设备</b><span>设备台账 · 状态监测</span></div>
-        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 20h17M6 20v-6M11 20V9M16 20v-9M21 20V5"/><path d="M4 5h9l3 3"/></svg><b>生产</b><span>生产进度 · 工单排程</span></div>
-        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l7.4 3v5.6c0 4.6-3 8-7.4 9.8-4.4-1.8-7.4-5.2-7.4-9.8V5.8z"/><path d="M8.7 12.1l2.3 2.3 4.4-4.6"/></svg><b>品质</b><span>品质追溯 · 检验记录</span></div>
-        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.4 2.6L5.8 13.2h5.3l-1 8.2 7.9-11.1h-5.4z"/></svg><b>能源</b><span>能耗监控 · 异常告警</span></div>
-        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.2 7.6L12 3.2l8.8 4.4v8.8L12 20.8l-8.8-4.4z"/><path d="M3.2 7.6L12 12l8.8-4.4M12 12v8.8"/></svg><b>仓储</b><span>库存查询 · 物料档案</span></div>
-        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 9v4.6M12 16.5v.2"/></svg><b>安环</b><span>安环巡检 · 隐患上报</span></div>
-        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 2.8h9l4 4v14.4H5.5z"/><path d="M14.5 2.8v4h4M8.5 12.5l2 2 4-4"/></svg><b>审批</b><span>审批中心 · 决策依据</span></div>
-        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="7.5" width="12" height="8.5" rx="2"/><circle cx="7" cy="18" r="1.6"/><circle cx="12" cy="18" r="1.6"/><path d="M17 10h2.6l1.6 2.6v3.4h-4.2"/><path d="M6.5 11.6h5.2"/></svg><b>AGV 叫料</b><span>扫码识别 · 就近调度</span></div>
-        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="3" width="15" height="18" rx="2.4"/><path d="M8 8h8M8 12h8M8 16h5"/><path d="M8 8l1 1 1.8-2"/></svg><b>点巡检</b><span>巡检工单 · 逐项确认</span></div>
-        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.6c0 4-3.4 7.2-7.6 7.2-1 0-2-.2-2.9-.5L4.5 20l1.5-4.2a6.9 6.9 0 01-1.5-4.2C4.5 7.6 7.9 4.4 12 4.4s8.5 3.2 8.5 7.2z"/><path d="M9 11.4h6"/></svg><b>消息</b><span>通知中心 · 异常推送</span></div>
-        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.2" r="3.6"/><path d="M4.8 20c.7-3.7 3.5-5.8 7.2-5.8s6.5 2.1 7.2 5.8"/></svg><b>我的</b><span>个人中心 · 常用功能</span></div>
-        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V5.8A1.8 1.8 0 015.8 4H9M15 4h3.2A1.8 1.8 0 0120 5.8V9M20 15v3.2a1.8 1.8 0 01-1.8 1.8H15M9 20H5.8A1.8 1.8 0 014 18.2V15"/><path d="M3.6 12h16.8"/></svg><b>扫描</b><span>扫码识别 · 入库确认</span></div></div>
-      <div class="pj-icon-note"><b>设计取舍</b><p>统一线性 + 圆角端点，小尺寸不糊、与数据卡片语言一致；语义色只作辅助（见 <b>NN#09</b>）。</p></div>
+      <p class="pj-sub">应用图标与业务图标统一「品牌蓝 + 浅冰蓝双色线性」语言，克制耐看，强光小尺寸下仍清晰可辨。</p>
+      <div class="pj-appicon-row">
+        <div class="pj-appicon-box" aria-label="iWork 官方应用图标">
+          <svg class="pj-appicon-bg" viewBox="0 0 120 120" fill="none">
+            <defs><linearGradient id="pjIwGrad" x1="12" y1="6" x2="108" y2="114" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#46B8FF"/><stop offset="52%" stop-color="#268BFF"/><stop offset="100%" stop-color="#1A6BFF"/></linearGradient></defs>
+            <rect width="120" height="120" fill="url(#pjIwGrad)"/>
+            <path d="M-10 88 C18 42, 42 104, 72 62 C92 34, 108 58, 130 34 L130 128 L-10 128 Z" fill="rgba(116,208,255,0.28)"/>
+            <circle cx="24" cy="30" r="6" fill="rgba(255,255,255,0.18)"/>
+            <circle cx="102" cy="76" r="5" fill="rgba(255,255,255,0.22)"/>
+          </svg>
+          <span class="pj-appicon-w"><svg width="34" height="34" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" fill="#fff"/><path d="M12.5 19.5 17.5 30.5 24 20.5 30.5 30.5 35.5 19.5" stroke="#268BFF" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="pj-appicon-name">iWork</span>
+          <span class="pj-appicon-sub">综合业务移动平台</span>
+        </div>
+        <div class="pj-appicon-meta">
+          <b>iWork 官方应用图标（App Icon）</b>
+          <p>延续品牌流体蓝渐变与白色 W 符号，在 iOS 桌面 64×64 标准比例下兼顾工业专业感与首眼识别度。</p>
+          <div class="pj-appicon-specs"><span>画布 <b>1024 × 1024</b></span><span>桌面尺寸 <b>64 × 64 pt</b></span><span>圆角 <b>22.5%</b></span><span>主色 <b>#268BFF</b></span></div>
+        </div>
+      </div>
+      <div class="pj-icon-spec"><span>栅格 <b>24 × 24</b></span><i></i><span>线宽 <b>1.75 px</b></span><i></i><span>双色填充 <b>16% 品牌蓝</b></span><i></i><span>底托 <b>#EFF7FF</b></span><i></i><span>语义色 <b>蓝 / 红 / 琥珀</b></span></div>
+      <div class="pj-icons">
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z" fill="rgba(50,169,229,0.16)" stroke="none"/><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="M12 12 4 7.5M12 12l8-4.5M12 12v9"/></svg><b>呼叫物料</b><span>产线配料 · 物料直达</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="8" width="16" height="10" rx="3" fill="rgba(50,169,229,0.16)"/><path d="M12 4v4M9 4h6M8 18v2.5M16 18v2.5M9.5 13h5"/></svg><b>呼叫 AGV</b><span>工位调度 · 实时回执</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="13" y="4" width="7" height="16" rx="2" fill="rgba(50,169,229,0.16)" stroke="none"/><path d="M13 4h5a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-5"/><path d="M4 12h11m-3.5-3.5L15 12l-3.5 3.5"/></svg><b>成品移出</b><span>立库出货 · 转运确认</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="16" rx="2" fill="rgba(50,169,229,0.16)" stroke="none"/><path d="M11 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5"/><path d="M20 12H9m3.5-3.5L9 12l3.5 3.5"/></svg><b>物料入库</b><span>扫码校验 · 立库入账</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2.5 4.5 13.5H11l-.8 8 9.3-12H13l0-7Z" fill="rgba(50,169,229,0.16)"/></svg><b>自动叫料</b><span>低水位策略 · 倒计时</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2" fill="rgba(50,169,229,0.16)" stroke="none"/><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16M5 12h14"/></svg><b>相机扫码</b><span>激光扫光 · 手动兜底</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17" rx="2.5" fill="rgba(50,169,229,0.16)"/><path d="M9 9h6M9 13h6M9 17h4"/></svg><b>点检工单</b><span>逐项检查 · 同意拒绝</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="rgba(50,169,229,0.16)"/><path d="M12 7v5l3.5 2"/></svg><b>巡检任务</b><span>班次计划 · 按序打卡</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-5.6 5.6a1.5 1.5 0 0 0 2.1 2.1l5.6-5.6a4 4 0 0 0 5.4-5.4l-2.3 2.3-2.1-2.1 2.3-2.3Z" fill="rgba(50,169,229,0.16)"/></svg><b>设备维修</b><span>故障闭环 · 备件联动</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3.5v5.5c0 4.6-3.2 7.8-8 9.5-4.8-1.7-8-4.9-8-9.5V6.5L12 3Z" fill="rgba(50,169,229,0.16)"/><path d="m9 12 2.2 2.2 4.2-4.4"/></svg><b>安全评估</b><span>规范引用 · 风险导出</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18V9l-5 3V9l-5 3V5H3v15Z" fill="rgba(50,169,229,0.16)"/><path d="M7 15h2M12 15h2M17 15h1"/></svg><b>智慧工厂</b><span>实时点位 · 微趋势线</span></div>
+        <div class="pj-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7c0 2.4 1.2 4.5 3 5.8V19l3.2-1.6c.3.04.5.06.8.06a7 7 0 1 0 0-14.46Z" fill="rgba(50,169,229,0.16)"/><path d="M9.5 10.5h5M10.5 13.5h3"/></svg><b>云宝 AI</b><span>流式问答 · 数据直达</span></div>
+      </div>
+      <div class="pj-icon-note"><b>设计取舍</b><p>拒绝多彩 AI 模板色块，全站统一 1.75px 品牌蓝双色线性与浅冰蓝底托，确保与首页工作台视觉高度统一（见 <b>NN#04</b>）。</p></div>
     </section>
 
     <!-- 设计内容分组横幅（不参与编号） -->
@@ -2690,48 +2711,71 @@ body:has(.proj:hover) .glow-cursor{opacity:.10}
 
     <section class="pd-iwork" id="pdIwork">
       <div class="pd-sec-title"><span class="pd-sec-no">01</span> 界面展示 <em>/ INTERACTIVE SHOWCASE</em></div>
-      <div class="pj-nn-tip">原则不单独讲，直接标在每一屏界面旁 · 切换标签查看「用了什么、达到了什么」</div>
+      <div class="pj-nn-tip">12 屏全部为真实可交互开发页面，按视觉与业务亮点排序 · 切换标签即可在样机内直接操作，并同步查看「设计原则 → 设计效果」</div>
       <div class="iw-layout">
         <div class="iw-copy" id="iwCopy">
-          <div class="iw-kicker" id="iwKicker">01 / 12 · 经营工作台</div>
-          <h3 id="iwTitle">打开 App，就知道今天要做什么</h3>
-          <p id="iwDesc">待办、指标与任务按「今天要处理」聚合。</p>
+          <div class="iw-kicker" id="iwKicker">01 / 12 · 首页工作台</div>
+          <h3 id="iwTitle">打开 App，核心指标与待办一屏掌控</h3>
+          <p id="iwDesc">2×2 指标监控卡与右侧两排高频入口像素齐平，底部居中云宝 AI 随时待命。</p>
           <ul class="iw-points" id="iwPoints">
-            <li>高频任务按紧急度聚合</li>
-            <li>3 层导航收敛 200+ 功能点</li>
+            <li>指标达标/未达标自带进度条，3 秒识别业务偏差</li>
+            <li>支持「最近使用 / 自定义分组」两种首页形态</li>
           </ul>
-          <div class="iw-nn" id="iwNN"><span class="iw-nn__n">NN#01</span><span class="iw-nn__x"><b>状态可见性</b> → 首屏实时待办与刷新时间戳，不下拉即知数据新旧</span></div>
-          <div class="iw-tabs" id="iwTabs" role="tablist" aria-label="切换 iWork 界面">
-            <button type="button" class="on" data-iw="0" role="tab" aria-selected="true">01 工作台</button>
-            <button type="button" data-iw="1" role="tab" aria-selected="false">02 指标监控</button>
-            <button type="button" data-iw="2" role="tab" aria-selected="false">03 AGV 叫料</button>
-            <button type="button" data-iw="3" role="tab" aria-selected="false">04 异常详情</button>
-            <button type="button" data-iw="4" role="tab" aria-selected="false">05 审批中心</button>
-            <button type="button" data-iw="5" role="tab" aria-selected="false">06 审批详情</button>
-            <button type="button" data-iw="6" role="tab" aria-selected="false">07 设备故障工单</button>
-            <button type="button" data-iw="7" role="tab" aria-selected="false">08 待办消息</button>
-            <button type="button" data-iw="8" role="tab" aria-selected="false">09 应用中心</button>
-            <button type="button" data-iw="9" role="tab" aria-selected="false">10 自定义首页</button>
-            <button type="button" data-iw="10" role="tab" aria-selected="false">11 系统通知</button>
-            <button type="button" data-iw="11" role="tab" aria-selected="false">12 手写签名</button>
+          <div class="iw-nn" id="iwNN"><span class="iw-nn__n">NN#01</span><span class="iw-nn__x"><b>状态可见性</b> → 首屏聚合待办角标与核心指标进度 → 无需下钻即知当日重点</span></div>
+          <div class="iw-tabs" id="iwTabs" role="tablist" aria-label="切换真实交互界面">
+            <button type="button" data-iw="0" role="tab" aria-selected="true" class="on">01 首页工作台</button>
+            <button type="button" data-iw="1" role="tab" aria-selected="false">02 异常详情</button>
+            <button type="button" data-iw="2" role="tab" aria-selected="false">03 云宝 AI</button>
+            <button type="button" data-iw="3" role="tab" aria-selected="false">04 指标监控</button>
+            <button type="button" data-iw="4" role="tab" aria-selected="false">05 智慧工厂</button>
+            <button type="button" data-iw="5" role="tab" aria-selected="false">06 设备点检</button>
+            <button type="button" data-iw="6" role="tab" aria-selected="false">07 手写签名</button>
+            <button type="button" data-iw="7" role="tab" aria-selected="false">08 AGV 调度</button>
+            <button type="button" data-iw="8" role="tab" aria-selected="false">09 扫光相机</button>
+            <button type="button" data-iw="9" role="tab" aria-selected="false">10 待办去处理</button>
+            <button type="button" data-iw="10" role="tab" aria-selected="false">11 自定义分组</button>
+            <button type="button" data-iw="11" role="tab" aria-selected="false">12 桌面与启动</button>
           </div>
-          <div class="iw-hint"><span class="iw-hint__dot"></span>点击标签或下方缩略图，切换 12 张真实界面</div>
+          <div class="iw-hint"><span class="iw-hint__dot"></span>点击标签切换 12 个真实开发页面，右侧样机支持直接滑动与点击体验</div>
         </div>
         <div class="iw-stage" id="iwStage">
           <span class="iw-glow"></span>
           <span class="iw-ring"></span>
           <div class="iw-device" id="iwDevice">
             <div class="dvc dvc-iphone-14-pro">
-              <div class="dvc-frame"><img class="dvc-screen" id="iwScreen" src="assets/dmtt/workbench.png" alt="iWork 经营工作台"></div>
+              <div class="dvc-frame">
+                <iframe class="dvc-screen dvc-screen--live" id="iwScreen" data-base="./iwork-demo/index.html?embed=phone&v=20261123c#" src="./iwork-demo/index.html?embed=phone&v=20261123c#/home" title="iWork 实时交互界面"></iframe>
+              </div>
               <div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div>
             </div>
-            <span class="iw-scan" aria-hidden="true"><i></i></span>
           </div>
-          <div class="iw-badge iw-badge--a"><b>6</b><span>业务模块</span></div>
-          <div class="iw-badge iw-badge--b"><b>20+</b><span>场景模板</span></div>
+          <div class="iw-badge iw-badge--a"><b>12</b><span>实机页面</span></div>
+          <div class="iw-badge iw-badge--b"><b>LIVE</b><span>可直接交互</span></div>
         </div>
       </div>
-      <div class="iw-thumbs" id="iwThumbs" aria-label="界面缩略图"></div>
+      <div class="iw-thumbs" id="iwThumbs" aria-label="界面快速索引"></div>
+    </section>
+
+    <!-- 项目6：内置可交互高保真原型（iWork Demo Studio） -->
+    <section class="pd-x pj-live-sec" id="pdLiveProto">
+      <div class="pd-sec-title"><span class="pd-sec-no"></span> 可交互原型 <em>/ LIVE PROTOTYPE</em></div>
+      <div class="pj-live-head">
+        <p class="pj-live-desc">内置 iWork 高保真交互原型，可直接点按 iPhone 样机体验全流程，或点击右侧 8 组主线一键自动演示。</p>
+        <div class="pj-live-acts">
+          <button type="button" class="pj-live-btn" id="iwLiveReload">重置原型</button>
+          <a class="pj-live-btn" href="./iwork-demo/index.html?theme=dark&v=20261123c" target="_blank" rel="noopener">全屏体验 ↗</a>
+        </div>
+      </div>
+      <div class="pj-live-wrap">
+        <iframe
+          id="iwLiveFrame"
+          class="pj-live-frame"
+          data-src="./iwork-demo/index.html?theme=dark&v=20261123c"
+          title="iWork 综合业务移动平台 · 可交互原型"
+          loading="lazy"
+          allow="camera"
+        ></iframe>
+      </div>
     </section>
 
     <!-- 项目6：卡片内完整演示 —— 场景样机 / 界面全景 / 设计系统（不再跳转第三级页面） -->
@@ -2751,8 +2795,8 @@ body:has(.proj:hover) .glow-cursor{opacity:.10}
         <div class="fx-stage rv d1">
           <div class="scene-frame" id="monitorScene" data-scene="monitor">
             <div class="scene-top"><span>SCENARIO / MONITOR</span><span class="live">LIVE DATA</span></div>
-            <div class="scene-device is-dim" data-screen="0" role="button" tabindex="0" title="点击切换界面"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/monitor-detail.png" alt="异常详情"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
-            <div class="scene-device is-front" data-screen="1" role="button" tabindex="0" title="点击切换界面"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/monitor-all.png" alt="指标总览"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
+            <div class="scene-device is-dim" data-screen="0" role="button" tabindex="0" title="点击切换界面"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live pj-lazy-frame" data-src="./iwork-demo/index.html?embed=phone&v=20261123c#/metrics-detail" title="异常详情"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
+            <div class="scene-device is-front" data-screen="1" role="button" tabindex="0" title="点击切换界面"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live pj-lazy-frame" data-src="./iwork-demo/index.html?embed=phone&v=20261123c#/metrics" title="指标监控"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
             <div class="scene-label l1 alert"><div><b>语义红</b><small>未达标即时标记</small></div></div>
             <div class="scene-label l2"><div><b>双维筛选</b><small>层级 × 时间</small></div></div>
             <div class="scene-label l3"><div><b>偏差对比</b><small>实际 / 目标同屏</small></div></div>
@@ -2788,8 +2832,8 @@ body:has(.proj:hover) .glow-cursor{opacity:.10}
         <div class="fx-stage rv d1">
           <div class="scene-frame agv" id="agvScene" data-scene="agv">
             <div class="scene-top"><span>SCENARIO / AGV LOGISTICS</span><span class="live">TASK FLOW</span></div>
-            <div class="scene-device is-dim" data-screen="0" role="button" tabindex="0" title="点击切换界面"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/todo.png" alt="任务流转"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
-            <div class="scene-device is-front right" data-screen="1" role="button" tabindex="0" title="点击切换界面"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/agv-home.png" alt="AGV 工作台"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
+            <div class="scene-device is-dim" data-screen="0" role="button" tabindex="0" title="点击切换界面"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live pj-lazy-frame" data-src="./iwork-demo/index.html?embed=phone&v=20261123c#/todo" title="待办列表"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
+            <div class="scene-device is-front right" data-screen="1" role="button" tabindex="0" title="点击切换界面"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live pj-lazy-frame" data-src="./iwork-demo/index.html?embed=phone&v=20261123c#/agv-home" title="AGV 调度中心"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div></div>
             <div class="scene-label l1"><div><b>扫码识别</b><small>物料与任务自动匹配</small></div></div>
             <div class="scene-label l2"><div><b>就近调度</b><small>AGV 自动叫料</small></div></div>
             <div class="scene-label l3"><div><b>入库确认</b><small>状态即时反馈</small></div></div>
@@ -2803,55 +2847,21 @@ body:has(.proj:hover) .glow-cursor{opacity:.10}
     </section>
 
     <section class="pd-x" id="pdRailSec">
-      <div class="pd-sec-title"><span class="pd-sec-no">03</span> 界面全景 <em>/ FULL GALLERY</em></div>
-      <div class="pj-nn"><div class="pj-nn__i is-law"><span class="pj-nn__n">希克定律</span><span class="pj-nn__x"><b></b> → <em>20+ 功能收敛为 6 模块 → 首屏决策更快</em></span></div><div class="pj-nn__i is-law"><span class="pj-nn__n">米勒定律</span><span class="pj-nn__x"><b></b> → <em>指标卡只留 3 个数字 → 不超出短时记忆</em></span></div><div class="pj-nn__i is-law"><span class="pj-nn__n">菲茨定律</span><span class="pj-nn__x"><b></b> → <em>主操作 ≥ 44px 落在拇指热区 → 戴手套也点得准</em></span></div></div>
-      <p class="pd-rail-sub">32 张真实界面，覆盖启动、登录、工作台、监控、AGV、审批、点巡检、应用中心与设置。可拖拽 / 滚轮 / 方向键浏览，点击放大。</p>
-      <div class="pd-spec-strip" aria-label="交付规格"><span><b>整套 32 屏</b>真实界面</span><i></i><span>基准 <b>429 × 930</b> px</span><i></i><span><b>iPhone</b> 真机比例</span><i></i><span><b>MasterGo</b> 组件化设计稿</span><i></i><span>覆盖 <b>6 大模块 · 20+</b> 场景</span></div>
-      <div class="story">
-        <div class="story-rail" id="pdRail" tabindex="0" aria-label="界面画廊，可拖动或使用左右方向键浏览">
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/splash.png" alt="启动页"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">01</span><figcaption class="cap"><span>01 · SPLASH</span>启动页 · 综合业务移动平台</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/workbench.png" alt="经营工作台"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">02</span><figcaption class="cap"><span>02 · WORKBENCH</span>经营工作台 · 常用功能聚合</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/monitor-all.png" alt="指标监控全部"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">03</span><figcaption class="cap"><span>03 · MONITOR</span>指标监控 · 全部指标</figcaption></figure>
-        <figure class="shotcard is-card"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/monitor-alert.png" alt="指标监控异常"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">04</span><figcaption class="cap"><span>04 · ALERT</span>指标监控 · 异常告警</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/agv-home.png" alt="AGV"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">05</span><figcaption class="cap"><span>05 · AGV</span>AGV 物料调度入口</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/todo.png" alt="待办"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">06</span><figcaption class="cap"><span>06 · TODO</span>待办 · 任务中心</figcaption></figure>
-        <figure class="shotcard is-card"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/message.png" alt="消息"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">07</span><figcaption class="cap"><span>07 · MESSAGE</span>消息 · 通知中心</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/monitor-detail.png" alt="监控详情"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">08</span><figcaption class="cap"><span>08 · DETAIL</span>指标监控 · 异常详情</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/new-home.png" alt="首页功能组"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">09</span><figcaption class="cap"><span>09 · HOME</span>首页 · 功能组导航</figcaption></figure>
-        <figure class="shotcard is-card"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/settings.png" alt="设置"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">10</span><figcaption class="cap"><span>10 · SETTINGS</span>设置 · 账号与系统信息</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/inspection.png" alt="点巡检"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">11</span><figcaption class="cap"><span>11 · INSPECTION</span>点巡检工单</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/login.png" alt="登录"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">12</span><figcaption class="cap"><span>12 · LOGIN</span>登录 · 账号验证</figcaption></figure>
-        <figure class="shotcard is-card"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/mine.png" alt="我的"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">13</span><figcaption class="cap"><span>13 · PROFILE</span>我的 · 个人中心</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/home.png" alt="自定义组"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">14</span><figcaption class="cap"><span>14 · CUSTOM</span>首页 · 自定义常用功能</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/approval.png" alt="审批中心"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">15</span><figcaption class="cap"><span>15 · APPROVAL</span>审批中心 · 待办 / 已审批分栏</figcaption></figure>
-        <figure class="shotcard is-card"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/approval-detail.png" alt="审批详情"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">16</span><figcaption class="cap"><span>16 · APPROVAL</span>审批详情 · 决策依据一屏到位</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/msg-step-maint-open.png" alt="设备故障工单"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">17</span><figcaption class="cap"><span>17 · WORK ORDER</span>设备故障工单 · 保全协同处理</figcaption></figure>
-        <figure class="shotcard is-card"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/verify-account.png" alt="账号验证"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">18</span><figcaption class="cap"><span>18 · LOGIN</span>账号验证 · 状态反馈</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/iwork-home-basic.jpg" alt="首页 · 常用功能"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">19</span><figcaption class="cap"><span>19 · WORKBENCH</span>首页 · 常用功能聚合</figcaption></figure>
-        <figure class="shotcard is-card"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/iwork-done.png" alt="已完成"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">20</span><figcaption class="cap"><span>20 · COMPLETED</span>待办 · 已完成列表</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/iwork-home-kpi.png" alt="自定义指标组"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">21</span><figcaption class="cap"><span>21 · CUSTOM KPI</span>首页 · 自定义指标分组</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/iwork-add-app.png" alt="添加应用"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">22</span><figcaption class="cap"><span>22 · ADD APP</span>应用 · 分类检索与添加</figcaption></figure>
-        <figure class="shotcard is-card"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/iwork-anomaly.jpg" alt="异常详情长图"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">23</span><figcaption class="cap"><span>23 · ANOMALY</span>异常详情 · 智能归因报告</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/iwork-monitor.png" alt="指标监控主题"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">24</span><figcaption class="cap"><span>24 · MONITOR</span>指标监控 · 成本 / 质量 / 设备</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/iwork-avatar-picker.png" alt="头像设置"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">25</span><figcaption class="cap"><span>25 · AVATAR</span>我的 · 拍照 / 相册选择</figcaption></figure>
-        <figure class="shotcard is-card"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/iwork-notice.png" alt="系统通知"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">26</span><figcaption class="cap"><span>26 · NOTICE</span>通知 · 版本更新公告</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/iwork-apps.png" alt="应用中心"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">27</span><figcaption class="cap"><span>27 · APPS</span>应用 · 工单 / 应用 / 指标分类</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/iwork-fav-setting.png" alt="常用功能设置"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">28</span><figcaption class="cap"><span>28 · SETTINGS</span>设置 · 最近使用清单</figcaption></figure>
-        <figure class="shotcard is-card"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/iwork-home-groups.png" alt="首页分组"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">29</span><figcaption class="cap"><span>29 · GROUPS</span>首页 · 分组折叠与自定义</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/iwork-home-basic2.jpg" alt="首页高清"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">30</span><figcaption class="cap"><span>30 · WORKBENCH</span>首页 · 常用功能（真机截屏）</figcaption></figure>
-        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/iwork-sign.png" alt="手写签名"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">31</span><figcaption class="cap"><span>31 · SIGN</span>审批 · 手写签名与双动作</figcaption></figure>
-        <figure class="shotcard is-card"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><img class="dvc-screen" loading="lazy" src="assets/dmtt/iwork-initiated.png" alt="已发起"></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">32</span><figcaption class="cap"><span>32 · INITIATED</span>待办 · 已发起状态跟踪</figcaption></figure>
-        </div>
-        <div class="story-bar">
-          <div class="story-num"><span id="pdRailNow">01</span><small id="pdRailTotal">/ 32</small></div>
-          <div class="story-info"><div class="t" id="pdRailTag">01 · SPLASH</div><h4 id="pdRailTitle">启动页 · 综合业务移动平台</h4></div>
-          <div class="story-nav">
-            <button id="pdRailPrev" aria-label="上一张" type="button">‹</button>
-            <button id="pdRailNext" aria-label="下一张" type="button">›</button>
-          </div>
-          <div class="story-dots" id="pdRailDots" aria-label="界面导航"></div>
-        </div>
-        <div class="story-tip">DRAG · SCROLL · ← → 浏览 32 张真实界面　/　点击放大查看细节</div>
+      <div class="pd-sec-title"><span class="pd-sec-no">03</span> 界面全景 <em>/ 12 LIVE SCREENS</em></div>
+      <p class="pd-rail-sub">精选 12 个已完成开发的核心高保真界面，按视觉与交互优先级横向排列，支持左右滑动并直接在样机内体验。</p>
+      <div class="pd-rail-track" id="pdRail" aria-label="iWork 12 屏真实界面全景">
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live pj-lazy-frame" data-src="./iwork-demo/index.html?embed=phone&v=20261123c#/home" title="首页工作台 · 2×2 指标与高频聚合"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">01</span><figcaption class="cap"><span>01 · WORKBENCH</span>首页工作台 · 2×2 指标与高频聚合</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live pj-lazy-frame" data-src="./iwork-demo/index.html?embed=phone&v=20261123c#/metrics-detail" title="异常详情 · 趋势柱线与三层根因树"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">02</span><figcaption class="cap"><span>02 · ROOT CAUSE</span>异常详情 · 趋势柱线与三层根因树</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live pj-lazy-frame" data-src="./iwork-demo/index.html?embed=phone&v=20261123c#/iwork-gpt" title="云宝 AI · 流式问答与业务数据微卡"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">03</span><figcaption class="cap"><span>03 · YUNBAO AI</span>云宝 AI · 流式问答与业务数据微卡</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live pj-lazy-frame" data-src="./iwork-demo/index.html?embed=phone&v=20261123c#/metrics" title="指标监控 · 关注/取消关注与进度条"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">04</span><figcaption class="cap"><span>04 · METRICS</span>指标监控 · 关注/取消关注与进度条</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live pj-lazy-frame" data-src="./iwork-demo/index.html?embed=phone&v=20261123c#/smart-factory" title="智慧工厂 · 13 项点位实时微趋势线"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">05</span><figcaption class="cap"><span>05 · SMART FACTORY</span>智慧工厂 · 13 项点位实时微趋势线</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live pj-lazy-frame" data-src="./iwork-demo/index.html?embed=phone&v=20261123c#/inspection?demo=fresh" title="设备点检 · 逐项勾选与同意/拒绝审批"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">06</span><figcaption class="cap"><span>06 · INSPECTION</span>设备点检 · 逐项勾选与同意/拒绝审批</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live pj-lazy-frame" data-src="./iwork-demo/index.html?embed=phone&v=20261123c#/signature" title="电子签名 · 基准纸张与流畅笔锋"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">07</span><figcaption class="cap"><span>07 · SIGNATURE</span>电子签名 · 基准纸张与流畅笔锋</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live pj-lazy-frame" data-src="./iwork-demo/index.html?embed=phone&v=20261123c#/agv-home" title="AGV 调度中心 · 蓝白双色线性重构"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">08</span><figcaption class="cap"><span>08 · AGV CENTER</span>AGV 调度中心 · 蓝白双色线性重构</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live pj-lazy-frame" data-src="./iwork-demo/index.html?embed=phone&v=20261123c#/agv-scan" title="相机扫码 · 扫光取景与手动录码"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">09</span><figcaption class="cap"><span>09 · SCANNER</span>相机扫码 · 扫光取景与手动录码</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live pj-lazy-frame" data-src="./iwork-demo/index.html?embed=phone&v=20261123c#/todo" title="待办任务 · 去处理直达与红点消除"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">10</span><figcaption class="cap"><span>10 · TODO TASKS</span>待办任务 · 去处理直达与红点消除</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live pj-lazy-frame" data-src="./iwork-demo/index.html?embed=phone&v=20261123c#/home-settings" title="常用功能设置 · 分组排序与添加应用"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">11</span><figcaption class="cap"><span>11 · CUSTOMIZE</span>常用功能设置 · 分组排序与添加应用</figcaption></figure>
+        <figure class="shotcard"><div class="dvc dvc-iphone-14-pro"><div class="dvc-frame"><iframe class="dvc-screen dvc-screen--live pj-lazy-frame" data-src="./iwork-demo/index.html?embed=phone&v=20261123c#/desktop" title="iPhone 桌面 · 64×64 官方应用图标"></iframe></div><div class="dvc-stripe"></div><div class="dvc-header"></div><div class="dvc-sensors"></div><div class="dvc-btns"></div><div class="dvc-power"></div><div class="dvc-home"></div></div><span class="no">12</span><figcaption class="cap"><span>12 · LAUNCH</span>iPhone 桌面 · 64×64 官方应用图标</figcaption></figure>
       </div>
     </section>
 
@@ -2895,35 +2905,11 @@ body:has(.proj:hover) .glow-cursor{opacity:.10}
             <div class="pj-ds__ctl"><span class="b b-primary">确认</span><span class="b">重置</span><span class="b b-red">拒绝</span><span class="b b-dot">待处理 12</span></div>
             <p class="pj-ds__note">主操作 ≥ 44px 落在拇指热区 → 戴手套也点得准 <em>菲茨定律</em></p>
           </div>
-        </div>
-
-        <div class="pj-ds__shotline">
-          <div class="pj-ds__shot"><img loading="lazy" src="assets/dmtt/workbench.png" alt="工作台"><span>01 工作台 · 状态聚合</span></div>
-          <div class="pj-ds__shot"><img loading="lazy" src="assets/dmtt/monitor-all.png" alt="指标监控"><span>02 指标 · 语义色</span></div>
-          <div class="pj-ds__shot"><img loading="lazy" src="assets/dmtt/approval.png" alt="审批中心"><span>03 审批 · 双动作</span></div>
-          <div class="pj-ds__shot"><img loading="lazy" src="assets/dmtt/todo.png" alt="待办"><span>04 待办 · 优先级</span></div>
-        </div>
+        </div></div></div>
       </div>
     </section>
     <!-- 12 设计页面概览：斜向滚动的真实界面墙 -->
-    <section class="pd-x" id="pdWall">
-      <div class="pd-sec-title"><span class="pd-sec-no">04</span><span class="pjwall-t">设计页面概览</span> <em>/ DESIGN PAGE OVERVIEW</em></div>
-      <p class="pd-rail-sub">32 张真实设计页面按业务模块混排成一面墙。悬停暂停、点击放大，看整体密度，也看单页细节。</p>
-      <div class="pj-wall" id="pjWall" aria-label="设计页面概览，斜向滚动的真实界面墙">
-        <span class="pj-wall__hint">HOVER TO PAUSE · CLICK TO ZOOM</span>
-        <div class="pj-wall__rot">
-          <div class="pj-wall__track"><div class="pj-wall__card" data-cap="启动页"><img loading="lazy" src="assets/dmtt/splash.png" alt="启动页"><span>启动页</span></div><div class="pj-wall__card" data-cap="AGV"><img loading="lazy" src="assets/dmtt/agv-home.png" alt="AGV"><span>AGV</span></div><div class="pj-wall__card" data-cap="首页功能组"><img loading="lazy" src="assets/dmtt/new-home.png" alt="首页功能组"><span>首页功能组</span></div><div class="pj-wall__card" data-cap="我的"><img loading="lazy" src="assets/dmtt/mine.png" alt="我的"><span>我的</span></div><div class="pj-wall__card" data-cap="设备故障工单"><img loading="lazy" src="assets/dmtt/msg-step-maint-open.png" alt="设备故障工单"><span>设备故障工单</span></div><div class="pj-wall__card" data-cap="自定义指标组"><img loading="lazy" src="assets/dmtt/iwork-home-kpi.png" alt="自定义指标组"><span>自定义指标组</span></div><div class="pj-wall__card" data-cap="头像设置"><img loading="lazy" src="assets/dmtt/iwork-avatar-picker.png" alt="头像设置"><span>头像设置</span></div><div class="pj-wall__card" data-cap="首页分组"><img loading="lazy" src="assets/dmtt/iwork-home-groups.png" alt="首页分组"><span>首页分组</span></div><div class="pj-wall__card" data-cap="启动页"><img loading="lazy" src="assets/dmtt/splash.png" alt="启动页"><span>启动页</span></div><div class="pj-wall__card" data-cap="AGV"><img loading="lazy" src="assets/dmtt/agv-home.png" alt="AGV"><span>AGV</span></div><div class="pj-wall__card" data-cap="首页功能组"><img loading="lazy" src="assets/dmtt/new-home.png" alt="首页功能组"><span>首页功能组</span></div><div class="pj-wall__card" data-cap="我的"><img loading="lazy" src="assets/dmtt/mine.png" alt="我的"><span>我的</span></div><div class="pj-wall__card" data-cap="设备故障工单"><img loading="lazy" src="assets/dmtt/msg-step-maint-open.png" alt="设备故障工单"><span>设备故障工单</span></div><div class="pj-wall__card" data-cap="自定义指标组"><img loading="lazy" src="assets/dmtt/iwork-home-kpi.png" alt="自定义指标组"><span>自定义指标组</span></div><div class="pj-wall__card" data-cap="头像设置"><img loading="lazy" src="assets/dmtt/iwork-avatar-picker.png" alt="头像设置"><span>头像设置</span></div><div class="pj-wall__card" data-cap="首页分组"><img loading="lazy" src="assets/dmtt/iwork-home-groups.png" alt="首页分组"><span>首页分组</span></div></div>
-          <div class="pj-wall__track"><div class="pj-wall__card" data-cap="经营工作台"><img loading="lazy" src="assets/dmtt/workbench.png" alt="经营工作台"><span>经营工作台</span></div><div class="pj-wall__card" data-cap="待办"><img loading="lazy" src="assets/dmtt/todo.png" alt="待办"><span>待办</span></div><div class="pj-wall__card" data-cap="设置"><img loading="lazy" src="assets/dmtt/settings.png" alt="设置"><span>设置</span></div><div class="pj-wall__card" data-cap="自定义组"><img loading="lazy" src="assets/dmtt/home.png" alt="自定义组"><span>自定义组</span></div><div class="pj-wall__card" data-cap="账号验证"><img loading="lazy" src="assets/dmtt/verify-account.png" alt="账号验证"><span>账号验证</span></div><div class="pj-wall__card" data-cap="添加应用"><img loading="lazy" src="assets/dmtt/iwork-add-app.png" alt="添加应用"><span>添加应用</span></div><div class="pj-wall__card" data-cap="系统通知"><img loading="lazy" src="assets/dmtt/iwork-notice.png" alt="系统通知"><span>系统通知</span></div><div class="pj-wall__card" data-cap="首页高清"><img loading="lazy" src="assets/dmtt/iwork-home-basic2.jpg" alt="首页高清"><span>首页高清</span></div><div class="pj-wall__card" data-cap="经营工作台"><img loading="lazy" src="assets/dmtt/workbench.png" alt="经营工作台"><span>经营工作台</span></div><div class="pj-wall__card" data-cap="待办"><img loading="lazy" src="assets/dmtt/todo.png" alt="待办"><span>待办</span></div><div class="pj-wall__card" data-cap="设置"><img loading="lazy" src="assets/dmtt/settings.png" alt="设置"><span>设置</span></div><div class="pj-wall__card" data-cap="自定义组"><img loading="lazy" src="assets/dmtt/home.png" alt="自定义组"><span>自定义组</span></div><div class="pj-wall__card" data-cap="账号验证"><img loading="lazy" src="assets/dmtt/verify-account.png" alt="账号验证"><span>账号验证</span></div><div class="pj-wall__card" data-cap="添加应用"><img loading="lazy" src="assets/dmtt/iwork-add-app.png" alt="添加应用"><span>添加应用</span></div><div class="pj-wall__card" data-cap="系统通知"><img loading="lazy" src="assets/dmtt/iwork-notice.png" alt="系统通知"><span>系统通知</span></div><div class="pj-wall__card" data-cap="首页高清"><img loading="lazy" src="assets/dmtt/iwork-home-basic2.jpg" alt="首页高清"><span>首页高清</span></div></div>
-          <div class="pj-wall__track"><div class="pj-wall__card" data-cap="指标监控全部"><img loading="lazy" src="assets/dmtt/monitor-all.png" alt="指标监控全部"><span>指标监控全部</span></div><div class="pj-wall__card" data-cap="消息"><img loading="lazy" src="assets/dmtt/message.png" alt="消息"><span>消息</span></div><div class="pj-wall__card" data-cap="点巡检"><img loading="lazy" src="assets/dmtt/inspection.png" alt="点巡检"><span>点巡检</span></div><div class="pj-wall__card" data-cap="审批中心"><img loading="lazy" src="assets/dmtt/approval.png" alt="审批中心"><span>审批中心</span></div><div class="pj-wall__card" data-cap="首页 · 常用功能"><img loading="lazy" src="assets/dmtt/iwork-home-basic.jpg" alt="首页 · 常用功能"><span>首页 · 常用功能</span></div><div class="pj-wall__card" data-cap="异常详情长图"><img loading="lazy" src="assets/dmtt/iwork-anomaly.jpg" alt="异常详情长图"><span>异常详情长图</span></div><div class="pj-wall__card" data-cap="应用中心"><img loading="lazy" src="assets/dmtt/iwork-apps.png" alt="应用中心"><span>应用中心</span></div><div class="pj-wall__card" data-cap="手写签名"><img loading="lazy" src="assets/dmtt/iwork-sign.png" alt="手写签名"><span>手写签名</span></div><div class="pj-wall__card" data-cap="指标监控全部"><img loading="lazy" src="assets/dmtt/monitor-all.png" alt="指标监控全部"><span>指标监控全部</span></div><div class="pj-wall__card" data-cap="消息"><img loading="lazy" src="assets/dmtt/message.png" alt="消息"><span>消息</span></div><div class="pj-wall__card" data-cap="点巡检"><img loading="lazy" src="assets/dmtt/inspection.png" alt="点巡检"><span>点巡检</span></div><div class="pj-wall__card" data-cap="审批中心"><img loading="lazy" src="assets/dmtt/approval.png" alt="审批中心"><span>审批中心</span></div><div class="pj-wall__card" data-cap="首页 · 常用功能"><img loading="lazy" src="assets/dmtt/iwork-home-basic.jpg" alt="首页 · 常用功能"><span>首页 · 常用功能</span></div><div class="pj-wall__card" data-cap="异常详情长图"><img loading="lazy" src="assets/dmtt/iwork-anomaly.jpg" alt="异常详情长图"><span>异常详情长图</span></div><div class="pj-wall__card" data-cap="应用中心"><img loading="lazy" src="assets/dmtt/iwork-apps.png" alt="应用中心"><span>应用中心</span></div><div class="pj-wall__card" data-cap="手写签名"><img loading="lazy" src="assets/dmtt/iwork-sign.png" alt="手写签名"><span>手写签名</span></div></div>
-          <div class="pj-wall__track"><div class="pj-wall__card" data-cap="指标监控异常"><img loading="lazy" src="assets/dmtt/monitor-alert.png" alt="指标监控异常"><span>指标监控异常</span></div><div class="pj-wall__card" data-cap="监控详情"><img loading="lazy" src="assets/dmtt/monitor-detail.png" alt="监控详情"><span>监控详情</span></div><div class="pj-wall__card" data-cap="登录"><img loading="lazy" src="assets/dmtt/login.png" alt="登录"><span>登录</span></div><div class="pj-wall__card" data-cap="审批详情"><img loading="lazy" src="assets/dmtt/approval-detail.png" alt="审批详情"><span>审批详情</span></div><div class="pj-wall__card" data-cap="已完成"><img loading="lazy" src="assets/dmtt/iwork-done.png" alt="已完成"><span>已完成</span></div><div class="pj-wall__card" data-cap="指标监控主题"><img loading="lazy" src="assets/dmtt/iwork-monitor.png" alt="指标监控主题"><span>指标监控主题</span></div><div class="pj-wall__card" data-cap="常用功能设置"><img loading="lazy" src="assets/dmtt/iwork-fav-setting.png" alt="常用功能设置"><span>常用功能设置</span></div><div class="pj-wall__card" data-cap="已发起"><img loading="lazy" src="assets/dmtt/iwork-initiated.png" alt="已发起"><span>已发起</span></div><div class="pj-wall__card" data-cap="指标监控异常"><img loading="lazy" src="assets/dmtt/monitor-alert.png" alt="指标监控异常"><span>指标监控异常</span></div><div class="pj-wall__card" data-cap="监控详情"><img loading="lazy" src="assets/dmtt/monitor-detail.png" alt="监控详情"><span>监控详情</span></div><div class="pj-wall__card" data-cap="登录"><img loading="lazy" src="assets/dmtt/login.png" alt="登录"><span>登录</span></div><div class="pj-wall__card" data-cap="审批详情"><img loading="lazy" src="assets/dmtt/approval-detail.png" alt="审批详情"><span>审批详情</span></div><div class="pj-wall__card" data-cap="已完成"><img loading="lazy" src="assets/dmtt/iwork-done.png" alt="已完成"><span>已完成</span></div><div class="pj-wall__card" data-cap="指标监控主题"><img loading="lazy" src="assets/dmtt/iwork-monitor.png" alt="指标监控主题"><span>指标监控主题</span></div><div class="pj-wall__card" data-cap="常用功能设置"><img loading="lazy" src="assets/dmtt/iwork-fav-setting.png" alt="常用功能设置"><span>常用功能设置</span></div><div class="pj-wall__card" data-cap="已发起"><img loading="lazy" src="assets/dmtt/iwork-initiated.png" alt="已发起"><span>已发起</span></div></div>
-        </div>
-        <div class="pj-wall__meta">
-          <b>32</b>
-          <i>DESIGN PAGES / 6 MODULES / 1 SYSTEM</i>
-          <p>启动、工作台、指标、AGV、审批、点巡检、应用中心与设置，全部出自同一套组件规范。</p>
-        </div>
-      </div>
-    </section>
+    
 
 
     <!-- 4. 分段正文 -->
@@ -2978,8 +2964,8 @@ body:has(.proj:hover) .glow-cursor{opacity:.10}
         <button type="button" class="pd-case-link__btn is-ghost" data-jump="#pdIcons">图标设计</button>
         <button type="button" class="pd-case-link__btn is-ghost" data-jump="#pdContentBand">设计内容</button>
         <button type="button" class="pd-case-link__btn is-ghost" data-jump="#pdIwork">交互界面 12 屏</button>
-        <button type="button" class="pd-case-link__btn is-ghost" data-jump="#pdRailSec">界面全景 32 张</button>
-        <button type="button" class="pd-case-link__btn is-ghost" data-jump="#pdWall">设计页面概览 32 页</button>
+        <button type="button" class="pd-case-link__btn is-ghost" data-jump="#pdLiveProto">可交互原型</button>
+        <button type="button" class="pd-case-link__btn is-ghost" data-jump="#pdRailSec">界面全景 12 屏</button>
       </div>
     </section>
 
@@ -4072,11 +4058,11 @@ p,li,dd,dt,figcaption,blockquote,.hero-copy,.about-lead,.pd-lead,.pd-rail-sub,.p
   border-bottom:1.5px solid rgba(141,192,255,.28)}
 .pj-proc__ph{position:relative;appearance:none;-webkit-appearance:none;border:0;
   border-right:1px solid rgba(141,192,255,.20);background:none;text-align:left;
-  padding:22px 14px 22px 0;cursor:pointer;color:inherit;font-family:inherit;
+  padding:22px 18px 22px 20px;cursor:pointer;color:inherit;font-family:inherit;
   transition:background .45s var(--ease)}
-.pj-proc__ph::before{content:"";position:absolute;top:0;left:0;right:14px;height:2px;
+.pj-proc__ph::before{content:"";position:absolute;top:0;left:20px;right:18px;height:2px;
   background:rgba(141,192,255,.34);transition:background .45s var(--ease),box-shadow .45s var(--ease)}
-.pj-proc__ph::after{content:"";position:absolute;top:-4px;left:0;width:7px;height:7px;border-radius:50%;
+.pj-proc__ph::after{content:"";position:absolute;top:-4px;left:20px;width:7px;height:7px;border-radius:50%;
   background:#5cf2d0;opacity:.9;transition:opacity .45s var(--ease),box-shadow .45s var(--ease)}
 .pj-proc__ph span{display:block;font:11.5px var(--mono);letter-spacing:.16em;color:#5cf2d0;margin-bottom:10px}
 .pj-proc__ph b{display:block;font-size:21px;font-weight:700;letter-spacing:.06em;color:#f2f8ff;margin-bottom:5px}
@@ -4111,8 +4097,8 @@ p,li,dd,dt,figcaption,blockquote,.hero-copy,.about-lead,.pd-lead,.pd-rail-sub,.p
   letter-spacing:.16em;color:#d3e8ff;white-space:nowrap;pointer-events:none;text-shadow:0 2px 12px #060b17}
 .pj-proc__motto i{display:block;width:32px;height:1.5px;background:linear-gradient(90deg,transparent,rgba(141,192,255,.85))}
 .pj-proc__motto i:last-child{background:linear-gradient(90deg,rgba(141,192,255,.85),transparent)}
-.pj-proc__motto.m1{left:20%;top:17%}
-.pj-proc__motto.m2{left:63%;top:17%}
+.pj-proc__motto.m1{left:32.0833%;top:17%;transform:translateX(-50%)}
+.pj-proc__motto.m2{left:67.9167%;top:17%;transform:translateX(-50%)}
 .pj-proc__side{position:absolute;z-index:3;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;
   padding-left:12px;border-left:2px solid rgba(141,192,255,.42);pointer-events:none}
 .pj-proc__side b{font-size:13.5px;font-weight:600;color:#e0edff;letter-spacing:.08em}
@@ -4237,7 +4223,7 @@ p,li,dd,dt,figcaption,blockquote,.hero-copy,.about-lead,.pd-lead,.pd-rail-sub,.p
 .ar-detail__item{min-width:0}
 .ar-detail__item span{display:block;font:10.5px/1.4 var(--mono);letter-spacing:.14em;color:#7fb0ff;margin-bottom:5px}
 .ar-detail__item b{display:block;font-size:14.5px;line-height:1.6;color:#dceafb;font-weight:600;text-wrap:pretty}
-.ar-detail__hint{margin:0;font-size:13.5px;color:#93aac9;letter-spacing:.03em;line-height:1.6}
+.ar-detail__hint{grid-column:1/-1;margin:0;font-size:13.5px;color:#93aac9;letter-spacing:.03em;line-height:1.6;white-space:nowrap}
 .ar-detail__body.is-swap{animation:arFade .42s var(--ease) both}
 @keyframes arFade{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
 .ar-nw{white-space:nowrap}
@@ -4376,7 +4362,7 @@ p,li,dd,dt,figcaption,blockquote,.hero-copy,.about-lead,.pd-lead,.pd-rail-sub,.p
  .ar-node em{display:inline-block;margin-left:10px}
  .ar-detail__body{grid-template-columns:1fr;gap:9px}
  .ar-detail{align-items:flex-start}
- .ar-detail__hint{font-size:12.5px}
+ .ar-detail__hint{font-size:12.5px;white-space:normal}
  .ar-foot .iw-nn{min-width:0}
  .ar-legend{display:none}
 }
@@ -4507,7 +4493,7 @@ p,li,dd,dt,figcaption,blockquote,.hero-copy,.about-lead,.pd-lead,.pd-rail-sub,.p
 .pd-cover__inner{z-index:2}
 .pd-cover__device{
   --cv-s:.71;
-  position:absolute;z-index:1;top:19%;right:6%;
+  position:absolute;z-index:1;top:28%;right:6%;
   width:calc(428px * var(--cv-s));height:calc(868px * var(--cv-s));
   pointer-events:none;opacity:0;transform:translateY(24px);
   filter:drop-shadow(0 34px 56px rgba(0,0,0,.72));
@@ -4631,6 +4617,55 @@ dialog.is-six .pd-more__card .mt{font-size:15px;margin:10px 0 6px}
   dialog.is-six .pd-more__card{border-right:0}
 }
 
+
+/* ===== v1.7.0 项目6：全量实时页面替换 + 官方图标规范 + 作品集讲解矩阵 ===== */
+iframe.dvc-screen--live,.dvc-screen--live{display:block!important;width:390px!important;height:830px!important;max-width:none!important;min-height:830px!important;border:0;border-radius:49px;background:#090712}
+.dvc-screen--cover{pointer-events:none}
+.pj-appicon-row{display:grid;grid-template-columns:84px 1fr;gap:20px;align-items:center;padding:18px 0;margin:14px 0 22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pj-appicon-box{width:84px;height:84px;border-radius:20px;overflow:hidden;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7px 4px 5px;box-shadow:0 12px 28px rgba(26,107,255,.26)}
+.pj-appicon-box svg.pj-appicon-bg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.pj-appicon-box .pj-appicon-w{position:relative;z-index:1;width:36px;height:36px;display:grid;place-items:center}
+.pj-appicon-box .pj-appicon-name{position:relative;z-index:1;margin-top:2px;font:700 13px/14px var(--font-sans,sans-serif);color:#fff}
+.pj-appicon-box .pj-appicon-sub{position:relative;z-index:1;margin-top:1px;font:500 7.5px/10px var(--font-sans,sans-serif);color:rgba(255,255,255,.92);white-space:nowrap}
+.pj-appicon-meta b{display:block;font-size:15px;font-weight:600;color:var(--fg);margin-bottom:4px}
+.pj-appicon-meta p{margin:0 0 8px;font-size:13px;line-height:1.6;color:var(--muted)}
+.pj-appicon-specs{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--muted)}
+.pj-appicon-specs span b{display:inline;font-size:11.5px;color:var(--fg);margin:0 0 0 4px}
+.pj-icons .pj-icon svg{stroke:#278ae0;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.iw-thumb--editorial{height:auto!important;min-height:54px;padding:9px 10px!important;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:4px;border:1px solid var(--line);background:transparent;text-align:left;cursor:pointer;transition:border-color .2s ease,background-color .2s ease}
+.iw-thumb--editorial em{font-style:normal;font:600 10px/1 var(--font-mono,monospace);letter-spacing:.08em;color:var(--muted)}
+.iw-thumb--editorial span{position:static!important;padding:0!important;background:none!important;font-size:12px!important;line-height:1.35!important;color:var(--fg)!important;font-weight:500}
+.iw-thumb--editorial.on{border-color:#278ae0!important;background:rgba(39,138,224,.08)!important}
+.iw-thumb--editorial.on em{color:#278ae0}
+.pj-ds__mini{position:relative;width:100%;aspect-ratio:390/830;overflow:hidden;border:1px solid var(--line);background:#090712}
+.pj-ds__mini iframe{position:absolute;top:0;left:0;width:390px;height:830px;border:0;transform-origin:top left;pointer-events:none}
+.pj-matrix{margin-top:26px;border-top:1px solid var(--line)}
+.pj-matrix-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:16px 0 12px}
+.pj-matrix-head h4{margin:0;font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--fg)}
+.pj-matrix-head span{font-size:11.5px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.pj-matrix-table{width:100%;border-collapse:collapse;font-size:12.5px;line-height:1.6}
+.pj-matrix-table th{padding:10px 10px 10px 0;text-align:left;font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--muted);border-top:1px solid var(--line);border-bottom:1px solid var(--line);white-space:nowrap}
+.pj-matrix-table td{padding:11px 12px 11px 0;vertical-align:top;border-bottom:1px solid var(--line);color:var(--muted)}
+.pj-matrix-table td:first-child{color:var(--fg);font-weight:600;white-space:nowrap}
+.pj-matrix-table td.is-princ{color:var(--fg);white-space:nowrap}
+
+#pdRailSec{overflow:hidden}
+#pdRailSec{position:relative!important;overflow:hidden}
+#pdRail{position:static!important;transform:none!important;display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:flex-start;gap:24px;overflow-x:auto;overflow-y:hidden;padding:18px 4px 28px;scroll-snap-type:x proximity}
+#pdRail .shotcard{flex:0 0 248px!important;width:248px!important;height:504px!important;overflow:hidden;position:relative}
+#pdRail .shotcard>.dvc{transform:scale(.58)!important;transform-origin:top left!important}
+.pj-matrix-table td em{font-style:normal;font-family:var(--font-mono,monospace);font-size:11px;color:#278ae0;margin-right:6px}
+@media(max-width:760px){.pj-matrix-table thead{display:none}.pj-matrix-table tr{display:grid;grid-template-columns:1fr;padding:10px 0;border-bottom:1px solid var(--line)}.pj-matrix-table td{border:0;padding:2px 0;white-space:normal!important}}
+
+/* ===== v1.6.0 项目6：内置可交互高保真原型（编辑式细线框） ===== */
+.pj-live-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin:14px 0 18px}
+.pj-live-desc{margin:0;max-width:620px;font-size:14px;line-height:1.7;color:var(--muted)}
+.pj-live-acts{display:flex;align-items:center;gap:10px;flex:none}
+.pj-live-btn{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border:1px solid var(--line);background:transparent;color:var(--fg);font:500 12px/1 var(--font-sans,inherit);letter-spacing:.04em;text-decoration:none;cursor:pointer;transition:border-color .2s ease,background-color .2s ease,color .2s ease}
+.pj-live-btn:hover{border-color:var(--fg);background:var(--fg);color:var(--bg)}
+.pj-live-wrap{position:relative;width:100%;border:1px solid var(--line);border-radius:18px;background:#0b101c;overflow:hidden}
+.pj-live-frame{display:block;width:100%;height:clamp(720px,82vh,880px);border:0;background:#0b101c}
+@media(max-width:900px){.pj-live-frame{height:790px}}
 
 /* ===== v1.5.0 项目6：设计页面概览 · 斜向滚动界面墙 ===== */
 .pd-x .pj-wall{position:relative;isolation:isolate;margin-top:26px;height:clamp(430px,46vw,580px);
@@ -10496,6 +10531,36 @@ const wrap = (value, span) => ((value % span) + span) % span;
     const caseLink = $('pdCaseLink'); if (caseLink) caseLink.style.display = idx === 5 ? 'flex' : 'none';
     // 项目6：显示卡片内完整演示区块（场景/画廊/设计系统），并重排可见章节编号
     document.querySelectorAll('.pd-x').forEach(sec=>sec.classList.toggle('is-on', idx===5));
+    if(idx===5){
+    // 懒加载项目6内的所有实时子画面与设计系统微缩预览缩放
+    (function initPjLiveFrames(){
+      const frames=[...document.querySelectorAll('.pj-lazy-frame')];
+      if('IntersectionObserver' in window){
+        const io=new IntersectionObserver(entries=>{
+          entries.forEach(en=>{
+            if(en.isIntersecting){
+              const f=en.target;
+              if(!f.getAttribute('src') && f.dataset.src) f.setAttribute('src', f.dataset.src);
+              io.unobserve(f);
+            }
+          });
+        },{root:document.getElementById('pdScroll'), rootMargin:'260px'});
+        frames.forEach(f=>io.observe(f));
+      } else {
+        frames.forEach(f=>{ if(!f.getAttribute('src') && f.dataset.src) f.setAttribute('src', f.dataset.src); });
+      }
+      const scaleMinis=()=>{
+        document.querySelectorAll('.pj-ds__mini').forEach(box=>{
+          const f=box.querySelector('iframe');
+          if(!f) return;
+          const s=box.clientWidth/390;
+          if(s>0) f.style.transform='scale('+s.toFixed(4)+')';
+        });
+      };
+      requestAnimationFrame(scaleMinis);
+      if(!window.__pjMiniBound){ window.__pjMiniBound=true; window.addEventListener('resize', scaleMinis); }
+    })();
+const lf=$('iwLiveFrame');if(lf&&!lf.getAttribute('src')&&lf.dataset.src)lf.setAttribute('src',lf.dataset.src);const rb=$('iwLiveReload');if(rb&&!rb.dataset.bound){rb.dataset.bound='1';rb.addEventListener('click',()=>{const f=$('iwLiveFrame');if(f&&f.dataset.src)f.setAttribute('src',f.dataset.src+(f.dataset.src.includes('?')?'&':'?')+'r='+Date.now());});}}
     dialog.classList.toggle('is-six', idx===5);
     document.querySelectorAll('#pdScroll .pd-six-hide').forEach(sec=>{sec.style.display = idx===5 ? 'none' : '';});
     if (idx===5 && typeof window.__pdRailInit==='function') requestAnimationFrame(()=>requestAnimationFrame(()=>{window.__pdRailInit();if(window.__pdRvCheck)window.__pdRvCheck();}));
@@ -10931,57 +10996,56 @@ const wrap = (value, span) => ((value % span) + span) % span;
   (function iWorkShowcase(){
     const sec=document.getElementById('pdIwork');
     if(!sec) return;
-    // 图片路径解析：离线版注入 window.__IW_IMGS 映射（base64），否则用相对路径
-    const imgSrc = name => (window.__IW_IMGS && window.__IW_IMGS[name]) ? window.__IW_IMGS[name] : ('assets/dmtt/'+name);
+    // 12 屏全部驱动真实开发的 iWork 页面（按视觉表现力与业务核心度排序）
     const PAGES=[
-      {img:'workbench.png',k:'01 / 12 · 经营工作台',t:'打开 App，就知道今天要做什么',
-       d:'待办、指标与任务按「今天要处理」聚合。',
-       pts:['高频任务按紧急度聚合','3 层导航收敛 200+ 功能点'],
-       nn:['NN#01','状态可见性','首屏实时待办与刷新时间戳 → 不下拉即知数据新旧']},
-      {img:'monitor-alert.png',k:'02 / 12 · 指标监控',t:'异常用语义红标出，不用去图里找',
-       d:'不达标数据直接标红（BPW-6-4-0 成本 1212.86 / 目标 1129.32）。',
-       pts:['红=不达标、绿=达标，无需图例','异常自动联动维修工单'],
-       nn:['NN#08','美学与极简','单屏只留实绩 / 目标 / 偏差 3 个数字 → 3 秒读懂一屏']},
-      {img:'agv-home.png',k:'03 / 12 · AGV 叫料',t:'叫料到物流，一屏掌握',
-       d:'叫料任务、设备状态与转运进度同屏。',
-       pts:['叫料即时下发，状态实时回传','对接单件追溯，数据同源'],
-       nn:['NN#02','系统与现实匹配','沿用「叫料 / 扫码 / 入库」车间口语 → 新用户无需培训']},
-      {img:'monitor-detail.png',k:'04 / 12 · 异常详情',t:'从告警到归因，一条线索追到底',
-       d:'不达标数据、位置、智能报告与关联指标串成一条线。',
-       pts:['实际 / 目标 / 地点 / 时间一屏交代','智能报告随异常推荐'],
-       nn:['NN#09','帮助诊断与恢复','告警写清指标、偏差与建议动作 → 从看到红点到知道该做什么']},
-      {img:'approval.png',k:'05 / 12 · 审批中心',t:'审批流，也能拖拽式配置',
-       d:'待审批 / 已审批分栏，审批流 0 代码拖拽配置。',
-       pts:['状态分栏，红点提示未读','卡片直连设备与产线信息'],
-       nn:['NN#07','灵活性与效率','分栏 + 批量通过 + 一键下钻 → 熟练用户路径缩短一半']},
-      {img:'approval-detail.png',k:'06 / 12 · 审批详情',t:'一屏把决策依据交代清楚',
-       d:'审批内容、时间、产线、设备与处理方式集中一屏。',
-       pts:['故障信息结构化呈现','再次审批 / 确认双动作明确'],
-       nn:['NN#06','识别而非回忆','决策依据一屏到位 → 不必跳转、不靠记忆']},
-      {img:'msg-step-maint-open.png',k:'07 / 12 · 设备故障工单',t:'异常之后，跨模块闭环',
-       d:'消息直达工单，生产课与保全双线协同。',
-       pts:['故障信息自动带出','异常联动维修工单与备件调拨'],
-       nn:['NN#05','错误预防','工单自动带出设备与产线信息 → 免手输、少填错']},
-      {img:'todo.png',k:'08 / 12 · 待办消息',t:'所有要处理的，都在这里',
-       d:'审批、任务、通知按紧急度收口。',
-       pts:['按紧急度智能排序','与工作台数据同源，状态实时同步'],
-       nn:['NN#03','用户控制与自由','一键清空筛选 / 逐级返回不丢条件 → 误触 1 步回原位']},
-       {img:'iwork-apps.png',k:'09 / 12 · 应用中心',t:'200+ 功能，收进 6 个模块',
-        d:'工单类 / 应用类 / 指标类分组陈列，搜索直达。',
-        pts:['按业务语义分组，不按系统菜单','搜索框常驻，跨类直达'],
-        nn:['NN#08','美学与极简','只留图标 + 名称 + 加号 → 单屏可扫读 20+ 功能']},
-       {img:'iwork-home-kpi.png',k:'10 / 12 · 自定义首页',t:'每个人都可以有自己的工作台',
-        d:'常用功能与指标卡自由编组，分组可折叠。',
-        pts:['分组 ABCDE 自定义命名','指标达标 / 未达标同屏对照'],
-        nn:['NN#07','灵活性与效率','最近使用 / 自定义两种形态 → 新手与熟练工各取所需']},
-       {img:'iwork-notice.png',k:'11 / 12 · 系统通知',t:'版本变更，不让现场猜',
-        d:'更新公告按时间倒序，变更条目逐条列明。',
-        pts:['更新内容结构化逐条说明','未读红点 + 时间戳'],
-        nn:['NN#01','状态可见性','公告写明生效时间与影响范围 → 版本升级零疑问']},
-       {img:'iwork-sign.png',k:'12 / 12 · 手写签名',t:'现场签字，不必切系统',
-        d:'审批内容、手写签名与拒绝 / 同意双动作同屏。',
-        pts:['签名可重置 / 导入 / 全屏','使用上次签名一键复用'],
-        nn:['NN#05','错误预防','同意与拒绝分色分区 → 关键操作不误触']}
+      {route:'/home',k:'01 / 12 · 首页工作台',t:'打开 App，核心指标与待办一屏掌控',
+       d:'2×2 指标监控卡与右侧两排高频入口像素齐平，底部居中云宝 AI 随时待命。',
+       pts:['指标达标/未达标自带进度条，3 秒识别业务偏差','支持「最近使用 / 自定义分组」两种首页形态'],
+       nn:['NN#01','状态可见性','首屏聚合待办角标与核心指标进度 → 无需下钻即知当日重点']},
+      {route:'/metrics-detail',k:'02 / 12 · 异常详情',t:'从告警到三层根因，一条线索追到底',
+       d:'异常概览、智能节能建议、趋势柱线图与三层异常原因拆解树同屏联动。',
+       pts:['趋势图支持日/周/月切换与悬浮数据提示卡','三层根因树支持点击车间联动工段并放大全景'],
+       nn:['NN#09','帮助诊断与恢复','告警直给偏差、关联指标与根因路径 → 从看到红点到知道如何处理']},
+      {route:'/iwork-gpt',k:'03 / 12 · 云宝 AI',t:'工业智能副驾，问答直接联动业务页',
+       d:'逐字流式回复内嵌 3 列业务数据微卡，支持安全条例引用导出与历史会话切换。',
+       pts:['流式打字机节奏 + 结构化产量/稼动率微卡','回答末尾提供一键跳转异常详情或点检工单'],
+       nn:['AI 副驾','业务闭环','问答直连真实指标与工单页面 → 不做孤立聊天框']},
+      {route:'/metrics',k:'04 / 12 · 指标监控',t:'星标滑出关注，核心 KPI 随时聚焦',
+       d:'浅底微边框进度条卡片，点击右上角星标可滑出「关注 / 取消关注」操作区。',
+       pts:['支持「全部 / 异常 / 已关注 / 空态」四维瞬时切换','与首页指标卡视觉语言完全一致，降低阅读疲劳'],
+       nn:['NN#04','一致性与标准','语义红/琥珀/品牌蓝全站统一 → 零学习成本']},
+      {route:'/smart-factory',k:'05 / 12 · 智慧工厂',t:'13 项车间实时点位，微趋势一眼辨波动',
+       d:'熔炉车间有功功率、前炉温度、炉压等 13 项点位配品牌蓝微趋势折线（Sparkline）。',
+       pts:['正常/预警状态圆点直观区分阈值逼近项','支持一号/二号熔炉切换与时间戳一键刷新'],
+       nn:['NN#08','美学与极简','克制微趋势线替代复杂大图表 → 单屏扫读 13 项实时点位']},
+      {route:'/inspection?demo=fresh',k:'06 / 12 · 设备点检',t:'逐项确认防漏检，同意与拒绝双轨闭环',
+       d:'4 项检查项勾选实时联动顶部进度条，支持填写备注、同意提交或弹出拒绝原因抽屉。',
+       pts:['未填全全部检查项自动拦截，防止漏检误提交','拒绝工单需选原因并同步回写待办列表状态'],
+       nn:['NN#05','错误预防','校验拦截 + 同意/拒绝分色分区 → 关键审批零误触']},
+      {route:'/signature',k:'07 / 12 · 手写签名',t:'工业现场手写签字，顺滑还原纸笔手感',
+       d:'独立签字纸张区配四角定位框与虚线基准线，支持笔色切换与贝塞尔平滑笔锋。',
+       pts:['二次贝塞尔曲线插值，消除快速滑动锯齿感','支持一键清空重签与确认保存闭环'],
+       nn:['拟物隐喻','触控友好','纸张基准线与笔锋反馈 → 现场单手签字自然流畅']},
+      {route:'/agv-home',k:'08 / 12 · AGV 调度中心',t:'统一蓝白双色线性，去除模板感',
+       d:'生产配料与智能仓储六大高频入口统一浅冰蓝底托与品牌蓝双色线性图标。',
+       pts:['顶部消息条实时同步立库与调度回执未读数','生产 / 出入库模块化分区，单手拇指热区易触达'],
+       nn:['NN#02','系统与现实匹配','沿用「呼叫物料 / 成品移出」车间术语 → 新员工免培训']},
+      {route:'/agv-scan',k:'09 / 12 · 扫光相机',t:'激光扫光实时识别，手动录码随时兜底',
+       d:'支持真实相机取景与激光扫光动效，底部一键切换手动输入条码，适应暗光车间。',
+       pts:['扫码/手动双轨切换，不因条码磨损中断入库','提交后弹出三阶段进度校验弹窗确认入库'],
+       nn:['NN#05','容错与恢复','扫码失败 1 步切手动录码 → 保障现场作业连续性']},
+      {route:'/todo',k:'10 / 12 · 待办去处理',t:'红点点开即消，强制进工单核验后审批',
+       d:'区分待处理「去处理」与已完成「查看任务详情」，双维筛选抽屉与搜索栏丝滑收展。',
+       pts:['点击卡片或「去处理」立即消除未读红点','列表外不设直接审批按钮，确保填单后严谨决策'],
+       nn:['NN#03','用户控制与自由','筛选重置 + 逐级返回不丢状态 → 操作可控可回退']},
+      {route:'/home-settings',k:'11 / 12 · 自定义首页',t:'分组拖拽排序，全屏应用库自由编组',
+       d:'支持「最近使用 / 自定义」模式切换、分组上下移排序及全屏分类「添加应用」。',
+       pts:['工单类 / 应用类 / 指标类 14 项业务功能可搜索勾选','保存后实时同步首页手风琴分组折叠展开'],
+       nn:['NN#07','灵活性与效率','按岗位习惯编排首页 → 熟练工高频路径缩短一半']},
+      {route:'/desktop',k:'12 / 12 · 桌面与启动',t:'从真机桌面点击图标，沉浸进入 iWork',
+       d:'严格按 iPhone 14 Pro 64×64 标准比例还原官方 iWork 图标，点击触发品牌启动过渡。',
+       pts:['还原 MasterGo 官方蓝波纹应用图标与未读角标','点击自然过渡启动页 → 账号登录 → 首页工作台'],
+       nn:['品牌信任','零摩擦入口','真机级启动链路 → 作品集演示更具真实产品说服力']}
     ];
     const screen=document.getElementById('iwScreen');
     const device=document.getElementById('iwDevice');
@@ -10995,11 +11059,12 @@ const wrap = (value, span) => ((value % span) + span) % span;
     let cur=0, timer=null;
 
     PAGES.forEach((p,i)=>{
+      const label=p.k.split('· ')[1];
       const b=document.createElement('div');
-      b.className='iw-thumb'+(i===0?' on':'');
+      b.className='iw-thumb iw-thumb--editorial'+(i===0?' on':'');
       b.setAttribute('role','button'); b.setAttribute('tabindex','0');
-      b.setAttribute('aria-label','查看 '+p.k.split('· ')[1]);
-      b.innerHTML='<img src="'+imgSrc(p.img)+'" alt="'+p.k.split('· ')[1]+'"><span>'+p.k.split('· ')[1]+'</span>';
+      b.setAttribute('aria-label','查看 '+label);
+      b.innerHTML='<em>'+String(i+1).padStart(2,'0')+' · LIVE</em><span>'+label+'</span>';
       b.addEventListener('click',()=>go(i));
       b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go(i)}});
       thumbsWrap.appendChild(b);
@@ -11028,7 +11093,7 @@ const wrap = (value, span) => ((value % span) + span) % span;
       device.classList.add('swap');
       clearTimeout(timer);
       timer=setTimeout(()=>{
-        screen.src=imgSrc(p.img);
+        const base=screen.dataset.base||'./iwork-demo/index.html?embed=phone&v=20261123c#'; screen.src=base+p.route;
         screen.alt=p.k.split('· ')[1];
         applyCopy(p);
         device.classList.remove('swap');

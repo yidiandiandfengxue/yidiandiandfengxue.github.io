@@ -4,7 +4,7 @@
 
 - **线上站点**：https://yidiandiandfengxue.github.io/ （GitHub Pages 自动托管）
 - **仓库**：`yidiandiandfengxue/yidiandiandfengxue.github.io`（public，默认分支 `main`）
-- **当前版本**：v1.5.0（commit `7705076f`，tag `v1.5.0`）
+- **当前版本**：v1.6.0（2026-11-24，详情见 [RELEASE-v1.6.0.md](RELEASE-v1.6.0.md)）
 - **站点性质**：完全离线的静态单文件作品集，Three.js / RoomEnvironment / 字体 / 全部图片均已内联，零外部请求；内容为脱敏演示数据。
 
 ---
