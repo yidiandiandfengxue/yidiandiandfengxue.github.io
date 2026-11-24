@@ -2979,9 +2979,10 @@ body:has(.proj:hover) .glow-cursor{opacity:.10}
 </dialog>
 
 <style>
-dialog{width:min(96vw,1180px);max-height:94vh;padding:0;color:var(--ink);
-  background:#0d1015;border:1px solid var(--edge);border-radius:22px;overflow:hidden;position:relative;
+dialog{width:min(96vw,1180px);height:94vh;max-height:94vh;padding:0;color:var(--ink);
+  background:#0d1015;border:1px solid var(--edge);border-radius:22px;overflow:hidden;position:fixed;inset:0;margin:auto;
   transition:width .3s ease,height .3s ease,max-width .3s ease,max-height .3s ease,border-radius .3s ease}
+html:has(dialog[open]),body:has(dialog[open]){overflow:hidden!important}
 dialog.is-fullscreen{width:100vw;max-width:100vw;height:100vh;max-height:100vh;border-radius:0;border-color:transparent}
 dialog::backdrop{background:rgba(2,3,5,.86);backdrop-filter:blur(10px)}
 .dlg-controls{position:fixed;top:18px;right:18px;z-index:2147483647;display:flex;align-items:center;gap:8px}
@@ -2993,7 +2994,7 @@ dialog::backdrop{background:rgba(2,3,5,.86);backdrop-filter:blur(10px)}
 .dlg-ctrl--fs .ico-min{display:none}
 dialog.is-fullscreen .dlg-ctrl--fs .ico-fs{display:none}
 dialog.is-fullscreen .dlg-ctrl--fs .ico-min{display:block}
-.dlg-scroll{max-height:94vh;height:94vh;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(92,242,208,.35) transparent}
+.dlg-scroll{max-height:100%;height:100%;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(92,242,208,.35) transparent}
 dialog.is-fullscreen .dlg-scroll{max-height:100vh;height:100vh}
 @media(max-width:640px){.dlg-controls{top:12px;right:12px}.dlg-ctrl{width:34px;height:34px;min-height:34px}}
 .dlg-scroll::-webkit-scrollbar{width:9px}
@@ -4620,7 +4621,7 @@ dialog.is-six .pd-more__card .mt{font-size:15px;margin:10px 0 6px}
 
 /* ===== v1.7.0 项目6：全量实时页面替换 + 官方图标规范 + 作品集讲解矩阵 ===== */
 iframe.dvc-screen--live,.dvc-screen--live{display:block!important;width:390px!important;height:830px!important;max-width:none!important;min-height:830px!important;border:0;border-radius:49px;background:#090712}
-.dvc-screen--cover{pointer-events:none}
+.dvc-screen--cover,.pd-x .scene-device .dvc-screen--live,.pd-x .shotcard .dvc-screen--live{pointer-events:none}
 .pj-appicon-row{display:grid;grid-template-columns:84px 1fr;gap:20px;align-items:center;padding:18px 0;margin:14px 0 22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .pj-appicon-box{width:84px;height:84px;border-radius:20px;overflow:hidden;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7px 4px 5px;box-shadow:0 12px 28px rgba(26,107,255,.26)}
 .pj-appicon-box svg.pj-appicon-bg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
