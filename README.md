@@ -4,7 +4,7 @@
 
 - **线上站点**：https://yidiandiandfengxue.github.io/ （GitHub Pages 自动托管）
 - **仓库**：`yidiandiandfengxue/yidiandiandfengxue.github.io`（public，默认分支 `main`）
-- **当前版本**：v1.6.0（2026-11-24，详情见 [RELEASE-v1.6.0.md](RELEASE-v1.6.0.md)）
+- **当前版本**：v1.7.0（2026-11-27，详情见 [CHANGELOG.md](CHANGELOG.md)）
 - **站点性质**：完全离线的静态单文件作品集，Three.js / RoomEnvironment / 字体 / 全部图片均已内联，零外部请求；内容为脱敏演示数据。
 
 ---
@@ -20,7 +20,7 @@ python3 -m http.server 8793 --bind 127.0.0.1
 # 浏览器打开 http://127.0.0.1:8793/
 ```
 
-> 只想看成品：直接双击 `deliverables/Oscar-离线版.html`，无需服务器。
+> 历史离线交付：`deliverables/Oscar-离线版.html` 与 ZIP 保留 11 月 19 日版本；查看 v1.7.0 两个新增案例请使用线上站点或本地静态服务。
 
 ---
 
@@ -28,10 +28,12 @@ python3 -m http.server 8793 --bind 127.0.0.1
 
 | 路径 | 说明 |
 |---|---|
-| `index.html` | 主站，单文件（约 1.3MB）：首页 + 6 个项目卡片 + 项目 6 完整设计叙事弹窗（12 章） |
+| `index.html` | 主站，主入口（约 1.6MB）：首页 + 8 个项目卡片 + 项目 6 完整设计叙事弹窗（12 章） |
 | `case-dmtt.html` | iWork / DMTT 独立完整案例页（14 张真实截图） |
 | `case-teamhub.html` | 「云枢协同」备用 B 端演示稿（10 页，含 OKR 与亮点注释） |
-| `assets/` | 全部本地资源（132 个）：界面截图、头像、KV、字体、效果壁纸。零外部请求 |
+| `case-libao.html` | 栗宝独立案例（3D 形象、动画与交互） |
+| `orchestra-demo/` | Orchestra 可交互演示 |
+| `assets/` | 本地资源：界面截图、头像、KV、字体、效果壁纸。零外部请求 |
 | `assets/dmtt/` | iWork 真实界面素材（55 个，含 32 张全景与概览墙用图） |
 | `deliverables/Oscar-离线版.html` | 单文件离线版（约 17MB，素材去重映射，双击即开，零坏图） |
 | `deliverables/Oscar-作品集-含DMTT案例.zip` | 完整站点交付包（约 30MB，源码 + 素材 + 离线版） |

@@ -1,0 +1,2241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Orchestra · 工业 AI 编排与执行平台</title>
+<style>
+  :root {
+    --bg-primary: #f5f7fc;
+    --bg-secondary: #f4f6fb;
+    --bg-sidebar: #f7f7f7;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f4f6fb;
+    --border: #e8eaed;
+    --accent: #ff00a5;
+    --accent-hover: #ff33b3;
+    --accent-soft: rgba(255, 0, 165, 0.11);
+    --accent-ring: rgba(255, 0, 165, 0.28);
+    --text-1: #1f2129;
+    --text-2: #5b606a;
+    --text-3: #8a919d;
+    --success: #00b578;
+    --error: #fa5151;
+    --warning: #ff8f1f;
+    --info: #07b9b9;
+    --hover-bg: rgba(31, 33, 41, 0.05);
+    --shadow-sm: 0 1px 3px rgba(31, 33, 41, 0.07);
+    --shadow-md: 0 10px 28px rgba(31, 33, 41, 0.08);
+    --radius: 8px;
+    --radius-lg: 14px;
+    --font-ui: "PingFang SC", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  html.dark {
+    --bg-primary: #202124;
+    --bg-secondary: #292a2d;
+    --bg-sidebar: #2b2d33;
+    --bg-card: #303134;
+    --bg-card-hover: #3c4043;
+    --border: #3c4043;
+    --text-1: #f1f3f6;
+    --text-2: #b4bac4;
+    --text-3: #8a919d;
+    --hover-bg: rgba(255, 255, 255, 0.06);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 14px 32px rgba(0, 0, 0, 0.42);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; overflow: hidden; font-family: var(--font-ui); background: var(--bg-primary); color: var(--text-1); -webkit-font-smoothing: antialiased; font-size: 13px; }
+  button, input { font-family: inherit; }
+
+  /* Studio wrapper when ?mode=studio */
+  body.is-studio {
+    background:
+      radial-gradient(ellipse 50% 60% at 18% 20%, rgba(255, 0, 165, 0.16), transparent 65%),
+      radial-gradient(ellipse 48% 55% at 84% 82%, rgba(7, 185, 185, 0.15), transparent 65%),
+      linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px) 0 0 / 32px 32px,
+      linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px) 0 0 / 32px 32px,
+      linear-gradient(135deg, #070a14 0%, #0e1324 52%, #090e1c 100%);
+    display: flex; flex-direction: column; padding: 14px 18px 16px; gap: 12px;
+  }
+  .studio-bar {
+    display: none; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    padding: 10px 14px; border-radius: 14px;
+    background: linear-gradient(165deg, rgba(20, 24, 40, 0.88), rgba(12, 16, 28, 0.94));
+    border: 1px solid rgba(255, 255, 255, 0.11); color: #f1f5f9; flex: none;
+  }
+  body.is-studio .studio-bar { display: flex; }
+  .studio-bar__left { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
+  .studio-badge {
+    font: 600 10px/1 var(--font-mono); letter-spacing: 1.2px; color: #ff5cc6;
+    padding: 5px 9px; border-radius: 999px; background: rgba(255, 0, 165, 0.12);
+    border: 1px solid rgba(255, 0, 165, 0.36); white-space: nowrap;
+  }
+  .studio-spotlight { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .studio-spotlight strong { font: 600 11px/1.3 var(--font-mono); color: #5cf2d0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .studio-spotlight span { font-size: 12px; color: #cbd5e1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .studio-pills { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .studio-pill {
+    height: 28px; padding: 0 11px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.04); color: #cbd5e1; font-size: 11.5px; font-weight: 500;
+    cursor: pointer; transition: all .18s ease; white-space: nowrap;
+  }
+  .studio-pill:hover { border-color: rgba(255, 0, 165, 0.55); color: #fff; background: rgba(255, 0, 165, 0.1); }
+  .studio-pill.active { border-color: #ff00a5; background: rgba(255, 0, 165, 0.22); color: #fff; font-weight: 600; }
+
+  .studio-frame {
+    flex: 1; min-height: 0; width: 100%; height: 100%; display: flex; flex-direction: column;
+    overflow: hidden; background: var(--bg-primary);
+  }
+  body.is-studio .studio-frame {
+    border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.58), 0 0 0 1px rgba(255, 0, 165, 0.12);
+  }
+  .mac-chrome {
+    display: none; height: 34px; flex: none; padding: 0 14px; align-items: center; gap: 10px;
+    background: #1a1c23; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #94a3b8;
+    font: 11px/1 var(--font-mono);
+  }
+  body.is-studio .mac-chrome { display: flex; }
+  .mac-dots { display: flex; gap: 6px; }
+  .mac-dots i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+  .mac-dots i:nth-child(1) { background: #ff5f57; }
+  .mac-dots i:nth-child(2) { background: #febc2e; }
+  .mac-dots i:nth-child(3) { background: #28c840; }
+  .mac-url {
+    flex: 1; max-width: 420px; margin: 0 auto; height: 22px; border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex; align-items: center; justify-content: center; gap: 6px; color: #cbd5e1; font-size: 11px;
+  }
+  .mac-url b { color: #ff5cc6; font-weight: 600; }
+
+  /* Main Orchestra Shell */
+  .app-shell { flex: 1; min-height: 0; display: flex; width: 100%; overflow: hidden; background: var(--bg-primary); }
+
+  /* Left Sidebar (Authentic PageSidebarNav) */
+  .sidebar {
+    width: 224px; flex: none; background: var(--bg-sidebar); border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; padding: 12px 10px; gap: 8px; overflow: hidden;
+    transition: width .22s ease;
+  }
+  .sidebar.collapsed { width: 58px; padding: 12px 8px; }
+  .sb-head { display: flex; align-items: center; justify-content: space-between; padding: 2px 4px 8px; border-bottom: 1px solid var(--border); }
+  .sb-logo { height: 22px; display: block; object-fit: contain; }
+  .sb-mark { width: 24px; height: 24px; display: none; object-fit: contain; }
+  .sidebar.collapsed .sb-logo { display: none; }
+  .sidebar.collapsed .sb-mark { display: block; margin: 0 auto; }
+  .sb-collapse-btn {
+    width: 26px; height: 26px; border: 0; border-radius: 6px; background: transparent;
+    color: var(--text-2); cursor: pointer; display: grid; place-items: center;
+  }
+  .sb-collapse-btn:hover { background: var(--hover-bg); color: var(--text-1); }
+  .sidebar.collapsed .sb-collapse-btn { display: none; }
+
+  .sb-scroll { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; scrollbar-width: none; }
+  .sb-scroll::-webkit-scrollbar { display: none; }
+  .sb-group-title {
+    font-size: 11px; font-weight: 600; color: var(--text-3); padding: 4px 10px; letter-spacing: .03em;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .sidebar.collapsed .sb-group-title { display: none; }
+  .sb-nav-item {
+    width: 100%; height: 34px; padding: 0 10px; border: 0; border-radius: 10px;
+    background: transparent; color: var(--text-2); font-size: 12.5px; font-weight: 500;
+    display: flex; align-items: center; gap: 9px; cursor: pointer; text-align: left;
+    transition: background .15s ease, color .15s ease; position: relative;
+  }
+  .sb-nav-item svg { width: 15px; height: 15px; flex: none; stroke-width: 1.75; }
+  .sb-nav-item span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sb-nav-item:hover { background: var(--hover-bg); color: var(--text-1); }
+  .sb-nav-item.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  .sb-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-left: auto; flex: none; animation: pulse 1.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity:.35; transform:scale(.85); } 50% { opacity:1; transform:scale(1.15); } }
+  .sidebar.collapsed .sb-nav-item { justify-content: center; padding: 0; }
+  .sidebar.collapsed .sb-nav-item span, .sidebar.collapsed .sb-dot { display: none; }
+
+  .sb-foot {
+    flex: none; padding-top: 8px; border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  }
+  .sb-user { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .sb-ava {
+    width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg, #ff00a5, #7c3aed);
+    color: #fff; font-size: 11px; font-weight: 700; display: grid; place-items: center; flex: none;
+  }
+  .sb-user-meta { min-width: 0; }
+  .sb-user-meta b { display: block; font-size: 12px; color: var(--text-1); line-height: 1.2; }
+  .sb-user-meta small { display: block; font-size: 10.5px; color: var(--success); }
+  .sidebar.collapsed .sb-user-meta { display: none; }
+  .theme-btn {
+    width: 28px; height: 28px; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--bg-card); color: var(--text-2); cursor: pointer; display: grid; place-items: center; flex: none;
+  }
+  .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Main Workspace */
+  .main { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow: hidden; }
+  .topbar {
+    height: 48px; flex: none; padding: 0 16px; background: var(--bg-card); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .topbar-title { font-size: 14.5px; font-weight: 650; color: var(--text-1); white-space: nowrap; }
+  .ws-chip {
+    display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 6px;
+    background: var(--bg-secondary); border: 1px solid var(--border); color: var(--text-2);
+    font-size: 11px; font-family: var(--font-mono); white-space: nowrap;
+  }
+  .ws-chip i { width: 6px; height: 6px; border-radius: 50%; background: var(--success); display: block; }
+  .topbar-actions { display: flex; align-items: center; gap: 8px; }
+  .btn {
+    height: 30px; padding: 0 12px; border-radius: var(--radius); border: 1px solid var(--border);
+    background: var(--bg-card); color: var(--text-1); font-size: 12px; font-weight: 500;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all .15s ease; white-space: nowrap;
+  }
+  .btn:hover { background: var(--bg-card-hover); border-color: var(--accent-ring); }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+  .btn-success { background: var(--success); border-color: var(--success); color: #fff; font-weight: 600; }
+  .btn-ghost { background: transparent; border-color: transparent; color: var(--text-2); }
+
+  .view-body { flex: 1; min-height: 0; display: flex; overflow: hidden; position: relative; }
+
+  /* ============ 1. WORKFLOW VIEW ============ */
+  .wf-canvas {
+    flex: 1; min-width: 0; position: relative; overflow: auto;
+    background-color: var(--bg-primary);
+    background-image: radial-gradient(var(--border) 1.25px, transparent 1.25px);
+    background-size: 22px 22px;
+    padding: 28px 24px;
+  }
+  .wf-stage { position: relative; width: 1040px; height: 460px; margin: 0 auto; }
+  .wf-edges { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+  .wf-edge { fill: none; stroke: var(--info); stroke-width: 2.2; stroke-dasharray: 6 5; animation: dash 1.2s linear infinite; pointer-events: stroke; cursor: pointer; transition: stroke .18s ease, stroke-width .18s ease, opacity .18s ease; }
+  .wf-edge:hover, .wf-edge.is-unlink-hover { stroke: #fa5151 !important; stroke-width: 3.4 !important; filter: drop-shadow(0 0 8px rgba(250,81,81,.65)); }
+  .wf-edge.is-cut { opacity: 0; pointer-events: none; }
+  .wf-edge.is-done { stroke: var(--success); stroke-dasharray: none; animation: none; }
+  .wf-edge.is-wait { stroke: var(--warning); }
+  @keyframes dash { to { stroke-dashoffset: -22; } }
+
+  .wf-node {
+    position: absolute; width: 192px; border-radius: 10px; background: var(--bg-card);
+    border: 1.5px solid var(--border); box-shadow: var(--shadow-sm); cursor: pointer;
+    transition: border-color .2s, box-shadow .2s, transform .2s;
+  }
+  .wf-node:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .wf-node.selected { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft), var(--shadow-md); }
+  .wf-node.st-running { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16); }
+  .wf-node.st-pending { border-color: var(--warning); box-shadow: 0 0 0 3px rgba(255, 143, 31, 0.18); }
+  .wf-node.st-done { border-color: rgba(0, 181, 120, 0.55); }
+  .wf-node-hd {
+    padding: 9px 11px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; gap: 6px;
+  }
+  .wf-node-hd b { font-size: 12.5px; color: var(--text-1); font-weight: 650; }
+  .wf-status-pill {
+    font: 600 10px/1 var(--font-mono); padding: 3px 6px; border-radius: 999px;
+    background: var(--bg-secondary); color: var(--text-2); white-space: nowrap;
+  }
+  .st-done .wf-status-pill { background: rgba(0,181,120,.14); color: var(--success); }
+  .st-running .wf-status-pill { background: rgba(37,99,235,.14); color: #2563eb; }
+  .st-pending .wf-status-pill { background: rgba(255,143,31,.16); color: #d97706; }
+  .wf-node-bd { padding: 9px 11px; display: flex; flex-direction: column; gap: 7px; }
+  .wf-meta-row { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--text-2); }
+  .wf-meta-row code { font-family: var(--font-mono); font-size: 10.5px; color: var(--accent); background: var(--accent-soft); padding: 1px 5px; border-radius: 4px; }
+  .wf-prompt { font-size: 11px; line-height: 1.45; color: var(--text-2); background: var(--bg-secondary); padding: 6px 8px; border-radius: 6px; }
+  .wf-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .wf-tag { font-size: 10px; padding: 2px 6px; border-radius: 4px; background: var(--bg-secondary); border: 1px solid var(--border); color: var(--text-2); }
+  .wf-handle { position: absolute; top: 50%; width: 9px; height: 9px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--info); transform: translateY(-50%); }
+  .wf-handle.in { left: -5px; }
+  .wf-handle.out { right: -5px; }
+
+  .wf-runs {
+    width: 256px; flex: none; background: var(--bg-card); border-left: 1px solid var(--border);
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .panel-hd {
+    padding: 11px 13px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; font-size: 12.5px; font-weight: 650;
+  }
+  .panel-list { flex: 1; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .run-card {
+    padding: 9px 10px; border-radius: var(--radius); border: 1px solid var(--border);
+    background: var(--bg-secondary); display: flex; flex-direction: column; gap: 4px; cursor: pointer;
+  }
+  .run-card.active { border-color: var(--accent); background: var(--accent-soft); }
+  .run-card-top { display: flex; align-items: center; justify-content: space-between; font-size: 11.5px; font-weight: 600; }
+  .run-card small { font-size: 10.5px; color: var(--text-3); font-family: var(--font-mono); }
+  .ev-box { border-top: 1px solid var(--border); padding: 10px 12px; background: var(--bg-card); display: flex; flex-direction: column; gap: 6px; max-height: 46%; overflow-y: auto; }
+  .ev-title { font-size: 11.5px; font-weight: 650; color: var(--text-1); display: flex; justify-content: space-between; }
+  .ev-row {
+    padding: 7px 8px; border-radius: 6px; background: var(--bg-secondary); border: 1px solid var(--border);
+    font-size: 11px; display: flex; flex-direction: column; gap: 2px;
+  }
+  .ev-row b { color: var(--text-1); font-size: 11.5px; }
+  .ev-row span { color: var(--text-2); line-height: 1.4; }
+  .gate-banner {
+    margin: 8px 10px 0; padding: 9px 10px; border-radius: 8px;
+    background: rgba(255, 143, 31, 0.12); border: 1px solid rgba(255, 143, 31, 0.4);
+    display: flex; flex-direction: column; gap: 7px; font-size: 11.5px;
+  }
+  .gate-actions { display: flex; gap: 6px; }
+
+  /* ============ 2. CHAT VIEW ============ */
+  .chat-wrap { flex: 1; display: flex; min-height: 0; overflow: hidden; }
+  .chat-main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+  .chat-feed { flex: 1; overflow-y: auto; padding: 18px 22px; display: flex; flex-direction: column; gap: 14px; }
+  .msg { max-width: 82%; padding: 11px 14px; border-radius: 12px; font-size: 12.5px; line-height: 1.65; }
+  .msg.user { align-self: flex-end; background: var(--accent-soft); border: 1px solid var(--accent-ring); color: var(--text-1); }
+  .msg.ai { align-self: flex-start; background: var(--bg-card); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+  .tool-call {
+    margin: 8px 0; padding: 8px 10px; border-radius: 8px; background: var(--bg-secondary);
+    border: 1px solid var(--border); font-family: var(--font-mono); font-size: 11px; color: var(--text-2);
+  }
+  .tool-call b { color: var(--info); }
+  .confirm-card {
+    margin-top: 10px; padding: 10px 12px; border-radius: 8px;
+    background: rgba(255, 143, 31, 0.1); border: 1px solid rgba(255, 143, 31, 0.35);
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  .chat-input-bar {
+    flex: none; padding: 10px 18px 14px; background: var(--bg-card); border-top: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .quick-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .quick-chip {
+    font-size: 11px; padding: 4px 9px; border-radius: 999px; border: 1px solid var(--border);
+    background: var(--bg-secondary); color: var(--text-2); cursor: pointer;
+  }
+  .quick-chip:hover { border-color: var(--accent); color: var(--accent); }
+  .composer { display: flex; gap: 8px; }
+  .composer input {
+    flex: 1; height: 36px; padding: 0 12px; border-radius: var(--radius); border: 1px solid var(--border);
+    background: var(--bg-primary); color: var(--text-1); outline: none; font-size: 12.5px;
+  }
+  .composer input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+
+  /* ============ 3. GENERIC GRID VIEWS (Skills, Models, Jobs, Usage, Ontology, AppBuilder) ============ */
+  .page-pad { flex: 1; overflow-y: auto; padding: 18px 22px; display: flex; flex-direction: column; gap: 16px; }
+  .kpi-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .kpi-card {
+    padding: 14px 16px; border-radius: var(--radius); background: var(--bg-card);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 4px;
+  }
+  .kpi-card span { font-size: 11.5px; color: var(--text-2); }
+  .kpi-card strong { font-size: 22px; font-weight: 700; font-family: var(--font-mono); color: var(--text-1); }
+  .kpi-card small { font-size: 11px; color: var(--success); }
+
+  .card-grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .card-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .card {
+    padding: 14px 15px; border-radius: var(--radius); background: var(--bg-card);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 8px;
+  }
+  .card-hd { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .card-hd b { font-size: 13px; color: var(--text-1); }
+  .card p { font-size: 12px; line-height: 1.55; color: var(--text-2); }
+  .pill-tag {
+    font: 600 10.5px/1 var(--font-mono); padding: 3px 7px; border-radius: 6px;
+    background: var(--bg-secondary); color: var(--text-2); border: 1px solid var(--border);
+  }
+  .pill-tag.pink { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-ring); }
+  .pill-tag.green { background: rgba(0,181,120,.12); color: var(--success); border-color: rgba(0,181,120,.3); }
+  .pill-tag.cyan { background: rgba(7,185,185,.12); color: var(--info); border-color: rgba(7,185,185,.3); }
+
+  .switch {
+    width: 34px; height: 19px; border-radius: 999px; border: 0; background: var(--border);
+    position: relative; cursor: pointer; transition: background .18s; flex: none;
+  }
+  .switch::after {
+    content: ""; position: absolute; top: 2px; left: 2px; width: 15px; height: 15px;
+    border-radius: 50%; background: #fff; transition: transform .18s;
+  }
+  .switch.on { background: var(--accent); }
+  .switch.on::after { transform: translateX(15px); }
+
+  .filter-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .filter-tab {
+    height: 28px; padding: 0 11px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--bg-card); color: var(--text-2); font-size: 12px; cursor: pointer;
+  }
+  .filter-tab.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+
+  /* App Builder Split */
+  .builder-split { flex: 1; display: grid; grid-template-columns: 320px 1fr; min-height: 0; overflow: hidden; }
+  .builder-left { background: var(--bg-card); border-right: 1px solid var(--border); padding: 14px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
+  .builder-right { padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+  .step-item { padding: 9px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-secondary); display: flex; align-items: center; gap: 9px; font-size: 12px; }
+  .step-item i { width: 18px; height: 18px; border-radius: 50%; background: rgba(0,181,120,.16); color: var(--success); font-style: normal; font-size: 11px; display: grid; place-items: center; font-weight: 700; flex: none; }
+  .preview-shell { border: 1px solid var(--border); border-radius: 12px; background: var(--bg-card); padding: 14px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 12px; }
+  .bar-chart { display: flex; align-items: flex-end; gap: 10px; height: 116px; padding-top: 12px; }
+  .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; height: 100%; justify-content: flex-end; }
+  .bar-fill { width: 100%; max-width: 34px; border-radius: 6px 6px 2px 2px; background: linear-gradient(180deg, #ff00a5, #ff66c4); transition: height .4s ease; }
+  .bar-col small { font-size: 10px; color: var(--text-3); font-family: var(--font-mono); }
+
+  /* Ontology 7-node ring */
+  .onto-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
+  .onto-pill {
+    padding: 12px 8px; border-radius: 10px; background: var(--bg-card); border: 1px solid var(--border);
+    text-align: center; display: flex; flex-direction: column; gap: 4px;
+  }
+  .onto-pill b { font-size: 13px; color: var(--accent); }
+  .onto-pill small { font-size: 10.5px; color: var(--text-2); }
+
+  .toast {
+    position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%) translateY(16px);
+    padding: 8px 16px; border-radius: 999px; background: #1f2129; color: #fff; font-size: 12px;
+    box-shadow: 0 10px 28px rgba(0,0,0,.32); opacity: 0; pointer-events: none; transition: all .22s ease; z-index: 999;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 900px) {
+    .sidebar { width: 58px; padding: 12px 8px; }
+    .sidebar .sb-logo, .sidebar .sb-group-title, .sidebar .sb-nav-item span, .sidebar .sb-user-meta, .sidebar .sb-collapse-btn { display: none; }
+    .sidebar .sb-mark { display: block; margin: 0 auto; }
+    .sidebar .sb-nav-item { justify-content: center; padding: 0; }
+    .wf-runs { display: none; }
+    .kpi-row, .card-grid-3 { grid-template-columns: 1fr 1fr; }
+    .builder-split { grid-template-columns: 1fr; }
+    .onto-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  /* v2.6.0: 移除顶部冗余伪浏览器条 + 浅色自适应 + 页面切换动效 */
+  .mac-chrome { display: none !important; }
+  html:not(.dark) body.is-studio { background: #eef1f7; }
+  html:not(.dark) .studio-bar { background: rgba(255,255,255,.94); border-color: rgba(15,23,42,.10); color: #1f2129; box-shadow: 0 6px 20px rgba(15,23,42,.06); }
+  html:not(.dark) .studio-spotlight strong { color: #078f8f; }
+  html:not(.dark) .studio-spotlight span { color: #5f6368; }
+  html:not(.dark) .studio-pill { background: #f3f5fa; border-color: rgba(15,23,42,.10); color: #3c4043; }
+  html:not(.dark) .studio-pill.on { background: #FF00A5; border-color: #FF00A5; color: #fff; }
+  .studio-frame { position: relative; }
+        @keyframes viewEnter { from { opacity: 0; transform: translateY(10px) scale(.992); filter: blur(2px); } to { opacity: 1; transform: none; filter: blur(0); } }
+  @keyframes cardPop { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+  .view-anim { animation: viewEnter .32s cubic-bezier(.16,1,.3,1) both; }
+  .view-anim .card, .view-anim .wf-node, .view-anim .job-card, .view-anim .skill-card, .view-anim .model-row, .view-anim .onto-node, .view-anim .kpi-card {
+    animation: cardPop .36s cubic-bezier(.16,1,.3,1) both;
+  }
+  .view-anim .card:nth-child(2), .view-anim .wf-node:nth-child(2), .view-anim .job-card:nth-child(2), .view-anim .skill-card:nth-child(2) { animation-delay: 45ms; }
+  .view-anim .card:nth-child(3), .view-anim .wf-node:nth-child(3), .view-anim .job-card:nth-child(3), .view-anim .skill-card:nth-child(3) { animation-delay: 90ms; }
+  .view-anim .card:nth-child(4), .view-anim .wf-node:nth-child(4), .view-anim .job-card:nth-child(4), .view-anim .skill-card:nth-child(4) { animation-delay: 135ms; }
+  .view-anim .card:nth-child(5), .view-anim .skill-card:nth-child(5) { animation-delay: 170ms; }
+  .view-anim .card:nth-child(6), .view-anim .skill-card:nth-child(6) { animation-delay: 200ms; }
+  .bar-fill, .prog-fill, .usage-bar i { transition: width .65s cubic-bezier(.16,1,.3,1), height .65s cubic-bezier(.16,1,.3,1); }
+
+
+  /* ===== v3.0.0 审批双分支闭环 + 4步引导 + 二级页返回 + shadcn 5态与无障碍 ===== */
+  .btn:focus-visible, .sb-nav-item:focus-visible, .studio-pill:focus-visible, .filter-tab:focus-visible, .switch:focus-visible, .quick-chip:focus-visible, .theme-btn:focus-visible, .sb-collapse-btn:focus-visible, .wf-node:focus-visible, .ev-row:focus-visible {
+    outline: 2px solid #FF00A5; outline-offset: 2px;
+  }
+  .btn:disabled { opacity: .45; cursor: not-allowed; pointer-events: none; }
+  .btn:active:not(:disabled) { transform: scale(.97); }
+  .wf-back-btn { padding: 5px 10px; font-size: 11px; border-color: rgba(255,0,165,.38); color: #ff66c4; background: rgba(255,0,165,.08); margin-right: 6px; }
+  .wf-back-btn:hover { background: rgba(255,0,165,.16); border-color: #FF00A5; }
+  .wf-steps-bar { display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,.02); flex-wrap: wrap; }
+  .wf-step { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-3); padding: 3px 9px; border-radius: 999px; border: 1px solid transparent; transition: all .2s; }
+  .wf-step i { font-style: normal; font-family: var(--font-mono); font-size: 10px; width: 16px; height: 16px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.08); }
+  .wf-step.active { color: #fff; background: rgba(255,0,165,.14); border-color: rgba(255,0,165,.45); font-weight: 600; }
+  .wf-step.active i { background: #FF00A5; color: #fff; }
+  .wf-step.done { color: #00B578; background: rgba(0,181,120,.10); border-color: rgba(0,181,120,.32); }
+  .wf-step.done i { background: #00B578; color: #fff; }
+  .wf-step.rejected { color: #FA5151; background: rgba(250,81,81,.12); border-color: rgba(250,81,81,.4); }
+  .wf-step.rejected i { background: #FA5151; color: #fff; }
+  .wf-step-hint { margin-left: auto; font-size: 11px; color: var(--text-2); }
+  .wf-node.st-rejected { border-color: #FA5151; box-shadow: 0 0 0 1px rgba(250,81,81,.4), 0 8px 24px rgba(250,81,81,.18); }
+  .wf-node.st-rejected .wf-status-pill { background: rgba(250,81,81,.18); color: #ff7b7b; }
+  .wf-node.st-blocked { opacity: .62; border-style: dashed; border-color: rgba(250,81,81,.45); }
+  .wf-node.st-blocked .wf-status-pill { background: rgba(250,81,81,.12); color: #ff8a8a; }
+  .wf-edge.is-rejected { stroke: #FA5151; stroke-dasharray: 4 4; opacity: .75; }
+  .gate-result { padding: 11px 12px; border-radius: 10px; margin-bottom: 10px; font-size: 11.5px; line-height: 1.5; display: flex; flex-direction: column; gap: 4px; }
+  .gate-result.is-done { background: rgba(0,181,120,.12); border: 1px solid rgba(0,181,120,.42); color: #d8fced; }
+  .gate-result.is-done b { color: #3ce6a8; font-size: 12px; }
+  .gate-result.is-rejected { background: rgba(250,81,81,.12); border: 1px solid rgba(250,81,81,.46); color: #ffd9d9; }
+  .gate-result.is-rejected b { color: #ff7878; font-size: 12px; }
+  html:not(.dark) .gate-result.is-done { color: #0c4d35; }
+  html:not(.dark) .gate-result.is-rejected { color: #6e1616; }
+  .ev-row { cursor: pointer; transition: border-color .18s, background .18s; }
+  .ev-row:hover { border-color: rgba(7,185,185,.45); }
+  .ev-row.checked { border-color: #07B9B9; background: rgba(7,185,185,.10); }
+  .ev-row .ev-src { display: inline-block; margin-top: 3px; font-size: 10px; font-family: var(--font-mono); color: #07B9B9; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  }
+
+
+  /* v3.2.0 Clean Polish: remove cheap top sweep line & redundant inner step bar */
+    .wf-steps-bar, .wf-steps { display: none !important; }
+  .chat-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 10px 0; }
+  .chat-kpi { padding: 8px 10px; border-radius: 8px; background: rgba(255,255,255,.04); border: 1px solid var(--border); }
+  .chat-kpi span { display: block; font-size: 10px; color: var(--text-3); margin-bottom: 3px; }
+  .chat-kpi b { font: 700 13px/1.1 var(--mono); color: var(--text-1); }
+  .chat-kpi b.is-warn { color: #FF8F1F; }
+  .chat-kpi b.is-cyan { color: #07B9B9; }
+  .chat-trace { display: flex; flex-direction: column; gap: 6px; margin: 10px 0; padding: 10px 12px; border-radius: 8px; background: rgba(7,185,185,.06); border: 1px solid rgba(7,185,185,.22); font-size: 11.5px; color: var(--text-1); }
+  .chat-trace div { display: flex; align-items: center; gap: 8px; }
+  .chat-trace i { font-style: normal; font: 700 10px/1 var(--mono); padding: 2px 6px; border-radius: 4px; background: rgba(7,185,185,.18); color: #07B9B9; }
+
+
+  /* v3.4.0 Live Dynamic Chart & Rolling Numbers */
+  .ab-bar, .bar-fill, [data-bar-val] { transition: height .7s cubic-bezier(.22,1,.36,1), filter .3s ease !important; }
+  .ab-bar-lbl { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font: 600 9.5px/1 var(--mono); color: rgba(255,255,255,.78); white-space: nowrap; }
+
+
+  /* 首页产品封面使用与工作台相同的审批状态，聚焦画布及证据。 */
+  .is-cover .sidebar, .is-cover .topbar-actions { display: none; }
+  .is-cover .wf-canvas { padding: 16px 0; align-content: center; isolation: isolate; }
+  .is-cover .wf-canvas::before {
+    content: ""; position: absolute; inset: 24% 0 0; pointer-events: none;
+    background: url('../assets/bg/orchestra-cover-signal-traces.jpg') center bottom / 100% 100% no-repeat;
+    mask-image: linear-gradient(transparent, #000 62%);
+    mix-blend-mode: screen; opacity: .36;
+  }
+  .is-cover .wf-stage { margin: 0 auto; }
+  .is-cover .wf-runs { width: 330px; }
+  .is-cover .wf-node-hd b { font-size: 14px; }
+  .is-cover .panel-list { flex: 0 1 auto; }
+  .is-cover .ev-box { margin-top: auto; }
+  .is-cover .wf-edge { animation: none; }
+
+/* === Interactive Workflow Canvas v3.5.0: Pan, Node Drag, Live Port Linking, Zoom Bar === */
+.wf-canvas {
+  position: relative;
+  overflow: hidden !important;
+  cursor: grab;
+  user-select: none;
+}
+.wf-canvas.is-panning { cursor: grabbing; }
+/* v3.9.0: 1040x460 airy stage with 76px node gaps, fitted cleanly at 0.74x */
+.wf-stage {
+  position: relative;
+  width: 1040px;
+  height: 460px;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+.wf-stage.is-anim {
+  transition: transform .55s cubic-bezier(.22,1,.36,1);
+}
+.wf-edges {
+  position: absolute;
+  inset: 0;
+  width: 1040px;
+  height: 460px;
+  overflow: visible;
+  pointer-events: none;
+}
+.wf-node {
+  cursor: grab;
+  transition: box-shadow .18s ease, border-color .18s ease;
+}
+.wf-node.is-dragging {
+  cursor: grabbing;
+  z-index: 20 !important;
+  box-shadow: 0 18px 42px rgba(0,0,0,.48), 0 0 0 2px #FF00A5 !important;
+}
+.wf-node.is-link-target {
+  box-shadow: 0 0 0 2px #07B9B9, 0 0 22px rgba(7,185,185,.42) !important;
+}
+.wf-handle {
+  width: 11px !important;
+  height: 11px !important;
+  cursor: crosshair !important;
+  z-index: 6;
+  transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+}
+.wf-handle:hover, .wf-handle.is-hot {
+  transform: scale(1.45);
+  background: #07B9B9 !important;
+  box-shadow: 0 0 0 3px rgba(7,185,185,.32);
+}
+.wf-edge-preview {
+  fill: none;
+  stroke: #07B9B9;
+  stroke-width: 2.2;
+  stroke-dasharray: 6 4;
+  filter: drop-shadow(0 0 6px rgba(7,185,185,.6));
+}
+.wf-edge-extra {
+  fill: none;
+  stroke: #FF00A5;
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+  animation: wfDashFlow 1.2s linear infinite;
+}
+@keyframes wfDashFlow { to { stroke-dashoffset: -20; } }
+
+.wf-zoom-bar {
+  position: absolute;
+  left: 14px;
+  top: 12px;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 7px;
+  border-radius: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border, rgba(255,255,255,.12));
+  box-shadow: 0 8px 24px rgba(0,0,0,.28);
+  backdrop-filter: blur(10px);
+}
+.wf-zoom-bar button {
+  height: 26px;
+  min-width: 26px;
+  padding: 0 7px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-1, #e8ecf5);
+  font: 600 11px/1 var(--font-mono, monospace);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+.wf-zoom-bar button:hover {
+  background: rgba(255,0,165,.14);
+  border-color: rgba(255,0,165,.36);
+  color: #FF00A5;
+}
+.wf-zoom-bar button.is-demo {
+  background: rgba(7,185,185,.14);
+  border-color: rgba(7,185,185,.35);
+  color: #07B9B9;
+}
+.wf-zoom-bar button.is-demo:hover {
+  background: rgba(7,185,185,.24);
+}
+.wf-zoom-val {
+  min-width: 40px;
+  text-align: center;
+  font: 600 11px/1 var(--font-mono, monospace);
+  color: var(--text-2, #aeb8cc);
+}
+.wf-zoom-sep {
+  width: 1px;
+  height: 14px;
+  background: var(--border, rgba(255,255,255,.12));
+  margin: 0 2px;
+}
+
+
+/* === v3.8.0 Real DOM-Targeted Demo Cursor & Caption === */
+.demo-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-40px, -40px, 0);
+  transition: opacity .28s ease;
+  will-change: transform;
+}
+.demo-cursor.is-on { opacity: 1; }
+.demo-cursor svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.55));
+  transition: transform .14s ease;
+}
+.demo-cursor.is-down svg { transform: scale(.86) translate(1px, 2px); }
+.demo-cursor-ring {
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border-radius: 50%;
+  border: 2px solid #FF00A5;
+  background: rgba(255,0,165,.18);
+  opacity: 0;
+  transform: scale(.35);
+  pointer-events: none;
+}
+.demo-cursor.is-click .demo-cursor-ring {
+  animation: demoCursorPop .55s cubic-bezier(.16,1,.3,1) forwards;
+}
+@keyframes demoCursorPop {
+  0% { opacity: .95; transform: scale(.35); }
+  100% { opacity: 0; transform: scale(1.85); }
+}
+.demo-caption {
+  position: fixed;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%) translateY(10px);
+  z-index: 9998;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: rgba(13,16,24,.92);
+  border: 1px solid rgba(255,0,165,.48);
+  box-shadow: 0 10px 28px rgba(0,0,0,.45);
+  color: #f4f7fc;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .26s ease, transform .26s ease;
+}
+.demo-caption.is-show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.demo-caption i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #FF00A5;
+  box-shadow: 0 0 8px #FF00A5;
+  display: inline-block;
+  flex: none;
+}
+.onto-pill.is-demo-hi, .card.is-demo-hi {
+  border-color: #07B9B9 !important;
+  box-shadow: 0 0 0 2px rgba(7,185,185,.28), 0 10px 24px rgba(0,0,0,.28) !important;
+  transform: translateY(-2px);
+  transition: all .24s ease;
+}
+
+
+/* 首页缩略预览：保留工作流、人工审批和证据链的真实组件。 */
+.is-project-cover {
+  --bg-primary:#15161f;
+  --bg-secondary:#1c1d28;
+  --bg-sidebar:#1d1d28;
+  --bg-card:#22232e;
+  --border:#3b3b4b;
+}
+.is-project-cover .topbar-actions,
+.is-project-cover .sb-collapse-btn,
+.is-project-cover .sb-foot,
+.is-project-cover .panel-list { display:none }
+.is-project-cover .sidebar { width:144px;padding:10px 8px }
+.is-project-cover .sb-group-title { padding:2px 9px }
+.is-project-cover .sb-nav-item { height:28px;font-size:12px }
+.is-project-cover .topbar { height:40px }
+.is-project-cover .wf-canvas {
+  padding:0;
+  overflow:hidden;
+  background-image:radial-gradient(#4a455b 1px,transparent 1px),
+                   radial-gradient(ellipse at 65% 40%,#281e32,transparent 68%);
+  background-size:18px 18px,100% 100%;
+}
+.is-project-cover .wf-stage { margin:0 }
+.is-project-cover .wf-runs { width:252px;box-shadow:-8px 0 24px #10101b4d;z-index:1 }
+.is-project-cover .panel-hd { padding:8px 11px }
+.is-project-cover .gate-banner { gap:5px }
+.is-project-cover .gate-actions .btn { height:26px }
+.is-project-cover .ev-box { margin-top:8px;max-height:none;padding:8px 10px;gap:5px }
+.is-project-cover .ev-row { padding:5px 7px;gap:1px }
+.is-project-cover .ev-row span { line-height:1.25 }
+.is-project-cover .ev-src { white-space:nowrap;overflow:hidden;text-overflow:ellipsis }
+.is-project-cover .ev-row:nth-of-type(n+4) { display:none }
+.is-project-cover .wf-node.st-pending { background:#332735;box-shadow:0 0 0 4px #ffae6a27,0 8px 30px #0b0710b0 }
+.is-project-cover .wf-node.st-done { border-color:#448375 }
+.is-project-cover .wf-node-hd b { font-size:14px }
+.is-project-cover .wf-edge,
+.is-project-cover .sb-dot { animation:none }
+
+</style>
+</head>
+<body>
+<div class="studio-bar" id="studioBar">
+  <div class="studio-bar__left">
+    <span class="studio-badge">ORCHESTRA · LIVE DEMO</span>
+    <div class="studio-spotlight">
+      <strong id="spPrinciple">NN#01 · 状态可见与人机协同闭环</strong>
+      <span id="spOutcome">多智能体节点画布 + 人工审批网关 + 执行证据链，让工业 AI 每一步可解释、可追溯。</span>
+    </div>
+  </div>
+  <div class="studio-pills" id="studioPills"></div>
+</div>
+
+<div class="studio-frame">
+  
+  <div class="mac-chrome">
+    <div class="mac-dots"><i></i><i></i><i></i></div>
+    <div class="mac-url"><span>orchestra.o3.local/<b>#/<span id="urlSlug">workflow</span></b></span></div>
+    <span style="font-size:10px;opacity:.75">STATIC DEMO · ZERO API</span>
+  </div>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sb-head">
+        <img class="sb-logo" id="brandLogo" src="./brand/orchestra-logo-light.svg" alt="Orchestra" />
+        <img class="sb-mark" id="brandMark" src="./brand/orchestra-mark-light.svg" alt="Orchestra" />
+        <button class="sb-collapse-btn" id="collapseBtn" title="收起侧栏">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+      </div>
+      <div class="sb-scroll" id="sidebarNav"></div>
+      <div class="sb-foot">
+        <div class="sb-user">
+          <span class="sb-ava">O</span>
+          <div class="sb-user-meta"><b>Oscar · 工业架构师</b><small>● 本地静态沙箱</small></div>
+        </div>
+        <button class="theme-btn" id="themeBtn" title="切换浅色/深色主题">◐</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <span class="topbar-title" id="pageTitle">工作流编排</span>
+          <span class="ws-chip"><i></i><span id="wsTag">o3-factory-mes / 产线异常处置</span></span>
+        </div>
+        <div class="topbar-actions" id="topbarActions"></div>
+      </header>
+      <div class="view-body" id="viewBody"></div>
+    </main>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<div class="demo-cursor" id="demoCursor" aria-hidden="true"><span class="demo-cursor-ring"></span><svg viewBox="0 0 24 24"><path d="M4 2l14 10-6.2 1.2L9 19.5 4 2z" fill="#fff" stroke="#14151c" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+<div class="demo-caption" id="demoCaption"><i></i><span></span></div>
+
+<script>
+(() => {
+  const params = new URLSearchParams(location.search);
+  const isStudio = params.get('mode') === 'studio';
+  const showCanvasBar = params.get('embed') !== 'project-cover';
+  if (params.get('embed') === 'cover') document.body.classList.add('is-cover');
+  const isProjectCover = params.get('embed') === 'project-cover';
+  if (isProjectCover) document.body.classList.add('is-project-cover');
+  if (isStudio) document.body.classList.add('is-studio');
+  if (params.get('theme') === 'dark') document.documentElement.classList.add('dark');
+
+  const VIEWS = [
+    { id: 'workflow', group: '编排与执行', label: '工作流编排', title: '工作流编排 · 产线异常闭环', ws: 'o3-factory-mes / workflow',
+      principle: 'NN#01 · 状态可见与人机协同闭环', outcome: '四节点多智能体画布 + 人工审批网关 + 执行证据链，异常处置每一步可追溯。',
+      icon: '<circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M7 6h10M6.5 7.5 11 16.3M17.5 7.5 13 16.3"/>', dot: true },
+    { id: 'chat', group: '编排与执行', label: '智能对话', title: '智能对话 · 虚拟开发与现场协同', ws: 'session / GEN5-异常诊断',
+      principle: 'NN#05 · 防错机制与分级确认', outcome: '高风险操作弹出人工确认卡，普通查询工具自动折叠，对话即业务动作。',
+      icon: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>' },
+    { id: 'app-builder', group: '编排与执行', label: '应用生成', title: '应用生成 · 业务页面实时构建', ws: 'app-builder / 品质看板 v2',
+      principle: 'NN#02 · 贴合业务心智模型', outcome: '自然语言拆解业务模型，右侧同步渲染标准 MES 界面与组件树，缩短交付周期。',
+      icon: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 13l-2 2 2 2M15 13l2 2-2 2"/>' },
+    { id: 'skills', group: '能力与治理', label: '技能中心', title: '技能中心 · 多运行时工业技能库', ws: 'skills / 24 项已装配',
+      principle: 'NN#07 · 灵活高效与资产复用', outcome: '统一纳管工业 Agent 与代码运行时技能，一键启停并追踪现场命中频次。',
+      icon: '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>' },
+    { id: 'models', group: '能力与治理', label: '模型路由', title: '多模型路由 · 内网与云端协同', ws: 'routing / 3 级策略生效',
+      principle: 'NN#03 · 用户控制与分层路由', outcome: '按默认 / 快速 / 推理三层拆分模型策略，兼顾工厂内网隐私与推理质量。',
+      icon: '<circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8"/>' },
+    { id: 'jobs', group: '能力与治理', label: '定时任务', title: '定时调度 · 无人值守巡检任务', ws: 'scheduler / 4 项运行中',
+      principle: 'NN#04 · 一致性与可预测调度', outcome: '定时巡检、能耗扫描与交接日报自动化执行，支持随时手动触发与状态回溯。',
+      icon: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>' },
+    { id: 'usage', group: '观测与上下文', label: '用量观测', title: '执行证据链与效能观测', ws: 'telemetry / 近 7 日汇总',
+      principle: 'NN#06 · 识别而非回忆', outcome: '将 Token 消耗、自动闭环率与首字延迟压缩为一屏可读卡片，辅助持续评测优化。',
+      icon: '<rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/>' },
+    { id: 'ontology', group: '观测与上下文', label: '本体与 MCP', title: '工业上下文与外部系统连接', ws: 'ontology / 7 维语义模型',
+      principle: 'O3 上下文工程 · 证据驱动', outcome: '以对象、语义、关系、工具、权限、证据、反馈七维上下文作为 AI 执行底座。',
+      icon: '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/>' },
+  ];
+
+  let state = {
+    view: params.get('view') || (location.hash.replace(/^#\/?/, '').split('?')[0]) || 'workflow',
+    selectedNode: 'n3',
+    wfZoom: isProjectCover ? 0.72 : 0.74,
+    wfPanX: 12,
+    wfPanY: isProjectCover ? 32 : 42,
+    wfPos: isProjectCover ? {
+      n1: { x: 16, y: 121 },
+      n2: { x: 250, y: 48 },
+      n3: { x: 485, y: 108 },
+      n4: { x: 720, y: 178 }
+    } : {
+      n1: { x: 20, y: 146 },
+      n2: { x: 288, y: 42 },
+      n3: { x: 556, y: 146 },
+      n4: { x: 824, y: 248 }
+    },
+    wfExtraEdges: [],
+    wfEdgeActive: { e1: true, e2: true, e3: true },
+    wfStage: params.get('stage') || 'pending',
+    evidenceChecked: false, // pending | running | done
+    chatApproved: false,
+    skillFilter: '全部',
+    modelTier: 'reasoning',
+    builderTab: 'preview',
+    skills: [
+      { id: 's1', name: '设备异常根因诊断', rt: '工业 Agent', desc: '结合 SCADA 实时点位与历史故障树，3 秒定位产线停机主因。', calls: 418, on: true },
+      { id: 's2', name: 'OEE 稼动波动归因', rt: '数据分析', desc: '按班次/车间拆解性能损失与良率波动，输出可执行改进清单。', calls: 306, on: true },
+      { id: 's3', name: '安全风险评估表生成', rt: '工业 Agent', desc: '依据产线作业规程自动生成标准化风险评估矩阵与防护要点。', calls: 229, on: true },
+      { id: 's4', name: '点检工单自动派发', rt: '工业 Agent', desc: '异常越限时自动匹配责任班组、备件库存并生成移动端待办。', calls: 194, on: true },
+      { id: 's5', name: '本体 SQL 语义生成', rt: '代码助手', desc: '将自然语言指标口径翻译为可验证的只读 SQL 与血缘引用。', calls: 267, on: true },
+      { id: 's6', name: '标准业务页面生成', rt: '代码助手', desc: '基于 O3 组件规范生成列表/表单/看板页面并同步交互状态。', calls: 148, on: false },
+    ],
+    messages: [
+      { role: 'user', text: '2 号熔炉车间 14:20 出现产量跌落预警，帮我排查根因并准备点检派单。' },
+      { role: 'ai',
+        text: '已检索 <b>Workshop#02 · 2 号熔炉</b> 近 4 小时 SCADA 实时流与设备拓扑，锁定根因为 <b>TC-0204 温控阀开度偏低（61%，标准 ≥ 85%）</b>，导致当前班次产量下降 <b>11.4%</b>。',
+        kpis: [
+          { label: '产量偏差（超阈值 5%）', val: '-11.4%', cls: 'is-warn' },
+          { label: 'TC-0204 温控阀开度', val: '61% / ≥85%', cls: 'is-warn' },
+          { label: '关联执行链路', val: '#RUN-1042', cls: 'is-cyan' }
+        ],
+        trace: [
+          ['01 越限触发', 'SCADA 实时流 14:20 命中产量跌落条件边（11.4% > 5%）'],
+          ['02 本体溯源', '沿 2 号熔炉 → 温控回路 → TC-0204 阀门定位唯一异常点位']
+        ],
+        tool: 'ontology.queryObjectSet("Workshop#02") → 14ms · 命中 3 台关联设备与 1 条越限点位',
+        confirm: true }
+    ],
+    jobs: [
+      { id: 'j1', name: '早班 07:30 全厂设备健康巡检', cron: '30 7 * * 1-6', status: '已完成', last: '今日 07:31', dur: '42s' },
+      { id: 'j2', name: '每 15 分钟能耗与炉温异常扫描', cron: '*/15 * * * *', status: '运行中', last: '刚刚', dur: '11s' },
+      { id: 'j3', name: '晚班 20:00 交接班异常摘要推送', cron: '0 20 * * *', status: '已排期', last: '昨日 20:00', dur: '28s' },
+      { id: 'j4', name: '每周一关键备件安全库存审计', cron: '0 9 * * 1', status: '已完成', last: '周一 09:01', dur: '1m 04s' },
+    ],
+  };
+  if (!VIEWS.some(v => v.id === state.view)) state.view = 'workflow';
+
+  const $ = id => document.getElementById(id);
+  function showToast(msg) {
+    const t = $('toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(t._tm); t._tm = setTimeout(() => t.classList.remove('show'), 2100);
+  }
+  function syncBrand() {
+    const dark = document.documentElement.classList.contains('dark');
+    $('brandLogo').src = `./brand/orchestra-logo-${dark ? 'dark' : 'light'}.svg`;
+    $('brandMark').src = `./brand/orchestra-mark-${dark ? 'dark' : 'light'}.svg`;
+  }
+
+  function setView(id) {
+    state.view = id;
+    if (!params.get('embed')) history.replaceState(null, '', '#/' + id);
+    render();
+  }
+
+  function renderSidebar() {
+    const groups = [...new Set(VIEWS.map(v => v.group))];
+    $('sidebarNav').innerHTML = groups.map(g => `
+      <div>
+        <div class="sb-group-title">${g}</div>
+        ${VIEWS.filter(v => v.group === g).map(v => `
+          <button class="sb-nav-item ${state.view === v.id ? 'active' : ''}" data-view="${v.id}" title="${v.label}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">${v.icon}</svg>
+            <span>${v.label}</span>
+            ${v.dot ? '<i class="sb-dot"></i>' : ''}
+          </button>
+        `).join('')}
+      </div>
+    `).join('');
+    $('sidebarNav').querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
+
+    if (isStudio) {
+      const cur = VIEWS.find(v => v.id === state.view) || VIEWS[0];
+      $('spPrinciple').textContent = cur.principle;
+      $('spOutcome').textContent = cur.outcome;
+      $('studioPills').innerHTML = VIEWS.slice(0, 6).map(v => `
+        <button class="studio-pill ${state.view === v.id ? 'active' : ''}" data-sp="${v.id}">${v.label}</button>
+      `).join('');
+      $('studioPills').querySelectorAll('[data-sp]').forEach(b => b.addEventListener('click', () => setView(b.dataset.sp)));
+    }
+  }
+
+  // === Interactive Workflow Canvas & Real-Cursor Demo Engine v3.8.0 ===
+  const DEFAULT_WF_ZOOM = 0.74;
+  const DEFAULT_WF_PANX = 12;
+  const DEFAULT_WF_PANY = 42;
+  const DEFAULT_WF_POS = () => ({
+    n1: { x: 20, y: 146 },
+    n2: { x: 288, y: 42 },
+    n3: { x: 556, y: 146 },
+    n4: { x: 824, y: 248 }
+  });
+
+  function bezierPath(x1, y1, x2, y2) {
+    const gap = x2 - x1;
+    // Silky horizontal S-curve with proportional control handles (never kinks backward)
+    const dx = gap >= 0
+      ? Math.max(22, Math.min(72, gap * 0.48))
+      : Math.max(48, Math.min(96, Math.abs(gap) * 0.35));
+    return `M ${x1.toFixed(1)} ${y1.toFixed(1)} C ${(x1 + dx).toFixed(1)} ${y1.toFixed(1)}, ${(x2 - dx).toFixed(1)} ${y2.toFixed(1)}, ${x2.toFixed(1)} ${y2.toFixed(1)}`;
+  }
+
+  function getNodeAnchor(nid, side) {
+    const el = document.querySelector(`.wf-node[data-nid="${nid}"]`);
+    const pos = state.wfPos[nid] || { x: 0, y: 0 };
+    const w = (el && el.offsetWidth) ? el.offsetWidth : 192;
+    const h = (el && el.offsetHeight) ? el.offsetHeight : 148;
+    return {
+      x: side === 'out' ? pos.x + w : pos.x,
+      y: pos.y + h * 0.5
+    };
+  }
+
+  function redrawWfEdges() {
+    const pairs = [['wfEdge1', 'e1', 'n1', 'n2'], ['wfEdge2', 'e2', 'n2', 'n3'], ['wfEdge3', 'e3', 'n3', 'n4']];
+    pairs.forEach(([eid, key, a, b]) => {
+      const p = $(eid);
+      if (!p) return;
+      const active = state.wfEdgeActive ? state.wfEdgeActive[key] !== false : true;
+      p.classList.toggle('is-cut', !active);
+      const p1 = getNodeAnchor(a, 'out');
+      const p2 = getNodeAnchor(b, 'in');
+      p.setAttribute('d', bezierPath(p1.x, p1.y, p2.x, p2.y));
+    });
+    const exG = $('wfExtraEdgesG');
+    if (exG) {
+      exG.innerHTML = (state.wfExtraEdges || []).map(([a, b]) => {
+        const p1 = getNodeAnchor(a, 'out');
+        const p2 = getNodeAnchor(b, 'in');
+        return `<path class="wf-edge-extra" marker-end="url(#wfArrPink)" d="${bezierPath(p1.x, p1.y, p2.x, p2.y)}" />`;
+      }).join('');
+    }
+  }
+
+  function applyWfTransform(animate) {
+    const stage = $('wfStage');
+    const zv = $('wfZoomVal');
+    if (stage) {
+      stage.classList.toggle('is-anim', !!animate);
+      stage.style.transform = `translate(${state.wfPanX.toFixed(1)}px, ${state.wfPanY.toFixed(1)}px) scale(${state.wfZoom.toFixed(3)})`;
+    }
+    if (zv) zv.textContent = Math.round(state.wfZoom * 100) + '%';
+  }
+
+  // Real DOM-targeted Demo Cursor controller
+  let demoAbort = { cancelled: false };
+  let cursorPos = { x: 420, y: 240 };
+
+  function setDemoCaption(txt) {
+    const cap = $('demoCaption');
+    if (!cap) return;
+    if (!txt) { cap.classList.remove('is-show'); return; }
+    const sp = cap.querySelector('span');
+    if (sp) sp.textContent = txt;
+    cap.classList.add('is-show');
+  }
+
+  function hideDemoCursor() {
+    const c = $('demoCursor');
+    if (c) c.classList.remove('is-on', 'is-down', 'is-click');
+    setDemoCaption('');
+  }
+
+  function cancelAllDemos() {
+    demoAbort.cancelled = true;
+    demoAbort = { cancelled: false };
+    hideDemoCursor();
+    const pv = $('wfPreviewEdge');
+    if (pv) pv.style.display = 'none';
+    document.querySelectorAll('.wf-node').forEach(n => n.classList.remove('is-dragging', 'is-link-target'));
+    document.querySelectorAll('.is-demo-hi').forEach(el => el.classList.remove('is-demo-hi'));
+  }
+
+  function waitMs(ms, token) {
+    return new Promise(resolve => {
+      setTimeout(() => resolve(!token.cancelled), ms);
+    });
+  }
+
+  function glideCursorTo(tx, ty, dur, token, onStep) {
+    const c = $('demoCursor');
+    if (!c) return Promise.resolve(false);
+    c.classList.add('is-on');
+    const sx = cursorPos.x, sy = cursorPos.y;
+    const t0 = performance.now();
+    return new Promise(resolve => {
+      function frame(now) {
+        if (token.cancelled) return resolve(false);
+        const p = Math.min(1, (now - t0) / Math.max(1, dur));
+        const e = 1 - Math.pow(1 - p, 3);
+        const cx = sx + (tx - sx) * e;
+        const cy = sy + (ty - sy) * e;
+        cursorPos.x = cx; cursorPos.y = cy;
+        c.style.transform = `translate3d(${cx.toFixed(1)}px, ${cy.toFixed(1)}px, 0)`;
+        if (onStep) onStep(p, e, cx, cy);
+        if (p < 1) requestAnimationFrame(frame);
+        else resolve(true);
+      }
+      requestAnimationFrame(frame);
+    });
+  }
+
+  function getElCenter(selectorOrEl) {
+    const el = typeof selectorOrEl === 'string' ? document.querySelector(selectorOrEl) : selectorOrEl;
+    if (!el) return null;
+    const r = el.getBoundingClientRect();
+    if (!r.width && !r.height) return null;
+    return { el, x: r.left + r.width * 0.5, y: r.top + r.height * 0.5, rect: r };
+  }
+
+  async function cursorClickEl(selectorOrEl, caption, token, dur = 560) {
+    const info = getElCenter(selectorOrEl);
+    if (!info || token.cancelled) return false;
+    if (caption) setDemoCaption(caption);
+    const ok = await glideCursorTo(info.x, info.y, dur, token);
+    if (!ok || token.cancelled) return false;
+    const c = $('demoCursor');
+    if (c) {
+      c.classList.add('is-down');
+      c.classList.remove('is-click');
+      void c.offsetWidth;
+      c.classList.add('is-click');
+    }
+    await waitMs(130, token);
+    if (token.cancelled) return false;
+    info.el.click();
+    if (c) c.classList.remove('is-down');
+    await waitMs(220, token);
+    return !token.cancelled;
+  }
+
+  function resetWfCanvasGeometry(animate) {
+    state.wfZoom = DEFAULT_WF_ZOOM;
+    state.wfPanX = DEFAULT_WF_PANX;
+    state.wfPanY = DEFAULT_WF_PANY;
+    state.wfPos = DEFAULT_WF_POS();
+    state.wfExtraEdges = [];
+    state.wfEdgeActive = { e1: true, e2: true, e3: true };
+    ['n1', 'n2', 'n3', 'n4'].forEach(id => {
+      const el = document.querySelector(`.wf-node[data-nid="${id}"]`);
+      if (el) { el.style.left = state.wfPos[id].x + 'px'; el.style.top = state.wfPos[id].y + 'px'; }
+    });
+    redrawWfEdges();
+    applyWfTransform(!!animate);
+  }
+
+  function stopWfCanvasDemo() {
+    cancelAllDemos();
+  }
+
+  // Real cursor-guided Workflow Canvas Demo (Zoom In -> Drag Card -> Pull Live Wire -> Zoom Out -> Optional Approve)
+  async function runWfCanvasDemo(opts = {}) {
+    cancelAllDemos();
+    const token = demoAbort;
+    const includeApprove = !!opts.includeApprove;
+    const loop = !!opts.loop;
+
+    do {
+      if (token.cancelled) return;
+      state.view = 'workflow';
+      state.wfStage = 'pending';
+      state.evidenceChecked = true;
+      state.selectedNode = 'n3';
+      state.wfZoom = DEFAULT_WF_ZOOM;
+      state.wfPanX = DEFAULT_WF_PANX;
+      state.wfPanY = DEFAULT_WF_PANY;
+      state.wfPos = DEFAULT_WF_POS();
+      state.wfExtraEdges = [];
+    state.wfEdgeActive = { e1: true, e2: true, e3: true };
+      render();
+      await waitMs(380, token);
+      if (token.cancelled) return;
+
+      // 1. Cursor clicks "+" Zoom In button twice (74% -> 90% -> 106%) for clear zoom contrast
+      if ($('wfZoomIn')) {
+        await cursorClickEl('#wfZoomIn', '点击「+」放大画布，聚焦节点与连线细节', token, 620);
+        if (token.cancelled) return;
+        await cursorClickEl('#wfZoomIn', '继续放大至 106%，准备拖拽节点与拉线', token, 260);
+        if (token.cancelled) return;
+        await waitMs(340, token);
+      } else {
+        state.wfZoom = 1.06; state.wfPanX = -18; state.wfPanY = -6;
+        applyWfTransform(true);
+        await waitMs(520, token);
+      }
+
+      // 2. Cursor grabs Node 02 and physically drags it down-right (edges flex live)
+      const n2Info = getElCenter('.wf-node[data-nid="n2"] .wf-node-hd');
+      if (n2Info && !token.cancelled) {
+        setDemoCaption('按住拖拽节点卡片，贝塞尔连线实时跟随');
+        await glideCursorTo(n2Info.x, n2Info.y, 580, token);
+        if (token.cancelled) return;
+        const c = $('demoCursor');
+        const n2El = document.querySelector('.wf-node[data-nid="n2"]');
+        if (c) c.classList.add('is-down');
+        if (n2El) n2El.classList.add('is-dragging');
+        const sx = state.wfPos.n2.x, sy = state.wfPos.n2.y;
+        const dxStage = 26, dyStage = 78;
+        const targetScreenX = n2Info.x + dxStage * state.wfZoom;
+        const targetScreenY = n2Info.y + dyStage * state.wfZoom;
+        await glideCursorTo(targetScreenX, targetScreenY, 880, token, (p, e) => {
+          state.wfPos.n2.x = sx + dxStage * e;
+          state.wfPos.n2.y = sy + dyStage * e;
+          if (n2El) { n2El.style.left = state.wfPos.n2.x + 'px'; n2El.style.top = state.wfPos.n2.y + 'px'; }
+          redrawWfEdges();
+        });
+        if (c) c.classList.remove('is-down');
+        if (n2El) n2El.classList.remove('is-dragging');
+        if (token.cancelled) return;
+        await waitMs(340, token);
+      }
+
+      // 3. Logical Disconnect -> Reconnect on real edge 02 -> 03
+      const h2Out = getElCenter('.wf-node[data-nid="n2"] .wf-handle.out');
+      const h3In = getElCenter('.wf-node[data-nid="n3"] .wf-handle.in');
+      const edge2El = $('wfEdge2');
+      if (h2Out && h3In && edge2El && !token.cancelled) {
+        // 3a. Glide to midpoint of edge 02 -> 03, highlight & click to disconnect
+        const midX = (h2Out.x + h3In.x) * 0.5;
+        const midY = (h2Out.y + h3In.y) * 0.5;
+        setDemoCaption('点击现有连线，断开「02 根因诊断 → 03 审批网关」');
+        await glideCursorTo(midX, midY, 560, token);
+        if (token.cancelled) return;
+        edge2El.classList.add('is-unlink-hover');
+        await waitMs(260, token);
+        if (token.cancelled) return;
+        const c = $('demoCursor');
+        if (c) {
+          c.classList.add('is-down');
+          c.classList.remove('is-click');
+          void c.offsetWidth;
+          c.classList.add('is-click');
+        }
+        await waitMs(130, token);
+        edge2El.classList.remove('is-unlink-hover');
+        if (c) c.classList.remove('is-down');
+        if (token.cancelled) return;
+        state.wfEdgeActive.e2 = false;
+        redrawWfEdges();
+        await waitMs(580, token);
+        if (token.cancelled) return;
+
+        // 3b. Glide to Node 02 output port -> drag glowing cyan wire -> reconnect to Node 03 input port
+        setDemoCaption('从节点 02 输出端口重新连线至节点 03，恢复审批链路');
+        await glideCursorTo(h2Out.x, h2Out.y, 480, token);
+        if (token.cancelled) return;
+        const pv = $('wfPreviewEdge');
+        const n3El = document.querySelector('.wf-node[data-nid="n3"]');
+        const p1 = getNodeAnchor('n2', 'out');
+        const p2 = getNodeAnchor('n3', 'in');
+        h2Out.el.classList.add('is-hot');
+        if (c) c.classList.add('is-down');
+        if (pv) pv.style.display = 'block';
+        await glideCursorTo(h3In.x, h3In.y, 820, token, (p, e) => {
+          const cx = p1.x + (p2.x - p1.x) * e;
+          const cy = p1.y + (p2.y - p1.y) * e;
+          if (pv) pv.setAttribute('d', bezierPath(p1.x, p1.y, cx, cy));
+          if (p > 0.70 && n3El) n3El.classList.add('is-link-target');
+        });
+        h2Out.el.classList.remove('is-hot');
+        if (c) c.classList.remove('is-down');
+        if (pv) pv.style.display = 'none';
+        if (n3El) n3El.classList.remove('is-link-target');
+        if (!token.cancelled) {
+          state.wfEdgeActive.e2 = true;
+          redrawWfEdges();
+        }
+        await waitMs(560, token);
+      }
+
+      // 4. Cursor clicks "-" Zoom Out twice to show full overview, then Reset
+      if ($('wfZoomOut') && !token.cancelled) {
+        await cursorClickEl('#wfZoomOut', '点击「−」缩小画布，纵览完整拓扑', token, 580);
+        if (token.cancelled) return;
+        await cursorClickEl('#wfZoomOut', '缩小至全景视角，查看全部 4 个节点', token, 260);
+        if (token.cancelled) return;
+        await waitMs(750, token);
+        await cursorClickEl('#wfZoomReset', '点击「复位」恢复默认 1:1 排布', token, 520);
+        if (token.cancelled) return;
+        await waitMs(480, token);
+      }
+
+      // 5. Optional: Cursor clicks real "批准并继续" button in right drawer
+      if (includeApprove && !token.cancelled) {
+        await cursorClickEl('#approveGateBtn', '点击「批准并继续」→ 放行节点 04 并派发 #WO-2042', token, 680);
+        if (token.cancelled) return;
+        try { window.parent.postMessage({ type: 'orch-paira-state', stage: 'done' }, '*'); } catch (e) {}
+        await waitMs(2200, token);
+        if (token.cancelled) return;
+        try { window.parent.postMessage({ type: 'orch-paira-state', stage: 'pending' }, '*'); } catch (e) {}
+      } else {
+        await waitMs(1000, token);
+        hideDemoCursor();
+      }
+    } while (loop && !token.cancelled);
+  }
+
+  // Real cursor-guided Chat Demo (Click Quick Chip -> Click In-Place Approve)
+  async function runChatAutoDemo() {
+    cancelAllDemos();
+    const token = demoAbort;
+    const baseMessages = JSON.parse(JSON.stringify(state.messages));
+    while (!token.cancelled) {
+      state.view = 'chat';
+      state.chatApproved = false;
+      state.messages = JSON.parse(JSON.stringify(baseMessages));
+      render();
+      await waitMs(900, token);
+      if (token.cancelled) return;
+
+      // 1. Click real quick-chip button
+      await cursorClickEl('.quick-chip[data-q]', '点击快捷指令 → 自动编排本体查询与 OEE 归因', token, 680);
+      if (token.cancelled) return;
+      await waitMs(1400, token);
+      if (token.cancelled) return;
+
+      // Scroll back to confirm card and click real "批准执行" button
+      const feed = $('chatFeed');
+      if (feed) feed.scrollTo({ top: 0, behavior: 'smooth' });
+      await waitMs(480, token);
+      if (token.cancelled) return;
+
+      await cursorClickEl('#chatApproveBtn', '点击「批准执行」→ 对话内原地派发点检工单', token, 680);
+      if (token.cancelled) return;
+      await waitMs(2600, token);
+    }
+  }
+
+  // Real cursor-guided Tools Demo (App Builder Preview<->Schema -> Skills Filter+Toggle -> Ontology Highlight)
+  async function runToolsAutoDemo() {
+    cancelAllDemos();
+    const token = demoAbort;
+    while (!token.cancelled) {
+      // A. App Builder: Preview <-> Schema
+      state.view = 'app-builder';
+      state.builderTab = 'preview';
+      render();
+      try { window.parent.postMessage({ type: 'orch-pairc-view', view: 'app-builder' }, '*'); } catch (e) {}
+      await waitMs(950, token);
+      if (token.cancelled) return;
+
+      await cursorClickEl('[data-bt="schema"]', '应用生成：点击「组件 Schema」核对本体绑定与权限', token, 660);
+      if (token.cancelled) return;
+      await waitMs(1800, token);
+      if (token.cancelled) return;
+
+      await cursorClickEl('[data-bt="preview"]', '切回「实时界面预览」，所见即所得验收看板', token, 580);
+      if (token.cancelled) return;
+      await waitMs(1100, token);
+      if (token.cancelled) return;
+
+      // B. Skills: Filter tab + real Toggle Switch
+      state.view = 'skills';
+      state.skillFilter = '全部';
+      render();
+      try { window.parent.postMessage({ type: 'orch-pairc-view', view: 'skills' }, '*'); } catch (e) {}
+      await waitMs(800, token);
+      if (token.cancelled) return;
+
+      await cursorClickEl('.filter-tab[data-rt="工业 Agent"]', '技能中心：按运行时筛选「工业 Agent」技能', token, 640);
+      if (token.cancelled) return;
+      await waitMs(950, token);
+      if (token.cancelled) return;
+
+      await cursorClickEl('.switch[data-sid]', '点击开关一键启停现场技能，权限即时生效', token, 640);
+      if (token.cancelled) return;
+      await waitMs(1400, token);
+      if (token.cancelled) return;
+
+      // C. Ontology: Glide & highlight 7-dim pills & MCP online card
+      state.view = 'ontology';
+      render();
+      try { window.parent.postMessage({ type: 'orch-pairc-view', view: 'ontology' }, '*'); } catch (e) {}
+      await waitMs(800, token);
+      if (token.cancelled) return;
+
+      const pills = Array.from(document.querySelectorAll('.onto-pill'));
+      for (const idx of [0, 2, 5]) {
+        const p = pills[idx];
+        if (!p || token.cancelled) break;
+        const info = getElCenter(p);
+        if (info) {
+          setDemoCaption('7 维工业本体：检视对象、关系与执行证据上下文');
+          await glideCursorTo(info.x, info.y, 520, token);
+          if (token.cancelled) return;
+          pills.forEach(x => x.classList.remove('is-demo-hi'));
+          p.classList.add('is-demo-hi');
+          await waitMs(650, token);
+        }
+      }
+      await waitMs(1100, token);
+    }
+  }
+
+  function bindWfCanvasInteractions() {
+    const canvas = $('wfCanvas');
+    const stage = $('wfStage');
+    if (!canvas || !stage) return;
+    redrawWfEdges();
+    applyWfTransform(false);
+
+    if (!showCanvasBar) return;
+
+    [['wfEdge1', 'e1'], ['wfEdge2', 'e2'], ['wfEdge3', 'e3']].forEach(([eid, key]) => {
+      const edgeEl = $(eid);
+      if (edgeEl) {
+        edgeEl.onclick = (e) => {
+          e.stopPropagation();
+          if (e.isTrusted) {
+            try { if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'orch-user-interact' }, '*'); } catch (err) {}
+            stopWfCanvasDemo();
+          }
+          state.wfEdgeActive[key] = false;
+          redrawWfEdges();
+          showToast('已断开连线，可从上游节点右侧圆点重新拖线连接');
+        };
+      }
+    });
+
+    const notifyParentInteract = () => {
+      try { if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'orch-user-interact' }, '*'); } catch (err) {}
+    };
+
+    const zIn = $('wfZoomIn'), zOut = $('wfZoomOut'), zReset = $('wfZoomReset'), zDemo = $('wfCanvasDemoBtn');
+    if (zIn) zIn.onclick = (e) => {
+      e.stopPropagation();
+      if (e.isTrusted) { notifyParentInteract(); stopWfCanvasDemo(); }
+      state.wfZoom = Math.min(1.45, +(state.wfZoom + 0.16).toFixed(2));
+      applyWfTransform(true);
+    };
+    if (zOut) zOut.onclick = (e) => {
+      e.stopPropagation();
+      if (e.isTrusted) { notifyParentInteract(); stopWfCanvasDemo(); }
+      state.wfZoom = Math.max(0.58, +(state.wfZoom - 0.16).toFixed(2));
+      applyWfTransform(true);
+    };
+    if (zReset) zReset.onclick = (e) => {
+      e.stopPropagation();
+      if (e.isTrusted) { notifyParentInteract(); stopWfCanvasDemo(); }
+      resetWfCanvasGeometry(true);
+    };
+    if (zDemo) zDemo.onclick = (e) => {
+      e.stopPropagation();
+      if (e.isTrusted) notifyParentInteract();
+      runWfCanvasDemo({ includeApprove: false, loop: false });
+    };
+
+    canvas.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      if (e.isTrusted) { notifyParentInteract(); stopWfCanvasDemo(); }
+      const delta = e.deltaY < 0 ? 0.08 : -0.08;
+      state.wfZoom = Math.min(1.45, Math.max(0.58, +(state.wfZoom + delta).toFixed(2)));
+      applyWfTransform(false);
+    }, { passive: false });
+
+    canvas.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('.wf-zoom-bar')) return;
+      if (e.isTrusted) { notifyParentInteract(); stopWfCanvasDemo(); }
+      stage.classList.remove('is-anim');
+
+      const handle = e.target.closest('.wf-handle.out');
+      if (handle) {
+        e.stopPropagation();
+        const srcNode = handle.closest('.wf-node');
+        const srcId = srcNode ? srcNode.dataset.nid : null;
+        if (!srcId) return;
+        const pv = $('wfPreviewEdge');
+        const p1 = getNodeAnchor(srcId, 'out');
+        handle.classList.add('is-hot');
+        if (pv) pv.style.display = 'block';
+        let targetId = null;
+
+        const onMove = (ev) => {
+          const rect = stage.getBoundingClientRect();
+          const mx = (ev.clientX - rect.left) / state.wfZoom;
+          const my = (ev.clientY - rect.top) / state.wfZoom;
+          if (pv) pv.setAttribute('d', bezierPath(p1.x, p1.y, mx, my));
+          document.querySelectorAll('.wf-node').forEach(n => n.classList.remove('is-link-target'));
+          const hit = document.elementFromPoint(ev.clientX, ev.clientY);
+          const tn = hit ? hit.closest('.wf-node') : null;
+          if (tn && tn.dataset.nid !== srcId) {
+            targetId = tn.dataset.nid;
+            tn.classList.add('is-link-target');
+          } else {
+            targetId = null;
+          }
+        };
+        const onUp = () => {
+          window.removeEventListener('pointermove', onMove);
+          window.removeEventListener('pointerup', onUp);
+          handle.classList.remove('is-hot');
+          if (pv) pv.style.display = 'none';
+          document.querySelectorAll('.wf-node').forEach(n => n.classList.remove('is-link-target'));
+          if (targetId) {
+            if (srcId === 'n1' && targetId === 'n2') { state.wfEdgeActive.e1 = true; }
+            else if (srcId === 'n2' && targetId === 'n3') { state.wfEdgeActive.e2 = true; }
+            else if (srcId === 'n3' && targetId === 'n4') { state.wfEdgeActive.e3 = true; }
+            else if (!state.wfExtraEdges.some(([a, b]) => a === srcId && b === targetId)) {
+              state.wfExtraEdges.push([srcId, targetId]);
+            }
+            redrawWfEdges();
+          }
+        };
+        window.addEventListener('pointermove', onMove);
+        window.addEventListener('pointerup', onUp);
+        return;
+      }
+
+      const nodeEl = e.target.closest('.wf-node');
+      if (nodeEl) {
+        e.stopPropagation();
+        const nid = nodeEl.dataset.nid;
+        const startClientX = e.clientX, startClientY = e.clientY;
+        const origX = state.wfPos[nid].x, origY = state.wfPos[nid].y;
+        let moved = false;
+
+        const onMove = (ev) => {
+          const dx = (ev.clientX - startClientX) / state.wfZoom;
+          const dy = (ev.clientY - startClientY) / state.wfZoom;
+          if (!moved && Math.hypot(dx, dy) > 3) {
+            moved = true;
+            nodeEl.classList.add('is-dragging');
+          }
+          if (moved) {
+            state.wfPos[nid].x = Math.max(8, Math.min(840, origX + dx));
+            state.wfPos[nid].y = Math.max(8, Math.min(300, origY + dy));
+            nodeEl.style.left = state.wfPos[nid].x + 'px';
+            nodeEl.style.top = state.wfPos[nid].y + 'px';
+            redrawWfEdges();
+          }
+        };
+        const onUp = () => {
+          window.removeEventListener('pointermove', onMove);
+          window.removeEventListener('pointerup', onUp);
+          nodeEl.classList.remove('is-dragging');
+        };
+        window.addEventListener('pointermove', onMove);
+        window.addEventListener('pointerup', onUp);
+        return;
+      }
+
+      canvas.classList.add('is-panning');
+      const startX = e.clientX, startY = e.clientY;
+      const origPanX = state.wfPanX, origPanY = state.wfPanY;
+      const onMove = (ev) => {
+        state.wfPanX = origPanX + (ev.clientX - startX);
+        state.wfPanY = origPanY + (ev.clientY - startY);
+        applyWfTransform(false);
+      };
+      const onUp = () => {
+        window.removeEventListener('pointermove', onMove);
+        window.removeEventListener('pointerup', onUp);
+        canvas.classList.remove('is-panning');
+      };
+      window.addEventListener('pointermove', onMove);
+      window.addEventListener('pointerup', onUp);
+    });
+  }
+
+  function renderWorkflow() {
+    const st = state.wfStage;
+    const isIdle = st === 'idle';
+    const isRun = st === 'running';
+    const isPend = st === 'pending';
+    const isDone = st === 'done';
+    const isRej = st === 'rejected';
+
+    const p = state.wfPos;
+    const nodes = [
+      { id: 'n1', x: p.n1.x, y: p.n1.y, title: '01 产线异常感知', model: 'qwen-fast',
+        status: isIdle ? 'queued' : (isRun ? 'running' : 'done'),
+        label: isIdle ? '待触发' : (isRun ? '运行中' : '已完成'),
+        prompt: '监听 SCADA 越限事件，拉取 2 号车间近 2 小时产量与炉温点位。', tags: ['SCADA 实时流', '自动触发'] },
+      { id: 'n2', x: p.n2.x, y: p.n2.y, title: '02 根因诊断推理', model: 'qwen-reason',
+        status: (isIdle || isRun) ? 'queued' : 'done',
+        label: isIdle ? '待上游' : (isRun ? '排队中' : '已完成'),
+        prompt: '按本体关系图谱拆解设备—工段—参数，输出 Top 2 异常根因与证据链。', tags: ['本体查询', '根因树'] },
+      { id: 'n3', x: p.n3.x, y: p.n3.y, title: '03 人工审批网关', model: 'policy-gate',
+        status: isDone ? 'done' : (isRej ? 'rejected' : (isPend ? 'pending' : 'queued')),
+        label: isDone ? '已批准' : (isRej ? '已驳回' : (isPend ? '待确认' : '待上游')),
+        prompt: '涉及 2 号熔炉温控阀点检工单派发，需值班工程师在 60s 内人工确认。', tags: ['人工审批', '防错网关'] },
+      { id: 'n4', x: p.n4.x, y: p.n4.y, title: '04 工单派发复盘', model: 'qwen-default',
+        status: isDone ? 'done' : (isRej ? 'blocked' : 'queued'),
+        label: isDone ? '已派单' : (isRej ? '已拦截' : '待上游'),
+        prompt: '向 iWork 移动端推送「2 号熔炉温控阀点检工单」，同步归档执行证据。', tags: ['iWork 联动', '证据归档'] },
+    ];
+
+    $('topbarActions').innerHTML = `
+      <button class="btn" id="wfResetBtn" ${isRun ? 'disabled' : ''}>重置重玩 ↺</button>
+      <button class="btn btn-primary" id="wfRunBtn" ${isRun ? 'disabled' : ''}>▶ ${isRun ? '执行中…' : (isIdle ? '运行工作流' : '重新运行')}</button>
+    `;
+
+    const e1Class = isIdle ? 'wf-edge' : (isRun ? 'wf-edge is-wait' : 'wf-edge is-done');
+    const e2Class = (isDone || isRej) ? 'wf-edge is-done' : (isPend ? 'wf-edge is-wait' : 'wf-edge');
+    const e3Class = isDone ? 'wf-edge is-done' : (isRej ? 'wf-edge is-rejected' : 'wf-edge');
+
+    const s1 = isIdle ? 'active' : (isRun ? 'active' : 'done');
+    const s2 = (isPend && !state.evidenceChecked) ? 'active' : ((isPend && state.evidenceChecked) || isDone || isRej ? 'done' : '');
+    const s3 = (isPend && state.evidenceChecked) ? 'active' : (isDone ? 'done' : (isRej ? 'rejected' : ''));
+    const s4 = isDone ? 'done' : (isRej ? 'rejected' : '');
+    const hintText = isIdle ? '下一步：点击右上角「▶ 运行工作流」启动 2 号熔炉异常诊断'
+      : (isRun ? '正在拉取 SCADA 实时点位并执行根因推理…'
+      : (isPend && !state.evidenceChecked ? '下一步：点击右侧「执行证据链」核验 11.4% 与 TC-0204 数据，或直接审批'
+      : (isPend ? '证据已核验：请点击右侧「✓ 批准并继续」或「驳回」完成闭环'
+      : (isDone ? '闭环完成（批准分支）：已派发 iWork 点检工单，可点「重置重玩」体验驳回分支'
+      : '闭环完成（驳回分支）：节点 04 已安全拦截，可点「重置重玩」体验批准分支'))));
+
+    const runStatusText = isDone ? '已完成 · 已派单' : (isRej ? '已安全终止' : (isPend ? '待审批' : (isRun ? '执行中' : '就绪待跑')));
+    const runDurText = isDone ? '14s' : (isRej ? '已拦截' : (isIdle ? '—' : '进行中'));
+
+    $('viewBody').innerHTML = `
+      <div style="display:flex;flex-direction:column;flex:1;min-width:0;min-height:0">
+        <div class="wf-canvas" id="wfCanvas" style="flex:1">
+          <div class="wf-stage" id="wfStage" style="transform:translate(${state.wfPanX}px,${state.wfPanY}px) scale(${state.wfZoom})">
+            <svg class="wf-edges" id="wfEdgesSvg" viewBox="0 0 1040 460">
+              <defs>
+                <marker id="wfArrCyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#07b9b9"/></marker>
+                <marker id="wfArrGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#00b578"/></marker>
+                <marker id="wfArrAmber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#ff8f1f"/></marker>
+                <marker id="wfArrRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#fa5151"/></marker>
+                <marker id="wfArrPink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#ff00a5"/></marker>
+              </defs>
+              <path id="wfEdge1" class="${e1Class}" marker-end="url(#${e1Class.includes('is-done') ? 'wfArrGreen' : (e1Class.includes('is-wait') ? 'wfArrAmber' : 'wfArrCyan')})" d="${bezierPath(p.n1.x + 192, p.n1.y + 74, p.n2.x, p.n2.y + 74)}" />
+              <path id="wfEdge2" class="${e2Class}" marker-end="url(#${e2Class.includes('is-done') ? 'wfArrGreen' : (e2Class.includes('is-wait') ? 'wfArrAmber' : 'wfArrCyan')})" d="${bezierPath(p.n2.x + 192, p.n2.y + 74, p.n3.x, p.n3.y + 74)}" />
+              <path id="wfEdge3" class="${e3Class}" marker-end="url(#${e3Class.includes('is-done') ? 'wfArrGreen' : (e3Class.includes('is-rejected') ? 'wfArrRed' : 'wfArrCyan')})" d="${bezierPath(p.n3.x + 192, p.n3.y + 74, p.n4.x, p.n4.y + 74)}" />
+              <g id="wfExtraEdgesG">${(state.wfExtraEdges || []).map(([a, b]) => `<path class="wf-edge-extra" marker-end="url(#wfArrPink)" d="${bezierPath((p[a]?.x || 0) + 192, (p[a]?.y || 0) + 74, p[b]?.x || 0, (p[b]?.y || 0) + 74)}" />`).join('')}</g>
+              <path id="wfPreviewEdge" class="wf-edge-preview" marker-end="url(#wfArrCyan)" d="" style="display:none" />
+            </svg>
+            ${nodes.map(n => `
+              <div class="wf-node st-${n.status} ${state.selectedNode === n.id ? 'selected' : ''}" data-nid="${n.id}" tabindex="0" style="left:${n.x}px;top:${n.y}px">
+                <i class="wf-handle in"></i><i class="wf-handle out"></i>
+                <div class="wf-node-hd"><b>${n.title}</b><span class="wf-status-pill">${n.label}</span></div>
+                <div class="wf-node-bd">
+                  <div class="wf-meta-row"><span>模型路由</span><code>${n.model}</code></div>
+                  <div class="wf-prompt">${n.prompt}</div>
+                  <div class="wf-tags">${n.tags.map(t => `<span class="wf-tag">${t}</span>`).join('')}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          ${showCanvasBar ? `<div class="wf-zoom-bar" id="wfZoomBar">
+            <button type="button" id="wfZoomOut" title="缩小画布">−</button>
+            <span class="wf-zoom-val" id="wfZoomVal">${Math.round(state.wfZoom * 100)}%</span>
+            <button type="button" id="wfZoomIn" title="放大画布">+</button>
+            <span class="wf-zoom-sep"></span>
+            <button type="button" id="wfZoomReset" title="复位画布与节点">⌖ 复位</button>
+          </div>` : ''}
+        </div>
+      </div>
+      <aside class="wf-runs">
+        <div class="panel-hd"><span>运行记录与审批</span><span class="pill-tag pink">3 次</span></div>
+        ${isPend ? `
+          <div class="gate-banner">
+            <b>节点 03 等待人工确认</b>
+            <span>是否允许自动下发「2 号熔炉温控阀点检工单」至 iWork 移动端？</span>
+            <div class="gate-actions">
+              <button class="btn btn-success" id="approveGateBtn" style="flex:1;justify-content:center">✓ 批准并继续</button>
+              <button class="btn" id="rejectGateBtn">驳回</button>
+            </div>
+          </div>
+        ` : ''}
+        ${isDone ? `
+          <div class="gate-result is-done">
+            <b>✓ 已批准并下发 iWork 点检工单（#WO-2042）</b>
+            <span>对象：2 号熔炉 · TC-0204 温控阀 · 审批人：Oscar · 节点 04 已完成复盘归档。</span>
+          </div>
+        ` : ''}
+        ${isRej ? `
+          <div class="gate-result is-rejected">
+            <b>✕ 已驳回本次派单 · 流程安全终止</b>
+            <span>节点 04（iWork 工单派发）已被策略拦截未执行，已写入人工阻断审计记录。</span>
+          </div>
+        ` : ''}
+        <div class="panel-list">
+          <div class="run-card active">
+            <div class="run-card-top"><span>#RUN-1042 · ${runStatusText}</span><span style="color:${isRej ? '#FA5151' : (isDone ? '#00B578' : 'var(--accent)')}">${runDurText}</span></div>
+            <small>2026-11-25 14:20 · 2 号熔炉异常 · 4 节点</small>
+          </div>
+          <div class="run-card">
+            <div class="run-card-top"><span>#RUN-1041 · 已完成</span><span>19s</span></div>
+            <small>2026-11-25 11:05 · 4 节点 · 自动闭环</small>
+          </div>
+          <div class="run-card">
+            <div class="run-card-top"><span>#RUN-1040 · 已完成</span><span>16s</span></div>
+            <small>2026-11-25 08:30 · 早班巡检触发</small>
+          </div>
+        </div>
+        <div class="ev-box">
+          <div class="ev-title"><span>执行证据链（点击核验）</span><span style="color:var(--text-3)">3 条</span></div>
+          <div class="ev-row ${state.evidenceChecked ? 'checked' : ''}" data-ev="1" tabindex="0">
+            <b>条件边 01 → 02 · 触发信号命中</b>
+            <span>output.dropRate = 11.4% > 阈值 5%，自动转入根因推理。</span>
+            <span class="ev-src">出处：SCADA 实时流 · 2 号车间 14:20</span>
+          </div>
+          <div class="ev-row ${state.evidenceChecked ? 'checked' : ''}" data-ev="2" tabindex="0">
+            <b>节点 02 · 根因证据引用</b>
+            <span>关联点位 TC-0204 温控阀开度 61%（标准 ≥ 85%）。</span>
+            <span class="ev-src">出处：7 维本体对象 Workshop#02 / 2 号熔炉</span>
+          </div>
+          <div class="ev-row">
+            <b>审批网关 03 · ${isDone ? '已由 Oscar 批准派单' : (isRej ? '已由 Oscar 驳回拦截' : (isIdle ? '待触发' : '等待值班确认'))}</b>
+            <span>${isRej ? '节点 04 派单动作已阻断，防止误停产线。' : '高风险写操作受策略拦截，防止误派工单。'}</span>
+          </div>
+        </div>
+      </aside>
+    `;
+    $('viewBody').querySelectorAll('[data-nid]').forEach(el => {
+      const pick = () => {
+        state.selectedNode = el.dataset.nid;
+        if (el.dataset.nid === 'n2' && state.wfStage === 'pending') state.evidenceChecked = true;
+        renderWorkflow();
+      };
+      el.addEventListener('click', pick);
+      el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+    });
+    $('viewBody').querySelectorAll('.ev-row[data-ev]').forEach(el => {
+      const checkEv = () => {
+        state.evidenceChecked = true;
+        state.selectedNode = 'n2';
+        renderWorkflow();
+        showToast('已核验证据：产量下降 11.4% · TC-0204 温控阀开度 61%');
+      };
+      el.addEventListener('click', checkEv);
+      el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); checkEv(); } });
+    });
+    $('wfRunBtn')?.addEventListener('click', () => {
+      if (state.wfStage === 'running') return;
+      state.wfStage = 'running';
+      state.evidenceChecked = false;
+      state.selectedNode = 'n1';
+      renderWorkflow();
+      showToast('工作流已启动：正在执行节点 01 → 02');
+      setTimeout(() => {
+        state.wfStage = 'pending';
+        state.selectedNode = 'n3';
+        renderWorkflow();
+        showToast('已抵达节点 03 人工审批网关，请核验证据后决策');
+      }, 950);
+    });
+    $('wfResetBtn')?.addEventListener('click', () => {
+      state.wfStage = 'idle';
+      state.evidenceChecked = false;
+      state.selectedNode = 'n1';
+      renderWorkflow();
+      showToast('已重置为初始状态，可重新运行体验批准或驳回分支');
+    });
+    $('approveGateBtn')?.addEventListener('click', () => {
+      state.wfStage = 'done';
+      state.evidenceChecked = true;
+      state.selectedNode = 'n4';
+      renderWorkflow();
+      showToast('审批通过：已下发 iWork 点检工单 #WO-2042 并归档证据');
+    });
+    $('rejectGateBtn')?.addEventListener('click', () => {
+      state.wfStage = 'rejected';
+      state.evidenceChecked = true;
+      state.selectedNode = 'n3';
+      renderWorkflow();
+      showToast('已驳回本次派单：节点 04 已被安全拦截，流程终止');
+    });
+    requestAnimationFrame(() => bindWfCanvasInteractions());
+  }
+  function renderChat() {
+    $('topbarActions').innerHTML = `<span class="pill-tag pink">多智能体协同 · 已开启防错确认</span>`;
+    $('viewBody').innerHTML = `
+      <div class="chat-wrap">
+        <div class="chat-main">
+          <div class="chat-feed" id="chatFeed">
+            ${state.messages.map(m => `
+              <div class="msg ${m.role}">
+                <div>${m.text}</div>
+                ${m.kpis ? `<div class="chat-kpis">${m.kpis.map(k => `<div class="chat-kpi"><span>${k.label}</span><b class="${k.cls || ''}">${k.val}</b></div>`).join('')}</div>` : ''}
+                ${m.trace ? `<div class="chat-trace">${m.trace.map(t => `<div><i>${t[0]}</i><span>${t[1]}</span></div>`).join('')}</div>` : ''}
+                ${m.tool ? `<div class="tool-call"><b>⚡ TOOL</b> ${m.tool}</div>` : ''}
+                ${m.confirm ? `
+                  <div class="confirm-card">
+                    <div><b>高风险操作确认</b><div style="font-size:11.5px;color:var(--text-2)">派发「2 号熔炉温控阀紧急点检」至设备运维组</div></div>
+                    ${state.chatApproved
+                      ? '<span class="pill-tag green">✓ 已批准并同步 iWork</span>'
+                      : '<button class="btn btn-primary" id="chatApproveBtn">批准执行</button>'}
+                  </div>
+                ` : ''}
+              </div>
+            `).join('')}
+          </div>
+          <div class="chat-input-bar">
+            <div class="quick-chips">
+              <button class="quick-chip" data-q="生成今日早班 OEE 波动归因摘要">生成今日早班 OEE 归因摘要</button>
+              <button class="quick-chip" data-q="检查 4 号车间备件安全库存并列预警">检查 4 号车间备件安全库存</button>
+              <button class="quick-chip" data-q="将当前诊断流程沉淀为定时巡检技能">沉淀为定时巡检技能</button>
+            </div>
+            <form class="composer" id="chatForm">
+              <input id="chatInp" placeholder="输入工业业务指令，Orchestra 将自动规划技能与本体查询…" />
+              <button class="btn btn-primary" type="submit">发送</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    `;
+    $('chatApproveBtn')?.addEventListener('click', () => {
+      state.chatApproved = true;
+      state.messages.push({ role: 'ai', text: '已生成点检工单 `WO-20261125-09`，并同步推送至陈工（设备运维组）的 iWork 移动端待办。' });
+      renderChat();
+    });
+    const send = txt => {
+      if (!txt.trim()) return;
+      state.messages.push({ role: 'user', text: txt.trim() });
+      state.messages.push({
+        role: 'ai',
+        text: `已按「${txt.trim()}」编排本体查询与规则校核：当前 4 条产线整体稼动率 **91.8%**，仅 2 号熔炉温控波动需重点复核，已附带可追溯证据编号 \`EV-8821\`。`,
+        tool: 'orchestra.planSkills → ontology.queryMetrics → report.synthesize (320ms)'
+      });
+      renderChat();
+      const feed = $('chatFeed'); if (feed) feed.scrollTop = feed.scrollHeight;
+    };
+    $('chatForm')?.addEventListener('submit', e => { e.preventDefault(); send($('chatInp').value); });
+    $('viewBody').querySelectorAll('[data-q]').forEach(b => b.addEventListener('click', () => send(b.dataset.q)));
+  }
+
+  function renderSkills() {
+    const rts = ['全部', '工业 Agent', '数据分析', '代码助手'];
+    const list = state.skillFilter === '全部' ? state.skills : state.skills.filter(s => s.rt === state.skillFilter);
+    $('topbarActions').innerHTML = `<span class="pill-tag green">已启用 ${state.skills.filter(s => s.on).length} / ${state.skills.length}</span>`;
+    $('viewBody').innerHTML = `
+      <div class="page-pad">
+        <div class="filter-bar">
+          ${rts.map(r => `<button class="filter-tab ${state.skillFilter === r ? 'active' : ''}" data-rt="${r}">${r}</button>`).join('')}
+        </div>
+        <div class="card-grid-3">
+          ${list.map(s => `
+            <div class="card">
+              <div class="card-hd">
+                <b>${s.name}</b>
+                <button class="switch ${s.on ? 'on' : ''}" data-sid="${s.id}" aria-label="切换技能"></button>
+              </div>
+              <p>${s.desc}</p>
+              <div class="card-hd" style="margin-top:auto">
+                <span class="pill-tag ${s.rt === '工业 Agent' ? 'pink' : 'cyan'}">${s.rt}</span>
+                <small style="color:var(--text-3);font-family:var(--font-mono)">近 7 日调用 ${s.calls} 次</small>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    $('viewBody').querySelectorAll('[data-rt]').forEach(b => b.addEventListener('click', () => { state.skillFilter = b.dataset.rt; renderSkills(); }));
+    $('viewBody').querySelectorAll('[data-sid]').forEach(b => b.addEventListener('click', () => {
+      const item = state.skills.find(x => x.id === b.dataset.sid);
+      if (item) { item.on = !item.on; renderSkills(); showToast(`${item.name}已${item.on ? '启用' : '停用'}`); }
+    }));
+  }
+
+  function renderAppBuilder() {
+    $('topbarActions').innerHTML = `
+      <button class="btn ${state.builderTab === 'preview' ? 'btn-primary' : ''}" data-bt="preview">实时界面预览</button>
+      <button class="btn ${state.builderTab === 'schema' ? 'btn-primary' : ''}" data-bt="schema">组件 Schema</button>
+    `;
+    $('viewBody').innerHTML = `
+      <div class="builder-split">
+        <div class="builder-left">
+          <div style="font-weight:650;font-size:13px">自然语言构建轨迹</div>
+          <div class="wf-prompt">「为品质工程师生成一屏良率追溯看板，包含批次合格率趋势、异常工序排行和一键发起复检。」</div>
+          <div class="step-item"><i>✓</i><div><b>1. 绑定本体对象</b><div style="font-size:11px;color:var(--text-3)">Batch / InspectionOrder / Line</div></div></div>
+          <div class="step-item"><i>✓</i><div><b>2. 装配标准组件</b><div style="font-size:11px;color:var(--text-3)">KPI 卡 × 3 · 趋势柱图 · 异常表</div></div></div>
+          <div class="step-item"><i>✓</i><div><b>3. 注入交互动作</b><div style="font-size:11px;color:var(--text-3)">点击异常行自动联动工单表单</div></div></div>
+          <div class="step-item"><i>✓</i><div><b>4. 规范自检通过</b><div style="font-size:11px;color:var(--text-3)">字号 / 对比度 / 响应式 0 告警</div></div></div>
+        </div>
+        <div class="builder-right">
+          ${state.builderTab === 'preview' ? `
+            <div class="preview-shell">
+              <div class="card-hd"><b>品质良率追溯看板（已生成预览）</b><span class="pill-tag green">LIVE PREVIEW</span></div>
+              <div class="kpi-row" style="grid-template-columns:repeat(3,1fr)">
+                <div class="kpi-card"><span>当日批次良率</span><strong>98.4%</strong><small>▲ +0.6% 较昨日</small></div>
+                <div class="kpi-card"><span>待复检异常批次</span><strong style="color:var(--warning)">3</strong><small style="color:var(--warning)">2 号线集中</small></div>
+                <div class="kpi-card"><span>平均闭环耗时</span><strong>18m</strong><small>▼ 缩短 41%</small></div>
+              </div>
+              <div class="bar-chart">
+                ${[['08:00',86],['10:00',92],['12:00',88],['14:00',74],['16:00',95],['18:00',98]].map(([t,v]) => `
+                  <div class="bar-col"><div class="bar-fill" style="height:${v}%"></div><small>${t}</small></div>
+                `).join('')}
+              </div>
+              <div style="margin-top:14px;border-top:1px solid var(--border);padding-top:12px;display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--text-3)">
+                  <span>异常工序实时排行（点击行可联动复检工单）</span>
+                  <span style="font-family:var(--font-mono,monospace)">3 ITEMS · LIVE</span>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1.5fr .7fr .9fr;gap:8px;align-items:center;padding:8px 10px;border-radius:8px;background:var(--surface-2,rgba(128,128,128,.06));border:1px solid var(--border);font-size:11.5px">
+                  <b style="font-family:var(--font-mono,monospace)">#B-2042</b>
+                  <span>2 号熔炉 · TC-0204 温控阀</span>
+                  <span style="color:#FF8F1F;font-family:var(--font-mono,monospace);font-weight:600">-11.4%</span>
+                  <span class="pill-tag amber" style="justify-self:end">待人工复检</span>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1.5fr .7fr .9fr;gap:8px;align-items:center;padding:8px 10px;border-radius:8px;background:var(--surface-2,rgba(128,128,128,.06));border:1px solid var(--border);font-size:11.5px">
+                  <b style="font-family:var(--font-mono,monospace)">#B-2039</b>
+                  <span>1 号退火炉 · 压力波动</span>
+                  <span style="color:#07B9B9;font-family:var(--font-mono,monospace);font-weight:600">-2.1%</span>
+                  <span class="pill-tag cyan" style="justify-self:end">自动观察中</span>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1.5fr .7fr .9fr;gap:8px;align-items:center;padding:8px 10px;border-radius:8px;background:var(--surface-2,rgba(128,128,128,.06));border:1px solid var(--border);font-size:11.5px">
+                  <b style="font-family:var(--font-mono,monospace)">#B-2035</b>
+                  <span>3 号成型线 · 批次抽检</span>
+                  <span style="color:#00B578;font-family:var(--font-mono,monospace);font-weight:600">99.6%</span>
+                  <span class="pill-tag green" style="justify-self:end">已闭环归档</span>
+                </div>
+              </div>
+            </div>
+          ` : `
+            <div class="preview-shell" style="font-family:var(--font-mono);font-size:11.5px;line-height:1.6;color:var(--text-2)">
+<pre style="white-space:pre-wrap">{
+  "page": "QualityTraceDashboard",
+  "ontology": ["Batch", "ProcessStep", "InspectionOrder"],
+  "layout": "kpi-strip(3) + trend-bar(6h) + action-table",
+  "theme": { "accent": "#FF00A5", "radius": "8px" },
+  "actions": { "onRowClick": "orchestra.trigger('create-recheck-order')" }
+}</pre>
+            </div>
+          `}
+        </div>
+      </div>
+    `;
+    $('topbarActions').querySelectorAll('[data-bt]').forEach(b => b.addEventListener('click', () => { state.builderTab = b.dataset.bt; renderAppBuilder(); }));
+  }
+
+  function renderModels() {
+    const tiers = [
+      { id: 'default', name: '默认模型（通用编排）', model: 'qwen3.5-27b-local', provider: '工厂内网 Ollama 集群', ttft: '0.68s', ctx: '64K' },
+      { id: 'fast', name: '快速模型（高频分类与路由）', model: 'qwen3.5-9b-local', provider: '工厂内网 Ollama 集群', ttft: '0.24s', ctx: '32K' },
+      { id: 'reasoning', name: '推理模型（复杂根因与代码生成）', model: 'o3-industrial-reasoner', provider: '私有化推理网关', ttft: '1.15s', ctx: '128K' },
+    ];
+    $('topbarActions').innerHTML = `<span class="pill-tag green">内网私有化优先 · 零敏感数据外发</span>`;
+    $('viewBody').innerHTML = `
+      <div class="page-pad">
+        <div class="card-grid-3">
+          ${tiers.map(t => `
+            <div class="card" style="cursor:pointer;${state.modelTier === t.id ? 'border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)' : ''}" data-mt="${t.id}">
+              <div class="card-hd"><b>${t.name}</b><span class="pill-tag ${state.modelTier === t.id ? 'pink' : ''}">${state.modelTier === t.id ? '当前策略' : '切换'}</span></div>
+              <div style="font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--accent)">${t.model}</div>
+              <p>提供商：${t.provider}</p>
+              <div class="card-hd" style="font-size:11px;color:var(--text-3);font-family:var(--font-mono)"><span>首字 ${t.ttft}</span><span>上下文 ${t.ctx}</span></div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="card">
+          <div class="card-hd"><b>分层路由原则</b><span class="pill-tag cyan">COST × LATENCY</span></div>
+          <p>意图分流与字段提取走 9B 快速模型（&lt; 250ms）；常规对话与工单流转走 27B 默认模型；跨车间异常归因与页面代码生成自动升级至推理模型，平均推理成本下降 34%。</p>
+        </div>
+      </div>
+    `;
+    $('viewBody').querySelectorAll('[data-mt]').forEach(el => el.addEventListener('click', () => {
+      state.modelTier = el.dataset.mt; renderModels(); showToast('已切换默认预览路由策略');
+    }));
+  }
+
+  function renderJobs() {
+    $('topbarActions').innerHTML = `<button class="btn btn-primary" id="runAllJobs">+ 手动触发巡检</button>`;
+    $('viewBody').innerHTML = `
+      <div class="page-pad">
+        <div class="card-grid-2">
+          ${state.jobs.map(j => `
+            <div class="card">
+              <div class="card-hd">
+                <b>${j.name}</b>
+                <span class="pill-tag ${j.status === '运行中' ? 'pink' : 'green'}">${j.status}</span>
+              </div>
+              <div style="font-family:var(--font-mono);font-size:11.5px;color:var(--text-2)">CRON: ${j.cron} · 上次执行 ${j.last} · 耗时 ${j.dur}</div>
+              <div class="card-hd" style="margin-top:4px">
+                <span style="font-size:11px;color:var(--text-3)">自动写入证据链与异常告警</span>
+                <button class="btn" data-jid="${j.id}">立即运行</button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    const trigger = id => {
+      const job = state.jobs.find(x => x.id === id) || state.jobs[0];
+      job.status = '运行中'; job.last = '刚刚'; renderJobs(); showToast(`已触发：${job.name}`);
+      setTimeout(() => { job.status = '已完成'; renderJobs(); }, 1000);
+    };
+    $('runAllJobs')?.addEventListener('click', () => trigger('j1'));
+    $('viewBody').querySelectorAll('[data-jid]').forEach(b => b.addEventListener('click', () => trigger(b.dataset.jid)));
+  }
+
+  function renderUsage() {
+    $('topbarActions').innerHTML = `<span class="pill-tag cyan">统计周期：近 7 天</span>`;
+    $('viewBody').innerHTML = `
+      <div class="page-pad" style="display:flex;flex-direction:column;gap:14px">
+        <div class="kpi-row">
+          <div class="kpi-card"><span>日均编排任务</span><strong>1,284</strong><small>▲ +18.2% 周环比</small></div>
+          <div class="kpi-card"><span>异常自动闭环率</span><strong>86.4%</strong><small>人工仅介入高风险节点</small></div>
+          <div class="kpi-card"><span>P95 首字延迟</span><strong>0.82s</strong><small>内网私有化部署</small></div>
+          <div class="kpi-card"><span>分层路由节省成本</span><strong>34%</strong><small>小模型承接 62% 流量</small></div>
+        </div>
+        <div class="card">
+          <div class="card-hd">
+            <b>7 日编排吞吐与自动闭环率走势</b>
+            <div style="display:flex;align-items:center;gap:12px;font-size:11px;color:var(--text-3)">
+              <span style="display:inline-flex;align-items:center;gap:5px"><i style="width:8px;height:8px;border-radius:50%;background:#07B9B9;display:inline-block"></i>执行吞吐量</span>
+              <span style="display:inline-flex;align-items:center;gap:5px"><i style="width:8px;height:8px;border-radius:50%;background:#FF00A5;display:inline-block"></i>自动闭环率 %</span>
+            </div>
+          </div>
+          <svg viewBox="0 0 760 170" style="width:100%;height:165px;display:block;margin-top:6px" fill="none">
+            <defs>
+              <linearGradient id="orchUsageArea" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#07B9B9" stop-opacity="0.34"/>
+                <stop offset="100%" stop-color="#07B9B9" stop-opacity="0.01"/>
+              </linearGradient>
+            </defs>
+            <g stroke="currentColor" stroke-opacity="0.09" stroke-dasharray="3 4">
+              <line x1="28" y1="26" x2="736" y2="26"/>
+              <line x1="28" y1="68" x2="736" y2="68"/>
+              <line x1="28" y1="110" x2="736" y2="110"/>
+              <line x1="28" y1="146" x2="736" y2="146"/>
+            </g>
+            <path d="M40 112 C110 100, 140 84, 156 80 C210 68, 250 74, 272 64 C330 40, 360 44, 388 38 C448 26, 480 22, 504 28 C560 44, 595 82, 620 74 C670 58, 700 42, 728 36 L728 146 L40 146 Z" fill="url(#orchUsageArea)"/>
+            <path d="M40 112 C110 100, 140 84, 156 80 C210 68, 250 74, 272 64 C330 40, 360 44, 388 38 C448 26, 480 22, 504 28 C560 44, 595 82, 620 74 C670 58, 700 42, 728 36" stroke="#07B9B9" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M40 94 C110 90, 140 88, 156 86 C210 82, 250 78, 272 72 C330 64, 360 58, 388 56 C448 52, 480 48, 504 50 C560 56, 595 62, 620 58 C670 50, 700 48, 728 44" stroke="#FF00A5" stroke-width="2" stroke-dasharray="5 4" stroke-linecap="round"/>
+            <g fill="#07B9B9">
+              <circle cx="40" cy="112" r="3.5"/><circle cx="156" cy="80" r="3.5"/><circle cx="272" cy="64" r="3.5"/>
+              <circle cx="388" cy="38" r="3.5"/><circle cx="504" cy="28" r="4.5" stroke="#fff" stroke-width="1.5"/>
+              <circle cx="620" cy="74" r="3.5"/><circle cx="728" cy="36" r="3.5"/>
+            </g>
+            <g fill="currentColor" fill-opacity="0.52" font-size="10.5" font-family="monospace" text-anchor="middle">
+              <text x="40" y="164">Mon</text><text x="156" y="164">Tue</text><text x="272" y="164">Wed</text>
+              <text x="388" y="164">Thu</text><text x="504" y="164">Fri</text><text x="620" y="164">Sat</text><text x="728" y="164">Sun</text>
+            </g>
+          </svg>
+        </div>
+        <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:14px">
+          <div class="card">
+            <div class="card-hd"><b>分层模型流量与成本占比</b><span class="pill-tag cyan">ROUTING MIX</span></div>
+            <div style="display:flex;height:10px;border-radius:999px;overflow:hidden;gap:2px;margin:10px 0 12px">
+              <span style="width:62%;background:#07B9B9"></span>
+              <span style="width:26%;background:#6EA0FF"></span>
+              <span style="width:12%;background:#FF00A5"></span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:11.5px">
+              <div><span style="color:var(--text-3)">qwen-fast</span><div style="font-weight:700;font-family:var(--font-mono,monospace);color:#07B9B9;margin-top:2px">62% · 0.24s</div></div>
+              <div><span style="color:var(--text-3)">qwen-reason</span><div style="font-weight:700;font-family:var(--font-mono,monospace);color:#6EA0FF;margin-top:2px">26% · 0.68s</div></div>
+              <div><span style="color:var(--text-3)">o3-industrial</span><div style="font-weight:700;font-family:var(--font-mono,monospace);color:#FF00A5;margin-top:2px">12% · 1.15s</div></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-hd"><b>高危审批门禁 7 日审计</b><span class="pill-tag green">0 误操作</span></div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px">
+              <div style="padding:8px 10px;border-radius:8px;background:var(--surface-2,rgba(128,128,128,.06));border:1px solid var(--border)"><div style="font-size:10.5px;color:var(--text-3)">已批准放行</div><b style="font-size:15px;font-family:var(--font-mono,monospace);color:#00B578">142</b></div>
+              <div style="padding:8px 10px;border-radius:8px;background:var(--surface-2,rgba(128,128,128,.06));border:1px solid var(--border)"><div style="font-size:10.5px;color:var(--text-3)">已驳回拦截</div><b style="font-size:15px;font-family:var(--font-mono,monospace);color:#FA5151">19</b></div>
+              <div style="padding:8px 10px;border-radius:8px;background:var(--surface-2,rgba(128,128,128,.06));border:1px solid var(--border)"><div style="font-size:10.5px;color:var(--text-3)">平均核验耗时</div><b style="font-size:15px;font-family:var(--font-mono,monospace);color:#FF8F1F">14s</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderOntology() {
+    const dims = [
+      ['对象', '设备/产线/批次'], ['语义', '工业指标口径'], ['关系', '上下游拓扑'],
+      ['工具', '可调用 MCP'], ['权限', '按岗读写隔离'], ['证据', '每次调用留痕'], ['反馈', '人工纠正回流']
+    ];
+    const mcps = [
+      { name: 'MES 工单与点检服务', state: '已连接 · 12 工具', lat: '18ms' },
+      { name: 'SCADA 实时点位网关', state: '已连接 · 8 工具', lat: '9ms' },
+      { name: '工业工艺知识库 RAG', state: '已连接 · 5 工具', lat: '42ms' },
+      { name: '企业消息与告警推送', state: '已连接 · 4 工具', lat: '26ms' },
+    ];
+    $('topbarActions').innerHTML = `<span class="pill-tag green">4 个 MCP 服务在线</span>`;
+    $('viewBody').innerHTML = `
+      <div class="page-pad">
+        <div class="card">
+          <div class="card-hd"><b>O3 七维工业上下文模型</b><span class="pill-tag pink">AI WORK CONTEXT</span></div>
+          <p>制造企业不缺系统和数据，真正缺的是 AI 可工作的业务上下文。Orchestra 通过统一上下文底座驱动执行层闭环。</p>
+          <div class="onto-grid" style="margin-top:6px">
+            ${dims.map(([a,b]) => `<div class="onto-pill"><b>${a}</b><small>${b}</small></div>`).join('')}
+          </div>
+        </div>
+        <div class="card-grid-2">
+          ${mcps.map(m => `
+            <div class="card">
+              <div class="card-hd"><b>${m.name}</b><span class="pill-tag green">ONLINE</span></div>
+              <div class="card-hd" style="font-size:11.5px;color:var(--text-2);font-family:var(--font-mono)"><span>${m.state}</span><span>${m.lat}</span></div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  function render() {
+    try {
+      if (window.parent && window.parent !== window && state.view === 'workflow') {
+        window.parent.postMessage({ type: 'orch-stage', stage: state.wfStage, evidenceChecked: state.evidenceChecked, node: state.selectedNode }, '*');
+      }
+    } catch (e) {}
+    const cur = VIEWS.find(v => v.id === state.view) || VIEWS[0];
+    $('pageTitle').textContent = cur.title;
+    let backBtn = $('backToWfBtn');
+    if (cur.id !== 'workflow') {
+      if (!backBtn) {
+        backBtn = document.createElement('button');
+        backBtn.id = 'backToWfBtn';
+        backBtn.className = 'btn wf-back-btn';
+        backBtn.type = 'button';
+        backBtn.textContent = '← 返回异常处理（#RUN-1042）';
+        backBtn.addEventListener('click', () => setView('workflow'));
+        const tl = document.querySelector('.topbar-left');
+        if (tl) tl.prepend(backBtn);
+      }
+    } else if (backBtn) {
+      backBtn.remove();
+    }
+    $('wsTag').textContent = cur.ws;
+    $('urlSlug').textContent = cur.id;
+    renderSidebar();
+    syncBrand();
+    if (cur.id === 'workflow') renderWorkflow();
+    else if (cur.id === 'chat') renderChat();
+    else if (cur.id === 'skills') renderSkills();
+    else if (cur.id === 'app-builder') renderAppBuilder();
+    else if (cur.id === 'models') renderModels();
+    else if (cur.id === 'jobs') renderJobs();
+    else if (cur.id === 'usage') renderUsage();
+    else renderOntology();
+    const mc = $('mainContent') || document.querySelector('.main-body') || document.querySelector('main');
+    if (mc) {
+      mc.classList.remove('view-anim');
+      void mc.offsetWidth;
+      mc.classList.add('view-anim');
+    }
+    
+    if (typeof window.__orchAnimateMetrics === 'function') setTimeout(window.__orchAnimateMetrics, 30);
+  }
+
+  $('collapseBtn').addEventListener('click', () => $('sidebar').classList.toggle('collapsed'));
+  $('themeBtn').addEventListener('click', () => { document.documentElement.classList.toggle('dark'); syncBrand(); });
+  window.addEventListener('hashchange', () => {
+    const next = location.hash.replace(/^#\/?/, '').split('?')[0];
+    if (VIEWS.some(v => v.id === next)) { state.view = next; render(); }
+  });
+  window.addEventListener('message', e => {
+    const d = e && e.data;
+    if (!d || typeof d !== 'object') return;
+    if (d.type === 'orch-nav' && d.view && VIEWS.some(v => v.id === d.view)) {
+      cancelAllDemos();
+      setView(d.view);
+    } else if (d.type === 'orch-reset-idle') {
+      state.view = 'workflow';
+      state.wfStage = 'idle';
+      state.evidenceChecked = false;
+      state.selectedNode = 'n1';
+      render();
+    } else if (d.type === 'orch-set-stage' && d.stage) {
+      cancelAllDemos();
+      state.wfZoom = DEFAULT_WF_ZOOM; state.wfPanX = DEFAULT_WF_PANX; state.wfPanY = DEFAULT_WF_PANY;
+      state.wfPos = DEFAULT_WF_POS();
+      state.wfExtraEdges = [];
+    state.wfEdgeActive = { e1: true, e2: true, e3: true };
+      state.view = 'workflow';
+      state.wfStage = d.stage;
+      state.evidenceChecked = Boolean(d.evidenceChecked);
+      if (d.node) state.selectedNode = d.node;
+      render();
+    } else if (d.type === 'orch-canvas-demo') {
+      runWfCanvasDemo({ includeApprove: false, loop: false });
+    } else if (d.type === 'orch-nav' && d.view && VIEWS.some(v => v.id === d.view)) {
+      cancelAllDemos();
+      setView(d.view);
+    } else if (d.type === 'orch-theme' && (d.theme === 'dark' || d.theme === 'light')) {
+      document.documentElement.classList.toggle('dark', d.theme === 'dark');
+      syncBrand();
+    }
+  });
+  render();
+  document.addEventListener('pointerdown', (e) => {
+    if (e.isTrusted) cancelAllDemos();
+  }, { capture: true });
+
+  const autoMode = params.get('autodemo');
+  if (autoMode === 'workflow') {
+    setTimeout(() => runWfCanvasDemo({ includeApprove: true, loop: true }), 700);
+  } else if (autoMode === 'chat') {
+    setTimeout(() => runChatAutoDemo(), 900);
+  } else if (autoMode === 'tools') {
+    setTimeout(() => runToolsAutoDemo(), 950);
+  }
+})();
+
+  // === Live Dynamic Numbers & Breathing Bars inside Orchestra Demo ===
+  (function orchDemoLiveMetrics(){
+    function animateVisibleNums(){
+      document.querySelectorAll('.kpi-val, .stat-num, .metric-v, .usage-big').forEach(el => {
+        if (el.dataset.animating) return;
+        const txt = el.textContent.trim();
+        const m = txt.match(/^([^\d]*)(\d+(?:\.\d+)?)(.*)$/);
+        if (!m) return;
+        const pre = m[1], target = parseFloat(m[2]), suf = m[3];
+        const dec = (m[2].split('.')[1] || '').length;
+        el.dataset.animating = '1';
+        const t0 = performance.now();
+        const dur = 750;
+        const step = now => {
+          const p = Math.min(1, (now - t0) / dur);
+          const ease = 1 - Math.pow(1 - p, 3);
+          el.textContent = pre + (target * ease).toFixed(dec) + suf;
+          if (p < 1) requestAnimationFrame(step);
+          else { el.textContent = txt; delete el.dataset.animating; }
+        };
+        requestAnimationFrame(step);
+      });
+    }
+    window.__orchAnimateMetrics = animateVisibleNums;
+    window.addEventListener('hashchange', () => setTimeout(animateVisibleNums, 60));
+    setTimeout(animateVisibleNums, 160);
+    setInterval(() => {
+      document.querySelectorAll('.bar-fill, .prog-fill, .usage-bar i').forEach(b => {
+        const cur = parseFloat(b.style.width || b.style.height || '60');
+        if (!isNaN(cur)) {
+          const next = Math.max(18, Math.min(96, cur + (Math.random() - 0.5) * 10));
+          if (b.style.height) b.style.height = next.toFixed(0) + '%';
+          else if (b.style.width) b.style.width = next.toFixed(0) + '%';
+        }
+      });
+    }, 2200);
+  })();
+
+
+  // v3.4.0 Enhanced Visible Live Chart & KPI Rolling Animation
+  (function initVisibleLiveCharts(){
+    const frames = [
+      { kpis: ['98.4%', '3', '18m'], bars: [78, 88, 94, 54, 86, 96] },
+      { kpis: ['97.8%', '4', '16m'], bars: [72, 82, 91, 46, 80, 92] },
+      { kpis: ['98.9%', '2', '15m'], bars: [84, 92, 96, 62, 90, 98] },
+      { kpis: ['98.1%', '3', '19m'], bars: [76, 85, 89, 50, 84, 94] }
+    ];
+    let fi = 0;
+    function rollNumber(el, targetStr) {
+      const m = targetStr.match(/^([\d.]+)(.*)$/);
+      if (!m) { el.textContent = targetStr; return; }
+      const to = parseFloat(m[1]), suf = m[2] || '';
+      const curM = (el.textContent || '').match(/^([\d.]+)/);
+      const from = curM ? parseFloat(curM[1]) : Math.max(0, to - 6);
+      const dec = m[1].includes('.') ? 1 : 0;
+      const t0 = performance.now(), dur = 680;
+      const step = (now) => {
+        const p = Math.min(1, (now - t0) / dur);
+        const ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = (from + (to - from) * ease).toFixed(dec) + suf;
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+    function tickChart() {
+      const f = frames[fi % frames.length];
+      fi++;
+      // Find App Builder chart bars (the 6 magenta vertical bars)
+      const barEls = document.querySelectorAll('.ab-bars .ab-bar, .chart-bars .bar, .bar-col .bar-fill, .mini-bars i, [style*="linear-gradient"][style*="height"]');
+      let bi = 0;
+      barEls.forEach(el => {
+        if (el.offsetHeight > 0 && el.offsetWidth >= 14 && el.offsetWidth <= 70 && bi < f.bars.length) {
+          el.style.transition = 'height .72s cubic-bezier(.22,1,.36,1)';
+          el.style.height = f.bars[bi] + '%';
+          bi++;
+        }
+      });
+      // Animate visible KPI numbers in App Builder / Usage
+      const kpiEls = document.querySelectorAll('.ab-kpi b, .kpi-card .kpi-v, .kpi-val, .ab-stat b');
+      kpiEls.forEach((el, idx) => {
+        if (idx < f.kpis.length) rollNumber(el, f.kpis[idx]);
+      });
+    }
+    setTimeout(tickChart, 400);
+    setInterval(tickChart, 2800);
+  })();
+
+
+</script>
+</body>
+</html>

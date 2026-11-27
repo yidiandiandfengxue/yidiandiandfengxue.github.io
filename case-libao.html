@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="栗宝的角色、动作、现场交互与品牌应用。Oscar 作品集。">
+<title>栗宝 · Libao | Oscar</title>
+<link rel="stylesheet" href="assets/libao/case.css?v=40d">
+<script type="importmap">{"imports":{"three":"./assets/libao/viewer_lib/three.module.js"}}</script>
+</head>
+<body>
+<script>if(new URLSearchParams(location.search).get('embed')==='1'&&parent!==window){document.documentElement.classList.add('libao-embedded');document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('a[href="./index.html"],a[href="./index.html#work"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();parent.postMessage('libao-case-close',location.origin)}));});document.addEventListener('keydown',e=>{if(e.key==='Escape')parent.postMessage('libao-case-close',location.origin)})}</script>
+<style>
+/* Portfolio case shell: shared spacing, scroll treatment and metadata rhythm. */
+.libao-embedded{scrollbar-width:thin;scrollbar-color:rgba(92,242,208,.35) transparent}
+.libao-embedded::-webkit-scrollbar{width:9px}
+.libao-embedded::-webkit-scrollbar-thumb{background:rgba(92,242,208,.3);border-radius:8px}
+.libao-embedded .nav{display:none}
+.libao-embedded .wrap:not(.nav){width:min(calc(100% - 2 * clamp(20px,4.75vw,56px)),1448px)}
+.libao-embedded section[id]{scroll-margin-top:12px}
+.libao-embedded .opening{scroll-margin-top:0}
+.libao-embedded .hero-meta{padding-right:98px;padding-top:24px}
+.libao-embedded .hero-compose{min-height:clamp(390px,42vw,520px)}
+.libao-embedded .hero-model{min-height:390px}
+.libao-embedded .chapter{padding-block:clamp(28px,4.4vw,52px)}
+.libao-embedded .section-head{margin-bottom:clamp(22px,3vw,38px)}
+.libao-embedded .film-section{padding-block:clamp(28px,4.4vw,52px)}
+.libao-embedded .footer{padding-block:34px}
+.portfolio-infobar{display:none}
+.libao-embedded .portfolio-infobar{display:flex;flex-wrap:wrap;border-bottom:1px solid #ffffff1d;background:rgba(255,255,255,.015)}
+.portfolio-infobar>div{flex:1;min-width:130px;display:flex;flex-direction:column;gap:5px;padding:16px clamp(18px,2.6vw,32px);border-right:1px solid #ffffff1d}
+.portfolio-infobar>div:last-child{border-right:0}
+.portfolio-infobar span{font:9px JetBrains,monospace;letter-spacing:.12em;color:#9ba5b4}
+.portfolio-infobar strong{font-size:13px;font-weight:600;color:#e6edf4}
+@media(max-width:740px){.libao-embedded .hero-model{min-height:280px}.libao-embedded .hero-meta{padding-right:0;padding-top:46px}.libao-embedded .hero-meta>span{font-size:10px;gap:5px;white-space:nowrap}.libao-embedded .hero-meta>a{white-space:nowrap;font-size:10px}.libao-embedded .hero-compose{min-height:0}.portfolio-infobar>div{flex-basis:50%;min-width:0;padding:12px 20px}.portfolio-infobar>div:nth-child(2){border-right:0}.portfolio-infobar>div:nth-child(-n+2){border-bottom:1px solid #ffffff1d}}
+</style>
+<header class="nav wrap">
+<a class="brand" href="./index.html">Oscar<span>PORTFOLIO</span></a>
+<nav aria-label="案例章节"><a href="#design">视觉识别</a><a href="#motion-study">动作</a><a href="#scenes">现场</a><a href="#applications">应用</a></nav>
+<a class="back" href="./index.html#work">← 返回作品</a>
+</header>
+<main>
+<section class="opening" id="top" aria-labelledby="title">
+<div class="hero-meta wrap"><span class="mono">栗宝 <span class="hero-divider"></span> DIGITAL TWIN CHARACTER</span><a class="mono" href="#film">观看短片 ↘</a></div>
+<div class="hero-compose wrap">
+  <div class="hero-copy">
+    <h1 id="title" aria-label="栗宝 Libao">
+      <img class="glyph li" src="assets/libao/editorial/li-tech.webp" alt="">
+      <img class="glyph bao" src="assets/libao/editorial/bao-tech.webp" alt="">
+    </h1>
+    <h2><span class="title-unit">栗宝，</span><wbr><span class="title-unit">工业数字孪生向导</span></h2>
+    <p>从找到工位，到看懂现场发生了什么。</p>
+    <div class="motion-controls" role="group" aria-label="栗宝动作">
+      <button data-motion="Static" type="button" aria-pressed="true" disabled>站立</button>
+      <button data-motion="Guide_Welcome" data-face="Face_Idle" type="button" aria-pressed="false" disabled>接待</button>
+      <button data-motion="Guide_Explain" data-face="Face_Talking" type="button" aria-pressed="false" disabled>讲解</button>
+      <button data-motion="Guide_Verify" data-face="Face_Alert" type="button" aria-pressed="false" disabled>核查</button>
+      <button id="hero-playback" class="playback" type="button" disabled aria-label="暂停角色动作">Ⅱ</button>
+    </div>
+  </div>
+  <div class="hero-model">
+    <div id="stage" class="stage" tabindex="0" role="region" aria-label="栗宝三维模型。拖动或使用方向键旋转，回车切换动作。"><img id="poster" src="assets/libao/front.png" alt="栗宝正面"></div>
+    <div class="view-controls"><span class="rotate-hint">拖动或用方向键旋转</span><button id="view-reset" type="button" disabled>回到正面 ↺</button></div>
+    <span id="model-status" class="sr" role="status">正在加载模型</span>
+  </div>
+</div>
+</section>
+<div class="portfolio-infobar" aria-label="项目信息">
+  <div><span>设计方向</span><strong>IP 视觉 / 三维角色</strong></div>
+  <div><span>项目定位</span><strong>工业数字孪生向导</strong></div>
+  <div><span>产出</span><strong>角色 / 动效 / 交互原型</strong></div>
+  <div><span>展示方式</span><strong>3D 模型 / 场景演示</strong></div>
+</div>
+<section class="film-section wrap" id="film" aria-labelledby="film-title">
+<div class="film-frame"><video aria-label="栗宝 · 数字孪生概念短片" playsinline muted preload="none" poster="assets/libao/editorial/digital-twin-refined.webp" data-src="assets/libao/films/film-v32.mp4" controls data-portfolio-poster></video></div>
+<div class="film-caption"><h2 id="film-title">栗宝 · 数字孪生概念短片</h2><span class="mono">Character Film · 00:25</span><button type="button" id="media-toggle">暂停动作预览</button></div>
+</section>
+<section class="chapter brand-chapter" id="design"><div class="wrap">
+<div class="section-head"><div><span class="mono">01 / VISUAL IDENTITY</span><h2><span class="title-unit">从栗子，</span><wbr><span class="title-unit">到栗宝</span></h2></div><p><span class="copy-unit">栗是熟悉的形状与色彩，</span><wbr><span class="copy-unit">宝是对小助手的亲昵称呼。</span><wbr><span class="copy-unit">圆润轮廓拉近距离，</span><wbr><span class="copy-unit">像素屏承担清楚的工作反馈。</span></p></div>
+<section class="origin-study-section" aria-labelledby="detail-title">
+  <header class="origin-heading spread-caption">
+    <div><span class="mono">Form / Meaning</span><h3 id="detail-title"><span class="title-unit">从自然形态</span><wbr><span class="title-unit">到数字角色</span></h3></div>
+    <p><span class="copy-unit">栗取板栗圆肩、收拢的顶点</span><wbr><span class="copy-unit">和饱满宽底，</span><wbr><span class="copy-unit">宝表达亲切与陪伴。</span><wbr><span class="copy-unit">将自然轮廓与面屏、触角、</span><wbr><span class="copy-unit">双耳结合，</span><wbr><span class="copy-unit">建立属于栗宝的形体识别。</span></p>
+  </header>
+<figure class="origin-art">
+  <img src="assets/libao/editorial/form-study-board.webp" width="1536" height="1024" loading="lazy" alt="板栗造型来源与栗宝角色对照概念展板，带中轴、横向基准和轮廓参考线">
+</figure>
+</section>
+<section class="research-plate" aria-labelledby="research-title">
+  <header class="plate-header"><div><span class="mono">01.1 / CHARACTER ARCHITECTURE</span><h3 id="research-title">FORM<br><em>&amp; FUNCTION.</em></h3></div><p>从轮廓到交互细节<br><small>Original model · Design study</small></p></header>
+  <div class="research-layout">
+    <div class="research-notes"><div><span>01 / SIGNAL</span><h4>双触角</h4><p>将顶部的自然尖点延展成两处醒目的信号识别特征。</p></div><div><span>02 / SHELL</span><h4>栗形外壳</h4><p>宽底、收顶与浅色波浪帽沿构成角色的主体轮廓。</p></div></div>
+    <div class="research-model">
+      <img src="assets/libao/front.png" width="800" height="950" alt="栗宝正面原模型渲染">
+      <svg class="research-guides" viewBox="0 0 800 950" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+        <g fill="none" stroke="#b6a38b" stroke-width="1.2" opacity=".72"><path stroke-dasharray="5 8" d="M400 14V930M45 44H755M45 891H755"/><path d="M83 292V270M717 292V270M83 278H717M83 274v8m634-8v8"/><path d="M332 77H208L142 125H15M171 258H95L15 322M716 454H770L785 410H800M580 550H756L800 613"/><path d="M400 700H600L800 757"/></g>
+        <g fill="#e4af78" stroke="#1a1918" stroke-width="1"><circle cx="332" cy="77" r="5"/><circle cx="171" cy="258" r="5"/><circle cx="716" cy="454" r="5"/><circle cx="580" cy="550" r="5"/><circle cx="400" cy="700" r="5"/></g>
+      </svg>
+      <span class="model-baseline mono">FRONT / ORTHOGRAPHIC</span>
+    </div>
+    <div class="research-notes research-right"><div><span>03 / AUDIO</span><h4>圆环侧耳</h4><p>层叠圆形部件加强侧面辨识度，提示语音交互属性。</p></div><div><span>04 / DISPLAY</span><h4>像素面屏</h4><p>统一的像素表情，为状态变化提供连续的视觉反馈。</p></div><div><span>05 / STATUS</span><h4>胸部环形件</h4><p>将圆形语言延伸至胸部，建立从头部到身体的呼应。</p></div></div>
+  </div>
+  <footer class="plate-footer"><span class="mono">DESIGN STUDY / 01</span><span>基于原模型正面渲染的设计标注 · 非工程尺寸图</span></footer>
+</section>
+<section class="identity-editorial" id="graphic-language">
+<header class="editorial-title"><span class="mono">01.2 / GRAPHIC LANGUAGE</span><div><h3><span class="title-unit">让形象成为</span><wbr><span class="title-unit">一种语言<span class="title-dot">.</span></span></h3><p><span class="copy-unit">从三维角色中提取辨识度高的</span><wbr><span class="copy-unit">自然轮廓、像素表情与圆环细节，</span><wbr><span class="copy-unit">并以更简洁的平面语言</span><wbr><span class="copy-unit">延伸品牌表达。</span></p></div></header>
+<figure class="graphic-hero graphic-hero-v35"><img src="assets/libao/editorial/graphic-language-v35.webp" width="1536" height="1024" loading="lazy" alt="栗宝角色设计语言插画，深蓝与栗橙配色，字标独立于人物全身，并展示侧耳与胸部的几何构成"></figure>
+</section>
+<section class="detail-study material-study" id="material-study" aria-labelledby="detail-study-title">
+<header class="editorial-title material-heading"><span class="mono">01.3 / MATERIAL &amp; CHARACTER</span><div><h3 id="detail-study-title"><span class="title-unit">细节，</span><wbr><span class="title-unit">不止于外形<span class="title-dot">.</span></span></h3><p><span class="copy-unit">从柔和的栗形外壳、圆环侧耳，</span><wbr><span class="copy-unit">到黑色玻璃与发光像素，</span><wbr><span class="copy-unit">以材质对比和结构过渡</span><wbr><span class="copy-unit">建立角色的识别语言。</span></p></div></header>
+<figure class="material-feature">
+  <img src="assets/libao/editorial/material-detail-v33.webp" width="1536" height="1024" loading="lazy" alt="栗宝深蓝摄影棚风格材质概念图：全身三分之四视角、侧耳、玻璃面屏、胸章及袖口的独立微距构图">
+</figure>
+<div class="material-index">
+  <div class="material-lead"><span class="mono">DESIGN LANGUAGE</span><h4><span class="title-unit">温暖的外壳</span><wbr><span class="title-unit">清晰的反馈</span></h4><p><span class="copy-unit">圆润、克制的结构是感知入口，</span><wbr><span class="copy-unit">像素信号则承担</span><wbr><span class="copy-unit">数字孪生工作状态的表达。</span></p></div>
+  <dl class="material-specs">
+    <div><dt><span class="material-num">01</span><strong>栗形帽沿 <small>CROWN</small></strong></dt><dd><span class="copy-unit">奶油色波浪分界</span><wbr><span class="copy-unit">与饱满栗壳形成对比，</span><wbr><span class="copy-unit">以柔和曲率和浅色材质</span><wbr><span class="copy-unit">突出自然来源。</span></dd></div>
+    <div><dt><span class="material-num">02</span><strong>圆形侧耳 <small>AUDIO</small></strong></dt><dd><span class="copy-unit">同心圆结构</span><wbr><span class="copy-unit">连接头部、侧耳及胸章，</span><wbr><span class="copy-unit">构成一套可重复识别的</span><wbr><span class="copy-unit">几何语言。</span></dd></div>
+    <div><dt><span class="material-num">03</span><strong>像素面屏 <small>DISPLAY</small></strong></dt><dd><span class="copy-unit">曜黑玻璃与青色方形像素</span><wbr><span class="copy-unit">形成清晰反差；</span><wbr><span class="copy-unit">高光克制，</span><wbr><span class="copy-unit">不遮盖角色的表情信号。</span></dd></div>
+    <div><dt><span class="material-num">04</span><strong>胸章与袖口 <small>BODY</small></strong></dt><dd><span class="copy-unit">圆章、浅色包边</span><wbr><span class="copy-unit">与暖棕色外壳呼应，</span><wbr><span class="copy-unit">使不同部件具有连续的</span><wbr><span class="copy-unit">材质与形态关系。</span></dd></div>
+  </dl>
+</div>
+</section>
+<section class="illustration-series" id="illustration-series" aria-labelledby="illustration-title">
+  <div class="board-heading"><div><span class="mono">Digital Twin / 3D Art Direction</span><h3 id="illustration-title"><span class="title-unit">看见实体，</span><wbr><span class="title-unit">理解数字世界</span></h3></div><p><span class="copy-unit">以真实设备与数字映射建立场景，</span><wbr><span class="copy-unit">让栗宝从品牌形象延伸为</span><wbr><span class="copy-unit">能引导巡检、解释信息的</span><wbr><span class="copy-unit">数字向导。</span></p></div>
+  <figure class="campaign-art"><img src="assets/libao/editorial/digital-twin-refined.webp" width="1536" height="1024" loading="lazy" alt="栗宝站在真实加工设备旁，伸手指引设备对应的青色数字孪生模型"><figcaption><span>01 / PHYSICAL &amp; DIGITAL</span><strong>DIGITAL TWIN · 实体与虚拟映射</strong></figcaption></figure>
+  <figure class="campaign-art"><img src="assets/libao/editorial/digital-insight-campaign.webp" width="1536" height="1024" loading="lazy" alt="栗宝在暗色工业工作台旁以自然手势介绍电机数字模型和温度变化趋势"><figcaption><span>02 / DATA INTERACTION</span><strong>INSIGHT · 读懂设备状态</strong></figcaption></figure>
+</section>
+<div class="brand-colors">
+  <div class="brand-color-heading"><span class="mono">COLOR SYSTEM</span><h3>色彩与信号</h3></div>
+  <ul class="palette-swatches">
+    <li style="--color:#101620"><i></i><span>石墨黑</span><small>#101620</small></li>
+    <li style="--color:#26374B"><i></i><span>深海军蓝</span><small>#26374B</small></li>
+    <li style="--color:#EEE9DF"><i></i><span>奶油白</span><small>#EEE9DF</small></li>
+    <li style="--color:#C88956"><i></i><span>栗棕</span><small>#C88956</small></li>
+    <li style="--color:#78D7EB"><i></i><span>信号青</span><small>#78D7EB</small></li>
+    <li style="--color:#EFAD72"><i></i><span>提醒琥珀</span><small>#EFAD72</small></li>
+  </ul>
+</div>
+<section class="expression-board" aria-labelledby="expressions-title">
+  <div class="board-heading"><div><span class="mono">Expression System</span><h3 id="expressions-title"><span class="title-unit">一套面屏，</span><wbr><span class="title-unit">五种工作状态</span></h3></div><p><span class="copy-unit">表情沿用同一屏幕和像素比例。</span><wbr><span class="copy-unit">在工作场景中</span><wbr><span class="copy-unit">用细微变化说明状态。</span></p></div>
+  <ol class="expression-line">
+    <li><div class="expression-art"><img src="assets/libao/Idle.png" alt="微笑和正常像素眼睛" loading="lazy"></div><span>待命聆听</span></li>
+    <li><div class="expression-art"><img src="assets/libao/Think_2.png" alt="眉眼变化及思考提示点" loading="lazy"></div><span>思考分析</span></li>
+    <li><div class="expression-art"><img src="assets/libao/Happy_Glow.png" alt="眯眼开心表情" loading="lazy"></div><span>完成开心</span></li>
+    <li><div class="expression-art"><img src="assets/libao/Alert.png" alt="异常状态和琥珀感叹号" loading="lazy"></div><span>异常提醒</span></li>
+    <li><div class="expression-art"><img src="assets/libao/Talk_Open.png" alt="说话张嘴像素表情" loading="lazy"></div><span>巡游讲解</span></li>
+  </ol>
+</section>
+<figure class="orthographic-board">
+  <div class="board-heading"><div><span class="mono">Character Model / 3 Views</span><h3><span class="title-unit">统一的形体</span><wbr><span class="title-unit">与比例</span></h3></div><p><span class="copy-unit">使用同一模型的正侧背渲染，</span><wbr><span class="copy-unit">检查双耳、外壳接缝、</span><wbr><span class="copy-unit">肩袖和足部。</span></p></div>
+  <div class="orthographic-views">
+    <div class="view-item"><div class="view-art"><img src="assets/libao/front.png" width="800" height="950" alt="原模型正面" loading="lazy"></div><span>正面 / FRONT</span></div>
+    <div class="view-item"><div class="view-art"><img src="assets/libao/side.png" width="800" height="950" alt="原模型侧面" loading="lazy"></div><span>侧面 / SIDE</span></div>
+    <div class="view-item"><div class="view-art"><img src="assets/libao/back.png" width="800" height="950" alt="原模型背面" loading="lazy"></div><span>背面 / BACK</span></div>
+  </div>
+  <figcaption class="view-legend"><span><i></i>中轴参考线</span><span><i></i>面屏与肩部基准</span><span><i></i>触角与足底基准</span></figcaption>
+</figure>
+<div class="principles">
+<div><strong>亲和的形状</strong><p>低重心、短四肢和外露双耳，让角色从正面也能被识别。</p></div>
+<div><strong>固定的颜色含义</strong><p>栗棕用于角色，信号青用于交互和正常反馈，琥珀色只用于提醒。</p></div>
+<div><strong>清楚的下一步</strong><p>表情说明当前状态，文字说明对象、原因和接下来的操作。</p></div>
+</div></div></section>
+<section class="chapter wrap" id="motion-study">
+<div class="section-head"><div><span class="mono">02 / MOTION SYSTEM</span><h2>动作是反馈</h2></div><p><span class="copy-unit">动作围绕真实的工作行为：</span><wbr><span class="copy-unit">问候、行走、讲解与提醒。</span><wbr><span class="copy-unit">基于原始骨骼</span><wbr><span class="copy-unit">重新设计动作节奏和落脚逻辑。</span></p></div>
+<div class="motion-grid">
+  <figure class="media action-card" data-action="greet">
+    <div class="action-visual"><video aria-label="接待确认" playsinline muted preload="none" poster="assets/libao/films/welcome-v32.jpg" data-src="assets/libao/films/welcome-v32.mp4" loop></video></div>
+    <figcaption><span class="action-context">初次相遇</span><h3>接待确认</h3><span class="mono action-en">Welcome</span><p>小幅抬手、点头示意，自然回到待命姿势。</p></figcaption>
+  </figure>
+  <figure class="media action-card" data-action="patrol">
+    <div class="action-visual"><video aria-label="地面巡游" playsinline muted preload="none" poster="assets/libao/films/walk-v32.jpg" data-src="assets/libao/films/walk-v32.mp4" loop></video></div>
+    <figcaption><span class="action-context">前往工位</span><h3>地面巡游</h3><span class="mono action-en">Walk Cycle</span><p>交替支撑和摆动腿，重心跟随步伐，脚底接触地面。</p></figcaption>
+  </figure>
+  <figure class="media action-card" data-action="explain">
+    <div class="action-visual"><video aria-label="设备讲解" playsinline muted preload="none" poster="assets/libao/films/explain-v32.jpg" data-src="assets/libao/films/explain-v32.mp4" loop></video></div>
+    <figcaption><span class="action-context">解读数据</span><h3>设备讲解</h3><span class="mono action-en">Explain</span><p>将手势和视线引向信息对象，配合像素面屏进行表达。</p></figcaption>
+  </figure>
+  <figure class="media action-card" data-action="alert">
+    <div class="action-visual"><video aria-label="异常核查" playsinline muted preload="none" poster="assets/libao/films/notice-v32.jpg" data-src="assets/libao/films/notice-v32.mp4" loop></video></div>
+    <figcaption><span class="action-context">需要关注</span><h3>异常核查</h3><span class="mono action-en">Verify</span><p>收住动作、切换提醒表情，将注意力引向待核查的设备状态。</p></figcaption>
+  </figure>
+</div>
+</section>
+<section class="chapter scenario" id="scenes"><div class="wrap">
+<div class="section-head"><div><span class="mono">03 / WORKING SCENARIOS</span><h2>栗宝在现场</h2></div><p><span class="copy-unit">通过三个不同的工作场景，</span><wbr><span class="copy-unit">展示栗宝如何定位工位、</span><wbr><span class="copy-unit">检索信息和提示异常。</span><wbr><span class="copy-unit">场景均为设计演示。</span></p></div>
+<figure class="campaign-poster">
+  <img src="assets/libao/editorial/on-site-campaign.webp" width="1536" height="1024" alt="LIBAO ON SITE，栗宝工业数字孪生向导品牌主视觉，蓝色背景、青白大字和伸手示意的栗宝角色" loading="lazy">
+</figure>
+<div class="scene-gallery accordion" aria-label="切换工作场景">
+  <div class="scene-card" data-panel="tour" data-active="true">
+    <button class="scene-tile" data-scene="tour" type="button" aria-pressed="true">
+      <img class="scene-cover" src="assets/libao/editorial/scene-patrol.webp" width="1536" height="1024" alt="数字孪生车间俯视场景概念图" loading="lazy">
+      <span class="scene-copy"><span class="mono">Patrol</span><span class="scene-name">工位巡游</span><span class="scene-meta">数字孪生 · 路线引导</span><span class="scene-detail"><span class="copy-unit">从加工区入口定位目标设备，</span><wbr><span class="copy-unit">沿可通行的路线前往 A-03。</span></span></span>
+    </button>
+  </div>
+  <div class="scene-card" data-panel="qa" data-active="false">
+    <button class="scene-tile" data-scene="qa" type="button" aria-pressed="false">
+      <img class="scene-cover" src="assets/libao/editorial/scene-qa.webp" width="1672" height="941" alt="机台控制面板和栗宝问答场景概念图" loading="lazy">
+      <span class="scene-copy"><span class="mono">Ask</span><span class="scene-name">现场问答</span><span class="scene-meta">设备台账 · 当班点检</span><span class="scene-detail"><span class="copy-unit">围绕特定设备提问，</span><wbr><span class="copy-unit">获得点检记录及信息来源。</span></span></span>
+    </button>
+  </div>
+  <div class="scene-card" data-panel="alert" data-active="false">
+    <button class="scene-tile" data-scene="alert" type="button" aria-pressed="false">
+      <img class="scene-cover" src="assets/libao/editorial/scene-alert.webp" width="1536" height="1024" alt="工位异常状态与栗宝提醒场景概念图" loading="lazy">
+      <span class="scene-copy"><span class="mono">Alert</span><span class="scene-name">异常提醒</span><span class="scene-meta">状态监测 · 核查提示</span><span class="scene-detail"><span class="copy-unit">识别同一设备的异常提醒，</span><wbr><span class="copy-unit">提示用户查看趋势及现场状态。</span></span></span>
+    </button>
+  </div></div>
+<div class="experience-heading"><div><span class="mono">Interactive Experience</span><h3><span class="title-unit">与栗宝一起</span><wbr><span class="title-unit">探索现场</span></h3></div><p><span class="copy-unit">选择上方场景或直接提问，</span><wbr><span class="copy-unit">查看巡游、答复与提醒</span><wbr><span class="copy-unit">如何同步变化。</span></p></div>
+<div class="experience-shell workbench-v36" id="libao-workbench">
+  <header class="experience-toolbar">
+    <div class="experience-name"><img src="assets/libao/Idle.png" alt=""><div><strong>栗宝 <span class="workbench-slash">/</span> 数字孪生工作台</strong><span>交互原型 · 模拟设备数据</span></div></div>
+    <div class="scenario-switch" role="group" aria-label="演示场景">
+      <button type="button" data-switch="tour" aria-pressed="true"><span>01</span><strong>工位巡游</strong></button>
+      <button type="button" data-switch="qa" aria-pressed="false"><span>02</span><strong>现场问答</strong></button>
+      <button type="button" data-switch="alert" aria-pressed="false"><span>03</span><strong>异常提醒</strong></button>
+    </div>
+  </header>
+  <div class="assistant-layout">
+    <div class="assistant-visual workbench-visual" data-context="tour" data-progress="0" data-phase="idle">
+      <div class="workbench-stage">
+        <div class="scene-display" aria-hidden="true"><img class="workbench-tour-clean" src="assets/libao/editorial/workbench-tour-clean-v37.webp" width="1672" height="941" alt="" loading="lazy">
+          <img class="workbench-station-clean" data-clean="qa" src="assets/libao/editorial/workbench-qa-clean-v40.webp" width="1672" height="941" alt="" loading="eager"><img class="workbench-station-clean" data-clean="alert" src="assets/libao/editorial/workbench-alert-clean-v40.webp" width="1672" height="941" alt="" loading="eager">
+          <img class="workbench-scene" data-view="tour" src="assets/libao/editorial/workbench-tour-v36.webp" width="1672" height="941" alt="" loading="lazy">
+          <img class="workbench-scene" data-view="qa" src="assets/libao/editorial/workbench-qa-v36.webp" width="1672" height="941" alt="" loading="lazy">
+          <img class="workbench-scene" data-view="alert" src="assets/libao/editorial/workbench-alert-v36.webp" width="1672" height="941" alt="" loading="lazy">
+        </div>
+        <div id="workbench-walker" aria-label="栗宝三维场景动作演示"></div><video id="workbench-walk-fallback" playsinline muted preload="none" hidden aria-label="栗宝三维行走备用短片"></video>
+        <div class="workbench-stage-meta"><div><span class="mono" id="stage-coordinate">01 / PATROL</span><strong id="stage-location">A-03 加工区</strong></div><span id="stage-state">准备接待</span></div>
+        <div class="route-overlay" aria-hidden="true"><svg viewBox="0 0 1600 900" preserveAspectRatio="none"><path id="route-base" class="route-base" d="M455 770 C665 661 820 582 965 490 Q1060 427 1180 310"/><path id="route-trace" class="route-trace" pathLength="100" d="M455 770 C665 661 820 582 965 490 Q1060 427 1180 310"/><g id="route-pin"><circle r="22" class="route-halo"/><circle r="9" class="route-core"/></g><circle class="route-destination" cx="1180" cy="310" r="13"/></svg><span class="route-map-label">A-03</span></div>
+        <div class="workbench-scene-callout"><i></i><span id="scene-callout">路线预览 · 加工区入口</span></div>
+      </div>
+      <div class="workbench-context">
+        <div class="context-content" id="route-context">
+          <div class="context-title"><div><span class="mono">ROUTE / A-03</span><strong>巡游路线</strong></div><span id="route-note">等待出发指令</span></div>
+          <ol class="route-steps"><li data-route-step="0"><b>01</b>加工区入口</li><li data-route-step="1"><b>02</b>主通道</li><li data-route-step="2"><b>03</b>A-03 工位</li></ol>
+        </div>
+        <div class="context-content" id="qa-context" hidden>
+          <div class="context-title"><div><span class="mono">ASSET / A-03</span><strong>加工中心 · 点检台账</strong></div><span id="record-state">等待查询</span></div>
+          <dl class="device-record"><div><dt>最近点检</dt><dd data-record="time">—</dd></div><div><dt>点检结果</dt><dd data-record="status">—</dd></div><div><dt>待核查</dt><dd data-record="warning">—</dd></div></dl>
+        </div>
+        <div class="context-content" id="alert-context" hidden>
+          <div class="context-title"><div><span class="mono">STATUS / A-03</span><strong>温度趋势</strong></div><span id="alert-status">待确认</span></div>
+          <div class="alert-reading"><div><small>当前温度</small><strong>68<span>°C</span></strong></div><svg viewBox="0 0 240 62" role="img" aria-label="模拟温度趋势超过65摄氏度阈值"><path d="M0 40H240" stroke="#bb9a6f" stroke-dasharray="5 5" fill="none"/><path class="alert-line" pathLength="100" d="M0 54L36 47L72 50L107 44L144 31L181 36L218 13L240 9" stroke="#e5ad70" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="240" cy="9" r="3.5" fill="#e5ad70"/></svg><div><small>提醒阈值</small><strong class="alert-threshold">65°C</strong></div></div>
+        </div>
+        <button type="button" class="workbench-action" id="workbench-action">开始巡游</button>
+      </div>
+    </div>
+    <div class="assistant-panel">
+      <div class="assistant-head"><img src="assets/libao/Idle.png" alt=""><div><strong>栗宝助手</strong><span id="assistant-mode">工位路线向导</span></div><span id="assistant-state" class="assistant-state">待命</span></div>
+      <div class="dialogue" id="dialogue" role="log" aria-label="与栗宝的对话" aria-live="polite"></div>
+      <div class="suggested-questions"><span>快速提问</span><button id="example" type="button">带我去 03 号工位 <b aria-hidden="true">↗</b></button><button type="button" data-question="A-03 工位点检记录在哪？">查看点检记录 ↗</button><button type="button" data-question="A-03 工位有温度异常吗？">查看温度提醒 ↗</button></div>
+      <div class="assistant-actions"><form id="assistant-form"><label class="sr" for="message">输入场景问题</label><input id="message" maxlength="120" placeholder="问问工位、点检或异常" autocomplete="off"><button aria-label="发送问题" type="submit" disabled><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></form></div>
+    </div>
+  </div>
+</div>
+<details class="scene-reels">
+  <summary>查看三维场景演示 <span class="mono">3D CONCEPT DEMO</span></summary>
+  <div class="scene-reel" data-reel="tour"><video aria-label="工位巡游短片" controls playsinline muted preload="none" poster="assets/libao/films/route-v32.jpg" data-src="assets/libao/films/route-v32.mp4"></video></div>
+  <div class="scene-reel" data-reel="qa" hidden><video aria-label="现场问答短片" controls playsinline muted preload="none" poster="assets/libao/films/query-v32.jpg" data-src="assets/libao/films/query-v32.mp4"></video></div>
+  <div class="scene-reel" data-reel="alert" hidden><video aria-label="异常提醒短片" controls playsinline muted preload="none" poster="assets/libao/films/alarm-v32.jpg" data-src="assets/libao/films/alarm-v32.mp4"></video></div>
+</details>
+</div></section>
+<section class="chapter brand-chapter" id="applications"><div class="wrap">
+<div class="section-head"><div><span class="mono">04 / BRAND APPLICATIONS</span><h2>从屏幕走到现场</h2></div><p><span class="copy-unit">同一套角色识别系统，</span><wbr><span class="copy-unit">落在界面、导视与实体周边。</span><wbr><span class="copy-unit">应用均为设计示意。</span></p></div>
+<figure class="extension-hero campaign-poster">
+  <img src="assets/libao/editorial/brand-kit-campaign.webp" width="1536" height="1024" alt="深色棚拍概念图，栗宝公仔、毛绒、包装、徽章和挂绳的统一品牌系列" loading="lazy">
+</figure>
+<div class="application-mockups">
+  <figure class="media"><img src="assets/libao/editorial/interface-application.webp" width="1536" height="1024" alt="深色工业触屏数字孪生界面应用概念" loading="lazy">
+    <figcaption><span class="mono">Interface</span><h3>数字孪生界面</h3><p>将角色、工位信息、巡游路线与对话统一到一个产品界面。</p></figcaption></figure>
+  <figure class="media"><img src="assets/libao/editorial/wayfinding-application.webp" width="1536" height="1024" alt="带栗宝角色标记和 A-03 编号的工位导视概念" loading="lazy">
+    <figcaption><span class="mono">Wayfinding</span><h3>工位导视系统</h3><p>角色图标与工位编号、方向箭头结合，沿用深色基底和状态信号的品牌语言。</p></figcaption></figure>
+</div>
+<details class="application-reels scene-reels">
+  <summary>查看应用演示短片 <span class="mono">Application Previews</span></summary>
+  <div class="application-video-grid">
+    <video aria-label="数字孪生界面短片" controls playsinline muted preload="none" poster="assets/libao/films/console.jpg?v=11" data-src="assets/libao/films/console.mp4?v=11"></video>
+    <video aria-label="工位标识短片" controls playsinline muted preload="none" poster="assets/libao/films/sign.jpg?v=11" data-src="assets/libao/films/sign.mp4?v=11"></video>
+    <video aria-label="品牌周边短片" controls playsinline muted preload="none" poster="assets/libao/films/goods.jpg?v=11" data-src="assets/libao/films/goods.mp4?v=11"></video>
+  </div>
+</details>
+</div>
+<div class="application-details wrap"><figure class="application-editorial">
+  <img width="1536" height="1024" src="assets/libao/editorial/field-kit.webp?v=11" alt="以栗宝为主题的公仔、挂绳与工牌场景概念图" loading="lazy">
+  <figcaption><span class="mono">Field Kit</span><h3><span class="title-unit">工位之外，</span><wbr><span class="title-unit">也能认出栗宝</span></h3><p>奶油白给工牌留出信息区，蓝灰用在贴纸和展示台上，栗棕留给角色本身。</p></figcaption>
+</figure>
+<figure class="application-editorial plush">
+  <img width="1536" height="1024" src="assets/libao/editorial/plush-study.webp?v=11" alt="栗宝毛绒玩具概念，短绒外壳和刺绣像素面屏" loading="lazy">
+  <figcaption><span class="mono">Plush Concept</span><h3><span class="title-unit">把像素和栗壳</span><wbr><span class="title-unit">做成毛绒</span></h3><p>短绒保留栗棕外壳的圆润体积，黑色布面用青色刺绣复现像素表情。触角、双耳和胸口圆章沿用角色轮廓。</p></figcaption>
+</figure></div>
+</section>
+<section class="chapter wrap closing-chapter" aria-labelledby="closing-title">
+  <div class="section-head"><div><span class="mono">LIBAO / READY TO GUIDE</span><h2 id="closing-title"><span class="title-unit">让工业现场</span><wbr><span class="title-unit">更好懂</span></h2></div><p><span class="copy-unit">从形象、表情到动作与场景交互，</span><wbr><span class="copy-unit">形成一套可扩展的</span><wbr><span class="copy-unit">数字孪生角色设计。</span></p></div>
+  <figure class="campaign-poster"><img src="assets/libao/editorial/closing-campaign.webp" width="1536" height="1024" alt="LIBAO READY TO GUIDE 栗宝品牌结束海报" loading="lazy"></figure>
+</section>
+</main>
+<footer class="footer wrap"><div><strong>栗宝 <span>Libao</span></strong><span class="mono">Character · Motion · Experience</span></div><a href="#top">回到顶部 ↑</a><a href="./index.html#work">返回作品 ↗</a></footer>
+<script>document.querySelector("[data-portfolio-poster]")?.addEventListener("play",e=>e.currentTarget.classList.add("is-playing"),{once:true});</script>
+<script type="module" src="assets/libao/viewer.js?v=32"></script>
+<script type="module" src="assets/libao/assistant.js?v=40c"></script>
+</body>
+</html>

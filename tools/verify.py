@@ -21,6 +21,7 @@ from release import (req, remote_tree, local_files, REPO_DIR, OWNER, REPO, API, 
 SITE = "https://yidiandiandfengxue.github.io"
 KEY_FILES = [
     "index.html", "case-dmtt.html", "case-teamhub.html",
+    "case-libao.html", "orchestra-demo/index.html", "assets/libao/libao.glb",
     "CHANGELOG.md", "README.md",
     "tools/release.py", "tools/verify.py",
     "assets/dmtt/splash.png", "assets/dmtt/iwork-apps.png",
@@ -29,6 +30,7 @@ KEY_FILES = [
 ]
 KEY_URLS = [
     "", "index.html", "case-dmtt.html", "case-teamhub.html",
+    "case-libao.html", "orchestra-demo/index.html", "assets/libao/libao.glb",
     "CHANGELOG.md", "README.md", "tools/release.py",
     "assets/dmtt/splash.png",
     "deliverables/Oscar-%E7%A6%BB%E7%BA%BF%E7%89%88.html",

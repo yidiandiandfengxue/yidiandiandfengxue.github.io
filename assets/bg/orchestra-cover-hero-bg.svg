@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="baseBg" cx="76%" cy="46%" r="72%">
+      <stop offset="0%" stop-color="#13182a"/>
+      <stop offset="48%" stop-color="#090c16"/>
+      <stop offset="100%" stop-color="#06080f"/>
+    </radialGradient>
+    <radialGradient id="glowCyan" cx="78%" cy="32%" r="36%">
+      <stop offset="0%" stop-color="#07B9B9" stop-opacity="0.34"/>
+      <stop offset="52%" stop-color="#07B9B9" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#07B9B9" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowPink" cx="62%" cy="76%" r="38%">
+      <stop offset="0%" stop-color="#FF00A5" stop-opacity="0.32"/>
+      <stop offset="50%" stop-color="#6B4CFF" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#FF00A5" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ribPink" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF00A5" stop-opacity="0.02"/>
+      <stop offset="32%" stop-color="#FF00A5" stop-opacity="0.52"/>
+      <stop offset="68%" stop-color="#8B5CF6" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#07B9B9" stop-opacity="0.55"/>
+    </linearGradient>
+    <linearGradient id="ribCyan" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#07B9B9" stop-opacity="0.04"/>
+      <stop offset="42%" stop-color="#07B9B9" stop-opacity="0.48"/>
+      <stop offset="78%" stop-color="#6EA0FF" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#FF00A5" stop-opacity="0.42"/>
+    </linearGradient>
+    <linearGradient id="glassFillA" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF00A5" stop-opacity="0.14"/>
+      <stop offset="50%" stop-color="#222a44" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#07B9B9" stop-opacity="0.18"/>
+    </linearGradient>
+    <linearGradient id="glassFillB" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#07B9B9" stop-opacity="0.16"/>
+      <stop offset="55%" stop-color="#141a2d" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#FF00A5" stop-opacity="0.12"/>
+    </linearGradient>
+    <filter id="softBlur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <filter id="rimGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="3.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#baseBg)"/>
+  <ellipse cx="1220" cy="290" rx="520" ry="340" fill="url(#glowCyan)" filter="url(#softBlur)"/>
+  <ellipse cx="980" cy="690" rx="560" ry="320" fill="url(#glowPink)" filter="url(#softBlur)"/>
+
+  <!-- Flowing Smoked-Glass Ribbons sweeping organically across the right half -->
+  <g opacity="0.92">
+    <path d="M 740 940 C 820 650, 1080 560, 1210 350 C 1320 170, 1460 60, 1650 -20 L 1650 160 C 1480 240, 1360 360, 1240 530 C 1100 720, 920 820, 860 940 Z" fill="url(#glassFillA)"/>
+    <path d="M 880 940 C 970 700, 1180 610, 1310 420 C 1420 250, 1520 170, 1660 110 L 1660 280 C 1510 350, 1400 470, 1270 640 C 1150 790, 1040 870, 990 940 Z" fill="url(#glassFillB)"/>
+    <path d="M 690 940 C 790 680, 1010 620, 1150 410 C 1270 230, 1410 110, 1630 10" fill="none" stroke="url(#ribPink)" stroke-width="2.4" filter="url(#rimGlow)"/>
+    <path d="M 820 940 C 910 670, 1130 580, 1260 370 C 1370 190, 1490 90, 1650 -10" fill="none" stroke="url(#ribCyan)" stroke-width="2.2" filter="url(#rimGlow)"/>
+    <path d="M 940 940 C 1040 730, 1230 640, 1360 440 C 1460 290, 1560 200, 1660 140" fill="none" stroke="url(#ribCyan)" stroke-width="1.6" opacity="0.72"/>
+    <path d="M 770 940 C 890 730, 1080 680, 1250 490 C 1390 330, 1510 260, 1660 210" fill="none" stroke="url(#ribPink)" stroke-width="1.4" opacity="0.58"/>
+  </g>
+</svg>
